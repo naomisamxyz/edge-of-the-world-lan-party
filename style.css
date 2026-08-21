@@ -26,8 +26,8 @@ body {
   background-color: #111;
   background-image: url("assets/images/header-glow.png");
   background-repeat: no-repeat;
-  background-position: top center;
-  background-size: cover;
+  background-position: center -8vw;
+  background-size: 120vw auto;
   background-attachment: fixed;
 }
 
@@ -39,13 +39,23 @@ body {
   padding: var(--page-pad) var(--page-pad) 0;
 }
 
+.stamp {
+  position: fixed;
+  right: var(--page-pad);
+  bottom: var(--page-pad);
+  z-index: 20;
+  margin: 0;
+  font-size: 11px;
+  color: rgb(130, 129, 129);
+}
+
 .site-title {
   margin: 0;
   font-size: clamp(20px, 2.8vw, 36px);
   font-weight: normal;
   letter-spacing: normal;
   line-height: 1;
-  color: rgb(235, 233, 233);
+  color: rgb(255, 255, 255);
 }
 
 .site-meta {
@@ -108,11 +118,11 @@ body {
   margin: 0 0 12px;
   font-weight: normal;
   font-size: clamp(16px, 1.8vw, 22px);
-  color: rgb(235, 233, 233);
+  color: rgb(255, 254, 254);
 }
 
 .below-canvas p {
-  width: 50%;
+  width: 50vw;
   margin: 0;
   font-size: 13px;
   line-height: 1.7;
@@ -123,7 +133,8 @@ body {
   margin-top: 12px;
 }
 
-.below-canvas a {
+.below-canvas a,
+.below-canvas a:visited {
   color: rgba(255, 255, 255, 0.85);
   text-decoration: underline;
   text-underline-offset: 2px;
