@@ -105,8 +105,7 @@ body {
   background: #000;
 }
 
-.tldraw-embed[hidden],
-.diagram-embed[hidden] {
+.tldraw-embed[hidden] {
   display: none;
 }
 
@@ -144,44 +143,7 @@ body {
   color: #fff;
 }
 
-.diagram-section {
-  padding: 0 var(--page-pad) 80px;
-}
-
-.diagram-section h2 {
-  margin: 0 0 12px;
-  font-weight: normal;
-  font-size: clamp(16px, 1.8vw, 22px);
-  color: rgba(255, 255, 255, 0.85);
-}
-
-.diagram-embed {
-  display: block;
-  width: 50%;
-  margin: 0;
-  border: 0;
-  border-radius: 1px;
-  background: #fff;
-}
-
-.diagram-section .embed-fallback {
-  width: 50%;
-  height: auto;
-  padding: 40px 24px;
-  background: #fff;
-  color: #666;
-}
-
-.diagram-section .embed-fallback a {
-  color: #111;
-}
-
 @media (max-width: 700px) {
-  .diagram-embed,
-  .diagram-section .embed-fallback {
-    width: 100%;
-  }
-
   .site-title {
     font-size: 30px;
   }
@@ -190,8 +152,7 @@ body {
     font-size: 12px;
   }
 
-  .below-canvas h2,
-  .diagram-section h2 {
+  .below-canvas h2 {
     font-size: 24px;
   }
 

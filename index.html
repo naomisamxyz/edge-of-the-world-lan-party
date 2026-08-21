@@ -45,21 +45,6 @@
       <a href="assets/guides/publish-to-github.html" target="_blank" rel="noopener">Guide: Publish your project to GitHub &rarr;</a>
     </p>
   </section>
-
-  <section class="diagram-section">
-    <h2>Computational Pipeline</h2>
-    <div class="embed-frame">
-      <iframe
-        class="diagram-embed"
-        src="assets/diagram/index.html"
-        title="Computational Pipeline"
-        loading="lazy"
-      ></iframe>
-      <div class="embed-fallback" id="diagram-fallback" hidden>
-        <p>The diagram couldn't load.</p>
-      </div>
-    </div>
-  </section>
 </main>
 
 <p class="stamp">Last updated August 20, 2026 &mdash; Naomi Sam</p>
@@ -88,44 +73,6 @@
     setTimeout(() => {
       if (!settled) showFallback();
     }, 10000);
-  })();
-
-  // Diagram: same-origin, so on load we can check that its content
-  // actually rendered rather than an empty/error response.
-  (function () {
-    const frame = document.querySelector(".diagram-embed");
-    const fallback = document.getElementById("diagram-fallback");
-
-    function resizeFrame() {
-      frame.style.height = frame.contentWindow.document.documentElement.scrollHeight + "px";
-    }
-
-    function showFallback() {
-      frame.hidden = true;
-      fallback.hidden = false;
-    }
-
-    frame.addEventListener("error", showFallback);
-
-    frame.addEventListener("load", () => {
-      let doc;
-      try {
-        doc = frame.contentWindow.document;
-      } catch (e) {
-        showFallback();
-        return;
-      }
-
-      if (!doc.querySelector(".diagram-frame")) {
-        showFallback();
-        return;
-      }
-
-      resizeFrame();
-      doc.querySelectorAll(".step").forEach((btn) =>
-        btn.addEventListener("click", () => setTimeout(resizeFrame, 0))
-      );
-    });
   })();
 </script>
 
