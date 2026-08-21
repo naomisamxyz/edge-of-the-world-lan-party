@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Publish to GitHub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #eef1ea;
+    --surface: #ffffff;
+    --surface-2: #f8f9f3;
+    --ink: #171a13;
+    --ink-soft: #565c4c;
+    --ink-faint: #8b917e;
+    --line: #d5d9c9;
+    --line-strong: #b9c0a8;
+    --accent: #2f6b3a;
+    --accent-strong: #1f4d27;
+    --accent-tint: #e2ecdf;
+    --code-bg: #14170f;
+    --code-text: #d7ead2;
+    --code-comment: #7f8f74;
+    --code-accent: #6bdc7f;
+    --shadow: 0 1px 2px rgba(23, 26, 19, 0.06), 0 8px 24px rgba(23, 26, 19, 0.05);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #10120d;
+      --surface: #181b14;
+      --surface-2: #1e2217;
+      --ink: #eef1ea;
+      --ink-soft: #a9b09a;
+      --ink-faint: #6c7360;
+      --line: #2c3122;
+      --line-strong: #3a4130;
+      --accent: #6bdc7f;
+      --accent-strong: #8fe89e;
+      --accent-tint: #1c2a1c;
+      --code-bg: #0b0d08;
+      --code-text: #cfe6c9;
+      --code-comment: #647159;
+      --code-accent: #6bdc7f;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #10120d;
+    --surface: #181b14;
+    --surface-2: #1e2217;
+    --ink: #eef1ea;
+    --ink-soft: #a9b09a;
+    --ink-faint: #6c7360;
+    --line: #2c3122;
+    --line-strong: #3a4130;
+    --accent: #6bdc7f;
+    --accent-strong: #8fe89e;
+    --accent-tint: #1c2a1c;
+    --code-bg: #0b0d08;
+    --code-text: #cfe6c9;
+    --code-comment: #647159;
+    --code-accent: #6bdc7f;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 64px 32px 96px;
+  }
+
+  /* ---------- Masthead ---------- */
+
+  .masthead {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 36px;
+  }
+
+  .eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  h1 {
+    font-family: "Space Mono", monospace;
+    font-weight: 700;
+    font-size: clamp(32px, 6vw, 46px);
+    line-height: 1.08;
+    margin: 0;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  .masthead p {
+    max-width: 58ch;
+    color: var(--ink-soft);
+    font-size: 17px;
+    margin: 4px 0 0;
+  }
+
+  /* ---------- Prerequisites ---------- */
+
+  .prereqs {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 20px 24px;
+    margin-bottom: 40px;
+  }
+
+  .prereqs h2 {
+    font-family: "Space Mono", monospace;
+    font-size: 14px;
+    margin: 0 0 12px;
+    color: var(--ink);
+  }
+
+  .prereqs ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .prereqs li {
+    display: flex;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+
+  .prereqs li::before {
+    content: "";
+    flex: none;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 8px;
+  }
+
+  .prereqs strong { color: var(--ink); font-weight: 600; }
+
+  /* ---------- Steps ---------- */
+
+  .steps {
+    list-style: none;
+    margin: 0 0 40px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    gap: 16px;
+    padding: 30px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .step:first-child { border-top: none; padding-top: 4px; }
+
+  .step-num {
+    font-family: "Space Mono", monospace;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--accent);
+    background: var(--accent-tint);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .step-body h3 {
+    margin: 3px 0 10px;
+    font-size: 19px;
+    font-weight: 600;
+    font-family: "Space Mono", monospace;
+  }
+
+  .do {
+    margin: 0 0 16px;
+    font-size: 15px;
+    color: var(--ink);
+  }
+
+  .click {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12.5px;
+    background: var(--accent-tint);
+    color: var(--accent-strong);
+    padding: 3px 9px;
+    border-radius: 6px;
+    margin: 1px 2px;
+  }
+
+  code.inline {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.9em;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+
+  .explain {
+    display: flex;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .explain-mark {
+    flex: none;
+    font-family: "Space Mono", monospace;
+    color: var(--accent);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .explain-text {
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+
+  .explain-text strong { color: var(--ink); font-weight: 600; }
+  .explain-text p { margin: 0; }
+  .explain-text p + p { margin-top: 10px; }
+
+  /* ---------- Live section ---------- */
+
+  .live {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 28px 28px 30px;
+    margin-bottom: 36px;
+  }
+
+  .live h2 {
+    font-family: "Space Mono", monospace;
+    font-size: 21px;
+    margin: 0 0 8px;
+  }
+
+  .live > p {
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    max-width: 60ch;
+    margin: 0 0 22px;
+  }
+
+  .live-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    counter-reset: sstep;
+  }
+
+  .live-steps li {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    padding-top: 32px;
+    position: relative;
+  }
+
+  .live-steps li::before {
+    counter-increment: sstep;
+    content: counter(sstep);
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: "Space Mono", monospace;
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--accent);
+    background: var(--accent-tint);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .live-steps strong {
+    display: block;
+    color: var(--ink);
+    font-weight: 600;
+    margin-bottom: 2px;
+    font-size: 13.5px;
+  }
+
+  /* ---------- Closing / footer ---------- */
+
+  .closing {
+    font-size: 15px;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
+    margin-bottom: 24px;
+  }
+
+  .closing strong { color: var(--ink); }
+
+  .note {
+    display: flex;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--ink-faint);
+  }
+
+  .note .mark {
+    font-family: "Space Mono", monospace;
+    color: var(--accent);
+    flex: none;
+  }
+
+  @media (max-width: 560px) {
+    .live-steps { grid-template-columns: repeat(2, 1fr); }
+    .step { grid-template-columns: 28px 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header class="masthead">
+    <span class="eyebrow">No terminal required</span>
+    <h1>Publish to GitHub</h1>
+    <p>A click-by-click guide to putting a project online using nothing but VS Code's built-in tools &mdash; and a plain-language explanation of what's actually happening at each step, not just what to click.</p>
+  </header>
+
+  <section class="prereqs">
+    <h2>BEFORE YOU START</h2>
+    <ul>
+      <li><strong>VS Code</strong>&nbsp;&mdash; installed, with your project open as a folder.</li>
+      <li><strong>A free GitHub.com account</strong>&nbsp;&mdash; sign up at github.com if you don't have one yet.</li>
+      <li><strong>A finished-enough project</strong>&nbsp;&mdash; any folder of files works. It doesn't need to be complete.</li>
+    </ul>
+  </section>
+
+  <ol class="steps">
+
+    <li class="step">
+      <span class="step-num">1</span>
+      <div class="step-body">
+        <h3>Open the Source Control panel</h3>
+        <p class="do">Click the branching icon in the left sidebar, or press <code class="inline">Cmd/Ctrl + Shift + G</code>.</p>
+        <div class="explain">
+          <span class="explain-mark">&gt;</span>
+          <div class="explain-text">
+            <p>This opens the panel for <strong>Git</strong>, a program built into VS Code that keeps a history of every change you make to your project. Opening the panel doesn't change anything yet &mdash; it's just where Git's controls live.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="step">
+      <span class="step-num">2</span>
+      <div class="step-body">
+        <h3>Initialize the repository</h3>
+        <p class="do">If you see a button labeled <span class="click">Initialize Repository</span>, click it.</p>
+        <div class="explain">
+          <span class="explain-mark">&gt;</span>
+          <div class="explain-text">
+            <p>Right now your folder is just files &mdash; Git isn't watching it yet. That's what "not tracked" means. <strong>Initializing</strong> tells Git to start recording this specific folder from this point on. It quietly creates a hidden <code class="inline">.git</code> folder inside your project, where it will store every saved version of your work from now on. You only do this once per project.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="step">
+      <span class="step-num">3</span>
+      <div class="step-body">
+        <h3>Add a .gitignore</h3>
+        <p class="do">Create a new file at the top level of your project named exactly <code class="inline">.gitignore</code>, and put this line in it: <code class="inline">.DS_Store</code></p>
+        <div class="explain">
+          <span class="explain-mark">&gt;</span>
+          <div class="explain-text">
+            <p>Not every file on your computer belongs in your project's history. macOS quietly drops an invisible housekeeping file called <code class="inline">.DS_Store</code> into folders you open in Finder &mdash; it's meaningless clutter, not part of your actual project.</p>
+            <p>A <strong>.gitignore</strong> is a list of files and patterns you're telling Git to never track, no matter what. Once it exists, those files stop showing up as "changes" entirely &mdash; you won't accidentally stage or commit them. This step is optional on other operating systems, but harmless either way, and worth doing once per project before your first commit.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="step">
+      <span class="step-num">4</span>
+      <div class="step-body">
+        <h3>Stage your changes</h3>
+        <p class="do">Hover over "Changes" and click the <span class="click">+</span> to stage everything at once, or stage individual files one at a time.</p>
+        <div class="explain">
+          <span class="explain-mark">&gt;</span>
+          <div class="explain-text">
+            <p>Git noticed your files, but it won't save anything without you telling it to. <strong>Staging</strong> is that choice &mdash; think of it like putting items in a cart before checkout. Nothing is permanently saved yet; staging just marks what should be included the next time you save.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="step">
+      <span class="step-num">5</span>
+      <div class="step-body">
+        <h3>Commit</h3>
+        <p class="do">Type a message in the box at the top, then click <span class="click">&check; Commit</span>.</p>
+        <div class="explain">
+          <span class="explain-mark">&gt;</span>
+          <div class="explain-text">
+            <p>A <strong>commit</strong> is the actual save point &mdash; a permanent snapshot of everything you just staged, added to your project's history. The message is a short note describing what's in that snapshot, for your own future reference.</p>
+            <p>For your very first commit, there's nothing to describe yet beyond "this is where I started" &mdash; something like <em>"Initial commit"</em> or <em>"First version"</em> is completely normal. Later on, describe what changed: <em>"Fix header spacing,"</em> <em>"Add contact page."</em></p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="step">
+      <span class="step-num">6</span>
+      <div class="step-body">
+        <h3>Publish</h3>
+        <p class="do">Click <span class="click">Publish Branch</span>.</p>
+        <div class="explain">
+          <span class="explain-mark">&gt;</span>
+          <div class="explain-text">
+            <p>Everything so far has stayed on your own computer &mdash; GitHub doesn't know this project exists yet. <strong>Publishing</strong> does two things at once: it creates a new project on GitHub.com under your account, and it uploads your commit and its whole history there.</p>
+            <p>VS Code will open a browser tab to sign in, the first time only, then ask whether the project should be <strong>Public</strong> (anyone can view the files) or <strong>Private</strong> (just you, unless you invite others). If you plan to host this as a free website with GitHub Pages, it needs to be Public.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="step">
+      <span class="step-num">7</span>
+      <div class="step-body">
+        <h3>Every time after</h3>
+        <p class="do">Stage &rarr; write a commit message &rarr; click <span class="click">Sync Changes</span>.</p>
+        <div class="explain">
+          <span class="explain-mark">&gt;</span>
+          <div class="explain-text">
+            <p>That's the whole loop from here on. Each round is one more snapshot added to the history, sent up to GitHub. <strong>Sync Changes</strong> is the same idea as Publish, just for a project that's already connected.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+  </ol>
+
+  <section class="live">
+    <h2>Make it a live website</h2>
+    <p>GitHub can turn any public repository into a real website with its own URL, for free, using a feature called <strong>GitHub Pages</strong>. This part happens on github.com in a browser, and only needs doing once per project.</p>
+    <ol class="live-steps">
+      <li><strong>Open the repo</strong>on github.com</li>
+      <li><strong>Settings</strong>top right of the page</li>
+      <li><strong>Pages</strong>left sidebar</li>
+      <li><strong>Deploy from a branch</strong>as the source</li>
+      <li><strong>main / root</strong>then Save</li>
+    </ol>
+  </section>
+
+  <p class="closing">That's it &mdash; refresh the Pages settings after a minute or two and GitHub will show a live link. <strong>Every future update</strong> is just step 7 on repeat: stage, commit, sync.</p>
+
+  <p class="note">
+    <span class="mark">&gt;</span>
+    <span>A command-line version of this exact process exists too, using <code class="inline">git</code> directly &mdash; useful to know, but nothing above requires it.</span>
+  </p>
+
+</div>
+
+</body>
+</html>
