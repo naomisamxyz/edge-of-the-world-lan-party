@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Edge of the World LAN Party</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <h1 class="site-title">IIMC-457-01/IIMC-657-01: Edge of the World LAN Party</h1>
+</header>
+<p class="site-meta">Fall 2026 W 1:00 PM &ndash; 3:50 PM 9/8/2026 &ndash; 12/13/2026 Main Building, C108 Studio</p>
+
+<main class="page-content">
+  <div class="canvas-wrap">
+    <div class="embed-frame">
+      <iframe
+        class="tldraw-embed"
+        src="https://www.tldraw.com/f/tQjdiYNWeBElgTBIw3OEJ?d=v-2044.-185.2240.1336.page"
+        title="Course research board"
+        loading="lazy"
+      ></iframe>
+      <div class="embed-fallback" id="tldraw-fallback" hidden>
+        <p>
+          The course board couldn't load.
+          <a href="https://www.tldraw.com/f/tQjdiYNWeBElgTBIw3OEJ" target="_blank" rel="noopener">
+            Open it directly on tldraw.com
+          </a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <section class="below-canvas">
+    <h2>Placeholder heading</h2>
+    <p>
+      Placeholder text. This section sits below the tldraw board and scrolls
+      normally under the fixed header. Replace with real course content
+      (syllabus, schedule, readings, etc.) once ready.
+    </p>
+  </section>
+
+  <section class="diagram-section">
+    <h2>Computational Pipeline</h2>
+    <div class="embed-frame">
+      <iframe
+        class="diagram-embed"
+        src="assets/diagram/index.html"
+        title="Computational Pipeline"
+        loading="lazy"
+      ></iframe>
+      <div class="embed-fallback" id="diagram-fallback" hidden>
+        <p>The diagram couldn't load.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  // tldraw board: cross-origin, so we can't inspect its document.
+  // Watch for a real network error, and fall back after a timeout if
+  // "load" never fires (covers blocked/stalled loads).
+  (function () {
+    const frame = document.querySelector(".tldraw-embed");
+    const fallback = document.getElementById("tldraw-fallback");
+    let settled = false;
+
+    function showFallback() {
+      if (settled) return;
+      settled = true;
+      frame.hidden = true;
+      fallback.hidden = false;
+    }
+
+    frame.addEventListener("error", showFallback);
+    frame.addEventListener("load", () => {
+      settled = true;
+    });
+
+    setTimeout(() => {
+      if (!settled) showFallback();
+    }, 10000);
+  })();
+
+  // Diagram: same-origin, so on load we can check that its content
+  // actually rendered rather than an empty/error response.
+  (function () {
+    const frame = document.querySelector(".diagram-embed");
+    const fallback = document.getElementById("diagram-fallback");
+
+    function resizeFrame() {
+      frame.style.height = frame.contentWindow.document.documentElement.scrollHeight + "px";
+    }
+
+    function showFallback() {
+      frame.hidden = true;
+      fallback.hidden = false;
+    }
+
+    frame.addEventListener("error", showFallback);
+
+    frame.addEventListener("load", () => {
+      let doc;
+      try {
+        doc = frame.contentWindow.document;
+      } catch (e) {
+        showFallback();
+        return;
+      }
+
+      if (!doc.querySelector(".diagram-frame")) {
+        showFallback();
+        return;
+      }
+
+      resizeFrame();
+      doc.querySelectorAll(".step").forEach((btn) =>
+        btn.addEventListener("click", () => setTimeout(resizeFrame, 0))
+      );
+    });
+  })();
+</script>
+
+</body>
+</html>

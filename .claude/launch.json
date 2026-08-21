@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "static-site",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-c", "cd '/private/tmp/claude-502/-Users-nsam-Documents-dev-edge-of-the-world-lan-party/c148c012-4419-4466-9189-13f635e849d4/scratchpad/preview' && exec python3 -m http.server 5588"],
+      "port": 5588
+    }
+  ]
+}

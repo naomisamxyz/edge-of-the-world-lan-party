@@ -1,0 +1,190 @@
+@font-face {
+  font-family: "VCR OSD Mono";
+  src: url("assets/fonts/VCR-OSD-Mono.woff") format("woff"),
+       url("assets/fonts/VCR-OSD-Mono.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --page-pad: clamp(5px, 0.7vw, 9px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: "VCR OSD Mono", "Space Mono", "Courier New", monospace;
+  color: #d5d5d5;
+  background-color: #111;
+  background-image: url("assets/images/header-glow.png");
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: min(1050px, 97.5vw) auto;
+  background-attachment: fixed;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: transparent;
+  padding: var(--page-pad) var(--page-pad) 0;
+}
+
+.site-title {
+  margin: 0;
+  font-size: clamp(20px, 2.8vw, 36px);
+  font-weight: normal;
+  letter-spacing: normal;
+  line-height: 1;
+  color: rgba(222, 222, 222, 0.85);
+}
+
+.site-meta {
+  margin: 18px 0 0;
+  padding: 0 var(--page-pad);
+  font-size: clamp(10px, 0.9vw, 12px);
+  line-height: 1.25;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: normal;
+}
+
+.canvas-wrap {
+  padding: 64px var(--page-pad) 0;
+}
+
+.embed-frame {
+  position: relative;
+}
+
+.embed-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  height: clamp(400px, 78vh, 640px);
+  background: #000;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.embed-fallback a {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.embed-fallback[hidden] {
+  display: none;
+}
+
+.tldraw-embed {
+  display: block;
+  width: 100%;
+  height: clamp(400px, 78vh, 640px);
+  border: 0;
+  border-radius: 1px;
+  background: #000;
+}
+
+.tldraw-embed[hidden],
+.diagram-embed[hidden] {
+  display: none;
+}
+
+.below-canvas {
+  padding: 12px var(--page-pad) 40px;
+}
+
+.below-canvas h2 {
+  margin: 0 0 12px;
+  font-weight: normal;
+  font-size: clamp(16px, 1.8vw, 22px);
+  color: rgba(237, 237, 237, 0.85);
+}
+
+.below-canvas p {
+  max-width: 640px;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.diagram-section {
+  padding: 0 var(--page-pad) 80px;
+}
+
+.diagram-section h2 {
+  margin: 0 0 12px;
+  font-weight: normal;
+  font-size: clamp(16px, 1.8vw, 22px);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.diagram-embed {
+  display: block;
+  width: 50%;
+  margin: 0;
+  border: 0;
+  border-radius: 1px;
+  background: #fff;
+}
+
+.diagram-section .embed-fallback {
+  width: 50%;
+  height: auto;
+  padding: 40px 24px;
+  background: #fff;
+  color: #666;
+}
+
+.diagram-section .embed-fallback a {
+  color: #111;
+}
+
+@media (max-width: 700px) {
+  .diagram-embed,
+  .diagram-section .embed-fallback {
+    width: 100%;
+  }
+
+  .site-title {
+    font-size: 30px;
+  }
+
+  .site-meta {
+    font-size: 12px;
+  }
+
+  .below-canvas h2,
+  .diagram-section h2 {
+    font-size: 24px;
+  }
+
+  .below-canvas p {
+    font-size: 13px;
+  }
+
+  .embed-fallback {
+    font-size: 20px;
+  }
+}
+
+/* Guard against a short viewport where the tldraw board alone would
+   fill the whole screen, trapping scroll input inside its canvas. */
+@media (max-height: 650px) {
+  .tldraw-embed,
+  .canvas-wrap .embed-fallback {
+    height: 45vh;
+    min-height: 220px;
+  }
+}
