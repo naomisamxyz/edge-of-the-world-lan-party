@@ -1,21 +1,230 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><title>Unity Best Practice</title><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="guide.css?v=39"><link rel="stylesheet" href="../site-shell.css?v=5"><link rel="stylesheet" href="../navigation.css?v=6"></head>
-<body class="guide-page guide-unity-best-practice"><header class="site-header" data-site-header></header>
-<div class="page"><span class="stamp" data-last-updated></span><nav class="guide-nav" data-site-navigation></nav><br><br>
-<header class="masthead"><div class="section-heading"><pre class="section-ornament guide-title-ornament" aria-hidden="true"></pre><h1>Unity Best Practice</h1></div><p>Organize, protect, test, and optimize a Unity project</p></header>
-<nav class="page-toc"><a href="#baseline">Project baseline</a><a href="#storage">Storage and backups</a><a href="#version-control">Version control</a><a href="#urp">URP</a><a href="#assets">Assets</a><a href="#architecture">Architecture</a><a href="#testing">Testing</a><a href="#builds">Builds</a></nav>
-<section class="section" id="baseline"><h2>Project Baseline</h2><p class="section-intro">Establish clear standards early and apply them consistently. Use Unity 2022.3 LTS with the required Windows, Mac, and WebGL modules. Create a URP project, install Input System and Cinemachine, enable visible <code class="inline">.meta</code> files and text serialization, use 1920×1080 at 16:9, choose a distinct Play Mode tint, add the Lighting window, save the Editor layout, and test rendering, lighting, input, Cinemachine, physics, audio, and build settings.</p><p class="body-text">Alternatively, duplicate a working project or template and rename it. Remove the hidden <code class="inline">.git</code> folder from the copy only, then initialize a new repository for the copied project.</p></section>
-<section class="section" id="storage"><h2>Storage and Backups</h2><p class="section-intro">If possible, keep projects on an external SSD with enough free space. Avoid mechanical drives, cloud-synced folders, and USB drives. Close Unity before disconnecting a drive, and never make that drive the project’s only copy.</p><p class="body-text">To back up, close Unity, compress the project folder, and copy the ZIP elsewhere. Generated <code class="inline">Library</code>, <code class="inline">Temp</code>, <code class="inline">Logs</code>, and <code class="inline">Obj</code> folders can be omitted. Name sequential backups clearly, such as <code class="inline">ProjectX_01.zip</code>.</p></section>
-<section class="section" id="version-control"><h2>Version Control</h2><p class="section-intro">Use source control from the beginning. Git records history locally; GitHub can provide a remote copy for backup and collaboration. Use visible <code class="inline">.meta</code> files, text-based asset serialization, and a Unity-specific <code class="inline">.gitignore</code>. Consider Git LFS for large binary assets. Do not commit generated folders.</p><p class="body-text"><a href="https://github.com/orgs/community/discussions/56071">GitHub and Unity .gitignore guidance</a></p><p class="body-text">Unity Version Control, formerly Plastic SCM, is another option designed for code and large binary assets. <a href="https://learn.unity.com/tutorial/set-up-plastic-scm-in-the-unity-editor">Set up Unity Version Control</a>.</p><p class="body-text">Commit and push regularly with short descriptions such as “Add player movement,” especially before experimental changes or package installation. To recover a ZIP backup, extract it to a new folder and open that copy. To recover with Git, locate the last working commit and revert the unwanted changes.</p></section>
-<section class="section" id="urp"><h2>Universal Render Pipeline</h2><p class="section-intro">Check <strong>Project Settings → Graphics</strong> and <strong>Quality</strong> for an assigned URP Pipeline Asset. If URP is not configured, install Universal RP, create a pipeline asset with <strong>Create → Rendering → URP Pipeline Asset</strong>, and assign it in both locations. Keep Pipeline and Renderer assets in a clearly named settings folder.</p><p class="body-text">Use URP-compatible shaders such as <strong>Universal Render Pipeline/Lit</strong>. Bright pink usually indicates an incompatible or missing shader. Use <strong>Window → Rendering → Render Pipeline Converter</strong> where appropriate. Check cameras, lights, shadows, post-processing Volumes, and quality settings after conversion. Avoid switching pipelines late in production.</p><p class="body-text"><a href="https://learn.unity.com/tutorial/creating-urp-materials">Creating URP materials</a></p></section>
-<section class="section" id="assets"><h2>Assets and Naming</h2><p class="section-intro">Move assets inside Unity so their <code class="inline">.meta</code> files stay connected. If moving through the operating system, move each asset and its <code class="inline">.meta</code> file together. Keep the root Assets folder clean and organize either by asset type or by object/area.</p><div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>Assets/Materials/Level1
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Unity Best Practice</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="guide.css?v=39" />
+<link rel="stylesheet" href="../site-shell.css?v=5" />
+<link rel="stylesheet" href="../navigation.css?v=6" />
+</head>
+<body class="guide-page guide-unity-best-practice">
+
+<header class="site-header" data-site-header></header>
+
+<div class="page">
+
+  <span class="stamp" data-last-updated></span>
+
+  <nav class="guide-nav" data-site-navigation></nav>
+  <br>
+    <br>
+
+  <header class="masthead">
+    <div class="section-heading"><pre class="section-ornament guide-title-ornament" aria-hidden="true"></pre><h1>Unity Best Practice</h1></div>
+    <p>Organize, protect, test, and optimize a Unity project</p>
+  </header>
+
+  <nav class="page-toc">
+    <a href="#baseline">Project baseline</a>
+    <a href="#storage">Storage and backups</a>
+    <a href="#version-control">Version control</a>
+    <a href="#urp">URP</a>
+    <a href="#assets">Assets and naming</a>
+    <a href="#architecture">Project architecture</a>
+    <a href="#testing">Testing and debugging</a>
+    <a href="#builds">Performance and builds</a>
+  </nav>
+
+  <!-- ================= BASELINE ================= -->
+
+  <section class="section" id="baseline">
+    <h2>Project baseline</h2>
+    <p class="section-intro">Set clear standards early and apply them consistently. A new project should match this before you build anything on it.</p>
+
+    <br>
+    <div class="ref-groups">
+      <div class="ref-group">
+        <h3>Every new project</h3>
+        <dl>
+          <div class="ref-row"><dt>Editor</dt><dd>Unity 2022.3 LTS with the Windows, Mac, and WebGL modules.</dd></div>
+          <div class="ref-row"><dt>Pipeline</dt><dd>a URP project, with Input System and Cinemachine installed.</dd></div>
+          <div class="ref-row"><dt>Settings</dt><dd>visible <code class="inline">.meta</code> files, text serialization, 1920&times;1080 at 16:9, a distinct Play Mode tint.</dd></div>
+          <div class="ref-row"><dt>Workspace</dt><dd>the Lighting window docked and the Editor layout saved.</dd></div>
+          <div class="ref-row"><dt>Smoke test</dt><dd>rendering, lighting, input, Cinemachine, physics, audio, and build settings all confirmed working.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <p class="body-text">Alternatively, duplicate a working project or template and rename it. Remove the hidden <code class="inline">.git</code> folder from the copy only, then initialize a new repository for it.</p>
+  </section>
+
+  <!-- ================= STORAGE ================= -->
+
+  <section class="section" id="storage">
+    <h2>Storage and backups</h2>
+    <p class="section-intro">A Unity project is thousands of small files. Keep it somewhere fast and back it up as a whole.</p>
+
+    <br>
+    <div class="ref-groups">
+      <div class="ref-group">
+        <h3>Where it lives</h3>
+        <dl>
+          <div class="ref-row"><dt>Good</dt><dd>an external SSD with plenty of free space.</dd></div>
+          <div class="ref-row"><dt>Avoid</dt><dd>mechanical drives, cloud-synced folders, and USB sticks.</dd></div>
+          <div class="ref-row"><dt>Always</dt><dd>close Unity before disconnecting a drive, and never let that drive hold the only copy.</dd></div>
+        </dl>
+      </div>
+
+      <div class="ref-group">
+        <h3>Backing up</h3>
+        <dl>
+          <div class="ref-row"><dt>How</dt><dd>close Unity, compress the project folder, copy the ZIP somewhere else.</dd></div>
+          <div class="ref-row"><dt>Skip</dt><dd>the generated <code class="inline">Library</code>, <code class="inline">Temp</code>, <code class="inline">Logs</code>, and <code class="inline">Obj</code> folders.</dd></div>
+          <div class="ref-row"><dt>Name</dt><dd>sequentially and clearly, such as <code class="inline">ProjectX_01.zip</code>.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VERSION CONTROL ================= -->
+
+  <section class="section" id="version-control">
+    <h2>Version control</h2>
+    <p class="section-intro">Use source control from the first day. Git records history locally; a remote like GitHub adds an off-machine backup and lets others work with you.</p>
+
+    <br>
+    <div class="ref-groups">
+      <div class="ref-group">
+        <h3>Set it up for Unity</h3>
+        <dl>
+          <div class="ref-row"><dt>Meta files</dt><dd>visible, with text-based asset serialization.</dd></div>
+          <div class="ref-row"><dt>.gitignore</dt><dd>a Unity-specific one &mdash; <a href="https://github.com/orgs/community/discussions/56071">GitHub and Unity .gitignore guidance</a>.</dd></div>
+          <div class="ref-row"><dt>Large binaries</dt><dd>consider Git LFS; never commit generated folders.</dd></div>
+          <div class="ref-row"><dt>Alternative</dt><dd>Unity Version Control (formerly Plastic SCM) is built for code and large binary assets &mdash; <a href="https://learn.unity.com/tutorial/set-up-plastic-scm-in-the-unity-editor">set it up</a>.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <p class="body-text">Commit and push regularly with short messages such as &ldquo;Add player movement,&rdquo; especially before experimental changes or installing a package. To recover from a ZIP backup, extract it to a new folder and open the copy. To recover with Git, find the last working commit and revert the unwanted changes.</p>
+  </section>
+
+  <!-- ================= URP ================= -->
+
+  <section class="section" id="urp">
+    <h2>Universal Render Pipeline</h2>
+    <p class="section-intro">Check <strong>Project Settings &rarr; Graphics</strong> and <strong>Quality</strong> for an assigned URP Pipeline Asset. If URP is not configured, install Universal RP, create a pipeline asset with <strong>Create &rarr; Rendering &rarr; URP Pipeline Asset</strong>, and assign it in both places. Keep Pipeline and Renderer assets in a clearly named settings folder.</p>
+
+    <br>
+    <div class="ref-groups">
+      <div class="ref-group">
+        <h3>Working in URP</h3>
+        <dl>
+          <div class="ref-row"><dt>Shaders</dt><dd>use URP-compatible ones such as <strong>Universal Render Pipeline/Lit</strong>. Bright pink usually means an incompatible or missing shader.</dd></div>
+          <div class="ref-row"><dt>Converting</dt><dd>use <strong>Window &rarr; Rendering &rarr; Render Pipeline Converter</strong> where appropriate, then check cameras, lights, shadows, post-processing Volumes, and quality settings.</dd></div>
+          <div class="ref-row"><dt>Timing</dt><dd>do not switch pipelines late in production.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <p class="body-text"><a href="https://learn.unity.com/tutorial/creating-urp-materials">Creating URP materials</a></p>
+  </section>
+
+  <!-- ================= ASSETS ================= -->
+
+  <section class="section" id="assets">
+    <h2>Assets and naming</h2>
+    <p class="section-intro">Move assets <em>inside</em> Unity so their <code class="inline">.meta</code> files stay connected. Moving through the operating system means moving each asset and its <code class="inline">.meta</code> file together. Keep the root <code class="inline">Assets</code> folder clean and organize by type or by object / area.</p>
+
+    <div class="snippet">
+      <div class="code-card">
+        <div class="code-scroll">
+<pre><code>Assets/Materials/Level1
 Assets/Prefabs/Characters
 Assets/Audio/Ambience
 
 Assets/Forest/Trees/BigTree/BigTree.fbx
 Assets/Forest/Trees/BigTree/BigTree.mat
-Assets/Forest/Trees/BigTree/BigTree_Bark.png</code></pre></div></div></div><p class="body-text">Avoid the Resources folder unless runtime loading requires it. Match asset quality to its on-screen use, configure compression and platform settings, and treat one Unity unit as one meter for most physics-based 3D games.</p><p class="body-text">Choose a consistent naming style such as PascalCase or camelCase. Use meaningful suffixes like <code class="inline">_N</code> for normal maps and <code class="inline">_AO</code> for ambient occlusion. Keep prototypes separate and avoid production assets depending on placeholders.</p></section>
-<section class="section" id="architecture"><h2>Project Architecture</h2><h3 class="sub">Assembly Definitions</h3><p class="body-text">Assembly Definition files divide scripts into assemblies so Unity recompiles only affected areas. Use them for clear systems such as gameplay, UI, tools, and shared code—not for every small folder.</p><h3 class="sub">Prefabs</h3><p class="body-text">Use prefabs for reusable GameObjects. Instances inherit central updates while allowing selected overrides; Prefab Variants share a foundation. <a href="https://learn.unity.com/tutorial/prefab-editing-mode">Prefab editing mode</a>.</p><h3 class="sub">ScriptableObjects</h3><p class="body-text">Use ScriptableObjects for reusable shared data such as items, characters, abilities, dialogue, difficulty, and settings—not temporary gameplay state.</p><h3 class="sub">Scene Hierarchies</h3><p class="body-text">Keep hierarchies shallow. Group objects only when they genuinely need to move, rotate, scale, or activate together.</p></section>
-<section class="section" id="testing"><h2>Testing and Debugging</h2><p class="section-intro">Add development cheats and checkpoints early: teleportation, progression skips, currency, and item unlocks reduce repetitive setup. Maintain small scenes dedicated to individual features.</p><p class="body-text">Open <strong>Window → General → Console</strong>. Fix the first error before later ones because one error may trigger several more.</p><p class="body-text">Use real-time lights while developing. When ready, mark stationary geometry for global illumination, set suitable lights to Baked or Mixed, then generate lighting. Reserve real-time lights and shadows for objects that move or change.</p><p class="body-text"><a href="https://learn.unity.com/tutorial/get-started-with-lighting-in-unity">Get started with lighting</a> · <a href="https://learn.unity.com/tutorial/creating-a-high-dynamic-range-image-skybox-1">Create an HDRI skybox</a></p></section>
-<section class="section" id="builds"><h2>Performance and Builds</h2><p class="section-intro">Before building, remove unused scenes, compress textures and audio, bake lighting when appropriate, disable unnecessary shadows and effects, and choose quality settings for the target computer.</p><ol class="steps"><li>Open <strong>File → Build Settings</strong>.</li><li>For profiling, enable <strong>Development Build</strong> and <strong>Autoconnect Profiler</strong>.</li><li>Select <strong>Build and Run</strong>.</li><li>Open <strong>Window → Analysis → Profiler</strong>.</li><li>Test the build while watching CPU, GPU, rendering, and memory.</li></ol><p class="body-text">For the final release, disable Development Build, Autoconnect Profiler, and Script Debugging. Export into a new empty folder and test outside the Editor. When sharing, ZIP the entire build folder.</p></section>
-</div><script src="../navigation.js?v=9"></script><script src="../last-updated.js?v=3"></script><script src="../cursor-sparkle.js?v=6"></script></body></html>
+Assets/Forest/Trees/BigTree/BigTree_Bark.png</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <br>
+    <div class="ref-groups">
+      <div class="ref-group">
+        <h3>Naming</h3>
+        <dl>
+          <div class="ref-row"><dt>Style</dt><dd>one consistent convention, such as PascalCase or camelCase.</dd></div>
+          <div class="ref-row"><dt>Suffixes</dt><dd>meaningful ones like <code class="inline">_N</code> for normal maps, <code class="inline">_AO</code> for ambient occlusion.</dd></div>
+          <div class="ref-row"><dt>Prototypes</dt><dd>kept separate; production assets should not depend on placeholders.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <p class="body-text">Avoid the <code class="inline">Resources</code> folder unless runtime loading needs it. Match asset quality to its on-screen use, set compression and platform settings, and treat one Unity unit as one meter for most physics-based 3D games.</p>
+  </section>
+
+  <!-- ================= ARCHITECTURE ================= -->
+
+  <section class="section" id="architecture">
+    <h2>Project architecture</h2>
+    <p class="section-intro">Structure that keeps a project workable as it grows.</p>
+
+    <br>
+    <div class="ref-groups">
+      <div class="ref-group">
+        <h3>Building blocks</h3>
+        <dl>
+          <div class="ref-row"><dt>Assembly Definitions</dt><dd>split scripts into assemblies so Unity recompiles only affected areas. Use them for clear systems &mdash; gameplay, UI, tools, shared code &mdash; not for every small folder.</dd></div>
+          <div class="ref-row"><dt>Prefabs</dt><dd>reusable GameObjects; instances inherit central updates while allowing overrides, and Prefab Variants share a base. <a href="https://learn.unity.com/tutorial/prefab-editing-mode">Prefab editing mode</a>.</dd></div>
+          <div class="ref-row"><dt>ScriptableObjects</dt><dd>reusable shared data &mdash; items, characters, abilities, dialogue, difficulty, settings &mdash; not temporary gameplay state.</dd></div>
+          <div class="ref-row"><dt>Scene hierarchies</dt><dd>keep them shallow. Group objects only when they genuinely move, rotate, scale, or activate together.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TESTING ================= -->
+
+  <section class="section" id="testing">
+    <h2>Testing and debugging</h2>
+    <p class="section-intro">Add development cheats and checkpoints early &mdash; teleportation, progression skips, currency, item unlocks &mdash; so you are not repeating setup. Keep small scenes dedicated to individual features.</p>
+
+    <br>
+    <div class="ref-groups">
+      <div class="ref-group">
+        <h3>While developing</h3>
+        <dl>
+          <div class="ref-row"><dt>Console</dt><dd>open <strong>Window &rarr; General &rarr; Console</strong> and fix the first error first &mdash; one error often triggers several more.</dd></div>
+          <div class="ref-row"><dt>Lighting</dt><dd>use real-time lights while iterating. When ready, mark stationary geometry for global illumination, set suitable lights to Baked or Mixed, then generate lighting. Reserve real-time lights and shadows for things that move or change.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <p class="body-text"><a href="https://learn.unity.com/tutorial/get-started-with-lighting-in-unity">Get started with lighting</a> &middot; <a href="https://learn.unity.com/tutorial/creating-a-high-dynamic-range-image-skybox-1">Create an HDRI skybox</a></p>
+  </section>
+
+  <!-- ================= BUILDS ================= -->
+
+  <section class="section" id="builds">
+    <h2>Performance and builds</h2>
+    <p class="section-intro">Before building, remove unused scenes, compress textures and audio, bake lighting where appropriate, disable unnecessary shadows and effects, and choose quality settings for the target computer.</p>
+    <ol class="steps">
+      <li>Open <strong>File &rarr; Build Settings</strong>.</li>
+      <li>For profiling, enable <strong>Development Build</strong> and <strong>Autoconnect Profiler</strong>.</li>
+      <li>Select <strong>Build and Run</strong>.</li>
+      <li>Open <strong>Window &rarr; Analysis &rarr; Profiler</strong>.</li>
+      <li>Test the build while watching CPU, GPU, rendering, and memory.</li>
+    </ol>
+    <p class="body-text">For the final release, turn off Development Build, Autoconnect Profiler, and Script Debugging. Export into a new empty folder and test outside the Editor. When sharing, ZIP the entire build folder.</p>
+  </section>
+
+</div>
+
+<script src="../navigation.js?v=9"></script>
+<script src="../last-updated.js?v=3"></script>
+<script src="../cursor-sparkle.js?v=6"></script>
+
+</body>
+</html>
