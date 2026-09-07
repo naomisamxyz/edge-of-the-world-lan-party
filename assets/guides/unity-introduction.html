@@ -27,11 +27,9 @@
 
   <nav class="page-toc">
     <a href="#first">First script</a>
-    <a href="#first-comments">First script with comments</a>
     <a href="#attach">Attaching it to an object</a>
     <a href="#physics">Adding physics</a>
     <a href="#second">Second script</a>
-    <a href="#second-comments">Second script with comments</a>
   </nav>
 
   <!-- ================= FIRST SCRIPT ================= -->
@@ -47,7 +45,8 @@
           <span class="grp" data-level="1" data-label="IMPORT" style="top: calc(0 * 2.05em); height: calc(1 * 2.05em - 6px);"></span>
           <span class="grp" data-level="1" data-label="THE CLASS" style="top: calc(2 * 2.05em); height: calc(15 * 2.05em);"></span>
           <span class="grp" data-level="2" data-alt="1" data-label="INSPECTOR FIELD" style="top: calc(4 * 2.05em); height: calc(1 * 2.05em - 6px);"></span>
-          <span class="grp" data-level="2" data-label="UPDATE( ) &mdash; RUNS EVERY FRAME" style="top: calc(6 * 2.05em); height: calc(10 * 2.05em - 6px);"></span>
+          <span class="grp" data-level="2" data-label="UPDATE( )" style="top: calc(6 * 2.05em); height: calc(2 * 2.05em - 6px);"></span>
+          <span class="grp" data-level="2" data-alt="1" data-label="READ INPUT &amp; MOVE" style="top: calc(8 * 2.05em); height: calc(8 * 2.05em - 6px);"></span>
         </div>
         <div class="code-scroll">
 <pre><code>using UnityEngine;
@@ -70,140 +69,37 @@ public class MoveObject : MonoBehaviour
         </div>
       </div>
 
-      <div class="notes" data-notes-id="first" style="min-height: 560px;">
+      <div class="notes" data-notes-id="first" style="min-height: 780px;">
 
         <div class="note" data-note="import" style="top: 0px;">
           <span class="note-label">IMPORT</span>
-          <p><code>using UnityEngine;</code> pulls in the Unity types this script needs &mdash; <code>MonoBehaviour</code>, <code>Vector3</code>, <code>Input</code>, <code>Time</code>. Almost every script starts with this line.</p>
+          <p>Gives the script access to Unity's features &mdash; types such as <code>MonoBehaviour</code>, <code>Vector3</code>, <code>Transform</code>, <code>Input</code>, and <code>Time</code>. Almost every script starts with this line.</p>
         </div>
 
-        <div class="note" data-note="class" style="top: 100px;">
+        <div class="note" data-note="class" style="top: 96px;">
           <span class="note-label">THE CLASS</span>
-          <p>Everything from <code>public class</code> down to the last <code>}</code> is the class body. The name must match the file name exactly &mdash; <code>MoveObject.cs</code> &mdash; and <code>: MonoBehaviour</code> is what lets you drop it onto a GameObject.</p>
+          <p>A class groups related data and instructions together. Everything from <code>public class</code> to the final <code>}</code> is its body. The name we chose is <code>MoveObject</code>, so the file must be named <code>MoveObject.cs</code>. <code>: MonoBehaviour</code> is what lets the class work as a Unity component &mdash; attached to a GameObject and able to use methods like <code>Update()</code>.</p>
         </div>
 
-        <div class="note" data-note="field" style="top: 236px;">
+        <div class="note" data-note="field" style="top: 246px;">
           <span class="note-label">INSPECTOR FIELD</span>
-          <p>A <code>public</code> field turns into an editable slot in the Inspector. You can change <code>speed</code> there, even while the game is running, without touching the code.</p>
+          <p>A variable is a named place to store a value. <code>public</code> makes it show up as an editable slot in the Inspector, so you can change it without editing code. <code>float</code> is a number that can have decimals. <code>speed</code> is the name. <code>= 3f</code> gives it a starting value of 3 &mdash; the <code>f</code> tells C# the number is a float.</p>
         </div>
 
-        <div class="note" data-note="update" style="top: 360px;">
-          <span class="note-label">UPDATE( ) &mdash; RUNS EVERY FRAME</span>
-          <p><code>Update()</code> and everything between its braces runs once per frame. It reads the arrow / WASD keys with <code>Input.GetAxis</code> (&minus;1 to 1), packs them into a <code>Vector3</code> direction with Y left at 0, and moves the object with <code>transform.Translate</code>. Multiplying by <code>Time.deltaTime</code> keeps the speed the same at any frame rate.</p>
+        <div class="note" data-note="update" style="top: 400px;">
+          <span class="note-label">UPDATE( )</span>
+          <p>Unity calls <code>Update()</code> automatically once every frame while the game runs. Checking the keyboard here means the object keeps responding for as long as a key is held.</p>
+        </div>
+
+        <div class="note" data-note="move" style="top: 500px;">
+          <span class="note-label">READ INPUT &amp; MOVE</span>
+          <p><code>Input.GetAxis("Horizontal")</code> returns a value from &minus;1 to 1 &mdash; A / left arrow negative, D / right positive, no key near zero &mdash; and Unity eases between them so starting and stopping feel smooth. <code>"Vertical"</code> is the same for S / W, used here for the forward / back (Z) axis. <code>Vector3</code> bundles the two into a direction: <code>x</code> left / right, <code>0f</code> no vertical movement, <code>z</code> forward / back (holding W gives roughly <code>(0, 0, 1)</code>). Every GameObject has a <code>Transform</code> holding its position, rotation, and scale; lowercase <code>transform</code> is this object's. <code>Translate</code> moves it by that vector, <code>&times; speed</code> sets how fast, and <code>&times; Time.deltaTime</code> &mdash; the time since the last frame &mdash; keeps the speed identical on any machine. <code>Translate</code> uses the object's <em>local</em> axes, so forward follows the way it faces.</p>
         </div>
 
       </div>
 
       <div class="connectors" data-connectors-id="first"></div>
 
-    </div>
-
-    <p class="body-text">The full explanation of every line is in the next section.</p>
-  </section>
-
-  <!-- ================= FIRST SCRIPT WITH COMMENTS ================= -->
-
-  <section class="section" id="first-comments">
-    <h2>First script with comments</h2>
-    <p class="section-intro">The same script again, with every line explained in a comment. You do not need to keep the comments in your own file &mdash; they are here to read once.</p>
-
-    <div class="snippet">
-      <div class="code-card">
-        <div class="code-scroll">
-<pre><code>// Gives this script access to Unity features such as
-// MonoBehaviour, Vector3, Transform, Input, and Time.
-using UnityEngine;
-
-// A class is a container that groups related information
-// and instructions together.
-//
-// "MoveObject" is simply the name we chose for this class.
-// The script file must also be named "MoveObject.cs".
-//
-// ": MonoBehaviour" allows this class to work as a Unity component.
-// This means the script can be attached to a GameObject and use
-// Unity methods such as Update().
-public class MoveObject : MonoBehaviour
-{
-    // A variable is a named place where the program stores a value.
-    //
-    // "public" makes this variable visible and editable in
-    // Unity's Inspector.
-    //
-    // "float" means this variable stores a number that can
-    // include decimal places.
-    //
-    // "speed" is the name we chose for the variable.
-    //
-    // "= 3f" gives speed a starting value of 3.
-    // The "f" tells C# that the number is a float.
-    public float speed = 3f;
-
-    // Unity automatically calls Update() once every frame.
-    //
-    // We check the keyboard inside Update so Unity responds
-    // continuously while the player presses or releases a key.
-    void Update()
-    {
-        // Creates a float variable named "x".
-        //
-        // Input.GetAxis("Horizontal") checks Unity's horizontal input:
-        // - A or left arrow produces a negative value.
-        // - D or right arrow produces a positive value.
-        // - No input produces a value near zero.
-        //
-        // Unity gradually changes the value between -1 and 1,
-        // which makes starting and stopping feel smoother.
-        float x = Input.GetAxis("Horizontal");
-
-        // Creates a float variable named "z".
-        //
-        // Input.GetAxis("Vertical") checks Unity's vertical input:
-        // - S or down arrow produces a negative value.
-        // - W or up arrow produces a positive value.
-        // - No input produces a value near zero.
-        //
-        // This axis is called "Vertical" in Unity's input settings,
-        // but here we use it for movement along the 3D Z axis.
-        float z = Input.GetAxis("Vertical");
-
-        // Vector3 stores three numbers: X, Y, and Z.
-        //
-        // Here we create a Vector3 variable named "movement":
-        // - x controls left and right.
-        // - 0f means this script does not move the object up or down.
-        // - z controls forward and backward.
-        //
-        // Examples:
-        // W creates approximately (0, 0, 1).
-        // A creates approximately (-1, 0, 0).
-        Vector3 movement = new Vector3(x, 0f, z);
-
-        // Every GameObject has a Transform component.
-        //
-        // A Transform stores and controls the object's:
-        // - position: where the object is
-        // - rotation: which direction it faces
-        // - scale: how large or small it is
-        //
-        // The lowercase word "transform" refers to the Transform
-        // belonging to the GameObject carrying this script.
-        //
-        // Translate changes the object's position using "movement".
-        //
-        // Multiplying by "speed" controls how fast the object moves.
-        //
-        // Multiplying by Time.deltaTime accounts for the amount of
-        // time since the previous frame. This keeps the object's speed
-        // approximately consistent across different frame rates.
-        //
-        // Translate uses the object's local directions by default.
-        // Therefore, forward follows the direction the object is facing.
-        transform.Translate(movement * speed * Time.deltaTime);
-    }
-}</code></pre>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -246,10 +142,18 @@ public class MoveObject : MonoBehaviour
 
   <section class="section" id="second">
     <h2>Second script</h2>
-    <p class="section-intro">A shorter way to write the same movement, for an object that already has a Rigidbody. The three axis values go straight into <code class="inline">Translate</code> instead of through a named <code class="inline">Vector3</code>, and the middle value is <code class="inline">0</code> so the Rigidbody's gravity handles vertical movement. Name this file <code class="inline">Move.cs</code>.</p>
+    <p class="section-intro">A shorter way to write the same movement, for an object that already has a Rigidbody. It skips the named <code class="inline">Vector3</code> and passes the axis values straight into <code class="inline">Translate</code>, with <code class="inline">0</code> for the vertical value. Name this file <code class="inline">Move.cs</code>.</p>
 
-    <div class="snippet">
+    <div class="annotated">
+
       <div class="code-card">
+        <div class="code-groups">
+          <span class="grp" data-level="1" data-label="IMPORT" style="top: calc(0 * 2.05em); height: calc(1 * 2.05em - 6px);"></span>
+          <span class="grp" data-level="1" data-label="THE CLASS" style="top: calc(2 * 2.05em); height: calc(12 * 2.05em);"></span>
+          <span class="grp" data-level="2" data-alt="1" data-label="INSPECTOR FIELD" style="top: calc(4 * 2.05em); height: calc(1 * 2.05em - 6px);"></span>
+          <span class="grp" data-level="2" data-label="UPDATE( )" style="top: calc(6 * 2.05em); height: calc(2 * 2.05em - 6px);"></span>
+          <span class="grp" data-level="2" data-alt="1" data-label="READ INPUT &amp; MOVE" style="top: calc(8 * 2.05em); height: calc(5 * 2.05em - 6px);"></span>
+        </div>
         <div class="code-scroll">
 <pre><code>using UnityEngine;
 
@@ -267,94 +171,38 @@ public class Move : MonoBehaviour
 }</code></pre>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ================= SECOND SCRIPT WITH COMMENTS ================= -->
+      <div class="notes" data-notes-id="second" style="min-height: 620px;">
 
-  <section class="section" id="second-comments">
-    <h2>Second script with comments</h2>
-    <p class="section-intro">The second script, explained line by line.</p>
-
-    <div class="snippet">
-      <div class="code-card">
-        <div class="code-scroll">
-<pre><code>// Gives the script access to Unity features.
-using UnityEngine;
-
-// A class is a container for related variables and instructions.
-//
-// "Move" is simply the name we chose for the class.
-// Because the class is named Move, the file must be named "Move.cs".
-//
-// MonoBehaviour allows this script to be attached to a GameObject.
-public class Move : MonoBehaviour
-{
-    // A variable is a named place where we store information.
-    //
-    // "public" makes this variable visible in Unity's Inspector,
-    // allowing us to change it without editing the script.
-    //
-    // "float" means this variable stores a number that can have decimals.
-    //
-    // "speed" is the name we chose for this variable.
-    //
-    // "= 5f" gives speed a starting value of 5.
-    public float speed = 5f;
-
-    // Unity automatically runs Update once every frame.
-    //
-    // We use Update because the script needs to check the player's
-    // keyboard input continuously while the game is running.
-    void Update()
-    {
-        // Creates a float variable named "x".
-        //
-        // GetAxis("Horizontal") checks for horizontal movement input.
-        // The A and left-arrow keys produce a negative number.
-        // The D and right-arrow keys produce a positive number.
-        // When no horizontal key is pressed, the value moves toward zero.
-        float x = Input.GetAxis("Horizontal");
-
-        // Creates a float variable named "z".
-        //
-        // GetAxis("Vertical") checks for forward and backward input.
-        // The S and down-arrow keys produce a negative number.
-        // The W and up-arrow keys produce a positive number.
-        // When no vertical key is pressed, the value moves toward zero.
-        float z = Input.GetAxis("Vertical");
-
-        // Every GameObject has a Transform component.
-        //
-        // The Transform stores the object's position, rotation, and scale.
-        // The lowercase word "transform" gives this script access to the
-        // Transform belonging to the GameObject carrying this script.
-        //
-        // Translate changes the object's position:
-        //
-        // x * speed * Time.deltaTime controls left-and-right movement.
-        //
-        // The middle value is 0, so this script does not directly move
-        // the object upward or downward. The Rigidbody's gravity handles
-        // its vertical movement.
-        //
-        // z * speed * Time.deltaTime controls forward-and-backward movement.
-        //
-        // Time.deltaTime is the amount of time since the previous frame.
-        // Multiplying by it makes movement approximately the same speed
-        // on computers with different frame rates.
-        //
-        // By default, Translate moves along the object's local directions.
-        // If the object is rotated, its forward direction rotates with it.
-        transform.Translate(
-            x * speed * Time.deltaTime,
-            0,
-            z * speed * Time.deltaTime
-        );
-    }
-}</code></pre>
+        <div class="note" data-note="import" style="top: 0px;">
+          <span class="note-label">IMPORT</span>
+          <p>Same as the first script &mdash; gives the script access to Unity's features.</p>
         </div>
+
+        <div class="note" data-note="class" style="top: 72px;">
+          <span class="note-label">THE CLASS</span>
+          <p>Same shape as <code>MoveObject</code>. This one is named <code>Move</code>, so its file must be <code>Move.cs</code>. <code>: MonoBehaviour</code> lets it attach to a GameObject.</p>
+        </div>
+
+        <div class="note" data-note="field" style="top: 190px;">
+          <span class="note-label">INSPECTOR FIELD</span>
+          <p><code>public</code> makes <code>speed</code> editable in the Inspector. <code>float</code> allows decimals. <code>= 5f</code> starts it at 5.</p>
+        </div>
+
+        <div class="note" data-note="update" style="top: 300px;">
+          <span class="note-label">UPDATE( )</span>
+          <p>Runs once per frame, so keyboard input is read continuously.</p>
+        </div>
+
+        <div class="note" data-note="move" style="top: 388px;">
+          <span class="note-label">READ INPUT &amp; MOVE</span>
+          <p><code>GetAxis("Horizontal")</code> reads A / D (eased between &minus;1 and 1); <code>"Vertical"</code> reads S / W. This version skips the named <code>Vector3</code> and passes the three values straight into <code>Translate</code>: <code>x * speed * Time.deltaTime</code> for left / right, <code>0</code> for vertical &mdash; the Rigidbody's gravity handles that &mdash; and <code>z * speed * Time.deltaTime</code> for forward / back. <code>Time.deltaTime</code> keeps the speed frame-rate independent, and <code>Translate</code> moves along the object's local axes, so a rotated object's forward rotates with it.</p>
+        </div>
+
       </div>
+
+      <div class="connectors" data-connectors-id="second"></div>
+
     </div>
   </section>
 
