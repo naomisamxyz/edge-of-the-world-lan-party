@@ -1,0 +1,40 @@
+:is(.site-nav, .guide-nav) {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(100vw - 40px);
+  max-width: 960px;
+  gap: 4px 18px;
+  margin-bottom: 16px;
+  font-size: 12.5px;
+}
+
+:is(.site-nav, .guide-nav) a,
+:is(.site-nav, .guide-nav) span {
+  padding: 2px 0;
+}
+
+:is(.site-nav, .guide-nav) a {
+  position: relative;
+  left: 0;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s, text-shadow 0.15s, border-color 0.15s, left 0.15s;
+}
+
+:is(.site-nav, .guide-nav) a:hover,
+:is(.site-nav, .guide-nav) a:focus-visible {
+  left: 4px;
+  color: #fff;
+  border-bottom-color: rgba(255, 255, 255, 0.4);
+}
+
+:is(.site-nav, .guide-nav) .current {
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.mirror-symbol {
+  display: inline-block;
+  transform: scaleX(-1);
+}

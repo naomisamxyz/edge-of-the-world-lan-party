@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Tools</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="guide.css?v=39" />
+<link rel="stylesheet" href="../site-shell.css?v=5" />
+<link rel="stylesheet" href="../navigation.css?v=6" />
+</head>
+<body class="guide-page guide-ai-tools">
+
+<header class="site-header" data-site-header></header>
+
+<div class="page">
+
+  <span class="stamp" data-last-updated></span>
+
+  <nav class="guide-nav" data-site-navigation></nav>
+  <br>
+    <br>
+
+  <header class="masthead">
+    <div class="section-heading"><pre class="section-ornament guide-title-ornament" aria-hidden="true"></pre><h1>AI Tools</h1></div>
+    <p>Chatbots, coding agents, and asset generation — what they are good for, where they break, and how to use them without handing over authorship</p>
+  </header>
+
+  <nav class="page-toc">
+    <a href="#chatbots">Chatbots</a>
+    <a href="#agents">Coding agents</a>
+    <a href="#assets">Generating assets</a>
+    <a href="#critical">Using them critically</a>
+  </nav>
+
+  <!-- ================= CHATBOTS ================= -->
+
+  <section class="section" id="chatbots">
+    <h2>Chatbots</h2>
+    <p class="section-intro">Chat models such as ChatGPT, Claude, and Gemini are useful as a patient tutor and a rubber duck: for explaining errors, unblocking syntax, and talking through a design before you build it.</p>
+
+    <h3 class="sub">What they are good at</h3>
+    <ul class="steps">
+      <li>Explaining a compiler error or a Unity console message in plain language.</li>
+      <li>Turning an idea (&ldquo;I want the door to open when the player is near&rdquo;) into a Unity approach you can then build.</li>
+      <li>Reviewing a short script you already wrote and pointing at likely problems.</li>
+      <li>Summarising documentation, or drafting boilerplate you intend to rewrite.</li>
+    </ul>
+
+    <h3 class="sub">Asking well</h3>
+    <p class="body-text">Paste the <strong>whole</strong> error message and the relevant code, say what you expected versus what actually happened, and mention your Unity version. Vague questions get vague answers.</p>
+
+    <h3 class="sub">Where they break</h3>
+    <ul class="steps">
+      <li>They confidently invent methods, components, and menu paths that do not exist. Check every API name against the <a href="https://docs.unity3d.com/ScriptReference/" target="_blank" rel="noopener">Unity Scripting Reference</a> before trusting it.</li>
+      <li>They do not know your project. Anything about your scene, your file layout, or code they have not seen is a guess.</li>
+      <li>Long threads drift. Keep one chat per problem rather than one endless conversation.</li>
+    </ul>
+  </section>
+
+  <!-- ================= CODING AGENTS ================= -->
+
+  <section class="section" id="agents">
+    <h2>Coding agents</h2>
+    <p class="section-intro">Coding agents such as Claude Code, Cursor, and GitHub Copilot go a step further than a chatbot: they read the files in your project and can write changes directly into them.</p>
+
+    <h3 class="sub">What they are for</h3>
+    <ul class="steps">
+      <li>Scaffolding a new script from a clear description.</li>
+      <li>Making the same edit across several files.</li>
+      <li>Wiring up a system you can describe precisely.</li>
+      <li>Tracking a bug that crosses more than one file.</li>
+    </ul>
+
+    <h3 class="sub">Staying in control</h3>
+    <ul class="steps">
+      <li>Work in small steps. Ask for one change, read the diff, run it in Unity, then continue. A 500-line change you did not watch happen is a change you do not understand.</li>
+      <li>Use version control (see <a href="unity-best-practice.html#version-control">Unity Best Practice</a>). Commit before you let an agent work, so a bad run is one command to throw away.</li>
+      <li>Point it at <code class="inline">Assets/Scripts</code>, not the whole project. Keep generated folders and <code class="inline">.meta</code> files out of what it touches.</li>
+      <li>You are still the author. If you cannot explain what a script does and why, it is not finished, no matter who typed it.</li>
+    </ul>
+  </section>
+
+  <!-- ================= GENERATING ASSETS ================= -->
+
+  <section class="section" id="assets">
+    <h2>Generating assets</h2>
+    <p class="section-intro">Generative tools can produce 3D models, textures, sprites, sound, and music from a text prompt or an image. Treat the output as raw material, not finished work.</p>
+
+    <ul class="steps">
+      <li><strong>3D models:</strong> Meshy, Tripo, and Rodin do text-to-mesh or image-to-mesh. Expect messy topology and lighting baked into the texture. Good for blockouts, background props, and anything you plan to retexture.</li>
+      <li><strong>Textures, sprites, concept art:</strong> image generators, plus texture-specific tools. Watch for seams that do not tile and style that drifts across a set.</li>
+      <li><strong>Audio:</strong> tools exist for sound effects and for music beds. Check the licence before you ship anything.</li>
+      <li><strong>Animation:</strong> <a href="https://www.mixamo.com/" target="_blank" rel="noopener">Mixamo</a> for auto-rigging and a motion library (not generative), and video-to-mocap tools such as DeepMotion.</li>
+    </ul>
+
+    <h3 class="sub">Getting it into Unity</h3>
+    <p class="body-text">Import models as FBX or glTF, keep one Unity unit as one metre, and move files <em>inside</em> Unity so their <code class="inline">.meta</code> links survive (see <a href="first-project-setup.html">First Project Setup</a> and <a href="unity-best-practice.html#assets">Unity Best Practice</a>).</p>
+  </section>
+
+  <!-- ================= USING THEM CRITICALLY ================= -->
+
+  <section class="section" id="critical">
+    <h2>Using them critically</h2>
+    <p class="section-intro">This is an art course, and these tools are part of its subject, not only its toolkit.</p>
+
+    <p class="body-text">These models are trained on scraped text, code, images, and audio &mdash; much of it copyrighted, most of it uncredited. The labour of filtering and rating their output is real and largely invisible, and running them carries a material energy and water cost.</p>
+    <p class="body-text">That is not an argument against using them. It is an argument for using them deliberately: know what a tool is doing, whose work it is standing on, and what it is for in your piece. The constraints you set around a tool are part of the work.</p>
+    <p class="body-text">If your project is <em>about</em> these systems, start from the course readings on games, automation, and ecology, and bring it to critique.</p>
+  </section>
+
+</div>
+
+<script src="../navigation.js?v=9"></script>
+<script src="../last-updated.js?v=3"></script>
+<script src="../cursor-sparkle.js?v=6"></script>
+
+</body>
+</html>

@@ -1,0 +1,528 @@
+@import url("../base.css?v=2");
+
+  body {
+    background-color: #000;
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+      url("../images/header-glow.png"),
+      url("../images/header-glow.png");
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-position: center, -50vw top, 50vw top;
+    background-size: cover, 100vw auto, 100vw auto;
+    background-attachment: fixed, fixed, fixed;
+  }
+
+  .page {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-width: 700px;
+    margin: 0;
+    padding: 68px var(--page-pad) 100px;
+  }
+
+  .guide-nav {
+    margin-left: calc(20px - var(--page-pad));
+  }
+
+  /* ---------- Masthead ---------- */
+
+  .masthead {
+    padding-bottom: 0;
+    margin-bottom: 20px;
+  }
+
+  .masthead p {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.7;
+    margin: 14px 0 0;
+  }
+
+  /* ---------- On-this-page table of contents ---------- */
+
+  .page-toc {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    margin: 24px 0 48px;
+    padding: 0;
+    counter-reset: page-section;
+    font-size: 12.5px;
+  }
+
+  .page-toc a {
+    counter-increment: page-section;
+    display: flex;
+    align-items: baseline;
+    min-width: 0;
+    padding: 7px 0 6px;
+    color: rgba(255, 255, 255, 0.78);
+    text-decoration: none;
+    line-height: 1.35;
+    transition:
+      color 0.15s,
+      text-shadow 0.15s,
+      left 0.15s;
+  }
+
+  .page-toc a::before {
+    content: counter(page-section, decimal-leading-zero) "  \2727";
+    flex: 0 0 58px;
+    color: rgba(255, 255, 255, 0.42);
+    font-size: 12.5px;
+    white-space: pre;
+    transition: color 0.15s, text-shadow 0.15s;
+  }
+
+  .page-toc a:hover,
+  .page-toc a:focus-visible {
+    color: #fff;
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.55);
+  }
+
+  .page-toc a:hover::before,
+  .page-toc a:focus-visible::before {
+    color: #fff;
+    text-shadow: 0 0 7px rgba(255, 255, 255, 0.7);
+  }
+
+  @media (max-width: 600px) {
+    .page-toc {
+      margin-bottom: 42px;
+    }
+  }
+
+  /* ---------- Section headings ---------- */
+
+  h2 {
+    font-size: 18px;
+    font-weight: normal;
+    margin: 0 0 6px;
+    color: #fff;
+  }
+
+  h3.sub {
+    font-size: 14px;
+    font-weight: normal;
+    color: #fff;
+    margin: 26px 0 8px;
+  }
+
+  .section {
+    margin-bottom: 48px;
+    scroll-margin-top: 32px;
+  }
+
+  .section-intro {
+    color: #fff;
+    font-size: 13px;
+    line-height: 1.7;
+    margin: 0 0 18px;
+  }
+
+  .section p.body-text {
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 10px 0 0;
+  }
+
+  .body-text.no-top-margin {
+    margin-top: 0;
+  }
+
+  code.inline {
+    font-size: 0.95em;
+    color: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.08);
+    padding: 1px 5px;
+  }
+
+  /* ==================================================
+     Annotated code block (code left, notes right)
+     ================================================== */
+
+  .annotated {
+    position: relative;
+    width: calc(100vw - 40px);
+    max-width: 1348px;
+    margin: 18px 0 24px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 28px;
+    align-items: start;
+  }
+
+  .code-card {
+    position: relative;
+    background: linear-gradient(90deg, rgba(255,255,255,0.045), rgba(0,0,0,0.15));
+    border: solid rgba(255,255,255,0.15);
+    border-width: 1px 0;
+    overflow: hidden;
+  }
+
+  .code-scroll {
+    position: relative;
+    overflow-x: auto;
+    padding: 18px 20px;
+  }
+
+  .code-card pre {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+  }
+
+  .code-card code {
+    display: block;
+    width: max-content;
+    min-width: 100%;
+    font-family: "Menlo", "Consolas", "Courier New", monospace;
+    font-size: 12px;
+    line-height: 2.05em;
+    color: rgba(255,255,255,0.9);
+    white-space: pre;
+  }
+
+  .code-groups {
+    position: absolute;
+    top: 18px;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    font-size: 12px;
+    pointer-events: none;
+  }
+
+  .grp {
+    position: absolute;
+    right: 0;
+    background: rgba(255,255,255,0.04);
+    border-left: 2px solid rgba(255,255,255,0.22);
+  }
+
+  .grp::after {
+    content: attr(data-label);
+    position: absolute;
+    top: 4px;
+    right: 12px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .grp[data-level="1"] { left: 0; }
+
+  .grp[data-level="2"] {
+    left: 16px;
+    background: rgba(255,255,255,0.055);
+    border-left-color: rgba(255,255,255,0.32);
+  }
+  .grp[data-level="2"]::after { color: rgba(255,255,255,0.5); }
+
+  .grp[data-alt="1"] {
+    background: rgba(255,255,255,0.09);
+    border-left-color: rgba(255,255,255,0.4);
+  }
+
+  .notes {
+    position: relative;
+    font-size: 13px;
+    min-height: 100%;
+  }
+
+  .note,
+  .ref-row {
+    background: var(--fade-box-background);
+  }
+
+  .note {
+    position: absolute;
+    left: 0;
+    right: 0;
+    padding: 8px 14px 10px;
+  }
+
+  .note-label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 5px;
+  }
+
+  .note p {
+    margin: 0;
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  .note strong { color: var(--text-primary); font-weight: normal; }
+  .note em { color: var(--text-primary); font-style: normal; }
+  .note code { font-family: "Menlo","Consolas","Courier New",monospace; color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.08); padding: 0 4px; font-size: 0.95em; }
+
+  .connectors {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .conn-h { position: absolute; height: 1px; background: rgba(255,255,255,0.3); }
+  .conn-v { position: absolute; width: 1px; background: rgba(255,255,255,0.3); }
+  .conn-dot {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    margin: -2px 0 0 -2px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+  }
+
+  @media (max-width: 800px) {
+    .connectors { display: none; }
+    .annotated { grid-template-columns: 1fr; width: auto; }
+    .notes { min-height: 0; margin-top: 20px; }
+    .note { position: static; margin-bottom: 14px; }
+  }
+
+  /* ---------- Plain (non-annotated) code snippet ---------- */
+
+  .snippet {
+    margin: 14px 0;
+  }
+
+  /* ==================================================
+     Reference groups (single column)
+     ================================================== */
+
+  .ref-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .ref-group {
+    border: 0;
+    background: transparent;
+    padding: 0;
+  }
+
+  .ref-group h3 {
+    font-size: 13px;
+    font-weight: normal;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin: 0 0 12px;
+  }
+
+  .ref-group dl {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .ref-group dt {
+    font-family: "Menlo","Consolas","Courier New",monospace;
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.85);
+    display: inline;
+  }
+
+  .ref-group dd {
+    display: inline;
+    margin: 0 0 0 8px;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .ref-row {
+    display: block;
+    padding: 10px 14px;
+  }
+
+  /* Numbered sections across the guide system. */
+  .guide-page .page {
+    counter-reset: guide-section;
+  }
+
+  .guide-page .section {
+    position: relative;
+    padding-left: 0;
+    counter-increment: guide-section;
+  }
+
+  .guide-page .section > h2 {
+    margin-left: 34px;
+  }
+
+  .guide-page .section::before {
+    content: "0" counter(guide-section);
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #fff;
+    font-size: 18px;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    font-family: inherit;
+    line-height: normal;
+    white-space: normal;
+  }
+
+  .guide-page .section:target::before {
+    color: rgba(255, 255, 255, 0.82);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.52);
+  }
+
+  .guide-page .section:target > h2 {
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.42);
+  }
+
+  @media (max-width: 600px) {
+    .guide-page .section::before {
+      font-size: 16px;
+    }
+
+    .guide-page .section > h2 {
+      margin-left: 30px;
+    }
+  }
+
+  .attr-list {
+    margin: 6px 0 0;
+    padding-left: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .tag-kind {
+    display: inline-block;
+    font-family: "VCR OSD Mono", "Space Mono", monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-left: 8px;
+  }
+
+/* ---------- Numbered steps ---------- */
+
+  .steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .steps li {
+    position: relative;
+    padding-left: 58px;
+    margin-bottom: 14px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #fff;
+  }
+
+  .steps li::before {
+    content: var(--list-sigil);
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 44px;
+    height: 24px;
+    overflow: hidden;
+    color: #fff;
+    font-family: monospace;
+    font-size: 4px;
+    line-height: 1;
+    white-space: pre;
+  }
+
+  
+
+/* ---------- Page intro (below page-toc) ---------- */
+
+  .page-intro {
+    margin: 0 0 40px;
+  }
+
+  .page-intro p {
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0 0 12px;
+  }
+
+  .page-intro p:last-child { margin-bottom: 0; }
+
+
+/* ---------- Screenshot beside "What is GitHub" ---------- */
+
+  #what-is-github {
+    position: relative;
+    --gh-shot-room: calc(100vw - 700px - 40px);
+  }
+
+  .gh-float-image {
+    display: block;
+    width: 100%;
+    margin: 24px 0 0;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    filter: grayscale(1);
+  }
+
+  /* Below 1200px, the image stays in normal flow after the paragraphs,
+     full paragraph width. */
+  @media (min-width: 1200px) {
+    .gh-float-image {
+      position: absolute;
+      top: 150px;
+      left: 100%;
+      max-width: none;
+      /* Both the gap and the width shrink to 0 right at 700px (zero spare
+         room) and grow as more space opens up -- the gap never causes
+         overflow on its own once the image has shrunk away. No upper cap:
+         the image grows to fill whatever room remains. */
+      margin: 0 0 0 max(0px, min(100px, var(--gh-shot-room)));
+      width: max(0px, calc(var(--gh-shot-room) - 100px));
+    }
+  }
+
+
+.folder-tree {
+    margin: 18px 0 24px;
+    padding: 16px 20px;
+    background: var(--fade-box-background);
+    color: var(--text-primary);
+    font: 13px/1.7 "VCR OSD Mono", "Space Mono", "Courier New", monospace;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+
+.quote-demo::before {
+    content: "\201C";
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  
+
+.snippet code.wrap {
+    width: 100%;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }

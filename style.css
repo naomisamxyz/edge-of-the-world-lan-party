@@ -1,0 +1,209 @@
+@import url("assets/base.css?v=2");
+
+body {
+  background-color: #000;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+    url("assets/images/header-glow.png");
+  background-repeat: no-repeat, no-repeat;
+  background-position: center, center -8vw;
+  background-size: cover, 120vw auto;
+  background-attachment: fixed, fixed;
+}
+
+.below-canvas {
+  padding: 68px var(--page-pad) 64px;
+}
+
+#attendance-coursework {
+  margin-top: 64px;
+}
+
+.site-nav {
+  margin-left: calc(20px - var(--page-pad));
+}
+
+.below-canvas p,
+.below-canvas .syllabus-copy {
+  width: 50%;
+  max-width: none;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+
+.below-canvas p + p,
+.below-canvas .syllabus-copy + .syllabus-copy {
+  margin-top: 12px;
+}
+
+.below-canvas p a,
+.below-canvas p a:visited,
+.below-canvas .syllabus-copy a,
+.below-canvas .syllabus-copy a:visited {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.below-canvas p a:hover,
+.below-canvas .syllabus-copy a:hover {
+  color: #fff;
+}
+
+.syllabus-section {
+  padding: 0 var(--page-pad) 100px;
+}
+
+.syllabus-week + .syllabus-week {
+  margin-top: 64px;
+}
+
+.syllabus-week {
+  scroll-margin-top: 112px;
+}
+
+.week-heading h2 a,
+.week-heading h2 a:visited {
+  color: inherit;
+  text-decoration-color: rgba(218, 217, 217, 0.22);
+}
+
+.week-heading {
+  width: 50%;
+  flex-wrap: wrap;
+  align-items: baseline;
+  margin-bottom: 24px;
+}
+
+.week-heading .section-ornament {
+  align-self: center;
+}
+
+.week-title {
+  display: flow-root;
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 0;
+}
+
+.week-title .section-ornament {
+  display: none;
+}
+
+.week-title::before {
+  float: left;
+  margin-right: 10px;
+  content: var(--heading-sigil);
+  color: #fff;
+  font-family: monospace;
+  font-size: 2.5px;
+  line-height: 1;
+  white-space: pre;
+}
+
+.week-title h2 {
+  white-space: normal;
+}
+
+.week-heading time {
+  flex-basis: 100%;
+  flex-shrink: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: normal;
+  letter-spacing: 0;
+}
+
+.syllabus-week > p,
+.syllabus-week > .syllabus-copy,
+.syllabus-week ul {
+  width: 50%;
+}
+
+.syllabus-week > p,
+.syllabus-week > .syllabus-copy {
+  margin: 0 0 32px;
+  color: var(--text-primary);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.syllabus-week ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.syllabus-week li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--text-primary);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.syllabus-week li::before {
+  content: var(--list-sigil);
+  flex: 0 0 44px;
+  width: 44px;
+  height: 24px;
+  overflow: hidden;
+  color: #fff;
+  font-family: monospace;
+  font-size: 4px;
+  line-height: 1;
+  white-space: pre;
+}
+
+.syllabus-week li + li {
+  margin-top: 12px;
+}
+
+.canvas-page .list-object li::before {
+  color: #fff;
+}
+
+.syllabus-week li a,
+.syllabus-week li a:visited {
+  padding: 0;
+  color: inherit;
+}
+
+.syllabus-week li a:hover {
+  color: inherit;
+}
+
+.week-guide-list {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 18px;
+  margin-top: 0;
+  vertical-align: baseline;
+}
+
+@media (max-width: 800px) {
+  .week-title h2 {
+    white-space: normal;
+  }
+
+  .week-heading,
+  .below-canvas p,
+  .below-canvas .syllabus-copy,
+  .syllabus-week > p,
+  .syllabus-week > .syllabus-copy,
+  .syllabus-week ul {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .week-heading time {
+    font-size: 16px;
+  }
+
+  body {
+    background-attachment: scroll;
+  }
+}

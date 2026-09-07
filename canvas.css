@@ -1,0 +1,671 @@
+.canvas-page {
+  height: 100vh;
+  overflow: hidden;
+  user-select: none;
+}
+
+.canvas-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  padding-bottom: 10px;
+  pointer-events: none;
+  background: linear-gradient(#000 15%, transparent);
+}
+
+.canvas-viewport {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+}
+
+.canvas-viewport.is-panning {
+  cursor: grabbing;
+}
+
+.canvas-world {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+.connections {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.edit-mode .connections {
+  z-index: 2;
+  pointer-events: none;
+}
+
+.edit-mode.edit-preview .connections {
+  z-index: auto;
+}
+
+.canvas-object {
+  position: absolute;
+  width: var(--w);
+  height: var(--h);
+  transform: translate(var(--x), var(--y));
+  transform-origin: 0 0;
+}
+
+.canvas-object.text-object {
+  position: absolute;
+  color: #dad9d9;
+  background: transparent;
+}
+
+.text-object h2 {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: clamp(16px, 1.8vw, 22px);
+  font-weight: normal;
+}
+
+.text-object h2::before {
+  content: none;
+}
+
+.text-object p,
+.text-object .canvas-paragraph {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.week-object a,
+.list-object a {
+  color: inherit;
+}
+
+.section-object a {
+  position: relative;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+.media-object {
+  box-sizing: border-box;
+  width: max-content;
+  height: auto;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.media-visual {
+  position: relative;
+  display: block;
+}
+
+.media-object img {
+  display: block;
+  width: min(var(--w), 240px);
+  max-width: 240px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.12));
+  -webkit-user-drag: none;
+}
+
+.media-object.is-link img,
+.media-object.is-youtube img {
+  height: var(--h);
+  object-fit: cover;
+}
+
+.media-play,
+.media-link {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.84);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.58);
+  box-shadow:
+    0 0 5px rgba(255, 255, 255, 0.5),
+    0 0 18px rgba(255, 255, 255, 0.28);
+  transform: translate(-50%, -50%);
+  text-decoration: none;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: transform 0.15s, color 0.15s, text-shadow 0.15s;
+}
+
+.media-play:hover,
+.media-play:focus-visible {
+  left: 50%;
+  transform: translate(calc(-50% + 4px), -50%);
+}
+
+.media-link svg {
+  width: 9px;
+  height: 9px;
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: none;
+}
+
+.media-link {
+  left: auto;
+  right: 7px;
+  top: 7px;
+  width: 18px;
+  height: 18px;
+  border-width: 0.75px;
+  border-color: rgba(255, 255, 255, 0.6);
+  background: transparent;
+  box-shadow: 0 0 3px rgba(255, 255, 255, 0.22);
+  transform: none;
+}
+
+.media-link:hover,
+.media-link:focus-visible {
+  left: auto;
+  transform: translateX(4px);
+}
+
+.media-play::after {
+  content: "";
+  width: 0;
+  height: 0;
+  margin-left: 1.5px;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 6px solid #fff;
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.55));
+}
+
+.media-play {
+  width: 28px;
+  height: 28px;
+}
+
+.media-title {
+  position: static;
+  box-sizing: border-box;
+  width: var(--w);
+  min-width: 0;
+  max-width: 240px;
+  height: auto;
+  padding: 10px 13px 10px 7px;
+  color: #dad9d9;
+  background: transparent;
+  font-size: 80%;
+  transform: none;
+  pointer-events: auto;
+}
+
+.media-title a {
+  display: block;
+  max-width: 100%;
+  color: #fff;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.media-meta {
+  display: block;
+  max-width: 100%;
+  margin-top: 6px;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 9px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.sigil-object {
+  color: rgba(255, 255, 255, 0.6);
+  font: 10px/1 monospace;
+  white-space: pre;
+  filter: drop-shadow(0 0 18px #fff);
+  pointer-events: none;
+}
+
+.canvas-controls {
+  position: fixed;
+  top: var(--page-pad);
+  right: 14px;
+  bottom: auto;
+  left: auto;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.canvas-controls button {
+  align-self: stretch;
+  padding: 0 8px;
+  border: 0;
+  border-left: 0;
+  color: rgba(255, 255, 255, 0.74);
+  background: transparent;
+  font: 12px "VCR OSD Mono", monospace;
+  cursor: pointer;
+}
+
+.canvas-controls button:hover,
+.canvas-controls button:focus-visible {
+  color: #fff;
+  background: transparent;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.55);
+}
+
+.edit-toolbar button {
+  padding: 9px 12px;
+  border: 1px solid #aaa;
+  color: #ddd;
+  background: #050505;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.22);
+  font: 12px "VCR OSD Mono", monospace;
+  cursor: pointer;
+}
+
+#zoom-readout {
+  padding: 0 5px;
+  border-left: 0;
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 10.5px;
+}
+
+.view-toggle {
+  position: fixed;
+  top: var(--page-pad);
+  right: 14px;
+  bottom: auto;
+  left: auto;
+  z-index: 120;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 5px;
+  align-items: center;
+  padding: 3px;
+  border: 0;
+  color: rgba(255, 255, 255, 0.5);
+  background: transparent;
+  box-shadow: none;
+  font-size: 12px;
+}
+
+.canvas-controls .view-toggle {
+  position: static;
+  z-index: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.view-toggle > span,
+.view-toggle > a {
+  padding: 6px 5px;
+  transition: color 0.15s, background 0.15s, text-shadow 0.15s, left 0.15s;
+}
+
+.view-toggle > a,
+.view-toggle > a:visited {
+  color: rgba(255, 255, 255, 0.56);
+  text-decoration: none;
+}
+
+.view-toggle > a:hover,
+.view-toggle > a:focus-visible {
+  color: #fff;
+  background: transparent;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.42);
+}
+
+.view-toggle .view-diamond {
+  padding-right: 0;
+  padding-left: 0;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 13px;
+  line-height: 1;
+}
+
+.view-toggle .view-current {
+  color: #fff;
+  background: transparent;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.48);
+}
+
+.edit-toolbar {
+  position: fixed;
+  left: 50%;
+  bottom: 34px;
+  z-index: 115;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+  width: max-content;
+  max-width: calc(100vw - 28px);
+  transform: translateX(-50%);
+}
+
+.edit-toolbar[hidden] {
+  display: none;
+}
+
+.media-editor-dialog {
+  width: min(520px, calc(100vw - 32px));
+  max-height: calc(100vh - 48px);
+  box-sizing: border-box;
+  overflow: auto;
+  padding: 20px;
+  border: 1px dotted rgba(255, 255, 255, 0.48);
+  color: #dad9d9;
+  background: rgba(5, 5, 5, 0.97);
+  box-shadow: 0 0 28px rgba(255, 255, 255, 0.14);
+  font: 13px/1.4 "VCR OSD Mono", monospace;
+}
+
+.media-editor-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.66);
+}
+
+.media-editor-form {
+  display: grid;
+  gap: 12px;
+}
+
+.media-editor-form h2 {
+  margin: 0 0 4px;
+  color: #fff;
+  font-size: 17px;
+  font-weight: normal;
+}
+
+.media-editor-form label {
+  display: grid;
+  gap: 5px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.media-editor-form input,
+.media-editor-form select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 9px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 0;
+  color: #fff;
+  background: #0b0b0b;
+  font: 13px/1.3 "VCR OSD Mono", monospace;
+}
+
+.media-editor-hint,
+.media-editor-status {
+  min-height: 1.4em;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 11px;
+}
+
+.media-editor-status {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.media-editor-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.media-editor-actions button {
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  color: #ddd;
+  background: transparent;
+  font: 12px "VCR OSD Mono", monospace;
+  cursor: pointer;
+}
+
+.media-editor-actions button:hover,
+.media-editor-actions button:focus-visible {
+  color: #fff;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.55);
+}
+
+.media-editor-actions button:disabled {
+  opacity: 0.4;
+}
+
+.edit-toolbar a {
+  padding: 9px 12px;
+  border: 1px solid #aaa;
+  color: #ddd;
+  background: #050505;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.edit-mode .canvas-object {
+  outline: 1px dashed #888;
+  cursor: move;
+}
+
+.edit-mode .sigil-object {
+  outline: 0;
+}
+
+.resize-handle {
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #000;
+  background: #fff;
+  cursor: nwse-resize;
+}
+
+.drag-handle {
+  position: absolute;
+  left: -9px;
+  top: -9px;
+  z-index: 10;
+  width: 14px;
+  height: 14px;
+  color: #fff;
+  font: 11px/14px "VCR OSD Mono", monospace;
+  text-align: center;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.55);
+  cursor: move;
+}
+
+.drag-handle::before {
+  content: "✧";
+}
+
+.edit-mode [contenteditable="true"] {
+  cursor: text;
+  outline: none;
+}
+
+.edit-mode [contenteditable="true"]:focus {
+  outline: 1px dotted rgba(255, 255, 255, 0.42);
+  outline-offset: 3px;
+}
+
+.edit-mode .media-visual,
+.edit-mode .media-meta {
+  cursor: move;
+}
+
+.edit-mode .media-play,
+.edit-mode .media-link,
+.edit-mode .media-title a {
+  cursor: pointer;
+}
+
+.edit-preview .canvas-object,
+.edit-preview .selected,
+.edit-preview [contenteditable="true"]:focus {
+  outline: 0 !important;
+}
+
+.edit-preview .drag-handle,
+.edit-preview .resize-handle {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.selected {
+  outline: 2px solid #fff !important;
+}
+
+.connection-path {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.76);
+  stroke-width: 1.45;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.7));
+}
+
+.connection-arrow-image {
+  filter: invert(1) drop-shadow(0 0 1px rgba(255, 255, 255, 0.45));
+}
+
+/* Canvas-only layout overrides formerly kept in cursor-fix.css. */
+.canvas-page .canvas-object.week-object {
+  --frame-x: 34px;
+  --frame-y: 22px;
+  padding: 34px 22px 34px 54px;
+}
+
+.canvas-page .week-object .week-heading { width: 100%; margin: 0; }
+.canvas-page .week-object .week-title { min-width: 0; }
+.canvas-page .canvas-object.list-object { padding: 54px 60px; }
+.canvas-page .list-object p { margin: 0 0 32px; font-size: 15px; line-height: 1.7; }
+.canvas-page .list-object ul { margin: 0; padding: 0; list-style: none; }
+.canvas-page .list-object li {
+  position: relative;
+  padding-left: 44px;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.canvas-page .list-object li::before {
+  content: var(--list-sigil);
+  position: absolute;
+  top: 3px;
+  left: 0;
+  width: 44px;
+  height: 24px;
+  overflow: hidden;
+  color: #fff;
+  font: 4px/1 monospace;
+  white-space: pre;
+}
+.canvas-page .list-object li + li { margin-top: 12px; }
+.canvas-page .canvas-object.text-object:not(.week-object):not(.list-object) { padding: 54px 60px; }
+.canvas-page .canvas-object.text-object:not(.week-object):not(.list-object) > p {
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.edit-mode .connection-path {
+  pointer-events: none;
+}
+
+.edit-mode .connection-path:hover,
+.connection-path.is-hovered,
+.connection-path.selected-connection {
+  stroke: #fff;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.95));
+}
+
+.connection-control {
+  pointer-events: all;
+  cursor: move;
+  fill: #050505;
+  stroke: #fff;
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.9));
+}
+
+.connection-endpoint {
+  fill: #fff;
+  stroke: #050505;
+  stroke-width: 2;
+  filter:
+    drop-shadow(0 0 2px #000)
+    drop-shadow(0 0 4px rgba(255, 255, 255, 0.95));
+}
+
+.connection-hit-area {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 16;
+  pointer-events: stroke;
+  cursor: pointer;
+  vector-effect: non-scaling-stroke;
+}
+
+.edit-preview .connection-control {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@media (max-width: 600px) {
+  .canvas-header .site-meta {
+    max-width: 88%;
+    font-size: 10px;
+  }
+
+  .canvas-controls {
+    top: var(--page-pad);
+    right: 8px;
+    bottom: auto;
+    left: auto;
+  }
+
+  .view-toggle {
+    top: var(--page-pad);
+    right: 8px;
+    bottom: auto;
+    left: auto;
+  }
+
+  #zoom-readout {
+    display: none;
+  }
+
+  .canvas-stamp {
+    max-width: 46vw;
+    text-align: right;
+  }
+}
