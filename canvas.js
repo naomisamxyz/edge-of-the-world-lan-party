@@ -306,25 +306,18 @@
     }
   }
 
-  function applyCamera(crisp) {
+  function applyCamera() {
     const zoom = camera.zoom;
-    if (crisp) {
-      const translateX = camera.x / zoom;
-      const translateY = camera.y / zoom;
-      world.style.zoom = zoom;
-      world.style.transform =
-        "translate(" + translateX + "px," + translateY + "px)";
-      lines.style.zoom = zoom;
-      lines.style.transform =
-        "translate(" + translateX + "px," + translateY + "px)";
-    } else {
-      const transform =
-        "translate(" + camera.x + "px," + camera.y + "px) scale(" + zoom + ")";
-      world.style.zoom = "";
-      world.style.transform = transform;
-      lines.style.zoom = "";
-      lines.style.transform = transform;
-    }
+    // Always scale with a transform. The CSS `zoom` property was used here for
+    // crisper text while panning, but Chrome fails to scale some descendant
+    // text (list items, paragraphs) under it, so headings and body copy drift
+    // out of proportion as you zoom.
+    const transform =
+      "translate(" + camera.x + "px," + camera.y + "px) scale(" + zoom + ")";
+    world.style.zoom = "";
+    world.style.transform = transform;
+    lines.style.zoom = "";
+    lines.style.transform = transform;
     world.style.transformOrigin = "0 0";
     lines.style.transformOrigin = "0 0";
     const displayedZoom = clamp(

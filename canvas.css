@@ -2,6 +2,10 @@
   height: 100vh;
   overflow: hidden;
   user-select: none;
+  /* Stop the browser's font auto-sizing from inflating long list/paragraph
+     text when the whole canvas is scaled down. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 .canvas-header {
