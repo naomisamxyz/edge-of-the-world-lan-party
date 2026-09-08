@@ -801,7 +801,7 @@
       innerWidth / 2 - (resource.x + resource.width / 2) * camera.zoom;
     camera.y =
       innerHeight / 2 - (resource.y + resource.height / 2) * camera.zoom;
-    applyCamera(true);
+    applyCamera();
     return true;
   }
 
@@ -817,7 +817,7 @@
       innerWidth / 2 - (resource.x + resource.width / 2) * camera.zoom;
     camera.y =
       innerHeight * 0.22 - (resource.y + resource.height / 2) * camera.zoom;
-    applyCamera(true);
+    applyCamera();
     return true;
   }
 
@@ -1055,7 +1055,7 @@
       camera.zoom = newZoom;
       camera.x = midX - pinch.worldX * newZoom;
       camera.y = midY - pinch.worldY * newZoom;
-      applyCamera(false);
+      applyCamera();
       return;
     }
     if (!gesture) return;
@@ -1099,7 +1099,7 @@
         gesture.endpoint === "start" ? "manualStart" : "manualEnd"
       ] = connectionAnchorRatio(gesture.resource, anchor);
     }
-    applyCamera(true);
+    applyCamera();
   });
 
   addEventListener("pointerup", event => {
@@ -1107,7 +1107,7 @@
       touchPoints.delete(event.pointerId);
       if (pinch && touchPoints.size < 2) {
         pinch = null;
-        applyCamera(true);
+        applyCamera();
         saveLocal();
         const rest = [...touchPoints.values()][0];
         gesture = rest
@@ -1144,7 +1144,7 @@
     camera.zoom = newZoom;
     camera.x = clientX - worldX * newZoom;
     camera.y = clientY - worldY * newZoom;
-    applyCamera(false);
+    applyCamera();
     return true;
   }
 
@@ -1154,7 +1154,7 @@
     zoomMomentumTimer = null;
     zoomMomentumFrame = null;
     zoomVelocity = 0;
-    if (settle) applyCamera(true);
+    if (settle) applyCamera();
   }
 
   function startZoomMomentum() {
@@ -1182,7 +1182,7 @@
         stopZoomMomentum(false);
         camera.x -= event.deltaX;
         camera.y -= event.deltaY;
-        applyCamera(true);
+        applyCamera();
         return;
       }
       clearTimeout(zoomMomentumTimer);
@@ -1220,7 +1220,7 @@
   document.querySelector("#back-origin").addEventListener("click", () => {
     if (!data) return;
     camera = { ...data.home };
-    applyCamera(true);
+    applyCamera();
   });
 
   document
@@ -1778,7 +1778,7 @@
       toolbar.hidden = false;
     }
 
-    applyCamera(true);
+    applyCamera();
     requestAnimationFrame(() => {
       const weekMatch = location.hash.match(/week(\d+)/);
       const id = location.hash.slice(1);
@@ -1788,7 +1788,7 @@
         focusResource(id)
       ) return;
       if (id && centerResource(id)) return;
-      applyCamera(true);
+      applyCamera();
     });
   }
 

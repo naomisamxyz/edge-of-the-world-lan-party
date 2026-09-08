@@ -129,10 +129,6 @@
     margin: 10px 0 0;
   }
 
-  .body-text.no-top-margin {
-    margin-top: 0;
-  }
-
   code.inline {
     font-size: 0.95em;
     color: rgba(255, 255, 255, 0.85);
@@ -399,27 +395,6 @@
     }
   }
 
-  .attr-list {
-    margin: 6px 0 0;
-    padding-left: 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    font-size: 12.5px;
-    color: var(--text-muted);
-    line-height: 1.6;
-  }
-
-  .tag-kind {
-    display: inline-block;
-    font-family: "VCR OSD Mono", "Space Mono", monospace;
-    font-size: 9.5px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
-    margin-left: 8px;
-  }
-
 /* ---------- Numbered steps ---------- */
 
   .steps {
@@ -450,79 +425,4 @@
     font-size: 4px;
     line-height: 1;
     white-space: pre;
-  }
-
-  
-
-/* ---------- Page intro (below page-toc) ---------- */
-
-  .page-intro {
-    margin: 0 0 40px;
-  }
-
-  .page-intro p {
-    color: #fff;
-    font-size: 14px;
-    line-height: 1.7;
-    margin: 0 0 12px;
-  }
-
-  .page-intro p:last-child { margin-bottom: 0; }
-
-
-/* ---------- Screenshot beside "What is GitHub" ---------- */
-
-  #what-is-github {
-    position: relative;
-    --gh-shot-room: calc(100vw - 700px - 40px);
-  }
-
-  .gh-float-image {
-    display: block;
-    width: 100%;
-    margin: 24px 0 0;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    filter: grayscale(1);
-  }
-
-  /* Below 1200px, the image stays in normal flow after the paragraphs,
-     full paragraph width. */
-  @media (min-width: 1200px) {
-    .gh-float-image {
-      position: absolute;
-      top: 150px;
-      left: 100%;
-      max-width: none;
-      /* Both the gap and the width shrink to 0 right at 700px (zero spare
-         room) and grow as more space opens up -- the gap never causes
-         overflow on its own once the image has shrunk away. No upper cap:
-         the image grows to fill whatever room remains. */
-      margin: 0 0 0 max(0px, min(100px, var(--gh-shot-room)));
-      width: max(0px, calc(var(--gh-shot-room) - 100px));
-    }
-  }
-
-
-.folder-tree {
-    margin: 18px 0 24px;
-    padding: 16px 20px;
-    background: var(--fade-box-background);
-    color: var(--text-primary);
-    font: 13px/1.7 "VCR OSD Mono", "Space Mono", "Courier New", monospace;
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
-  }
-
-
-.quote-demo::before {
-    content: "\201C";
-    color: rgba(255, 255, 255, 0.45);
-  }
-
-  
-
-.snippet code.wrap {
-    width: 100%;
-    white-space: pre-wrap;
-    word-break: break-all;
   }
