@@ -28,6 +28,32 @@
   const maximumZoom = 1.6;
   const connectionGap = 10;
 
+  function beginThumbnailLoad(image) {
+    const source = image.dataset.src;
+    if (!source) return;
+    thumbnailObserver?.unobserve(image);
+    delete image.dataset.src;
+    image.src = source;
+  }
+
+  const thumbnailObserver = "IntersectionObserver" in window
+    ? new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) beginThumbnailLoad(entry.target);
+        });
+      }, { root: viewport, rootMargin: "600px" })
+    : null;
+
+  function observeThumbnail(image) {
+    if (thumbnailObserver) thumbnailObserver.observe(image);
+    else beginThumbnailLoad(image);
+  }
+
+  function updateThumbnailSource(image, source) {
+    if (image.hasAttribute("src")) image.src = source;
+    else image.dataset.src = source;
+  }
+
   const clamp = (number, minimum, maximum) =>
     Math.min(maximum, Math.max(minimum, number));
 
@@ -133,6 +159,7 @@
 
   function createNode(resource) {
     const element = document.createElement("div");
+    let deferredImage = null;
     element.className = "canvas-object";
     element.dataset.id = resource.id;
     element.style.cssText =
@@ -215,7 +242,7 @@
       element.style.height = "auto";
       element.innerHTML =
         '<div class="media-visual">' +
-        '<img loading="lazy" decoding="async" src="' +
+        '<img loading="lazy" decoding="async" fetchpriority="low" data-src="' +
         escapeHTML(resource.image) +
         '" width="' + Math.round(resource.width) +
         '" height="' + Math.round(resource.height) +
@@ -236,6 +263,7 @@
           : "") +
         "</div>";
       const image = element.querySelector("img");
+      deferredImage = image;
       image.addEventListener("error", () => {
         if (
           mediaKind === "youtube" &&
@@ -245,14 +273,14 @@
             "/maxresdefault.jpg",
             "/hqdefault.jpg"
           );
-          image.src = resource.image;
+          updateThumbnailSource(image, resource.image);
           saveLocal();
         } else if (
           mediaKind === "link" &&
           !String(resource.image || "").startsWith("data:")
         ) {
           resource.image = generatedLinkPlaceholder(resource.url);
-          image.src = resource.image;
+          updateThumbnailSource(image, resource.image);
           saveLocal();
         }
       });
@@ -267,7 +295,7 @@
       if (recoverLinkThumbnail) {
         linkMetadata(resource.url).then(metadata => {
           resource.image = metadata.image;
-          image.src = resource.image;
+          updateThumbnailSource(image, resource.image);
           saveLocal();
         });
       }
@@ -292,6 +320,7 @@
     }
 
     world.append(element);
+    if (deferredImage) observeThumbnail(deferredImage);
     const autoHeightType = ["week", "list", "text", "section"].includes(
       resource.type
     );
@@ -1769,7 +1798,6 @@
     data =
       edit && cached && cached.version === json.version ? cached : json;
     data.lastUpdated = { ...json.lastUpdated };
-    saveLocal();
     camera = { ...data.home };
     data.resources.forEach(createNode);
 

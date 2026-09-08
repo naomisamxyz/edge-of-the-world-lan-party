@@ -69,6 +69,10 @@
   background: transparent;
 }
 
+.canvas-object.section-object {
+  z-index: 1;
+}
+
 .text-object h2 {
   margin: 0;
   color: rgba(255, 255, 255, 0.85);

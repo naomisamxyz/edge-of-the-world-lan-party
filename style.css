@@ -4,10 +4,10 @@ body {
   background-color: #000;
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
-    url("assets/images/header-glow.png");
+    url("assets/background_color2.png");
   background-repeat: no-repeat, no-repeat;
-  background-position: center, center -8vw;
-  background-size: cover, 120vw auto;
+  background-position: center, center;
+  background-size: cover, cover;
   background-attachment: fixed, fixed;
 }
 
