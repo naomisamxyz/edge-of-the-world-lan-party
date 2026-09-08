@@ -30,7 +30,7 @@
   float: left;
   margin: 0 12px 0 0;
   font-family: monospace;
-  font-size: clamp(3.33px, 0.4667vw, 6px);
+  font-size: clamp(3.33px, 0.37vw, 6px);
   line-height: 1;
   white-space: pre;
   color: #fff;
@@ -39,7 +39,7 @@
 
 .site-title {
   margin: 0;
-  font-size: clamp(20px, 2.8vw, 36px);
+  font-size: clamp(20px, 2.2vw, 36px);
   font-weight: normal;
   line-height: 1;
   color: #fff;
