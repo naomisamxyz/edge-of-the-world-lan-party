@@ -1680,9 +1680,113 @@
     saveLocal();
   }
 
+  const rasterImageExtensions = {
+    "image/jpeg": "jpg",
+    "image/jpg": "jpg",
+    "image/png": "png",
+    "image/webp": "webp",
+    "image/gif": "gif",
+    "image/avif": "avif"
+  };
+
+  // Turn a raster "data:" URI into bytes + an extension so it can be written
+  // out as a file. SVG data URIs (link placeholders) return null and stay
+  // inline, since they are tiny.
+  function decodeImageDataUri(value) {
+    if (typeof value !== "string" || !value.startsWith("data:")) return null;
+    const comma = value.indexOf(",");
+    if (comma < 0) return null;
+    const header = value.slice(5, comma);
+    const extension = rasterImageExtensions[header.split(";")[0].toLowerCase()];
+    if (!extension) return null;
+    const payload = value.slice(comma + 1);
+    const bytes = /;base64/i.test(header)
+      ? Uint8Array.from(atob(payload), character => character.charCodeAt(0))
+      : new TextEncoder().encode(decodeURIComponent(payload));
+    return { extension, bytes };
+  }
+
+  async function writeFileInto(directoryHandle, path, contents) {
+    const parts = path.split("/");
+    const name = parts.pop();
+    let directory = directoryHandle;
+    for (const part of parts) {
+      directory = await directory.getDirectoryHandle(part, { create: true });
+    }
+    const handle = await directory.getFileHandle(name, { create: true });
+    const writer = await handle.createWritable();
+    await writer.write(contents);
+    await writer.close();
+  }
+
   async function exportFile() {
+    // Split embedded raster images out to files under assets/thumbnails/ so
+    // resources-data.js stays small — base64 images add hundreds of KB, and
+    // the file loads on every page.
+    const exportData = structuredClone(data);
+    const imageFiles = [];
+    const remap = [];
+
+    exportData.resources.forEach((resource, index) => {
+      const original = data.resources[index];
+      const decoded = decodeImageDataUri(resource.image);
+      if (decoded) {
+        const path =
+          "assets/thumbnails/" + resource.id + "." + decoded.extension;
+        if (!imageFiles.some(file => file.path === path)) {
+          imageFiles.push({ path, bytes: decoded.bytes });
+        }
+        resource.image = path;
+      }
+      // Image nodes often carry the same picture again in `url`; point it at
+      // the extracted file instead of leaving a second copy embedded.
+      if (
+        String(resource.url || "").startsWith("data:image/") &&
+        !String(resource.image || "").startsWith("data:")
+      ) {
+        resource.url = resource.image;
+      }
+      if (resource.image !== original.image || resource.url !== original.url) {
+        remap.push({ index, image: resource.image, url: resource.url });
+      }
+    });
+
     const contents =
-      "window.CANVAS_DATA = " + JSON.stringify(data, null, 2) + ";\n";
+      "window.CANVAS_DATA = " + JSON.stringify(exportData, null, 2) + ";\n";
+
+    if (imageFiles.length && window.showDirectoryPicker) {
+      try {
+        const root = await showDirectoryPicker({
+          id: "edge-of-the-world-lan-party-project",
+          mode: "readwrite"
+        });
+        await writeFileInto(root, "resources-data.js", contents);
+        for (const file of imageFiles) {
+          await writeFileInto(root, file.path, file.bytes);
+        }
+        // Adopt the new paths in the live data so the local cache shrinks too.
+        remap.forEach(entry => {
+          data.resources[entry.index].image = entry.image;
+          data.resources[entry.index].url = entry.url;
+        });
+        saveLocal();
+        alert(
+          "Saved resources-data.js and " + imageFiles.length + " image" +
+          (imageFiles.length === 1 ? "" : "s") + " into assets/thumbnails/."
+        );
+        return;
+      } catch (error) {
+        if (error.name === "AbortError") return;
+      }
+    }
+
+    // No embedded images, or the project folder was unavailable. Save just the
+    // data file; if images could not be split out, keep them embedded so the
+    // file still works on its own.
+    const fallbackContents = imageFiles.length
+      ? "window.CANVAS_DATA = " + JSON.stringify(data, null, 2) + ";\n"
+      : contents;
+
     if (window.showSaveFilePicker) {
       try {
         const handle = await showSaveFilePicker({
@@ -1695,14 +1799,22 @@
           ]
         });
         const writer = await handle.createWritable();
-        await writer.write(contents);
+        await writer.write(fallbackContents);
         await writer.close();
+        if (imageFiles.length) {
+          alert(
+            "Saved resources-data.js with images still embedded — the project " +
+            "folder wasn't available. Run this in Chrome and allow folder " +
+            "access to split them into assets/thumbnails/."
+          );
+        }
         return;
       } catch (error) {
         if (error.name === "AbortError") return;
       }
     }
-    const blob = new Blob([contents], { type: "text/javascript" });
+
+    const blob = new Blob([fallbackContents], { type: "text/javascript" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
     link.download = "resources-data.js";

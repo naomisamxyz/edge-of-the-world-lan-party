@@ -33,9 +33,7 @@
   var artEl = document.createElement("pre");
   artEl.className = "corner-ornament";
   artEl.textContent = brailleArt;
-  if (!document.body.classList.contains("canvas-page")) {
-    document.body.appendChild(artEl);
-  }
+  document.body.appendChild(artEl);
 
   var lastSpawn = 0;
   var chars = ["◆", "⬥", "♦"];

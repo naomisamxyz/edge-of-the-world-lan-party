@@ -76,7 +76,10 @@
 .text-object h2 {
   margin: 0;
   color: rgba(255, 255, 255, 0.85);
-  font-size: clamp(16px, 1.8vw, 22px);
+  /* Fixed, not viewport-relative: the canvas has its own camera zoom, and a
+     vw-based size would re-wrap the week headings every time the window
+     resized instead of keeping the layout as it was placed. */
+  font-size: 22px;
   font-weight: normal;
 }
 
