@@ -29,7 +29,7 @@ body {
 }
 
 body {
-  font-family: "VCR OSD Mono", "Space Mono", "Courier New", monospace;
+  font-family: "VCR OSD Mono";
   color: var(--text-primary);
 }
 

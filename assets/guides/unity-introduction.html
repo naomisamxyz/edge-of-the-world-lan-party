@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <title>Unity Introduction</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="guide.css?v=43" />
-<link rel="stylesheet" href="../site-shell.css?v=6" />
+<link rel="stylesheet" href="guide.css?v=46" />
+<link rel="stylesheet" href="../site-shell.css?v=9" />
 <link rel="stylesheet" href="../navigation.css?v=6" />
 </head>
 <body class="guide-page guide-unity-introduction">
@@ -22,21 +22,87 @@
 
   <header class="masthead">
     <div class="section-heading"><pre class="section-ornament guide-title-ornament" aria-hidden="true"></pre><h1>Unity Introduction</h1></div>
-    <p>Your first C# scripts: reading the keyboard and moving an object around the scene</p>
+    <p>An introduction to building scenes, using physics, and adding interaction with C#</p>
   </header>
 
   <nav class="page-toc">
-    <a href="#first">First script</a>
-    <a href="#attach">Attaching it to an object</a>
-    <a href="#physics">Adding physics</a>
-    <a href="#second">Second script</a>
+    <a href="#game-objects">Game Objects</a>
+    <a href="#terrain">Terrain</a>
+    <a href="#physics">Physics</a>
+    <a href="#interactivity">Interactivity</a>
+    <a href="#adding-interactivity">Adding interactivity</a>
+    <a href="#second">Movement with gravity</a>
+    <a href="#refine-terrain-movement">Refining Terrain movement</a>
   </nav>
 
-  <!-- ================= FIRST SCRIPT ================= -->
+  <!-- ================= GAME OBJECTS ================= -->
 
-  <section class="section" id="first">
-    <h2>First script</h2>
-    <p class="section-intro">A Unity script is a C# class that Unity runs on an object in the scene. This one reads the keyboard every frame and moves whatever object it is attached to. Make a file named <code class="inline">MoveObject.cs</code> and paste this in:</p>
+  <section class="section" id="game-objects">
+    <h2>Game Objects</h2>
+    <p class="section-intro">Everything placed in a Unity scene is a GameObject: cameras, lights, characters, props, and empty organizational objects. A GameObject becomes useful through the components attached to it.</p>
+    <div class="ref-groups">
+      <div class="ref-group">
+        <dl>
+          <div class="ref-row"><dt>Transform</dt><dd>Every GameObject has one. It stores the object's position, rotation, and scale.</dd></div>
+          <div class="ref-row"><dt>Components</dt><dd>Add behavior and capabilities, such as rendering, collision, audio, physics, or scripts.</dd></div>
+          <div class="ref-row"><dt>Hierarchy</dt><dd>Lists the GameObjects in the current scene and shows parent-child relationships between them.</dd></div>
+          <div class="ref-row"><dt>Inspector</dt><dd>Displays and edits the selected GameObject and all of its components.</dd></div>
+        </dl>
+      </div>
+    </div>
+    <p class="body-text">Create primitive GameObjects from <strong>GameObject → 3D Object</strong>. Select an object and use the move, rotate, and scale tools to change its Transform in the Scene view.</p>
+  </section>
+
+  <!-- ================= TERRAIN ================= -->
+
+  <section class="section" id="terrain">
+    <h2>Terrain</h2>
+    <p class="section-intro">A Terrain is a specialized GameObject for building large outdoor environments. Create one with <strong>GameObject → 3D Object → Terrain</strong>, then use its Inspector tools to shape and surface the landscape.</p>
+    <p class="body-text">For the first movement test, leave the Terrain mostly flat. Detailed shaping comes after the Rigidbody movement is working.</p>
+  </section>
+
+  <!-- ================= PHYSICS ================= -->
+
+  <section class="section" id="physics">
+    <h2>Physics</h2>
+    <p class="section-intro">Unity's physics system controls gravity and collisions. An object needs a Rigidbody to be physically simulated and a Collider to define the shape that can make contact with other objects.</p>
+    <div class="ref-groups">
+      <div class="ref-group">
+        <dl>
+          <div class="ref-row"><dt>Rigidbody</dt><dd>With <strong>Use Gravity</strong> enabled, makes an object fall and respond to collisions.</dd></div>
+          <div class="ref-row"><dt>Collider</dt><dd>Defines the object's collision shape. Anything it should hit or stand on also needs a Collider.</dd></div>
+          <div class="ref-row"><dt>Constraints</dt><dd>Freeze Rigidbody rotation on X and Z when an upright object should not tip over.</dd></div>
+          <div class="ref-row"><dt>Terrain Collider</dt><dd>Allows Rigidbody objects to collide with and stand on Unity Terrain.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INTERACTIVITY ================= -->
+
+  <section class="section" id="interactivity">
+    <h2>Interactivity</h2>
+    <p class="section-intro">Interactivity connects player input to changes in the scene. A script can continuously read a keyboard or controller, then use those values to move, rotate, or otherwise affect a GameObject.</p>
+    <p class="body-text">Scripts are components: they only affect the scene after they are attached to a GameObject. Unity calls certain methods automatically. <code class="inline">Update()</code> runs once per frame, making it useful for reading continuous player input. Public variables appear in the Inspector so values such as movement speed can be adjusted without rewriting the script.</p>
+  </section>
+
+  <!-- ================= ADDING INTERACTIVITY ================= -->
+
+  <section class="section" id="adding-interactivity">
+    <h2>Adding interactivity</h2>
+    <p class="section-intro">Create a script, add the movement code, attach it to a GameObject, and test the result.</p>
+
+    <h3 class="sub">Create the script</h3>
+    <ol class="steps">
+      <li>In the Project window, create an <strong>Assets/Scripts</strong> folder. Keep scripts here instead of loose among scenes, models, and materials.</li>
+      <li>Open the folder, right-click inside it, and choose <strong>Create → C# Script</strong>.</li>
+      <li>Name the script <code class="inline">MoveObject</code>. The filename and class name must match exactly, so <code class="inline">MoveObject.cs</code> must contain <code class="inline">public class MoveObject</code>.</li>
+      <li>Double-click the script to open it in your code editor. Replace its contents with the code below and save the file.</li>
+      <li>Return to Unity and wait for it to compile. Check the Console before continuing: a red compiler error anywhere in the project can prevent scripts from running.</li>
+    </ol>
+
+    <h3 class="sub">Add movement code</h3>
+    <p class="body-text">This script reads the keyboard every frame and moves the GameObject it is attached to.</p>
 
     <div class="annotated">
 
@@ -101,78 +167,66 @@ public class MoveObject : MonoBehaviour
       <div class="connectors" data-connectors-id="first"></div>
 
     </div>
-  </section>
-
-  <!-- ================= ATTACHING IT ================= -->
-
-  <section class="section" id="attach">
-    <h2>Attaching it to an object</h2>
+    <h3 class="sub">Attach and test the script</h3>
     <p class="section-intro">A script does nothing on its own. It runs only once it is a component on a GameObject.</p>
     <ol class="steps">
       <li>Put a cube or a model in the scene.</li>
       <li>Drag <code class="inline">MoveObject.cs</code> from the Project window onto that object &mdash; or select the object and use <strong>Add Component</strong> in the Inspector.</li>
       <li>The <strong>Speed</strong> field now shows in the Inspector. Adjust it there, even while the game is running, to feel the difference.</li>
       <li>Press Play and use the arrow keys or WASD.</li>
+      <li>Remember that Inspector changes made during Play Mode normally return to their previous values when Play Mode ends.</li>
     </ol>
-  </section>
-
-  <!-- ================= PHYSICS ================= -->
-
-  <section class="section" id="physics">
-    <h2>Adding physics</h2>
-    <p class="section-intro">On its own, <code class="inline">Translate</code> slides the object straight through walls and floors and ignores gravity. To make it collide and fall, add a physics body and colliders.</p>
-
-    <br>
-    <div class="ref-groups">
-      <div class="ref-group">
-        <h3>The object also needs</h3>
-        <dl>
-          <div class="ref-row"><dt>Rigidbody</dt><dd>with <strong>Use Gravity</strong> on &mdash; makes the object fall and respond to collisions.</dd></div>
-          <div class="ref-row"><dt>Collider</dt><dd>on the object, and one on anything it should be able to stand on.</dd></div>
-          <div class="ref-row"><dt>Constraints</dt><dd>on the Rigidbody, freeze <strong>Rotation X</strong> and <strong>Rotation Z</strong> so the object does not tip over.</dd></div>
-          <div class="ref-row"><dt>Terrain Collider</dt><dd>if the ground is Unity terrain rather than a mesh.</dd></div>
-        </dl>
-      </div>
-    </div>
-
-    <p class="body-text"><code class="inline">Translate</code> moves along the object's own axes by default, so "forward" follows the direction the object is facing.</p>
   </section>
 
   <!-- ================= SECOND SCRIPT ================= -->
 
   <section class="section" id="second">
-    <h2>Second script</h2>
-    <p class="section-intro">A shorter way to write the same movement, for an object that already has a Rigidbody. It skips the named <code class="inline">Vector3</code> and passes the axis values straight into <code class="inline">Translate</code>, with <code class="inline">0</code> for the vertical value. Name this file <code class="inline">Move.cs</code>.</p>
+    <h2>Movement with gravity</h2>
+    <p class="section-intro">The first script demonstrates general movement by changing the Transform directly. This version is for an object that should fall with gravity, collide with the ground, and travel across Terrain. It moves through a Rigidbody and keeps the Rigidbody's vertical velocity. Name the file <code class="inline">Move.cs</code>.</p>
 
     <div class="annotated">
 
       <div class="code-card">
         <div class="code-groups">
           <span class="grp" data-level="1" data-label="IMPORT" style="top: calc(0 * 2.05em); height: calc(1 * 2.05em - 6px);"></span>
-          <span class="grp" data-level="1" data-label="THE CLASS" style="top: calc(2 * 2.05em); height: calc(12 * 2.05em);"></span>
-          <span class="grp" data-level="2" data-alt="1" data-label="INSPECTOR FIELD" style="top: calc(4 * 2.05em); height: calc(1 * 2.05em - 6px);"></span>
-          <span class="grp" data-level="2" data-label="UPDATE( )" style="top: calc(6 * 2.05em); height: calc(2 * 2.05em - 6px);"></span>
-          <span class="grp" data-level="2" data-alt="1" data-label="READ INPUT &amp; MOVE" style="top: calc(8 * 2.05em); height: calc(5 * 2.05em - 6px);"></span>
+          <span class="grp" data-level="1" data-label="THE CLASS" style="top: calc(2 * 2.05em); height: calc(24 * 2.05em);"></span>
+          <span class="grp" data-level="2" data-alt="1" data-label="FIELDS" style="top: calc(5 * 2.05em); height: calc(3 * 2.05em - 6px);"></span>
+          <span class="grp" data-level="2" data-label="GET RIGIDBODY" style="top: calc(9 * 2.05em); height: calc(4 * 2.05em - 6px);"></span>
+          <span class="grp" data-level="2" data-alt="1" data-label="READ INPUT" style="top: calc(14 * 2.05em); height: calc(5 * 2.05em - 6px);"></span>
+          <span class="grp" data-level="2" data-label="PHYSICS MOVEMENT" style="top: calc(20 * 2.05em); height: calc(5 * 2.05em - 6px);"></span>
         </div>
         <div class="code-scroll">
 <pre><code>using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Move : MonoBehaviour
 {
     public float speed = 5f;
+    private Rigidbody body;
+    private Vector3 movementInput;
+
+    void Awake()
+    {
+        body = GetComponent&lt;Rigidbody&gt;();
+    }
 
     void Update()
     {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-        transform.Translate(x * speed * Time.deltaTime, 0, z * speed * Time.deltaTime);
+        movementInput = new Vector3(x, 0f, z);
+    }
+
+    void FixedUpdate()
+    {
+        body.velocity = new Vector3(movementInput.x * speed, body.velocity.y, movementInput.z * speed);
     }
 }</code></pre>
         </div>
       </div>
 
-      <div class="notes" data-notes-id="second" style="min-height: 620px;">
+      <div class="notes" data-notes-id="second" style="min-height: 880px;">
 
         <div class="note" data-note="import" style="top: 0px;">
           <span class="note-label">IMPORT</span>
@@ -181,22 +235,27 @@ public class Move : MonoBehaviour
 
         <div class="note" data-note="class" style="top: 72px;">
           <span class="note-label">THE CLASS</span>
-          <p>Same shape as <code>MoveObject</code>. This one is named <code>Move</code>, so its file must be <code>Move.cs</code>. <code>: MonoBehaviour</code> lets it attach to a GameObject.</p>
+          <p><code>RequireComponent</code> makes sure the GameObject has a Rigidbody. The class is named <code>Move</code>, so its file must be <code>Move.cs</code>.</p>
         </div>
 
         <div class="note" data-note="field" style="top: 190px;">
-          <span class="note-label">INSPECTOR FIELD</span>
-          <p><code>public</code> makes <code>speed</code> editable in the Inspector. <code>float</code> allows decimals. <code>= 5f</code> starts it at 5.</p>
+          <span class="note-label">FIELDS</span>
+          <p><code>speed</code> remains editable in the Inspector. <code>body</code> stores the attached Rigidbody, while <code>movementInput</code> stores the direction read from the keyboard.</p>
         </div>
 
         <div class="note" data-note="update" style="top: 300px;">
-          <span class="note-label">UPDATE( )</span>
-          <p>Runs once per frame, so keyboard input is read continuously.</p>
+          <span class="note-label">GET RIGIDBODY</span>
+          <p><code>Awake()</code> runs when the object is initialized. <code>GetComponent&lt;Rigidbody&gt;()</code> finds the Rigidbody on the same GameObject and stores it in <code>body</code>.</p>
         </div>
 
-        <div class="note" data-note="move" style="top: 388px;">
-          <span class="note-label">READ INPUT &amp; MOVE</span>
-          <p><code>GetAxis("Horizontal")</code> reads A / D (eased between &minus;1 and 1); <code>"Vertical"</code> reads S / W. This version skips the named <code>Vector3</code> and passes the three values straight into <code>Translate</code>: <code>x * speed * Time.deltaTime</code> for left / right, <code>0</code> for vertical &mdash; the Rigidbody's gravity handles that &mdash; and <code>z * speed * Time.deltaTime</code> for forward / back. <code>Time.deltaTime</code> keeps the speed frame-rate independent, and <code>Translate</code> moves along the object's local axes, so a rotated object's forward rotates with it.</p>
+        <div class="note" data-note="input" style="top: 430px;">
+          <span class="note-label">READ INPUT</span>
+          <p><code>Update()</code> reads the keyboard every rendered frame and stores the X/Z direction in <code>movementInput</code>. Separating input from physics keeps controls responsive.</p>
+        </div>
+
+        <div class="note" data-note="move" style="top: 560px;">
+          <span class="note-label">PHYSICS MOVEMENT</span>
+          <p><code>FixedUpdate()</code> runs in step with Unity's physics simulation. It applies the stored input as horizontal X/Z velocity. Reusing <code>body.velocity.y</code> preserves falling and gravity instead of forcing the vertical speed to zero.</p>
         </div>
 
       </div>
@@ -204,14 +263,48 @@ public class Move : MonoBehaviour
       <div class="connectors" data-connectors-id="second"></div>
 
     </div>
+
+    <h3 class="sub">Set up the object and Terrain</h3>
+    <ol class="steps">
+      <li>Add <code class="inline">Move.cs</code> to the player object. Unity adds a Rigidbody automatically because the script requires one.</li>
+      <li>Make sure the player has an appropriate Collider.</li>
+      <li>Keep <strong>Use Gravity</strong> enabled on the Rigidbody.</li>
+      <li>Make sure the Terrain has its Terrain Collider enabled.</li>
+      <li>Place the player slightly above the Terrain, press Play, and use WASD or the arrow keys. Gravity brings the player down to the surface while the script supplies horizontal movement.</li>
+    </ol>
+  </section>
+
+  <!-- ================= REFINING TERRAIN MOVEMENT ================= -->
+
+  <section class="section" id="refine-terrain-movement">
+    <h2>Refining Terrain movement</h2>
+    <p class="section-intro">Try the Rigidbody movement before adding constraints. The player may tip or roll when it collides with the Terrain. After observing that behavior, stabilize the player and begin shaping the environment.</p>
+
+    <h3 class="sub">Freeze unwanted rotation</h3>
+    <ol class="steps">
+      <li>Select the player and open its Rigidbody component in the Inspector.</li>
+      <li>Expand <strong>Constraints</strong>.</li>
+      <li>Enable <strong>Freeze Rotation X</strong> and <strong>Freeze Rotation Z</strong> so the player remains upright. Leave Y unfrozen if the player should still be able to turn.</li>
+      <li>Press Play again and compare the constrained movement with the earlier test.</li>
+    </ol>
+
+    <h3 class="sub">Shape the Terrain</h3>
+    <ol class="steps">
+      <li>Select the Terrain and choose <strong>Paint Terrain</strong> in the Inspector.</li>
+      <li>Use <strong>Raise or Lower Terrain</strong> to sculpt gentle hills, valleys, ramps, and paths.</li>
+      <li>Test the player frequently while shaping. Begin with gradual slopes before trying steep surfaces.</li>
+      <li>Use <strong>Paint Texture</strong> to create Terrain Layers and apply ground materials.</li>
+      <li>Add trees and details only after establishing the main scale, routes, and playable shape of the environment.</li>
+      <li>Keep the Terrain Collider enabled so the Rigidbody continues to collide with the finished landscape.</li>
+    </ol>
   </section>
 
 </div>
 
-<script src="../navigation.js?v=9"></script>
-<script src="../last-updated.js?v=3"></script>
+<script src="../navigation.js?v=10"></script>
+<script src="../last-updated.js?v=4"></script>
 <script src="annotations.js?v=1"></script>
-<script src="../cursor-sparkle.js?v=6"></script>
+<script src="../cursor-sparkle.js?v=7"></script>
 
 </body>
 </html>

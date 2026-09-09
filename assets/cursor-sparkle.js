@@ -20,7 +20,7 @@
     "@keyframes sparkle-fade {" +
     " 0% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); }" +
     " 100% { opacity: 0; transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, -40px))) scale(0.3) rotate(45deg); } }" +
-    ".corner-ornament { position: fixed; bottom: 4px; right: 4px; margin: 0; font-family: monospace; font-size: 5px; line-height: 1; white-space: pre; color: rgba(255,255,255,0.25); pointer-events: none; z-index: 1; }";
+    ".corner-ornament { position: fixed; bottom: 4px; right: 4px; margin: 0; font-family: 'VCR OSD Mono'; font-size: 5px; line-height: 1; white-space: pre; color: rgba(255,255,255,0.25); pointer-events: none; z-index: 1; }";
   document.head.appendChild(style);
 
   var orb = document.createElement("img");

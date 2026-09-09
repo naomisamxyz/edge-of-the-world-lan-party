@@ -165,6 +165,12 @@
     element.style.cssText =
       "--x:" + resource.x + "px;--y:" + resource.y + "px;" +
       "--w:" + resource.width + "px;--h:" + resource.height + "px";
+    if (resource.type === "text" && Number.isFinite(Number(resource.fontSize))) {
+      element.style.setProperty(
+        "--text-font-size",
+        Number(resource.fontSize) + "px"
+      );
+    }
     if (resource.type === "week") {
       element.classList.add("text-object", "week-object");
       element.innerHTML =
@@ -1583,6 +1589,28 @@
     saveLocal();
   }
 
+  function resizeSelectedText(direction) {
+    const sizes = [9, 11, 13, 15, 18, 22, 28, 36];
+    const resources = selectedResources().filter(
+      resource => resource.type === "text"
+    );
+    if (!resources.length) {
+      alert("Select a plain text object first.");
+      return;
+    }
+    resources.forEach(resource => {
+      const current = Number(resource.fontSize) || 15;
+      const next = direction < 0
+        ? sizes.slice().reverse().find(size => size < current)
+        : sizes.find(size => size > current);
+      if (next === undefined) return;
+      resource.fontSize = next;
+      world.querySelector('[data-id="' + resource.id + '"]')
+        ?.style.setProperty("--text-font-size", next + "px");
+    });
+    saveLocal();
+  }
+
   function applyMediaValues(resource, values, adding) {
     Object.assign(resource, values);
     if (values.mediaKind === "link") {
@@ -1635,6 +1663,7 @@
       const text = prompt("Text:", "New text");
       if (text === null) return;
       resource.text = text;
+      resource.fontSize = 15;
     } else {
       resource.type = "media";
       const values = await openMediaEditor({
@@ -1689,6 +1718,8 @@
     const action = event.target.dataset.action;
     if (!action) return;
     if (action === "add-text") await addResource("text");
+    if (action === "text-smaller") resizeSelectedText(-1);
+    if (action === "text-larger") resizeSelectedText(1);
     if (action === "add-image") await addResource("image");
     if (action === "add-link") await addResource("link");
     if (action === "add-youtube") await addResource("youtube");
@@ -1798,6 +1829,64 @@
     data =
       edit && cached && cached.version === json.version ? cached : json;
     data.lastUpdated = { ...json.lastUpdated };
+    if (data === cached) {
+      const baseResources = new Map(
+        json.resources.map(resource => [resource.id, resource])
+      );
+      let migratedThumbnails = false;
+      data.resources.forEach(resource => {
+        const base = baseResources.get(resource.id);
+        if (
+          resource.type === "media" &&
+          (
+            (
+              /^https:\/\/iad\.microlink\.io\//.test(resource.image || "") ||
+              (
+              String(resource.image || "").startsWith("data:image/svg+xml") &&
+                /link%20preview/i.test(resource.image || "")
+              ) ||
+              resource.image === "assets/images/link-placeholder.svg"
+            ) ||
+            (
+              String(resource.image || "").startsWith("assets/thumbnails/") &&
+              String(resource.image).split("?")[0] ===
+                String(base?.image || "").split("?")[0] &&
+              resource.image !== base.image
+            )
+          ) &&
+          String(base?.image || "").startsWith("assets/thumbnails/")
+        ) {
+          resource.image = base.image;
+          if (/^google\.com\/url\?q=/.test(resource.url || "")) {
+            resource.url = base.url;
+          }
+          migratedThumbnails = true;
+        }
+      });
+      const hasWeek02Details = data.resources.some(resource =>
+        /^week02-(?:media|note)-/.test(resource.id)
+      );
+      if (!hasWeek02Details) {
+        json.resources
+          .filter(resource => /^week02-(?:media|note)-/.test(resource.id))
+          .forEach(resource => {
+            data.resources.push(JSON.parse(JSON.stringify(resource)));
+          });
+        migratedThumbnails = true;
+      }
+      [
+        "week01-media-parallel-ii",
+        "week01-media-parallel-iii"
+      ]
+        .forEach(id => {
+          if (data.resources.some(resource => resource.id === id)) return;
+          const resource = baseResources.get(id);
+          if (!resource) return;
+          data.resources.push(JSON.parse(JSON.stringify(resource)));
+          migratedThumbnails = true;
+        });
+      if (migratedThumbnails) saveLocal();
+    }
     camera = { ...data.home };
     data.resources.forEach(createNode);
 

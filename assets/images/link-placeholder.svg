@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="300" viewBox="0 0 480 300">
+  <rect width="480" height="300" fill="#080808"/>
+  <path d="M204 164l72-72m-28 0h28v28M232 136l-28 28v44h44l28-28" fill="none" stroke="#fff" stroke-width="3"/>
+  <text x="240" y="246" fill="#999" font-family="VCR OSD Mono" font-size="18" text-anchor="middle">EXTERNAL LINK</text>
+</svg>

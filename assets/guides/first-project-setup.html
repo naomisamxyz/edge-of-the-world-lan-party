@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <title>First Project Setup</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="guide.css?v=43" />
-<link rel="stylesheet" href="../site-shell.css?v=6" />
+<link rel="stylesheet" href="guide.css?v=46" />
+<link rel="stylesheet" href="../site-shell.css?v=9" />
 <link rel="stylesheet" href="../navigation.css?v=6" />
 </head>
 <body class="guide-page guide-first-project-setup">
@@ -26,127 +26,99 @@
   </header>
 
   <nav class="page-toc">
-    <a href="#hardware">Hardware</a>
-    <a href="#install">Install Unity</a>
-    <a href="#settings">Editor settings</a>
-    <a href="#packages">Packages</a>
+    <a href="#hardware">Hardware Requirements</a>
+    <a href="#install">Installing Unity</a>
+    <a href="#account">Unity Account</a>
+    <a href="#project">Creating a Project</a>
     <a href="#workspace">Layout</a>
+    <a href="#resolution">Resolution</a>
+    <a href="#play-mode-tint">Play Mode Tint</a>
     <a href="#test">Initial test</a>
+    <a href="#saving">Save Scene Changes</a>
   </nav>
 
   <!-- ================= HARDWARE ================= -->
 
   <section class="section" id="hardware">
-    <h2>Hardware</h2>
-    <p class="section-intro">The Unity editor is demanding. Check your computer against this before installing.</p>
-
-    <br>
-    <div class="ref-groups">
-      <div class="ref-group">
-        <h3>Minimum spec</h3>
-        <dl>
-          <div class="ref-row"><dt>Memory</dt><dd>at least 16 GB of RAM.</dd></div>
-          <div class="ref-row"><dt>Processor</dt><dd>a modern multicore CPU.</dd></div>
-          <div class="ref-row"><dt>Graphics</dt><dd>a card that supports DirectX 11 or Metal.</dd></div>
-          <div class="ref-row"><dt>Storage</dt><dd>at least 30 GB free.</dd></div>
-        </dl>
-      </div>
-    </div>
+    <h2>Hardware Requirements</h2>
+    <p class="section-intro">Check if your personal computer fulfills these requirements: at least 16 GB of RAM, a modern multicore processor, and a graphics card that supports DirectX 11 or Metal, at least 30 GB of free storage available.</p>
   </section>
 
   <!-- ================= INSTALL ================= -->
 
   <section class="section" id="install">
-    <h2>Install Unity</h2>
-    <p class="section-intro">Install through Unity Hub, which manages editor versions and your projects.</p>
+    <h2>Installing Unity</h2>
     <ol class="steps">
       <li>Download and install <a href="https://unity.com/download">Unity Hub</a>.</li>
-      <li>Open Unity Hub and sign in, or create a free Unity account.</li>
-      <li>Open <strong>Installs</strong>, choose <strong>Install Editor</strong>, and select <strong>Unity 2022.3 LTS</strong>.</li>
-      <li>Check Visual Studio and the build-support modules for Mac, Windows, and WebGL.</li>
-      <li>When it finishes, open <strong>Projects</strong> to create or add a project.</li>
+      <li>Open Unity Hub and sign in or create a free Unity account.</li>
+      <li>Open <strong>Installs</strong>, select <strong>Install Editor</strong>, and choose the <strong>Unity 2022.3.62f1</strong> LTS version that we will be using in this class (you might have to go into the archive to find this version). We are all using this version because it runs safely on most computers.</li>
+      <li>Check Visual Studio and the build-support module for Mac, Windows and WebGL.</li>
+      <li>When installation finishes, open <strong>Projects</strong> to create or add a project.</li>
     </ol>
-    <p class="body-text">Everyone on a project should use the <strong>same editor version</strong> to avoid compatibility problems.</p>
+    <p class="body-text">Always open a project with the same Unity version that it was created in. Projects can be converted but it is not a safe practice.</p>
   </section>
 
-  <!-- ================= EDITOR SETTINGS ================= -->
+  <!-- ================= UNITY ACCOUNT ================= -->
 
-  <section class="section" id="settings">
-    <h2>Editor settings</h2>
-    <p class="section-intro">Set these once per project so files stay readable in version control and behave the same on every machine.</p>
-
-    <br>
-    <div class="ref-groups">
-      <div class="ref-group">
-        <h3>Edit &rarr; Project Settings &rarr; Editor</h3>
-        <dl>
-          <div class="ref-row"><dt>Version Control Mode</dt><dd>Visible Meta Files.</dd></div>
-          <div class="ref-row"><dt>Asset Serialization Mode</dt><dd>Force Text.</dd></div>
-          <div class="ref-row"><dt>Line Endings for New Scripts</dt><dd>OS Native, or Unix.</dd></div>
-        </dl>
-      </div>
-
-      <div class="ref-group">
-        <h3>Also configure</h3>
-        <dl>
-          <div class="ref-row"><dt>Render Pipeline</dt><dd>use the <strong>Universal Render Pipeline (URP)</strong>. Start from Unity's 3D URP template when you can; for an existing project, install <strong>Universal RP</strong> through Package Manager, create a URP Pipeline Asset, and assign it under <strong>Project Settings &rarr; Graphics</strong> and <strong>Quality</strong>.</dd></div>
-          <div class="ref-row"><dt>Resolution</dt><dd><strong>1920 &times; 1080</strong> at <strong>16:9</strong> unless the project needs something else, under <strong>Project Settings &rarr; Player &rarr; Resolution and Presentation</strong>.</dd></div>
-          <div class="ref-row"><dt>Play Mode Tint</dt><dd>set a noticeable tint under <strong>Edit &rarr; Preferences &rarr; Colors</strong> so it is obvious when the game is running.</dd></div>
-        </dl>
-      </div>
-    </div>
+  <section class="section" id="account">
+    <h2>Unity Account</h2>
+    <p class="section-intro">You DO NOT need a subscription to use Unity, you can work under the free license. This can be confusing when creating the account.</p>
   </section>
 
-  <!-- ================= PACKAGES ================= -->
+  <!-- ================= CREATING A PROJECT ================= -->
 
-  <section class="section" id="packages">
-    <h2>Packages</h2>
-    <p class="section-intro">Open <strong>Window &rarr; Package Manager</strong> and install only what the project needs.</p>
-
-    <br>
-    <div class="ref-groups">
-      <div class="ref-group">
-        <h3>For this course</h3>
-        <dl>
-          <div class="ref-row"><dt>Universal RP</dt><dd>the render pipeline the projects are built on.</dd></div>
-          <div class="ref-row"><dt>Input System</dt><dd>Unity's current input API.</dd></div>
-          <div class="ref-row"><dt>Cinemachine</dt><dd>camera rigs and follow cameras.</dd></div>
-        </dl>
-      </div>
-    </div>
-
-    <p class="body-text">After installing Input System, set <strong>Active Input Handling</strong> to <strong>Input System Package (New)</strong> under <strong>Project Settings &rarr; Player &rarr; Other Settings</strong>, and restart when prompted.</p>
+  <section class="section" id="project">
+    <h2>Creating a Project</h2>
+    <ol class="steps">
+      <li>In the Unity Hub click on new project and select Editor Version, Project Name, Storage Location and Source Control (more below).</li>
+      <li>Always choose a storage location that isn’t connected to a cloud sync. You can use your internal SSD or an external SSD. Never use an HDD external hard drive.</li>
+      <li>Pick a template: for this course we will start with <strong>3D (Built-In Render Pipeline)</strong> and later move on to working with <strong>Universal 3D</strong> (you might have to download them first).</li>
+      <li>Click <strong>Create Project</strong>.</li>
+    </ol>
+    <p class="body-text">The Editor will open and load your project. When loading an empty project and the loading panel freezes or is loading incredibly slow there might be an issue with your storage device or Unity version.</p>
   </section>
 
   <!-- ================= LAYOUT ================= -->
 
   <section class="section" id="workspace">
     <h2>Layout</h2>
-    <p class="section-intro">Keep the Hierarchy, Scene, Game, Inspector, Project, and Console windows visible. Open <strong>Window &rarr; Rendering &rarr; Lighting</strong>, dock the Lighting window, then save the arrangement from the <strong>Layout</strong> menu.</p>
+    <p class="section-intro">Once the Editor has fully loaded you will see Hierarchy, Scene, Game, Inspector and Project windows. On the top right choose Layout 2 by 3. Open <strong>Window &rarr; Rendering &rarr; Lighting</strong> and dock the Lighting window on the right with the Inspector. Open <strong>Window &rarr; General &rarr; Console</strong> and dock the Console under the Game View on the bottom left. Save the finished arrangement from the <strong>Layout</strong> menu so it can be restored later.</p>
+  </section>
+
+  <!-- ================= RESOLUTION ================= -->
+
+  <section class="section" id="resolution">
+    <h2>Resolution</h2>
+    <p class="section-intro">Set the intended resolution and aspect ratio early. For class projects, use <strong>1920 &times; 1080</strong> with a <strong>16:9</strong> aspect ratio unless the project requires something different.</p>
+    <p class="body-text">Add or select this resolution in the Game window and confirm the default window settings under <strong>Project Settings &rarr; Player &rarr; Resolution and Presentation</strong>.</p>
+  </section>
+
+  <!-- ================= PLAY MODE TINT ================= -->
+
+  <section class="section" id="play-mode-tint">
+    <h2>Play Mode Tint</h2>
+    <p class="section-intro">Set a noticeable Play Mode tint under <strong>Edit &rarr; Preferences &rarr; Colors</strong>. This makes it clear when the game is running and helps prevent edits that disappear after leaving Play Mode.</p>
   </section>
 
   <!-- ================= INITIAL TEST ================= -->
 
   <section class="section" id="test">
-    <h2>Initial test</h2>
-    <p class="section-intro">Before building the real project, make a small test scene with a camera, basic URP lighting, a floor, and an Input Action asset. Confirm rendering, input, physics, Cinemachine, audio, and the chosen resolution all work.</p>
+    <h2>Initial Test</h2>
+    <p class="section-intro">Create a small test scene with a camera, basic lighting, a floor, and a 3D game object with gravity. Confirm that rendering, physics, and the selected resolution work before building the main project.</p>
+  </section>
 
-    <br>
-    <div class="ref-groups">
-      <div class="ref-group">
-        <h3>Remember</h3>
-        <dl>
-          <div class="ref-row"><dt>Saving</dt><dd>Unity does not save scene changes automatically. Use <strong>Ctrl+S</strong> / <strong>Command+S</strong> often &mdash; especially before entering Play Mode, importing packages, or closing Unity. An asterisk next to the scene name means unsaved changes.</dd></div>
-        </dl>
-      </div>
-    </div>
+  <!-- ================= SAVE SCENE CHANGES ================= -->
+
+  <section class="section" id="saving">
+    <h2>Save Scene Changes</h2>
+    <p class="section-intro">Unity does not automatically save scene changes. Save regularly with <strong>Ctrl+S</strong> on Windows or <strong>Command+S</strong> on Mac, especially before entering Play Mode, importing packages, or closing Unity. An asterisk beside the scene name indicates unsaved changes.</p>
   </section>
 
 </div>
 
-<script src="../navigation.js?v=9"></script>
-<script src="../last-updated.js?v=3"></script>
-<script src="../cursor-sparkle.js?v=6"></script>
+<script src="../navigation.js?v=10"></script>
+<script src="../last-updated.js?v=4"></script>
+<script src="../cursor-sparkle.js?v=7"></script>
 
 </body>
 </html>

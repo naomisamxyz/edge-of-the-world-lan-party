@@ -87,7 +87,7 @@
 .text-object p,
 .text-object .canvas-paragraph {
   margin: 0;
-  font-size: 15px;
+  font-size: var(--text-font-size, 15px);
   line-height: 1.7;
 }
 
@@ -598,8 +598,8 @@
 }
 .canvas-page .list-object li + li { margin-top: 12px; }
 .canvas-page .canvas-object.text-object:not(.week-object):not(.list-object) { padding: 54px 60px; }
-.canvas-page .canvas-object.text-object:not(.week-object):not(.list-object) > p {
-  font-size: 15px;
+.canvas-page .canvas-object.text-object:not(.week-object):not(.list-object) > .canvas-paragraph {
+  font-size: var(--text-font-size, 15px);
   line-height: 1.7;
 }
 

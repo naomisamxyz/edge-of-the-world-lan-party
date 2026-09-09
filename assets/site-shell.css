@@ -30,7 +30,7 @@
 .header-ornament {
   float: left;
   margin: 0 12px 0 0;
-  font-family: monospace;
+  font-family: "VCR OSD Mono";
   font-size: clamp(3.33px, 0.37vw, 6px);
   line-height: 1;
   white-space: pre;
@@ -67,6 +67,21 @@
   color: var(--text-muted);
 }
 
+.stamp[data-last-updated] {
+  cursor: pointer;
+  user-select: none;
+}
+
+.stamp[data-last-updated]:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 5px;
+}
+
+body.background-black {
+  background-color: #000 !important;
+  background-image: none !important;
+}
+
 .section-heading {
   display: flex;
   align-items: center;
@@ -86,7 +101,7 @@
   flex-shrink: 0;
   margin: 0;
   color: #fff;
-  font-family: monospace;
+  font-family: "VCR OSD Mono";
   font-size: 2.5px;
   line-height: 1;
   white-space: pre;
