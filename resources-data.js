@@ -113,7 +113,7 @@ window.CANVAS_DATA = {
       "description": "",
       "items": [
         "“H.O.R.I.Z.O.N. (Habitat One: Regenerative Interactive Zone of Nurture)” — Institute of Queer Ecology (2021)",
-        "Worlding and the infinite game<br>“Emissary’s Guide to Worlding” — Ian Cheng (2018)<br>“Finite and Infinite Games” — James P. Carse (1986)<br>“Staying with the Trouble: Making Kin in the Chthulucene” — Donna J. Haraway (2016)",
+        "Worlding and the infinite game<br>“Emissary’s Guide to Worlding” — Ian Cheng (2018)<br>“Finite and Infinite Games” — James P. Carse (1986)<br>“Staying with the Trouble: Making Kin in the Chthulucene” — Donna J. Haraway (2016)<br>“Hyperobjects: Philosophy and Ecology After the End of the World” — Timothy Morton (2013)",
         "<a href=\"assets/guides/environment-i.html\">⚔︎ Environment I ⚔︎</a><br>Terrain, Importing Assets, Lighting, Skybox, URP, Materials, LOD",
         "<a href=\"assets/guides/ai-tools.html\">❖ AI Tools: ChatBots, Coding Agents, Generating Assets ❖</a>",
         "Open Lab"

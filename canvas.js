@@ -1885,6 +1885,29 @@
           data.resources.push(JSON.parse(JSON.stringify(resource)));
           migratedThumbnails = true;
         });
+      const week03Content = data.resources.find(
+        resource => resource.id === "week03-content"
+      );
+      const harawayIndex = week03Content?.items?.findIndex(item =>
+        item.includes("Donna J. Haraway (2016)")
+      );
+      if (
+        harawayIndex >= 0 &&
+        week03Content.items[harawayIndex].includes("<em>“Hyperobjects")
+      ) {
+        week03Content.items[harawayIndex] = week03Content.items[harawayIndex]
+          .replace("<em>“Hyperobjects", "“Hyperobjects")
+          .replace("World”</em> — Timothy Morton", "World” — Timothy Morton");
+        migratedThumbnails = true;
+      }
+      if (
+        harawayIndex >= 0 &&
+        !week03Content.items[harawayIndex].includes("Hyperobjects")
+      ) {
+        week03Content.items[harawayIndex] +=
+          "<br>“Hyperobjects: Philosophy and Ecology After the End of the World” — Timothy Morton (2013)";
+        migratedThumbnails = true;
+      }
       if (migratedThumbnails) saveLocal();
     }
     camera = { ...data.home };
