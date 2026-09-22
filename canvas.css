@@ -17,6 +17,20 @@
   background: linear-gradient(#000 15%, transparent);
 }
 
+.canvas-guide-nav {
+  position: fixed;
+  top: 72px;
+  left: var(--page-pad);
+  z-index: 110;
+  margin: 0;
+  pointer-events: auto;
+  text-shadow: 0 1px 5px #000, 0 0 8px #000;
+}
+
+.canvas-guide-nav[hidden] {
+  display: none;
+}
+
 .canvas-viewport {
   position: fixed;
   inset: 0;

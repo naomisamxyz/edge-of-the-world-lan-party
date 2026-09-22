@@ -5,7 +5,7 @@
 <title>Environment I</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="guide.css?v=46" />
+<link rel="stylesheet" href="guide.css?v=47" />
 <link rel="stylesheet" href="../site-shell.css?v=9" />
 <link rel="stylesheet" href="../navigation.css?v=6" />
 </head>
@@ -23,12 +23,122 @@
 
   <header class="masthead">
     <div class="section-heading"><pre class="section-ornament guide-title-ornament" aria-hidden="true"></pre><h1>Environment I</h1></div>
+    <p>Sculpting terrain with Unity's Terrain Tools, and how to import static props correctly</p>
   </header>
+
+  <nav class="page-toc">
+    <a href="#terrain-tools">Terrain Tools</a>
+    <a href="#importing-assets">Importing assets</a>
+  </nav>
+
+  <!-- ================= TERRAIN TOOLS ================= -->
+
+  <section class="section" id="terrain-tools">
+    <h2>Terrain Tools</h2>
+    <p class="section-intro">Terrain Tools is Unity's package for sculpting landscape. It adds extra brushes &mdash; smoothing, stamping, noise, erosion &mdash; on top of Unity's built-in Terrain object, which already handles height, ground textures, trees, and grass.</p>
+
+    <h3 class="sub">Set up</h3>
+    <ol class="steps">
+      <li>Install it if it's not already in the project: <strong>Window &rarr; Package Manager &rarr; Unity Registry &rarr; Terrain Tools &rarr; Install</strong>.</li>
+      <li>Create a terrain: <strong>GameObject &rarr; 3D Object &rarr; Terrain</strong>. This adds a large flat plane.</li>
+      <li>Select it, then open the <strong>Terrain Settings</strong> tab first (the gear icon) and set its Width/Length/Height to match your scene's scale before sculpting &mdash; resizing later can distort what you've already sculpted.</li>
+    </ol>
+
+    <div class="ref-groups">
+      <div class="ref-group">
+        <h3>Core tools</h3>
+        <dl>
+          <div class="ref-row"><dt>Raise/Lower Terrain</dt><dd>push the ground up or down with a brush. Your main sculpting tool.</dd></div>
+          <div class="ref-row"><dt>Smooth Height</dt><dd>blurs out sharp bumps and hard edges left by other brushes.</dd></div>
+          <div class="ref-row"><dt>Stamp Terrain</dt><dd>stamps a brush shape at full height in one click &mdash; fast for hills or craters.</dd></div>
+          <div class="ref-row"><dt>Set Height</dt><dd>flattens an area to an exact height. Use it for building foundations, roads, or a level water line.</dd></div>
+          <div class="ref-row"><dt>Paint Texture</dt><dd>blends multiple ground textures &mdash; grass, rock, dirt &mdash; across the surface.</dd></div>
+          <div class="ref-row"><dt>Paint Trees</dt><dd>scatters tree prefabs across the terrain by painting.</dd></div>
+          <div class="ref-row"><dt>Paint Details</dt><dd>scatters small detail objects &mdash; grass, rocks &mdash; as lightweight billboards or meshes.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="ref-groups">
+      <div class="ref-group">
+        <h3>Additional tools, from the Terrain Tools package</h3>
+        <dl>
+          <div class="ref-row"><dt>Noise</dt><dd>generates natural-looking bumps and variation from a procedural pattern, instead of freehand sculpting every detail by hand.</dd></div>
+          <div class="ref-row"><dt>Erosion</dt><dd>Hydraulic, Thermal, and Wind variants simulate water, gravity, or wind wearing the terrain down over time, for a weathered, natural look.</dd></div>
+          <div class="ref-row"><dt>Terrace</dt><dd>carves the terrain into stepped levels &mdash; useful for canyons, rice paddies, or any stepped landscape.</dd></div>
+          <div class="ref-row"><dt>Contrast</dt><dd>sharpens or softens the height differences across the whole terrain at once.</dd></div>
+          <div class="ref-row"><dt>Bridge</dt><dd>connects two points across a gap with a ramp or path, so you don't have to sculpt the connection by hand.</dd></div>
+          <div class="ref-row"><dt>Mesh Stamp</dt><dd>stamps the shape of a chosen 3D mesh into the terrain's height &mdash; sculpting with a model instead of a brush.</dd></div>
+          <div class="ref-row"><dt>Clone Brush</dt><dd>copies terrain height from one area and paints it elsewhere, like Stamp but sourced from existing terrain rather than a preset shape.</dd></div>
+          <div class="ref-row"><dt>Pinch / Smudge / Twist</dt><dd>smaller detail brushes: pinch sharpens a ridge inward, smudge drags height around like wet clay, twist spins it into a spiral.</dd></div>
+          <div class="ref-row"><dt>Transform</dt><dd>moves, rotates, or scales terrain data that's already there, instead of painting new height.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <h3 class="sub">A basic first pass</h3>
+    <ol class="steps">
+      <li>Block out the landscape with <strong>Raise/Lower</strong> and <strong>Stamp</strong>, then pass over it with <strong>Smooth</strong> to soften hard edges.</li>
+      <li>Add ground textures: open <strong>Paint Texture</strong>, click <strong>Edit Terrain Layers &rarr; Create Layer</strong>, and choose an Albedo texture for each material (grass, dirt, rock).</li>
+      <li>Add trees and grass: add prefabs to the <strong>Paint Trees</strong> and <strong>Paint Details</strong> lists first, then paint them on like a texture.</li>
+    </ol>
+  </section>
+
+  <!-- ================= IMPORTING ASSETS ================= -->
+
+  <section class="section" id="importing-assets">
+    <h2>Importing assets</h2>
+    <p class="section-intro">Best practice for bringing a static (non-animated) 3D model &mdash; a prop, a rock, a piece of architecture &mdash; into the project cleanly.</p>
+
+    <div class="ref-groups">
+      <div class="ref-group">
+        <h3>Free 3D model libraries</h3>
+        <dl>
+          <div class="ref-row"><dt><a href="https://polyhaven.com/models" target="_blank" rel="noopener">Poly Haven</a></dt><dd>high-quality realistic models, textures, and HDRIs. All assets are CC0 and can be used without attribution.</dd></div>
+          <div class="ref-row"><dt><a href="https://kenney.nl/assets/category:3D" target="_blank" rel="noopener">Kenney</a></dt><dd>game-ready 3D asset packs in a consistent, stylized low-poly aesthetic. Check the license shown on each download page.</dd></div>
+          <div class="ref-row"><dt><a href="https://quaternius.com/" target="_blank" rel="noopener">Quaternius</a></dt><dd>free stylized asset packs for games, including environments, characters, props, and animations.</dd></div>
+          <div class="ref-row"><dt><a href="https://sketchfab.com/3d-models?features=downloadable" target="_blank" rel="noopener">Sketchfab</a></dt><dd>a large collection of downloadable models from many creators. Licenses vary, so check whether attribution and commercial use are allowed before downloading.</dd></div>
+          <div class="ref-row"><dt><a href="https://free3d.com/3d-models/" target="_blank" rel="noopener">Free3D</a></dt><dd>free models in many categories and file formats. Check the license attached to each model before using it.</dd></div>
+          <div class="ref-row"><dt><a href="https://www.thingiverse.com/" target="_blank" rel="noopener">Thingiverse</a></dt><dd>a large library of community-made models, primarily designed for 3D printing. Licenses vary, and models may need optimization before use in Unity.</dd></div>
+          <div class="ref-row"><dt><a href="https://www.turbosquid.com/Search/3D-Models/free" target="_blank" rel="noopener">TurboSquid</a></dt><dd>free models ranging from simple props to detailed realistic assets. Check the model's license, file format, and polygon count before downloading.</dd></div>
+        </dl>
+      </div>
+    </div>
+    <br>
+
+    <h3 class="sub">File type, size and detail</h3>
+    <ol class="steps">
+      <li>Unity can reliably import <code class="inline">.fbx</code> and <code class="inline">.obj</code> files.</li>
+      <li>For <code class="inline">.glb</code> and <code class="inline">.gltf</code> files, use MeshLab to convert them.</li>
+      <li>Also check the download size, texture resolution, and polygon or triangle count. A model containing hundreds of thousands or millions of polygons, or several 4K/8K textures, can make Unity slow even when the download itself looks small. Choose the simplest version that still looks good at the size it will appear in the game.</li>
+    </ol>
+    <br>
+
+    <div class="ref-groups">
+      <div class="ref-group">
+        <h3>Import settings to check</h3>
+        <dl>
+          <div class="ref-row"><dt>Rig &rarr; Animation Type</dt><dd>set to <strong>None</strong>. A non-animated prop doesn't need a rig, and skipping it avoids Unity guessing at a skeleton and speeds up import.</dd></div>
+          <div class="ref-row"><dt>Model &rarr; Scale Factor</dt><dd>confirm it results in 1 Unity unit = 1 meter. A prop that imports tiny or huge usually means the Scale Factor needs adjusting here, not in the Transform.</dd></div>
+          <div class="ref-row"><dt>Model &rarr; Read/Write Enabled</dt><dd>leave off unless a script needs to read the mesh at runtime &mdash; on costs extra memory for no benefit on a static prop.</dd></div>
+          <div class="ref-row"><dt>Model &rarr; Generate Colliders</dt><dd>only turn on if the object needs physics collisions. Leave it off for purely decorative props.</dd></div>
+          <div class="ref-row"><dt>Materials &rarr; Location</dt><dd>use <strong>Extract Materials...</strong> to get real, editable material assets instead of ones embedded in the model file.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <h3 class="sub">After importing</h3>
+    <ol class="steps">
+      <li>Bring the files in by dragging them into Unity's <strong>Project window</strong>, not the OS file browser &mdash; that keeps textures and <code class="inline">.meta</code> files correctly linked (see <a href="unity-best-practice.html#assets">Assets and naming</a>).</li>
+      <li>If a GameObject will never move, rotate, or change scale while the game is running, select it in the Hierarchy and enable <strong>Static</strong> at the top-right of the Inspector. This tells Unity that the object can be included in optimizations such as static batching and baked lighting. Do not mark objects Static if they need to move during play.</li>
+      <li>If the material renders bright pink, its shader isn't URP-compatible yet &mdash; see <a href="materials-and-shaders.html#urp-shaders">URP shaders</a> to fix it.</li>
+    </ol>
+  </section>
 
 </div>
 
-<script src="../navigation.js?v=10"></script>
-<script src="../last-updated.js?v=5"></script>
+<script src="../navigation.js?v=16"></script>
+<script src="../last-updated.js?v=6"></script>
 <script src="../cursor-sparkle.js?v=8"></script>
 
 </body>

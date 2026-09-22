@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Materials and Shaders</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="guide.css?v=47" />
+<link rel="stylesheet" href="../site-shell.css?v=9" />
+<link rel="stylesheet" href="../navigation.css?v=6" />
+</head>
+<body class="guide-page guide-materials-and-shaders">
+
+<header class="site-header" data-site-header></header>
+
+<div class="page">
+
+  <span class="stamp" data-last-updated></span>
+
+  <nav class="guide-nav" data-site-navigation></nav>
+  <br>
+    <br>
+
+  <header class="masthead">
+    <div class="section-heading"><pre class="section-ornament guide-title-ornament" aria-hidden="true"></pre><h1>Materials and Shaders</h1></div>
+    <p>URP materials, the shaders that come with it, and a simple first look at Shader Graph</p>
+  </header>
+
+  <nav class="page-toc">
+    <a href="#materials">Materials</a>
+    <a href="#urp-shaders">URP shaders</a>
+    <a href="#skybox">Skybox materials</a>
+    <a href="#shader-graph">Shader Graph</a>
+    <a href="#wobble-shader">Wobble Shader</a>
+    <a href="#bounce">Make an Object Bounce</a>
+  </nav>
+
+  <!-- ================= MATERIALS ================= -->
+
+  <section class="section" id="materials">
+    <h2>Materials</h2>
+    <p class="section-intro">A material tells Unity how a surface should look &mdash; its color, texture, roughness, and which shader draws it. Every mesh needs at least one material, or it renders in Unity's default pink/magenta error shader.</p>
+
+    <h3 class="sub">Create and assign one</h3>
+    <ol class="steps">
+      <li>In the Project window: right-click &rarr; Create &rarr; Material.</li>
+      <li>Name it, then select it &mdash; the Inspector shows its shader and properties.</li>
+      <li>Drag it onto a mesh in the Scene view or the Hierarchy to assign it.</li>
+    </ol>
+  </section>
+
+  <!-- ================= URP SHADERS ================= -->
+
+  <section class="section" id="urp-shaders">
+    <h2>URP shaders</h2>
+    <p class="section-intro">Every material uses a shader &mdash; the small program that decides how light interacts with its surface. URP ships a handful of ready-made ones, so you rarely need to write your own.</p>
+    <div class="ref-groups">
+      <div class="ref-group">
+        <h3>Built-in URP shaders</h3>
+        <dl>
+          <div class="ref-row"><dt>Lit</dt><dd>the default. Supports lighting, normal maps, and metallic/smoothness. Use it for most props and characters.</dd></div>
+          <div class="ref-row"><dt>Simple Lit</dt><dd>a cheaper lit shader with simpler lighting math. Use it for mobile or low-end targets.</dd></div>
+          <div class="ref-row"><dt>Unlit</dt><dd>ignores scene lighting entirely &mdash; flat color or texture only. Use it for UI, skyboxes, or stylized flat looks.</dd></div>
+          <div class="ref-row"><dt>Baked Lit</dt><dd>a lit shader for objects using only baked, not real-time, lighting. Cheaper than Lit.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SKYBOX ================= -->
+
+  <section class="section" id="skybox">
+    <h2>Skybox materials</h2>
+    <p class="section-intro">A skybox material is a special material Unity renders behind everything else in the scene, at infinite distance &mdash; it's what gives an empty scene a sky instead of a flat background color.</p>
+    <div class="ref-groups">
+      <div class="ref-group">
+        <h3>Skybox types</h3>
+        <dl>
+          <div class="ref-row"><dt>Procedural</dt><dd>a simple generated sky and sun, controlled by sliders. No image needed &mdash; good for a quick placeholder.</dd></div>
+          <div class="ref-row"><dt>Panoramic</dt><dd>uses a single 360&deg; HDRI image. The easiest way to get a real photographed or rendered sky.</dd></div>
+          <div class="ref-row"><dt>6 Sided</dt><dd>uses six separate images, one per face of a cube around the camera.</dd></div>
+          <div class="ref-row"><dt>Cubemap</dt><dd>uses a single Cubemap texture asset instead of six loose images.</dd></div>
+        </dl>
+      </div>
+    </div>
+    <h3 class="sub">Set one</h3>
+    <ol class="steps">
+      <li>Create a material and set its shader to one under <strong>Skybox</strong> (for example <strong>Skybox/Panoramic</strong>), then assign your HDRI image to it.</li>
+      <li>Open <strong>Window &rarr; Rendering &rarr; Lighting</strong>, go to the <strong>Environment</strong> tab, and drag the material into the <strong>Skybox Material</strong> field.</li>
+    </ol>
+  </section>
+
+  <!-- ================= SHADER GRAPH ================= -->
+
+  <section class="section" id="shader-graph">
+    <h2>Shader Graph</h2>
+    <p class="section-intro">Shader Graph is Unity's visual shader editor. Instead of writing shader code, you connect nodes &mdash; a texture, a color, some math &mdash; to a set of outputs, and Unity generates the shader for you.</p>
+    <p class="body-text">It's worth it once a stock URP shader can't do what you want: stylized effects like toon shading, a dissolve, water, or a glow all start here, and you can see and tweak the result without knowing HLSL.</p>
+
+    <h3 class="sub">Your first Shader Graph</h3>
+    <ol class="steps">
+      <li>In the Project window: right-click &rarr; Create &rarr; Shader Graph &rarr; URP &rarr; Lit Shader Graph.</li>
+      <li>Double-click it to open the Shader Graph window.</li>
+      <li>Drag in a Color node and connect it to Base Color on the Fragment output.</li>
+      <li>Click Save Asset (top-left) to compile it.</li>
+      <li>Create a material, set its shader to your new Shader Graph asset, then assign the material to a mesh like any other.</li>
+    </ol>
+  </section>
+
+  <!-- ================= WOBBLE SHADER ================= -->
+
+  <section class="section" id="wobble-shader">
+    <h2>Wobble Shader</h2>
+    <p class="section-intro">This shader changes the position of the mesh's vertices over time. Different parts of the object move by different amounts, creating a wave instead of moving the whole object.</p>
+
+    <h3 class="sub">1. Create the Shader Graph</h3>
+    <ol class="steps">
+      <li>Create &rarr; Shader Graph &rarr; URP &rarr; Lit Shader Graph.</li>
+      <li>Name it <code class="inline">Wobble</code>.</li>
+      <li>Create three Float properties:
+        <ul class="sub-steps">
+          <li>Speed = <code class="inline">2</code></li>
+          <li>Frequency = <code class="inline">5</code></li>
+          <li>Amount = <code class="inline">0.1</code></li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3 class="sub">2. Find each vertex's height</h3>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>Position (Object) &rarr; Split &rarr; G</code></pre></div></div></div>
+    <ul class="steps">
+      <li>Position gives us the position of every vertex.</li>
+      <li>Split separates X, Y and Z.</li>
+      <li>G is the Y value, the vertex's height.</li>
+    </ul>
+
+    <h3 class="sub">3. Create the wave</h3>
+    <p class="body-text">Build:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>Position Y &rarr; Multiply &larr; Frequency
+                   &darr;
+                  Add &larr; Time &times; Speed
+                   &darr;
+                  Sine
+                   &darr;
+                Multiply &larr; Amount</code></pre></div></div></div>
+    <p class="body-text">This calculates: <code class="inline">sin(Time &times; Speed + PositionY &times; Frequency) &times; Amount</code></p>
+    <p class="body-text">What each part does:</p>
+    <ul class="steps">
+      <li>Time makes it animate.</li>
+      <li>Speed controls how fast.</li>
+      <li>Position Y makes vertices at different heights move differently.</li>
+      <li>Frequency controls how many waves appear across the mesh.</li>
+      <li>Sine creates smooth back-and-forth movement.</li>
+      <li>Amount controls how far the vertices move.</li>
+    </ul>
+
+    <h3 class="sub">4. Turn it into movement</h3>
+    <p class="body-text">Use Combine:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>R = wobble
+G = 0
+B = 0</code></pre></div></div></div>
+    <p class="body-text">This means the wobble only moves vertices along X. Then:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>Position (Object) ────────┐
+                          Add &rarr; Vertex Position
+Wobble &rarr; Combine RGB ─────┘</code></pre></div></div></div>
+    <p class="body-text">We take each vertex's original position and add the wobble to it.</p>
+
+    <h3 class="sub">Full graph</h3>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>Position &rarr; Split &rarr; Y &rarr; &times; Frequency ─┐
+                                    &darr;
+Time &rarr; &times; Speed ──────────────────&rarr; Add
+                                    &darr;
+                                   Sine
+                                    &darr;
+                                &times; Amount
+                                    &darr;
+                                 Combine
+                                    &darr;
+Position ───────────────────────&rarr; Add
+                                    &darr;
+                              Vertex Position</code></pre></div></div></div>
+
+    <p class="body-text"><strong>Important:</strong> the model needs enough vertices/subdivisions. Shader Graph can move existing vertices, but it cannot bend areas where there are no vertices.</p>
+  </section>
+
+  <!-- ================= PHYSICS MATERIAL ================= -->
+
+  <section class="section" id="bounce">
+    <h2>Make an Object Bounce</h2>
+    <p class="section-intro">A Physics Material controls how a Collider behaves on impact &mdash; friction and bounciness &mdash; separate from the rendering material on its Mesh Renderer.</p>
+
+    <h3 class="sub">1. Set up the object</h3>
+    <p class="body-text">Select the object and add:</p>
+    <ul class="steps">
+      <li>Rigidbody</li>
+      <li>Collider appropriate for its shape</li>
+    </ul>
+    <p class="body-text">On the Rigidbody:</p>
+    <ul class="steps">
+      <li>Use Gravity: On</li>
+      <li>Linear Damping: <code class="inline">0</code></li>
+      <li>Angular Damping: <code class="inline">0</code></li>
+    </ul>
+
+    <h3 class="sub">2. Create a Physics Material</h3>
+    <ol class="steps">
+      <li>In the Project window: right-click &rarr; Create &rarr; Physics Material.</li>
+      <li>Name it <code class="inline">Bouncy</code>.</li>
+    </ol>
+    <div class="ref-groups">
+      <div class="ref-group">
+        <h3>Settings</h3>
+        <dl>
+          <div class="ref-row"><dt>Dynamic Friction</dt><dd><code class="inline">0</code></dd></div>
+          <div class="ref-row"><dt>Static Friction</dt><dd><code class="inline">0</code></dd></div>
+          <div class="ref-row"><dt>Bounciness</dt><dd><code class="inline">0.8</code></dd></div>
+          <div class="ref-row"><dt>Friction Combine</dt><dd><code class="inline">Average</code></dd></div>
+          <div class="ref-row"><dt>Bounce Combine</dt><dd><code class="inline">Maximum</code></dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <h3 class="sub">3. Apply the material</h3>
+    <ol class="steps">
+      <li>Select the bouncing object's Collider.</li>
+      <li>Drag the <code class="inline">Bouncy</code> Physics Material into its Material field.</li>
+    </ol>
+    <p class="body-text">A Physics Material goes on the Collider, not the Mesh Renderer.</p>
+
+    <h3 class="sub">4. Set up the ground</h3>
+    <ul class="steps">
+      <li>Make sure the ground has a Collider.</li>
+      <li>It does not need a Rigidbody.</li>
+    </ul>
+
+    <h3 class="sub">5. Test</h3>
+    <p class="body-text">Move the object above the ground and press Play. Gravity pulls it down, the Collider detects the impact, and the Physics Material determines how much it bounces back.</p>
+    <p class="body-text">With Bounciness = <code class="inline">0.8</code>, each bounce should be smaller than the previous one until the object eventually settles.</p>
+  </section>
+
+</div>
+
+<script src="../navigation.js?v=16"></script>
+<script src="../last-updated.js?v=6"></script>
+<script src="../cursor-sparkle.js?v=8"></script>
+
+</body>
+</html>

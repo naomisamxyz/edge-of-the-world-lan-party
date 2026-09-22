@@ -427,3 +427,27 @@
     line-height: 1;
     white-space: pre;
   }
+
+  /* ---------- Sub-points nested inside a numbered step ---------- */
+
+  .steps .sub-steps {
+    list-style: none;
+    margin: 8px 0 0;
+    padding: 0;
+  }
+
+  .steps .sub-steps li {
+    position: relative;
+    padding-left: 16px;
+    margin: 0 0 6px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  .steps .sub-steps li::before {
+    content: "\2013";
+    position: absolute;
+    left: 0;
+    color: rgba(255, 255, 255, 0.35);
+  }

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Visual Scripting</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="guide.css?v=47" />
+<link rel="stylesheet" href="../site-shell.css?v=9" />
+<link rel="stylesheet" href="../navigation.css?v=6" />
+</head>
+<body class="guide-page guide-visual-scripting">
+
+<header class="site-header" data-site-header></header>
+
+<div class="page">
+
+  <span class="stamp" data-last-updated></span>
+
+  <nav class="guide-nav" data-site-navigation></nav>
+  <br>
+    <br>
+
+  <header class="masthead">
+    <div class="section-heading"><pre class="section-ornament guide-title-ornament" aria-hidden="true"></pre><h1>Visual Scripting</h1></div>
+    <p>Build simple game logic by connecting nodes instead of writing code &mdash; a gentle starting point for beginners</p>
+  </header>
+
+  <nav class="page-toc">
+    <a href="#what-is-it">What it is</a>
+    <a href="#setup">Setup</a>
+    <a href="#first-graph">Your first graph</a>
+    <a href="#common-nodes">Important nodes</a>
+  </nav>
+
+  <!-- ================= WHAT IT IS ================= -->
+
+  <section class="section" id="what-is-it">
+    <h2>What it is</h2>
+    <p class="section-intro">Visual Scripting lets you build behavior by connecting nodes &mdash; Unity's built-in blocks for events (&ldquo;the game starts&rdquo;, &ldquo;the player enters a trigger&rdquo;) and actions (&ldquo;play a sound&rdquo;, &ldquo;destroy this object&rdquo;) &mdash; instead of typing C# code.</p>
+    <p class="body-text">It's a good starting point if code feels intimidating: the whole flow of logic is laid out where you can see it, and every node is documented right there in the graph. You can always move to code later once a piece of logic outgrows it.</p>
+  </section>
+
+  <!-- ================= SETUP ================= -->
+
+  <section class="section" id="setup">
+    <h2>Setup</h2>
+    <ol class="steps">
+      <li>Check whether it's already installed: <strong>Edit &rarr; Project Settings &rarr; Visual Scripting</strong>. If that panel doesn't exist yet, install it from <strong>Window &rarr; Package Manager &rarr; Unity Registry &rarr; Visual Scripting &rarr; Install</strong>.</li>
+      <li>Select the GameObject that should have behavior, then <strong>Add Component &rarr; Visual Scripting &rarr; Script Machine</strong>.</li>
+      <li>In the Script Machine component, click <strong>New</strong> to create a graph asset (reusable across objects), or <strong>Embed</strong> to keep the graph local to this one object. If dragging a scene object into the graph later doesn't work, switching to Embed is worth trying &mdash; a shared graph asset can't always hold a reference to one specific scene object.</li>
+    </ol>
+  </section>
+
+  <!-- ================= FIRST GRAPH ================= -->
+
+  <section class="section" id="first-graph">
+    <h2>Your first graph</h2>
+
+    <h3 class="sub">Show a message on screen for 20 seconds</h3>
+    <ol class="steps">
+      <li>In the Hierarchy, right-click &rarr; <strong>UI &rarr; Text - TextMeshPro</strong>.</li>
+      <li>Rename the text object <code class="inline">MessageText</code> and type your message into its Text Input field.</li>
+      <li>Select the Canvas and add <strong>Script Machine</strong>.</li>
+      <li>Click <strong>Edit Graph</strong>.</li>
+      <li>Add an <strong>On Start</strong> node.</li>
+      <li>Select On Start and enable <strong>Coroutine</strong> in the Graph Inspector.</li>
+      <li>Add <strong>Wait For Seconds</strong> and set it to <code class="inline">20</code>.</li>
+      <li>Drag <code class="inline">MessageText</code> from the Hierarchy into the graph to create a reference to it.</li>
+      <li>Add <strong>Set Active</strong>, connect <code class="inline">MessageText</code> to its GameObject input, and set Active to <code class="inline">false</code>.</li>
+      <li>Connect the flow:
+        <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>On Start &rarr; Wait For Seconds (20) &rarr; Set Active (false)</code></pre></div></div></div>
+      </li>
+    </ol>
+    <p class="body-text">The Canvas stays active. Only <code class="inline">MessageText</code> disappears after 20 seconds.</p>
+
+    <h3 class="sub">React to a trigger</h3>
+    <ol class="steps">
+      <li>Right-click the graph &rarr; <strong>Events &rarr; Physics &rarr; On Trigger Enter</strong>.</li>
+      <li>Drag out from its output and connect it to an action, such as <strong>Destroy</strong> or <strong>Set Active</strong>.</li>
+      <li>Make sure the object has a Collider with <strong>Is Trigger</strong> checked, and that the graph lives on the object that should react.</li>
+    </ol>
+
+    <p class="body-text">Once a graph gets long and hard to follow, that's usually the sign to convert that piece of behavior into a short script instead. Visual Scripting is best for small, readable logic, not an entire game's worth of systems.</p>
+  </section>
+
+  <!-- ================= COMMON NODES ================= -->
+
+  <section class="section" id="common-nodes">
+    <h2>Important nodes</h2>
+    <p class="section-intro">These are useful building blocks to search for when creating a graph.</p>
+
+    <br>
+    <div class="ref-groups">
+      <div class="ref-group">
+        <dl>
+          <div class="ref-row"><dt>Start</dt><dd>Run something once when the game starts.</dd></div>
+          <div class="ref-row"><dt>Update</dt><dd>Run something or check for something every frame.</dd></div>
+          <div class="ref-row"><dt>On Trigger Enter</dt><dd>React when something enters an area.</dd></div>
+          <div class="ref-row"><dt>On Collision Enter</dt><dd>React when objects physically collide.</dd></div>
+          <div class="ref-row"><dt>Debug Log</dt><dd>Print information in the Console to see what the program is doing.</dd></div>
+          <div class="ref-row"><dt>Get Variable</dt><dd>Read stored information.</dd></div>
+          <div class="ref-row"><dt>Set Variable</dt><dd>Set or change stored information.</dd></div>
+          <div class="ref-row"><dt>Add</dt><dd>Add numbers together.</dd></div>
+          <div class="ref-row"><dt>Subtract</dt><dd>Subtract numbers.</dd></div>
+          <div class="ref-row"><dt>Multiply</dt><dd>Multiply values.</dd></div>
+          <div class="ref-row"><dt>Divide</dt><dd>Divide values.</dd></div>
+          <div class="ref-row"><dt>Equal</dt><dd>Check whether two things are the same.</dd></div>
+          <div class="ref-row"><dt>Not Equal</dt><dd>Check whether two things are different.</dd></div>
+          <div class="ref-row"><dt>Greater Than</dt><dd>Compare numbers.</dd></div>
+          <div class="ref-row"><dt>Less Than</dt><dd>Compare numbers.</dd></div>
+          <div class="ref-row"><dt>Branch</dt><dd><code class="inline">if</code>: choose what happens based on a condition.</dd></div>
+          <div class="ref-row"><dt>And</dt><dd>Check whether two conditions are both true.</dd></div>
+          <div class="ref-row"><dt>Or</dt><dd>Check whether at least one condition is true.</dd></div>
+          <div class="ref-row"><dt>Not</dt><dd>Reverse true or false.</dd></div>
+          <div class="ref-row"><dt>Sequence</dt><dd>Run several actions in order.</dd></div>
+          <div class="ref-row"><dt>Wait For Seconds</dt><dd>Delay an action.</dd></div>
+          <div class="ref-row"><dt>For Loop</dt><dd>Repeat something a certain number of times.</dd></div>
+          <div class="ref-row"><dt>For Each</dt><dd>Do something to every item in a collection.</dd></div>
+          <div class="ref-row"><dt>Get Component</dt><dd>Access a component attached to an object.</dd></div>
+          <div class="ref-row"><dt>Get Property</dt><dd>Read something from an object or component.</dd></div>
+          <div class="ref-row"><dt>Set Property</dt><dd>Change something on an object or component.</dd></div>
+          <div class="ref-row"><dt>Get Position</dt><dd>Find an object's position.</dd></div>
+          <div class="ref-row"><dt>Set Position</dt><dd>Change an object's position.</dd></div>
+          <div class="ref-row"><dt>Instantiate</dt><dd>Create an object.</dd></div>
+          <div class="ref-row"><dt>Destroy</dt><dd>Remove an object.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="../navigation.js?v=16"></script>
+<script src="../last-updated.js?v=6"></script>
+<script src="../cursor-sparkle.js?v=8"></script>
+
+</body>
+</html>

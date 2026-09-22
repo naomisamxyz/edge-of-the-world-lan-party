@@ -5,7 +5,7 @@
 <title>Player and Controls</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="guide.css?v=46" />
+<link rel="stylesheet" href="guide.css?v=47" />
 <link rel="stylesheet" href="../site-shell.css?v=9" />
 <link rel="stylesheet" href="../navigation.css?v=6" />
 </head>
@@ -23,12 +23,151 @@
 
   <header class="masthead">
     <div class="section-heading"><pre class="section-ornament guide-title-ornament" aria-hidden="true"></pre><h1>Player and Controls</h1></div>
+    <p>The starter template project, and what Cinemachine, the Input System, and the character controllers actually do</p>
   </header>
+
+  <nav class="page-toc">
+    <a href="#template">Template project</a>
+    <a href="#cinemachine">Cinemachine</a>
+    <a href="#character-controllers">Character controllers</a>
+    <a href="#input-system">New Input System</a>
+  </nav>
+
+  <!-- ================= TEMPLATE PROJECT ================= -->
+
+  <section class="section" id="template">
+    <h2>Template project</h2>
+    <p class="section-intro">A ready-to-open URP 3D project, preloaded with the packages this course uses most. Start here instead of building a project from scratch.</p>
+    <div class="ref-groups">
+      <div class="ref-group">
+        <h3>Preloaded packages</h3>
+        <dl>
+          <div class="ref-row"><dt>Cinemachine</dt><dd>smart cameras that follow and frame the player without hand-scripted camera code.</dd></div>
+          <div class="ref-row"><dt>Recorder</dt><dd>captures gameplay video and image sequences straight out of the Editor.</dd></div>
+          <div class="ref-row"><dt>Input System (new)</dt><dd>Unity's current, device-agnostic way of reading keyboard, mouse, gamepad, and touch input.</dd></div>
+          <div class="ref-row"><dt>Terrain Tools</dt><dd>extra sculpting, painting, and stamping tools for Unity's built-in terrain system.</dd></div>
+          <div class="ref-row"><dt>Timeline</dt><dd>a sequencer for cutscenes, scripted events, and animation tracks.</dd></div>
+          <div class="ref-row"><dt>First Person + Third Person Character Controller</dt><dd>Unity's official character controllers, ready to drop into a scene.</dd></div>
+          <div class="ref-row"><dt>Simple Water Shader URP</dt><dd>a lightweight animated water shader and material for URP.</dd></div>
+          <div class="ref-row"><dt>TextMeshPro Examples</dt><dd>sample scenes and fonts for Unity's sharper, more flexible text rendering.</dd></div>
+        </dl>
+      </div>
+    </div>
+    <p class="body-text">Unzip the template and open it directly from Unity Hub &mdash; no additional package installs required.</p>
+    <p class="body-text"><a href="https://drive.google.com/file/d/1qY7gfDHtMrXvDv_ocz4fVcHBcjr592cP/view?usp=sharing" target="_blank" rel="noopener">Download the template project (.zip)</a></p>
+    <p class="body-text">Find more free assets in the <a href="https://assetstore.unity.com" target="_blank" rel="noopener">Asset Store</a> and <a href="https://assetstore.unity.com/publishers/1" target="_blank" rel="noopener">assetstore.unity.com/publishers/1</a>.</p>
+  </section>
+
+  <!-- ================= CINEMACHINE ================= -->
+
+  <section class="section" id="cinemachine">
+    <h2>Cinemachine</h2>
+    <p class="section-intro">Cinemachine is Unity's camera system. Instead of scripting camera movement and math by hand, you place a virtual camera, tell it what to follow and what to look at, and it handles the smoothing, framing, and cuts for you. Use it for a camera that follows the player, cutscene shots, and switching between angles. It's worth using because a good camera is most of what makes a game feel controllable &mdash; Cinemachine gets you there without reinventing follow-and-look math every project.</p>
+  </section>
+
+  <!-- ================= CHARACTER CONTROLLERS ================= -->
+
+  <section class="section" id="character-controllers">
+    <h2>Character controllers</h2>
+    <p class="section-intro">Unity's official First Person and Third Person Character Controllers are ready-made player movement &mdash; walking, running, jumping, looking around, and, in third person, an orbiting camera &mdash; all wired up and already tuned. Use one as your player's starting point instead of writing movement and camera code from zero. It's worth using because it gets you moving around a scene in minutes, and gives you a working, testable reference to change once you know what you want different.</p>
+  </section>
+
+  <!-- ================= INPUT SYSTEM ================= -->
+
+  <section class="section" id="input-system">
+    <h2>New Input System</h2>
+    <p class="section-intro">The Input System is how Unity reads keyboard, mouse, gamepad, and touch input. The &ldquo;new&rdquo; one (as opposed to the old Input Manager) lets you define actions like Move or Jump once, then map them to any device. Use it for anything the player presses, moves, or aims. It's worth using because it separates what a control does from which physical button does it &mdash; supporting a gamepad later doesn't mean rewriting your scripts.</p>
+
+    <h3 class="sub">Setup</h3>
+    <ol class="steps">
+      <li>Install the package
+        <ul class="sub-steps">
+          <li>Window &rarr; Package Manager</li>
+          <li>Select Unity Registry</li>
+          <li>Find Input System</li>
+          <li>Click Install</li>
+        </ul>
+      </li>
+      <li>Enable it
+        <ul class="sub-steps">
+          <li>Unity may ask to enable the new Input System and restart &mdash; click Yes.</li>
+          <li>Or manually: <strong>Edit &rarr; Project Settings &rarr; Player &rarr; Other Settings &rarr; Active Input Handling</strong>, set to <strong>Input System Package (New)</strong>.</li>
+        </ul>
+      </li>
+      <li>Create an Input Actions asset
+        <ul class="sub-steps">
+          <li>In the Project window: right-click &rarr; Create &rarr; Input Actions.</li>
+          <li>Name it something like <code class="inline">PlayerControls</code>.</li>
+        </ul>
+      </li>
+      <li>Open the Input Actions asset
+        <ul class="sub-steps">
+          <li>Double-click it.</li>
+          <li>Create an Action Map called <code class="inline">Player</code>.</li>
+        </ul>
+      </li>
+      <li>Add actions
+        <div class="ref-groups">
+          <div class="ref-group">
+            <dl>
+              <div class="ref-row"><dt>Move</dt><dd>Action Type <strong>Value</strong>, Control Type <strong>Vector2</strong>.</dd></div>
+              <div class="ref-row"><dt>Look</dt><dd>Action Type <strong>Value</strong>, Control Type <strong>Vector2</strong>.</dd></div>
+              <div class="ref-row"><dt>Jump</dt><dd>Action Type <strong>Button</strong>, Control Type <strong>Button</strong>.</dd></div>
+              <div class="ref-row"><dt>Interact</dt><dd>Action Type <strong>Button</strong>, Control Type <strong>Button</strong>.</dd></div>
+            </dl>
+          </div>
+        </div>
+      </li>
+      <li>Add bindings for each action
+        <ul class="sub-steps">
+          <li><strong>Move</strong> &mdash; add a 2D Vector Composite:
+            <ul class="sub-steps">
+              <li>Up <code class="inline">W</code> &middot; Down <code class="inline">S</code> &middot; Left <code class="inline">A</code> &middot; Right <code class="inline">D</code></li>
+              <li>Optional: add another binding for <code class="inline">&lt;Gamepad&gt;/leftStick</code>.</li>
+            </ul>
+          </li>
+          <li><strong>Look</strong> &mdash; <code class="inline">&lt;Mouse&gt;/delta</code>, <code class="inline">&lt;Gamepad&gt;/rightStick</code>.</li>
+          <li><strong>Jump</strong> &mdash; <code class="inline">&lt;Keyboard&gt;/space</code>, <code class="inline">&lt;Gamepad&gt;/buttonSouth</code>.</li>
+          <li><strong>Interact</strong> &mdash; <code class="inline">&lt;Keyboard&gt;/e</code>, plus a gamepad button of your choice.</li>
+        </ul>
+      </li>
+      <li>Add Player Input to your player
+        <ul class="sub-steps">
+          <li>Select your Player GameObject.</li>
+          <li>Add Component &rarr; Player Input.</li>
+          <li>Drag <code class="inline">PlayerControls</code> into Actions.</li>
+          <li>Set Default Map to <code class="inline">Player</code>.</li>
+        </ul>
+      </li>
+      <li>Connect it to your movement script
+        <p class="body-text">On the Player Input component, set <strong>Behavior</strong> to <strong>Send Messages</strong> &mdash; the simplest of the four options. In plain terms: &ldquo;whenever an action happens, call a method with a matching name on this same object.&rdquo;</p>
+        <ul class="sub-steps">
+          <li>The method name has to match the action name, with &ldquo;On&rdquo; in front: the action is called <code class="inline">Move</code>, so Unity looks for a method called <code class="inline">OnMove</code>. Rename the action to <code class="inline">Sprint</code> and you'd need <code class="inline">OnSprint</code> instead.</li>
+          <li>These methods have to live in a script on the <strong>same GameObject</strong> as the Player Input component &mdash; that's how Unity knows where to look for them.</li>
+          <li>Add <code class="inline">using UnityEngine.InputSystem;</code> at the top of that script, or <code class="inline">InputValue</code> below won't be recognized.</li>
+          <li><code class="inline">InputValue value</code> is just a small box Unity hands you, holding whatever was pressed or moved. <code class="inline">value.Get&lt;Vector2&gt;()</code> opens the box &mdash; since Move's Control Type is Vector2, this gives you the direction the player is pushing, as an (x, y) pair. <code class="inline">value.isPressed</code> is the same idea for a button: just <code class="inline">true</code> or <code class="inline">false</code>.</li>
+        </ul>
+        <p class="body-text">Put together, here's what Unity calls automatically as the player moves and jumps:</p>
+        <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>public void OnMove(InputValue value)
+{
+    Vector2 movement = value.Get&lt;Vector2&gt;();
+}
+
+public void OnJump(InputValue value)
+{
+    if (value.isPressed)
+    {
+        // Jump
+    }
+}</code></pre></div></div></div>
+      </li>
+    </ol>
+  </section>
 
 </div>
 
-<script src="../navigation.js?v=10"></script>
-<script src="../last-updated.js?v=5"></script>
+<script src="../navigation.js?v=16"></script>
+<script src="../last-updated.js?v=6"></script>
 <script src="../cursor-sparkle.js?v=8"></script>
 
 </body>

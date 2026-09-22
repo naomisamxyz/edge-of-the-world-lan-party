@@ -5,10 +5,13 @@
     ["first-project-setup.html", "⭐︎ First Project Setup ⭐︎"],
     ["unity-introduction.html", "⟡ Unity Introduction ⟡"],
     ["unity-best-practice.html", "༺ Unity Best Practice ༻"],
+    ["version-control.html", "⎇ Version Control ⎇"],
     ["player-and-controls.html", "༺ Player and Controls ༻"],
+    ["visual-scripting.html", "❈ Visual Scripting ❈"],
+    ["materials-and-shaders.html", "◈ Materials and Shaders ◈"],
     ["environment-i.html", "⚔︎ Environment I ⚔︎"],
     ["ai-tools.html", "❖ AI Tools ❖"],
-    ["events.html", "✧ Events ✧"],
+    ["interactivity-and-agency.html", "✧ Interactivity and Agency ✧"],
     ["characters.html", "❥ Characters <span class=\"mirror-symbol\">❥</span>"],
     ["interface.html", "✢ Interface ✢"],
     ["scenes-menus.html", "♦︎ Scenes, Menus ♦︎"],
@@ -23,10 +26,8 @@
   ];
 
   var disabledGuides = new Set([
-    "player-and-controls.html",
-    "environment-i.html",
     "ai-tools.html",
-    "events.html",
+    "interactivity-and-agency.html",
     "characters.html",
     "interface.html",
     "scenes-menus.html",
@@ -53,11 +54,14 @@
 
   document.querySelectorAll("[data-site-navigation]").forEach(function (nav) {
     var onGuide = document.body.classList.contains("guide-page");
+    var onCanvas = document.body.classList.contains("canvas-page");
     var currentFile = window.location.pathname.split("/").pop() || "index.html";
     var parts = [];
 
     if (onGuide) {
       parts.push('<a href="../../index.html">&larr; Course home</a>');
+    } else if (onCanvas) {
+      parts.push('<a href="index.html">&larr; Course home</a>');
     } else {
       parts.push('<span class="current">&larr; Course home</span>');
     }

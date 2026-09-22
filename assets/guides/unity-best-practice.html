@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Unity Best Practice</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="guide.css?v=46" />
+<link rel="stylesheet" href="guide.css?v=47" />
 <link rel="stylesheet" href="../site-shell.css?v=9" />
 <link rel="stylesheet" href="../navigation.css?v=6" />
 </head>
@@ -28,7 +28,6 @@
   <nav class="page-toc">
     <a href="#baseline">Project baseline</a>
     <a href="#storage">Storage and backups</a>
-    <a href="#version-control">Version control</a>
     <a href="#urp">URP</a>
     <a href="#assets">Assets and naming</a>
     <a href="#architecture">Project architecture</a>
@@ -85,28 +84,6 @@
         </dl>
       </div>
     </div>
-  </section>
-
-  <!-- ================= VERSION CONTROL ================= -->
-
-  <section class="section" id="version-control">
-    <h2>Version control</h2>
-    <p class="section-intro">Use source control from the first day. Git records history locally; a remote like GitHub adds an off-machine backup and lets others work with you.</p>
-
-    <br>
-    <div class="ref-groups">
-      <div class="ref-group">
-        <h3>Set it up for Unity</h3>
-        <dl>
-          <div class="ref-row"><dt>Meta files</dt><dd>visible, with text-based asset serialization.</dd></div>
-          <div class="ref-row"><dt>.gitignore</dt><dd>a Unity-specific one &mdash; <a href="https://github.com/orgs/community/discussions/56071">GitHub and Unity .gitignore guidance</a>.</dd></div>
-          <div class="ref-row"><dt>Large binaries</dt><dd>consider Git LFS; never commit generated folders.</dd></div>
-          <div class="ref-row"><dt>Alternative</dt><dd>Unity Version Control (formerly Plastic SCM) is built for code and large binary assets &mdash; <a href="https://learn.unity.com/tutorial/set-up-plastic-scm-in-the-unity-editor">set it up</a>.</dd></div>
-        </dl>
-      </div>
-    </div>
-
-    <p class="body-text">Commit and push regularly with short messages such as &ldquo;Add player movement,&rdquo; especially before experimental changes or installing a package. To recover from a ZIP backup, extract it to a new folder and open the copy. To recover with Git, find the last working commit and revert the unwanted changes.</p>
   </section>
 
   <!-- ================= URP ================= -->
@@ -222,8 +199,8 @@ Assets/Forest/Trees/BigTree/BigTree_Bark.png</code></pre>
 
 </div>
 
-<script src="../navigation.js?v=10"></script>
-<script src="../last-updated.js?v=5"></script>
+<script src="../navigation.js?v=16"></script>
+<script src="../last-updated.js?v=6"></script>
 <script src="../cursor-sparkle.js?v=8"></script>
 
 </body>

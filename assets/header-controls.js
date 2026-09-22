@@ -29,6 +29,11 @@
   }
 
   function reflow() {
+    var guideNav = document.querySelector(".canvas-guide-nav");
+    if (guideNav) {
+      guideNav.style.top =
+        Math.round(header.getBoundingClientRect().bottom + GAP) + "px";
+    }
     var controls =
       document.querySelector(".canvas-controls") ||
       document.querySelector(".view-toggle");

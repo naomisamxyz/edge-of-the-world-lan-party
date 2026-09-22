@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Version Control</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="guide.css?v=47" />
+<link rel="stylesheet" href="../site-shell.css?v=9" />
+<link rel="stylesheet" href="../navigation.css?v=6" />
+</head>
+<body class="guide-page guide-version-control">
+
+<header class="site-header" data-site-header></header>
+
+<div class="page">
+
+  <span class="stamp" data-last-updated></span>
+
+  <nav class="guide-nav" data-site-navigation></nav>
+  <br>
+    <br>
+
+  <header class="masthead">
+    <div class="section-heading"><pre class="section-ornament guide-title-ornament" aria-hidden="true"></pre><h1>Version Control</h1></div>
+    <p>Git and GitHub Desktop for a Unity project, step by step, on Mac or Windows</p>
+  </header>
+
+  <nav class="page-toc">
+    <a href="#zipping">Zip snapshots</a>
+    <a href="#git">Git and GitHub</a>
+    <a href="#unity-vcs">Unity Version Control</a>
+  </nav>
+
+  <!-- ================= ZIPPING ================= -->
+
+  <section class="section" id="zipping">
+    <h2>Zip snapshots</h2>
+    <p class="section-intro">If Git feels like too much right now, this is the bare-minimum alternative: whenever you've made changes and have a working version, zip your project folder to make a copy, then keep working in the copy. There's no diffing, no branching, and no partial undo &mdash; the only move is "go back to an older zip" &mdash; but it means a bad session can never cost you the last version that worked.</p>
+    <div class="ref-groups">
+      <div class="ref-group">
+        <h3>Naming the copies</h3>
+        <dl>
+          <div class="ref-row"><dt>Sequential</dt><dd>increment a number every time, such as <code class="inline">ProjectName_01.zip</code>, <code class="inline">ProjectName_02.zip</code>. Simple, and sorts correctly by name.</dd></div>
+          <div class="ref-row"><dt>Dated</dt><dd>stamp the date, such as <code class="inline">ProjectName_2026-09-19.zip</code>. Add a letter or time if you make more than one copy a day.</dd></div>
+          <div class="ref-row"><dt>Described</dt><dd>add a few words about what changed, such as <code class="inline">ProjectName_03_player-jump-fixed.zip</code>. Slower to write, much faster to find later.</dd></div>
+          <div class="ref-row"><dt>Where</dt><dd>keep the zips outside the live project folder, in a separate backups folder, so you never accidentally zip a zip.</dd></div>
+        </dl>
+      </div>
+    </div>
+    <p class="body-text">This is a safety net, not version control &mdash; there is no way to see what changed between two zips, merge work from two people, or recover just one file out of the whole project. Once more than one person is working on the project, or you want that finer-grained history, move to Git below.</p>
+  </section>
+
+  <!-- ================= GIT ================= -->
+
+  <section class="section" id="git">
+    <h2>Git and GitHub</h2>
+    <p class="section-intro">Use source control from the first day. Git records history locally; GitHub adds an off-machine copy and makes collaboration possible.</p>
+    <p class="body-text">(This guide is written for Mac. Windows notes are called out at each step &mdash; mostly it's the same GitHub Desktop app, just different installers for the Terminal-only parts.)</p>
+
+    <h3 class="sub">1. Install the tools</h3>
+    <ol class="steps">
+      <li>Mac only: Install <a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a> if you don't have it (run the command it gives you, then the post-install step it prints). Windows: skip Homebrew &mdash; you'll install Git directly from <a href="https://git-scm.com/download/win" target="_blank" rel="noopener">git-scm.com</a> instead (just run the installer, defaults are fine).</li>
+      <li>Mac, in Terminal:
+        <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>brew install git</code></pre></div></div></div>
+      </li>
+      <li>Download and install <a href="https://github.com/apps/desktop" target="_blank" rel="noopener">GitHub Desktop</a> &mdash; same app on both platforms. On Mac, unzip and drag into Applications; on Windows, run the installer.</li>
+      <li>Open GitHub Desktop &rarr; Settings/Options &rarr; Accounts &rarr; Sign in to GitHub.com.</li>
+      <li>GitHub Desktop &rarr; Settings/Options &rarr; Git &rarr; enter your name and email (same ones as your GitHub account).</li>
+    </ol>
+
+    <h3 class="sub">2. Prepare the Unity project</h3>
+    <ol class="steps">
+      <li>In Unity: <strong>Edit &rarr; Project Settings &rarr; Editor</strong>
+        <ul class="sub-steps">
+          <li>Version Control Mode &rarr; <strong>Visible Meta Files</strong></li>
+          <li>Asset Serialization Mode &rarr; <strong>Force Text</strong></li>
+        </ul>
+      </li>
+      <li>Download the <a href="https://github.com/github/gitignore/blob/main/Unity.gitignore" target="_blank" rel="noopener">Unity .gitignore template</a>.
+        <ul class="sub-steps">
+          <li>Rename it from <code class="inline">Unity.gitignore</code> to exactly <code class="inline">.gitignore</code>. Mac: it'll show a plain question-mark icon afterward &mdash; that's normal, ignore it. Windows: File Explorer may block naming a file starting with a dot and no extension via the rename box &mdash; if so, rename it in a text editor's "Save As" dialog instead, or wrap the name in quotes (<code class="inline">".gitignore"</code>) when renaming.</li>
+          <li>Move it into the project's root folder, right next to <code class="inline">Assets</code>, <code class="inline">Packages</code>, and <code class="inline">ProjectSettings</code>.</li>
+        </ul>
+      </li>
+      <li>Open the <code class="inline">.gitignore</code> in a text editor and add one more line at the bottom:
+        <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>.DS_Store</code></pre></div></div></div>
+        <p class="body-text">(This line only matters on Mac &mdash; it ignores Finder's metadata file. Harmless to leave in on Windows too.)</p>
+      </li>
+    </ol>
+
+    <h3 class="sub">3. Create the repository &mdash; GitHub Desktop only</h3>
+    <ol class="steps">
+      <li>Close Unity.</li>
+      <li>GitHub Desktop &rarr; File &rarr; Add Local Repository.</li>
+      <li>Click <strong>Choose...</strong> and select your project folder (do not use "New Repository" &mdash; that can create an unwanted extra subfolder).</li>
+      <li>It'll say "This directory does not appear to be a Git repository" &mdash; click create a repository right there. In the dialog that opens, the Local Path field shows the parent folder (the one containing your project), and a separate Name field shows your project folder's name &mdash; that's expected, not an error. Just confirm the Name field matches your actual project folder name exactly, then confirm. GitHub Desktop will make an automatic initial commit for you at this point.</li>
+      <li>Check the History tab to see that initial commit, and the Changes tab going forward for anything new. You should not see <code class="inline">Library</code>, <code class="inline">Logs</code>, <code class="inline">obj</code>, <code class="inline">UserSettings</code>, <code class="inline">.vs</code>, or <code class="inline">.DS_Store</code> show up as tracked. If those appear, the <code class="inline">.gitignore</code> wasn't in the right spot before the repo was created &mdash; fix it and remove those files from tracking before continuing.</li>
+      <li>Click Publish repository, choose public or private, and confirm.</li>
+    </ol>
+
+    <h3 class="sub">4. Git LFS (only if your project has large binary assets &mdash; video, big audio, huge textures, or 3D files like .fbx/.blend/.c4d/.obj)</h3>
+    <p class="body-text">This part still needs Terminal (Mac) or Git Bash/Command Prompt (Windows) &mdash; there's no GUI for setting tracking rules. Run these one at a time, in order &mdash; each does something different, and the later ones depend on the earlier ones having finished:</p>
+    <ol class="steps">
+      <li>Install Git LFS itself (only needed once per computer).
+        <ul class="sub-steps">
+          <li>Mac:
+            <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>brew install git-lfs</code></pre></div></div></div>
+          </li>
+          <li>Windows: download and run the installer from <a href="https://git-lfs.com/" target="_blank" rel="noopener">git-lfs.com</a>, or if you installed Git for Windows recently it may already be bundled &mdash; check with <code class="inline">git lfs version</code>.</li>
+        </ul>
+      </li>
+      <li>Enable LFS for your Git installation (only needed once per computer):
+        <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>git lfs install</code></pre></div></div></div>
+      </li>
+      <li>Move into your project folder (needed every time you open a new Terminal/Command Prompt window):
+        <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>cd "/Users/your-name/Unity Projects/Class Project"</code></pre></div></div></div>
+        <p class="body-text">Windows: the path will look like <code class="inline">cd "C:\Users\your-name\Unity Projects\Class Project"</code>.</p>
+      </li>
+      <li>Tell LFS which file types to track (only needed once per project, or whenever you want to add more types later):
+        <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>git lfs track "*.psd" "*.fbx" "*.blend" "*.c4d" "*.obj" "*.wav" "*.mp4" "*.mov" "*.zip"</code></pre></div></div></div>
+        <p class="body-text">Add or remove extensions based on what your project actually uses.</p>
+      </li>
+    </ol>
+    <p class="body-text">Step 4 updates a file called <code class="inline">.gitattributes</code>. After running it, go back to GitHub Desktop &mdash; you'll see <code class="inline">.gitattributes</code> listed as changed &mdash; commit it and push using the normal buttons.</p>
+
+    <h3 class="sub">5. Everyday workflow &mdash; GitHub Desktop only</h3>
+    <p class="body-text">After making changes in Unity:</p>
+    <ol class="steps">
+      <li>Open GitHub Desktop &mdash; it shows what changed.</li>
+      <li>Write a short summary of what you did &rarr; Commit to main.</li>
+      <li>Click Push origin.</li>
+    </ol>
+    <p class="body-text">Commit after a meaningful change, and before trying something experimental. If working with others, click Fetch origin / Pull before you start working, and avoid two people editing the same scene at once.</p>
+
+    <h3 class="sub">Large files and recovery</h3>
+    <p class="body-text">Don't commit generated folders (<code class="inline">Library</code>, <code class="inline">Temp</code>, <code class="inline">Obj</code>, <code class="inline">Logs</code>) or exported builds &mdash; they're regenerated automatically and the <code class="inline">.gitignore</code> already keeps them out. For large binary assets that must be versioned, use Git LFS (above).</p>
+    <p class="body-text">To recover from a ZIP backup, extract it into a new folder and open the copy. To recover with Git, use GitHub Desktop's History tab to find the last good commit, right-click it, and revert or check out from there.</p>
+  </section>
+
+  <!-- ================= UNITY VERSION CONTROL ================= -->
+
+  <section class="section" id="unity-vcs">
+    <h2>Unity Version Control</h2>
+    <p class="section-intro">Built for projects with code and heavy binary assets &mdash; the Unity-native alternative to Git and GitHub.</p>
+    <p class="body-text">Unity Version Control (formerly Plastic SCM) is built for projects with heavy binary assets. If Git and GitHub don't suit your project, see Unity's <a href="https://learn.unity.com/tutorial/set-up-plastic-scm-in-the-unity-editor" target="_blank" rel="noopener">setup guide</a> (Mac and Windows both covered there).</p>
+  </section>
+
+</div>
+
+<script src="../navigation.js?v=16"></script>
+<script src="../last-updated.js?v=6"></script>
+<script src="../cursor-sparkle.js?v=8"></script>
+
+</body>
+</html>
