@@ -1,5 +1,5 @@
 window.CANVAS_DATA = {
-  "version": 34,
+  "version": 36,
   "lastUpdated": {
     "datetime": "2026-09-19",
     "label": "September 19, 2026",
@@ -112,8 +112,8 @@ window.CANVAS_DATA = {
       "height": 602,
       "description": "",
       "items": [
-        "“H.O.R.I.Z.O.N. (Habitat One: Regenerative Interactive Zone of Nurture)” - Institute of Queer Ecology (2021)",
-        "Worlding and the infinite game<br>“Emissary’s Guide to Worlding” - Ian Cheng (2018)<br>“Finite and Infinite Games” - James P. Carse (1986)<br>“Staying with the Trouble: Making Kin in the Chthulucene” - Donna J. Haraway (2016)<br>“Hyperobjects: Philosophy and Ecology After the End of the World” - Timothy Morton (2013)",
+        "“H.O.R.I.Z.O.N. (Habitat One: Regenerative Interactive Zone of Nurture)” — Institute of Queer Ecology (2021)",
+        "Worlding and the infinite game<br>“Emissary’s Guide to Worlding” — Ian Cheng (2018)<br>“Finite and Infinite Games” — James P. Carse (1986)<br>“Staying with the Trouble: Making Kin in the Chthulucene” — Donna J. Haraway (2016)<br>“Hyperobjects: Philosophy and Ecology After the End of the World” — Timothy Morton (2013)",
         "<a href=\"assets/guides/environment-i.html\">⚔︎ Environment I ⚔︎</a><br>Terrain, Importing Assets",
         "<a href=\"assets/guides/visual-scripting.html\">❈ Visual Scripting ❈</a><br>Nodes instead of code, easy for beginners",
         "<a href=\"assets/guides/materials-and-shaders.html\">◈ Materials and Shaders ◈</a><br>URP shaders, Skybox, Shader Graph, Wobble Shader, Bouncy Physics Material",
@@ -167,7 +167,7 @@ window.CANVAS_DATA = {
       "url": "https://bewildrewild.org/wp-content/uploads/Finite-and-Infinite-Games-by-James-Carse.pdf",
       "meta": "James P. Carse (1986)",
       "alt": "Finite and Infinite Games",
-      "image": "https://iad.microlink.io/ReRuOa5u6ElI1eu8sgCRdn7ToDgzsMTomH-2cQBHB1FZZafJHdqOgvMXdbrn33-Qs8qqbQboMi5Zbf9BlXp07w.png",
+      "image": "assets/thumbnails/week03-finite-infinite-games.jpg?v=1",
       "previewHeight": 112,
       "heightMode": "manual",
       "groupId": "group-1789889196022"
@@ -185,7 +185,7 @@ window.CANVAS_DATA = {
       "url": "https://www.are.na/block/26149046",
       "meta": "Ian Cheng (2018)",
       "alt": "Emissary’s Guide to Worlding",
-      "image": "https://iad.microlink.io/t014ioAr-SrulFI3eEPaLUZmH8gLoSuh1Dnrj5qdHtJgVD2eVXBp9H7HEJ0lYXQmXmO3qHcOQTrp5rVsfYIlLQ.png",
+      "image": "assets/thumbnails/week03-emissary-worlding.jpg?v=1",
       "previewHeight": 112,
       "heightMode": "manual",
       "groupId": "group-1789889196022"
@@ -220,7 +220,7 @@ window.CANVAS_DATA = {
       "url": "https://www.are.na/block/6450923",
       "meta": "Donna J. Haraway (2016)",
       "alt": "Staying with the Trouble",
-      "image": "https://iad.microlink.io/DMHUuoOXn1MnBTM-E9lvGyPjO954zv3UoLE3r-3ey6W3TgHyekqi-g0YOi4W4KwVeAZHMn3Pxjsh8TGKk8G-CQ.png",
+      "image": "assets/thumbnails/week03-staying-with-trouble.jpg?v=1",
       "previewHeight": 112,
       "heightMode": "manual",
       "groupId": "group-1789889196022"
@@ -238,7 +238,7 @@ window.CANVAS_DATA = {
       "url": "https://www.are.na/block/632985",
       "meta": "Timothy Morton (2013)",
       "alt": "Hyperobjects",
-      "image": "https://iad.microlink.io/zi2AdMBLWYBapSSyVnIhO_xV2zb1mQRMWNLzPJF2hr1ffrFDWPL9h_x4Wbl6qQjjRzDU-DwbU3yP6Mj8u0hEnQ.png",
+      "image": "assets/thumbnails/week03-hyperobjects.jpg?v=1",
       "previewHeight": 112,
       "heightMode": "manual",
       "groupId": "group-1789889196022"
@@ -256,7 +256,7 @@ window.CANVAS_DATA = {
       "url": "https://www.are.na/block/11377499",
       "meta": "Timothy Morton",
       "alt": "Dark Ecology",
-      "image": "https://iad.microlink.io/Xs8Q3YtprMFzIwSsXHJFkeXc_pobocmguCF96Vt45ls3W4lRIRhaQCZufzLlw0xLRfaIs-V71PQDoVFUHf6uOg.png",
+      "image": "assets/thumbnails/week03-dark-ecology.jpg?v=1",
       "previewHeight": 112,
       "heightMode": "manual",
       "groupId": "group-1789889196022"
@@ -1232,7 +1232,7 @@ window.CANVAS_DATA = {
       "y": 3348.2993163217675,
       "width": 486.2838311473013,
       "height": 116.8290353026895,
-      "text": "“The ‘content’ of any medium is always another medium.” - Marshall McLuhan 1964",
+      "text": "“The ‘content’ of any medium is always another medium.” — Marshall McLuhan 1964",
       "heightMode": "manual",
       "fontSize": 11
     },
@@ -1293,12 +1293,12 @@ window.CANVAS_DATA = {
       "y": 4325.861538366832,
       "width": 178.58777347799315,
       "height": 99.32923931965563,
-      "mediaKind": "youtube",
+      "mediaKind": "link",
       "title": "Morphogenic Angels",
       "url": "https://vimeo.com/851219516",
       "meta": "Keiken - Morphogenic Angels",
       "alt": "Keiken",
-      "image": "https://vimeo.com/851219516",
+      "image": "https://i.vimeocdn.com/video/1705836030-f7913fc1f2f7920e4f62d37a98234001b76ace3cc68948fbe91f68a37c1b2f89-d_295x166?region=us",
       "previewHeight": 135,
       "heightMode": "manual"
     },
