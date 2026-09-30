@@ -26,8 +26,6 @@
   ];
 
   var disabledGuides = new Set([
-    "ai-tools.html",
-    "interactivity-and-agency.html",
     "characters.html",
     "interface.html",
     "scenes-menus.html",

@@ -5,8 +5,8 @@
 <title>Environment I</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="guide.css?v=47" />
-<link rel="stylesheet" href="../site-shell.css?v=9" />
+<link rel="stylesheet" href="guide.css?v=50" />
+<link rel="stylesheet" href="../site-shell.css?v=10" />
 <link rel="stylesheet" href="../navigation.css?v=6" />
 </head>
 <body class="guide-page guide-environment-i">
@@ -109,7 +109,8 @@
     <h3 class="sub">File type, size and detail</h3>
     <ol class="steps">
       <li>Unity can reliably import <code class="inline">.fbx</code> and <code class="inline">.obj</code> files.</li>
-      <li>For <code class="inline">.glb</code> and <code class="inline">.gltf</code> files, use MeshLab to convert them.</li>
+      <li>For <code class="inline">.glb</code>, <code class="inline">.gltf</code>, or another format Unity cannot read, use <a href="https://www.meshlab.net/" target="_blank" rel="noopener">MeshLab</a> to convert the model to a supported format such as <code class="inline">.obj</code>. MeshLab can also simplify or decimate a dense mesh to reduce its polygon count before importing it into Unity.</li>
+      <li>When exporting a model from Cinema 4D, Blender, Maya, or another 3D application, bake procedural materials and textures into image files first. Unity cannot reproduce application-specific shaders automatically, so include the baked texture files with the exported model and reconnect them to a Unity material after importing.</li>
       <li>Also check the download size, texture resolution, and polygon or triangle count. A model containing hundreds of thousands or millions of polygons, or several 4K/8K textures, can make Unity slow even when the download itself looks small. Choose the simplest version that still looks good at the size it will appear in the game.</li>
     </ol>
     <br>
@@ -137,8 +138,8 @@
 
 </div>
 
-<script src="../navigation.js?v=16"></script>
-<script src="../last-updated.js?v=8"></script>
+<script src="../navigation.js?v=19"></script>
+<script src="../last-updated.js?v=9"></script>
 <script src="../cursor-sparkle.js?v=8"></script>
 
 </body>

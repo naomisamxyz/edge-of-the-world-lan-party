@@ -1946,6 +1946,20 @@
         json.resources.map(resource => [resource.id, resource])
       );
       let migratedThumbnails = false;
+      const baseResourceRevision = Number(json.baseResourceRevision || 0);
+      const cachedResourceRevision = Number(
+        data.baseResourceRevision || 0
+      );
+      if (cachedResourceRevision < baseResourceRevision) {
+        json.resources
+          .filter(resource => /^week04-media-/.test(resource.id))
+          .forEach(resource => {
+            if (data.resources.some(item => item.id === resource.id)) return;
+            data.resources.push(JSON.parse(JSON.stringify(resource)));
+          });
+        data.baseResourceRevision = baseResourceRevision;
+        migratedThumbnails = true;
+      }
       data.resources.forEach(resource => {
         const base = baseResources.get(resource.id);
         if (

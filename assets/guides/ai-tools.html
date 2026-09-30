@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <title>AI Tools</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="guide.css?v=47" />
-<link rel="stylesheet" href="../site-shell.css?v=9" />
+<link rel="stylesheet" href="guide.css?v=53" />
+<link rel="stylesheet" href="../site-shell.css?v=10" />
 <link rel="stylesheet" href="../navigation.css?v=6" />
 </head>
 <body class="guide-page guide-ai-tools">
@@ -22,62 +22,44 @@
 
   <header class="masthead">
     <div class="section-heading"><pre class="section-ornament guide-title-ornament" aria-hidden="true"></pre><h1>AI Tools</h1></div>
-    <p>Chatbots, coding agents, and asset generation — what they are good for, where they break, and how to use them without handing over authorship</p>
+    <p>Chatbots and asset generation — what they are good for, where they break, and how to use them without handing over authorship</p>
   </header>
 
   <nav class="page-toc">
     <a href="#chatbots">Chatbots</a>
-    <a href="#agents">Coding agents</a>
     <a href="#assets">Generating assets</a>
-    <a href="#critical">Using them critically</a>
+    <a href="#ai-workflows">AI-assisted workflows</a>
   </nav>
 
   <!-- ================= CHATBOTS ================= -->
 
   <section class="section" id="chatbots">
     <h2>Chatbots</h2>
-    <p class="section-intro">Chat models such as ChatGPT, Claude, and Gemini are useful as a patient tutor and a rubber duck: for explaining errors, unblocking syntax, and talking through a design before you build it.</p>
+    <p class="section-intro">Chat models such as ChatGPT, Claude, and Gemini can help you think through a game before you begin coding. They are useful as a patient tutor and sounding board for developing mechanics, planning a project, understanding errors, and working through unfamiliar syntax.</p>
 
     <h3 class="sub">What they are good at</h3>
     <ul class="steps">
-      <li>Explaining a compiler error or a Unity console message in plain language.</li>
-      <li>Turning an idea (&ldquo;I want the door to open when the player is near&rdquo;) into a Unity approach you can then build.</li>
-      <li>Reviewing a short script you already wrote and pointing at likely problems.</li>
-      <li>Summarising documentation, or drafting boilerplate you intend to rewrite.</li>
+      <li>Developing a game mechanic and identifying the objects, components, variables, events, and scripts it might require.</li>
+      <li>Planning how a project should be organized before writing any code.</li>
+      <li>Explaining compiler errors and Unity Console messages in plain language.</li>
+      <li>Turning an idea such as &ldquo;open the door when the player is nearby&rdquo; into a Unity approach you can build and test.</li>
+      <li>Reviewing a short script you wrote and identifying likely problems or unclear sections.</li>
+      <li>Summarizing documentation or drafting simple boilerplate that you will inspect, test, and revise.</li>
     </ul>
 
     <h3 class="sub">Asking well</h3>
-    <p class="body-text">Paste the <strong>whole</strong> error message and the relevant code, say what you expected versus what actually happened, and mention your Unity version. Vague questions get vague answers.</p>
+    <p class="body-text">Include the <strong>complete</strong> error message, the relevant code, your Unity version, and a short description of the GameObjects and components involved. Explain what you expected to happen and what happened instead. Specific context produces more useful answers; vague questions produce guesses.</p>
 
     <h3 class="sub">Where they break</h3>
     <ul class="steps">
-      <li>They confidently invent methods, components, and menu paths that do not exist. Check every API name against the <a href="https://docs.unity3d.com/ScriptReference/" target="_blank" rel="noopener">Unity Scripting Reference</a> before trusting it.</li>
-      <li>They do not know your project. Anything about your scene, your file layout, or code they have not seen is a guess.</li>
-      <li>Long threads drift. Keep one chat per problem rather than one endless conversation.</li>
-    </ul>
-  </section>
-
-  <!-- ================= CODING AGENTS ================= -->
-
-  <section class="section" id="agents">
-    <h2>Coding agents</h2>
-    <p class="section-intro">Coding agents such as Claude Code, Cursor, and GitHub Copilot go a step further than a chatbot: they read the files in your project and can write changes directly into them.</p>
-
-    <h3 class="sub">What they are for</h3>
-    <ul class="steps">
-      <li>Scaffolding a new script from a clear description.</li>
-      <li>Making the same edit across several files.</li>
-      <li>Wiring up a system you can describe precisely.</li>
-      <li>Tracking a bug that crosses more than one file.</li>
+      <li>They can confidently invent methods, components, settings, and menu paths. Verify unfamiliar API names in the <a href="https://docs.unity3d.com/ScriptReference/" target="_blank" rel="noopener">Unity Scripting Reference</a>.</li>
+      <li>They cannot see your scene, component settings, file structure, or scripts unless you provide that information. Anything missing from the prompt is an assumption.</li>
+      <li>Long conversations lose focus and accumulate incorrect assumptions. Start a new conversation for each distinct problem and restate the relevant context.</li>
     </ul>
 
-    <h3 class="sub">Staying in control</h3>
-    <ul class="steps">
-      <li>Work in small steps. Ask for one change, read the diff, run it in Unity, then continue. A 500-line change you did not watch happen is a change you do not understand.</li>
-      <li>Use version control (see <a href="version-control.html">Version Control</a>). Commit before you let an agent work, so a bad run is one command to throw away.</li>
-      <li>Point it at <code class="inline">Assets/Scripts</code>, not the whole project. Keep generated folders and <code class="inline">.meta</code> files out of what it touches.</li>
-      <li>You are still the author. If you cannot explain what a script does and why, it is not finished, no matter who typed it.</li>
-    </ul>
+    <h3 class="sub">Protect the project</h3>
+    <p class="body-text">It is not safe to give an AI coding agent direct access to a Unity project. Every time you change a script or ask AI to generate or revise code, first save the last working version somewhere outside the live Unity project, or preserve it with version control.</p>
+    <p class="body-text">Do not keep duplicate <code class="inline">.cs</code> script files inside the project as backups. Unity will try to compile every script in the Assets folder, and duplicate classes or old code can cause errors. Keep backups outside the project instead.</p>
   </section>
 
   <!-- ================= GENERATING ASSETS ================= -->
@@ -97,21 +79,54 @@
     <p class="body-text">Import models as FBX or glTF, keep one Unity unit as one metre, and move files <em>inside</em> Unity so their <code class="inline">.meta</code> links survive (see <a href="first-project-setup.html">First Project Setup</a> and <a href="unity-best-practice.html#assets">Unity Best Practice</a>).</p>
   </section>
 
-  <!-- ================= USING THEM CRITICALLY ================= -->
+  <!-- ================= AI-ASSISTED WORKFLOWS ================= -->
 
-  <section class="section" id="critical">
-    <h2>Using them critically</h2>
-    <p class="section-intro">This is an art course, and these tools are part of its subject, not only its toolkit.</p>
+  <section class="section" id="ai-workflows">
+    <h2>AI-assisted workflows</h2>
+    <p class="section-intro">Every tool shapes how you understand what you are working on, not only what you can build with it. Tools also have politics: who owns them, whose labor and data built them, how much energy they use, what happens to the material you give them, and who benefits.</p>
 
-    <p class="body-text">These models are trained on scraped text, code, images, and audio &mdash; much of it copyrighted, most of it uncredited. The labour of filtering and rating their output is real and largely invisible, and running them carries a material energy and water cost.</p>
-    <p class="body-text">That is not an argument against using them. It is an argument for using them deliberately: know what a tool is doing, whose work it is standing on, and what it is for in your piece. The constraints you set around a tool are part of the work.</p>
-    <p class="body-text">If your project is <em>about</em> these systems, start from the course readings on games, automation, and ecology, and bring it to critique.</p>
+    <p class="body-text">Learning to code has always involved searching for solutions, reading documentation, finding code that someone shared, taking it apart, changing it, and learning how it works in your own project. AI can accelerate that process by helping you develop an idea, locate possible approaches, explain unfamiliar code, and debug problems.</p>
+    <p class="body-text">AI can help write code, but you still need enough understanding to know what to ask for, where the code belongs, what it changes, how it connects to the rest of the project, and when the result is wrong. Treat it as a collaborator that needs clear boundaries, complete context, and close supervision.</p>
+
+    <h3 class="sub">A controlled workflow</h3>
+    <ul class="steps">
+      <li>
+        <h3 class="sub" style="margin-top: 0;">Intention + boundaries</h3>
+        <p class="body-text no-top-margin">Explain what you are trying to build, limit the scope, and say how you want to work. Ask for one understandable step at a time and require permission before any change.</p>
+        <p class="body-text no-top-margin prompt-example"><em>“I'm building a simple Unity interaction where clicking an object changes its material. I want to build this one step at a time using basic C# that I can understand. Start by helping me detect when the object is clicked. Don't write the material-changing part yet. Always ask for my permission before making changes. Only do what I ask, and keep your answers short and precise.”</em></p>
+      </li>
+      <li>
+        <h3 class="sub" style="margin-top: 0;">Give it your input</h3>
+        <p class="body-text no-top-margin">Provide the relevant script, exact error, component setup, and other context. Let it understand what already exists before proposing changes.</p>
+        <p class="body-text no-top-margin prompt-example"><em>“Here is my current script. Read it and explain how it works. Don't change or rewrite anything yet.”</em></p>
+      </li>
+      <li>
+        <h3 class="sub" style="margin-top: 0;">Give exact instructions + approach</h3>
+        <p class="body-text no-top-margin">Describe precisely what should change. If you are practicing a particular concept, require the solution to use it and prohibit unnecessary systems.</p>
+        <p class="body-text no-top-margin prompt-example"><em>“Change the script so clicking the object switches between two materials. Use a <code class="inline">bool</code> to track which material is active and an <code class="inline">if / else</code> statement to decide which material to apply. Store both materials as public variables so I can assign them in the Unity Inspector. Keep the code simple and don't introduce additional systems or concepts.”</em></p>
+      </li>
+      <li>
+        <h3 class="sub" style="margin-top: 0;">Repeat back</h3>
+        <p class="body-text no-top-margin">Before any code is written, make sure the tool understood both the task and its limits.</p>
+        <p class="body-text no-top-margin prompt-example"><em>“Before you do anything, repeat what you understood and how you are going to approach it.”</em></p>
+      </li>
+      <li>
+        <h3 class="sub" style="margin-top: 0;">Execute</h3>
+        <p class="body-text no-top-margin">Correct the plan if necessary, save the last working version, and then authorize only the specific step you discussed.</p>
+        <p class="body-text no-top-margin prompt-example"><em>“Only make the changes we agreed on. Don't change anything else.”</em></p>
+      </li>
+      <li>
+        <h3 class="sub" style="margin-top: 0;">Test + debug</h3>
+        <p class="body-text no-top-margin">Run the change in Unity. If it fails, report the exact error and observed behavior. Diagnose one possibility at a time before changing more code.</p>
+        <p class="body-text no-top-margin prompt-example"><em>“The material isn't changing when I click. There are no errors in the Console. Help me identify the cause. Let's test one thing at a time, and don't change the code until we know what is wrong.”</em></p>
+      </li>
+    </ul>
   </section>
 
 </div>
 
-<script src="../navigation.js?v=16"></script>
-<script src="../last-updated.js?v=8"></script>
+<script src="../navigation.js?v=19"></script>
+<script src="../last-updated.js?v=9"></script>
 <script src="../cursor-sparkle.js?v=8"></script>
 
 </body>

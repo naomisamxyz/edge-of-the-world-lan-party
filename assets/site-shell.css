@@ -79,7 +79,13 @@
 
 body.background-black {
   background-color: #000 !important;
-  background-image: none !important;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.08)),
+    url("background-dark.jpeg") !important;
+  background-repeat: no-repeat, no-repeat !important;
+  background-position: center, center !important;
+  background-size: cover, cover !important;
+  background-attachment: fixed, fixed !important;
 }
 
 .section-heading {

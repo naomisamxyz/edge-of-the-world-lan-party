@@ -24,8 +24,8 @@
     document.querySelectorAll("[data-last-updated]").forEach(element => {
       element.setAttribute("aria-pressed", String(isBlack));
       element.title = isBlack
-        ? "Restore background image"
-        : "Switch to black background";
+        ? "Restore main background image"
+        : "Switch to alternate background image";
     });
   }
 

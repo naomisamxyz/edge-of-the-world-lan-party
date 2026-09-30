@@ -5,8 +5,8 @@
 <title>Interactivity and Agency</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="guide.css?v=47" />
-<link rel="stylesheet" href="../site-shell.css?v=9" />
+<link rel="stylesheet" href="guide.css?v=52" />
+<link rel="stylesheet" href="../site-shell.css?v=10" />
 <link rel="stylesheet" href="../navigation.css?v=6" />
 </head>
 <body class="guide-page guide-interactivity-and-agency">
@@ -23,12 +23,451 @@
 
   <header class="masthead">
     <div class="section-heading"><pre class="section-ornament guide-title-ornament" aria-hidden="true"></pre><h1>Interactivity and Agency</h1></div>
+    <p>Understanding how game systems shape player agency, and building interactions with events, detection, conditions, and state</p>
   </header>
+
+  <nav class="page-toc">
+    <a href="#critical-play">Critical Play, Concepts in Video Game Art</a>
+    <a href="#player-game-detail">Player + Game</a>
+    <a href="#systems-behavior-detail">Systems + Behavior</a>
+    <a href="#meaning-politics-detail">Meaning + Politics</a>
+    <a href="#concepts-connect">How the Concepts Connect</a>
+    <a href="#critical-play-detail">Critical Play</a>
+    <a href="#events">Events</a>
+    <a href="#detection">Detection</a>
+    <a href="#conditions">Conditions</a>
+    <a href="#state-variables">State and Variables</a>
+    <a href="#building-interaction">Building an Interaction</a>
+  </nav>
+
+  <!-- ================= CRITICAL PLAY ================= -->
+
+  <section class="section" id="critical-play">
+    <h2>Critical Play, Concepts in Video Game Art</h2>
+    <p class="section-intro">Games are not just stories or images. They are <strong>systems we interact with</strong>. Critical play means looking at how those systems shape what players can do, how they behave, and what they experience.
+      <br> <br>It also means asking what assumptions and values are built into a game's rules, and how artists can question, expose, or change them. What does the game make possible? What does it prevent? What does it reward? What does it assume? And what happens when we play against those assumptions?</p>
+
+
+    <h3>Player + Game</h3>
+    <div class="ref-groups">
+      <div class="ref-group">
+        <dl>
+          <div class="ref-row"><dt>Affordance</dt><dd>What does the game suggest you can do?<br><em>Example:</em> A glowing object suggests that you can pick it up. If the game places a weapon in front of you but does not let you use it, it deliberately breaks that expectation.</dd></div>
+          <div class="ref-row"><dt>Agency</dt><dd>How much can your actions meaningfully affect what happens?<br><em>Example:</em> A dialogue gives you three different responses, but all three lead to exactly the same outcome. You have choices, but little agency.</dd></div>
+          <div class="ref-row"><dt>State</dt><dd>The current condition of the game at a particular moment.<br><em>Example:</em> You pick up a key. The game changes key = false to key = true. A locked door can now open. Your action changed the game state.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <h3>Systems + Behavior</h3>
+    <div class="ref-groups">
+      <div class="ref-group">
+        <dl>
+          <div class="ref-row"><dt>Emergence</dt><dd>Something happens because several simple systems interact, rather than because the designer explicitly scripted that event.<br><em>Example:</em> Fire spreads to a wooden bridge → the bridge burns down → an NPC can no longer cross → the NPC finds another route. Each rule is simple, but together they produce an unexpected situation.</dd></div>
+          <div class="ref-row"><dt>Procedurality</dt><dd>Games can communicate ideas through <strong>rules and processes</strong>, not only through images or stories.<br><em>Example:</em> A game about capitalism might require the player to constantly accumulate money to pay increasing debts. The idea is expressed through what the player has to do, rather than through dialogue explaining capitalism.</dd></div>
+          <div class="ref-row"><dt>Simulation</dt><dd>A rule-based model of something. Every simulation decides what to include, simplify, or leave out.<br><em>Example:</em> A game models an ecosystem using only three variables: plants, herbivores, and predators. Changing one population affects the others.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <h3>Meaning + Politics</h3>
+    <div class="ref-groups">
+      <div class="ref-group">
+        <dl>
+          <div class="ref-row"><dt>Representation</dt><dd>How people, places, objects, or ideas are depicted.<br><em>Example:</em> A game shows a city neighborhood as abandoned, dangerous, and full of crime. Those visual and narrative choices shape how that place and its inhabitants are represented.</dd></div>
+          <div class="ref-row"><dt>Representation vs. Simulation</dt><dd>A game <strong>represents</strong> pollution by showing a polluted river.<br>A game <strong>simulates</strong> pollution when factories produce pollution, pollution accumulates over time, fish die, and the player's actions can change the outcome.<br>A game can do both.</dd></div>
+          <div class="ref-row"><dt>Games as Political Systems</dt><dd>Rules can encode values:
+            <ul class="steps">
+              <li>What gets rewarded or punished?</li>
+              <li>Who has agency?</li>
+              <li>What resources are available, and to whom?</li>
+              <li>What behaviors does the system encourage?</li>
+              <li>What possibilities are excluded?</li>
+            </ul>
+            Games can model systems such as <strong>labor, housing, borders, economies, policing, migration, inequality, or care</strong>.<br>They can also make arguments through their mechanics. This is central to <strong>persuasive and activist games</strong>: the rules themselves can communicate a political position.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="player-game-detail">
+    <h2>Player + Game</h2>
+    <h3>Affordance</h3>
+    <p class="section-intro"><strong>Affordance:</strong> What does the game suggest I can do?</p>
+    <p class="body-text">An object's appearance, location, context, and our previous experience with the game help us understand how we might interact with it.</p>
+    <p class="body-text guide-example">A <strong>door</strong> might suggest:</p>
+    <ul class="steps guide-example">
+      <li><strong>Enter</strong> if it is open.</li>
+      <li><strong>Open</strong> if it has a handle.</li>
+      <li><strong>Unlock</strong> if it has a visible lock and I have a key.</li>
+      <li><strong>Break</strong> if it looks damaged and I am carrying a weapon.</li>
+      <li><strong>Come back later</strong> if none of my current abilities work.</li>
+      <li><strong>Nothing</strong> if I have learned that similar doors are just decoration.</li>
+    </ul>
+    <p class="body-text">Affordance is therefore not only about the object itself. It depends on the relationship between the <strong>object, environment, player abilities, game rules, and context</strong>.</p>
+    <p class="body-text guide-example">A mountain in the distance might look reachable, but whether I understand it as somewhere I can actually go depends on what the game has taught me about its world.</p>
+    <p class="body-text"><strong>Question:</strong> What does the game make me think is possible?</p>
+    <h3>Agency</h3>
+    <p class="section-intro"><strong>Agency:</strong> What kind of power does the player have to act within the game?</p>
+    <p class="body-text">Agency is more than simply <strong>having choices</strong>. It comes from the relationship between the player's <strong>goals, abilities, constraints, choices, and the consequences of those choices</strong>.</p>
+    <blockquote>
+      <p>“The rules and goals of games are not arbitrary at all. They are actually a way of specifying particular modes of agency for the player to adopt.”</p>
+      <p><strong>C. Thi Nguyen, “Games and the Art of Agency,” <em>The Philosophical Review</em> 128, no. 4 (2019), p. 423</strong></p>
+    </blockquote>
+    <p class="body-text">Nguyen argues that game designers don't just create a world. They design a particular <strong>way of acting within that world</strong>.</p>
+    <p class="body-text">They decide:</p>
+    <p class="body-text"><strong>What can I do?</strong><br><strong>What am I trying to accomplish?</strong><br><strong>What resources and abilities do I have?</strong><br><strong>What constrains me?</strong><br><strong>What counts as success or failure?</strong></p>
+    <p class="body-text guide-example">Take the locked door again. I might be able to:</p>
+    <p class="body-text guide-example"><code class="inline">unlock it</code><br><code class="inline">break it</code><br><code class="inline">pick the lock</code><br><code class="inline">convince someone to open it</code><br><code class="inline">find another route</code></p>
+    <p class="body-text guide-example">But those possibilities depend on <strong>who I am within the system</strong>.</p>
+    <p class="body-text guide-example">Do I have the key?<br>Am I strong enough to break it?<br>Did I learn lock-picking?<br>Does the guard trust me?<br>Am I even allowed to decide where I go?</p>
+    <p class="body-text guide-example">The same environment can therefore produce very different forms of agency for different players or characters.</p>
+    <p class="body-text">Agency also doesn't necessarily mean <strong>freedom</strong>. Restricting agency can be part of the meaning of a game. A game might deliberately make you powerless, force you to choose between bad options, or require you to operate within an oppressive system.</p>
+    <p class="body-text">Salen and Zimmerman connect agency to consequences:</p>
+    <blockquote>
+      <p>“Meaningful play in a game emerges from the relationship between player action and system outcome.”</p>
+      <p><strong>Katie Salen and Eric Zimmerman, <em>Rules of Play: Game Design Fundamentals</em> (2004), Chapter 3, “Meaningful Play”</strong></p>
+    </blockquote>
+    <p class="body-text">So agency isn't simply:</p>
+    <p class="body-text"><strong>How many choices do I have?</strong></p>
+    <p class="body-text">It is:</p>
+    <p class="body-text"><strong>What am I able to do, what am I trying to do, what constrains me, and how does the game respond to my actions?</strong></p>
+    <h3>State</h3>
+    <p class="section-intro"><strong>Game state:</strong> The current condition of the game and its systems.</p>
+    <p class="body-text">State is what allows a game to <strong>remember what has happened</strong> and use that information to determine what can happen next.</p>
+    <p class="body-text guide-example">A door might have:</p>
+    <p class="body-text guide-example"><code class="inline">locked = true</code></p>
+    <p class="body-text guide-example">The player might have:</p>
+    <p class="body-text guide-example"><code class="inline">hasKey = false</code></p>
+    <p class="body-text guide-example">After finding the key:</p>
+    <p class="body-text guide-example"><code class="inline">hasKey = true</code></p>
+    <p class="body-text guide-example">The door hasn't necessarily changed, but the relationship between the player and the door has.</p>
+    <p class="body-text guide-example">State can include:</p>
+    <p class="body-text guide-example"><code class="inline">health = 50</code><br><code class="inline">doorOpen = false</code><br><code class="inline">enemyAlive = true</code><br><code class="inline">timeOfDay = night</code><br><code class="inline">relationship = 8</code><br><code class="inline">questCompleted = false</code></p>
+    <p class="body-text guide-example">These states can interact:</p>
+    <p class="body-text guide-example"><code class="inline">hasKey = true</code> + <code class="inline">doorLocked = true</code> → player can unlock door</p>
+    <p class="body-text guide-example"><strong>ACTION → STATE CHANGE → NEW POSSIBILITIES</strong></p>
+  </section>
+
+  <section class="section" id="systems-behavior-detail">
+    <h2>Systems + Behavior</h2>
+    <h3>Emergence</h3>
+    <p class="section-intro"><strong>Emergence:</strong> Complex or unexpected situations that arise when simpler rules and systems interact.</p>
+    <p class="body-text guide-example">Imagine a game where:</p>
+    <p class="body-text guide-example"><code class="inline">fire spreads</code><br><code class="inline">wood burns</code><br><code class="inline">rain extinguishes fire</code><br><code class="inline">NPCs avoid danger</code><br><code class="inline">bridges can collapse</code></p>
+    <p class="body-text guide-example">The designer doesn't need to explicitly program:</p>
+    <p class="body-text guide-example"><strong>“The player can burn the bridge to stop an enemy from following them.”</strong></p>
+    <p class="body-text guide-example">That possibility can emerge from the interaction between the existing systems.</p>
+    <p class="body-text">Salen and Zimmerman describe emergence as:</p>
+    <blockquote>
+      <p>“Systems generating complex and unpredictable patterns of behavior from simple rules.”</p>
+      <p><strong>Katie Salen and Eric Zimmerman, <em>Rules of Play: Game Design Fundamentals</em> (2004), Chapter 14, “Games as Emergent Systems”</strong></p>
+    </blockquote>
+    <p class="body-text"><strong>SIMPLE RULES + INTERACTION → COMPLEX BEHAVIOR</strong></p>
+    <p class="body-text">The designer creates the <strong>conditions for possibilities</strong> without necessarily scripting every event that can occur.</p>
+    <p class="body-text">Emergence can happen between:</p>
+    <p class="body-text guide-example"><strong>game systems</strong><br>fire + weather + physics</p>
+    <p class="body-text guide-example"><strong>players and systems</strong><br>players discovering an unintended strategy</p>
+    <p class="body-text guide-example"><strong>players</strong><br>alliances, competition, cooperation, social norms</p>
+    <p class="body-text">This is one reason games can produce experiences their designers did not completely predict.</p>
+    <h3>Procedurality</h3>
+    <p class="section-intro"><strong>Procedurality:</strong> How does the game produce things through rules and processes?</p>
+    <p class="body-text">Games don't just contain objects, images, and stories. They define <strong>relationships and processes</strong> between things.</p>
+    <p class="body-text guide-example">For example:</p>
+    <p class="body-text guide-example"><code class="inline">player works → money increases</code><br><code class="inline">time passes → rent increases</code><br><code class="inline">player rests → health increases</code><br><code class="inline">player works → health decreases</code></p>
+    <p class="body-text guide-example">Once these processes interact, they create a system the player has to navigate.</p>
+    <p class="body-text">Bogost defines processes as:</p>
+    <blockquote>
+      <p>“The methods, techniques, and logics that drive the operation of systems.”</p>
+      <p><strong>Ian Bogost, <em>Persuasive Games: The Expressive Power of Videogames</em> (2007), Chapter 1, “Procedural Rhetoric”</strong></p>
+    </blockquote>
+    <p class="body-text">Procedurality shifts our attention from:</p>
+    <p class="body-text"><strong>What is in the game?</strong></p>
+    <p class="body-text">to:</p>
+    <p class="body-text"><strong>How does the game work?</strong></p>
+    <h3>Procedural Rhetoric</h3>
+    <p class="section-intro">Processes can also <strong>express ideas and make arguments</strong>.</p>
+    <blockquote>
+      <p>“I call this new form procedural rhetoric, the art of persuasion through rule-based representations and interactions rather than the spoken word, writing, images, or moving pictures.”</p>
+      <p><strong>Ian Bogost, <em>Persuasive Games: The Expressive Power of Videogames</em> (2007), Preface</strong></p>
+    </blockquote>
+    <p class="body-text guide-example">Imagine a game where:</p>
+    <p class="body-text guide-example"><code class="inline">rent ↑</code><br><code class="inline">wages stay the same</code><br><code class="inline">work hours ↑</code><br><code class="inline">free time ↓</code><br><code class="inline">health ↓</code></p>
+    <p class="body-text guide-example">The game doesn't need a character to tell us:</p>
+    <p class="body-text guide-example"><strong>“This economic system makes life increasingly difficult.”</strong></p>
+    <p class="body-text guide-example">The player experiences that relationship by <strong>operating inside the system</strong>.</p>
+    <p class="body-text">Procedural rhetoric asks us to look at what the rules make:</p>
+    <p class="body-text"><strong>possible / impossible</strong><br><strong>easy / difficult</strong><br><strong>valuable / worthless</strong><br><strong>rewarded / punished</strong><br><strong>visible / invisible</strong></p>
+    <p class="body-text"><strong>Question:</strong> What argument do the game's rules make?</p>
+    <h3>Simulation</h3>
+    <p class="section-intro"><strong>Simulation:</strong> A rule-based model of how something behaves.</p>
+    <p class="body-text">A simulation does not need to reproduce reality perfectly. It selects <strong>which properties, behaviors, and relationships matter</strong>.</p>
+    <p class="body-text guide-example">A tree could simply be scenery.</p>
+    <p class="body-text guide-example">Or the game might simulate:</p>
+    <p class="body-text guide-example"><code class="inline">tree needs water</code><br><code class="inline">tree grows over time</code><br><code class="inline">tree burns</code><br><code class="inline">tree produces wood</code><br><code class="inline">tree provides habitat</code></p>
+    <p class="body-text guide-example">The designer decides which of these relationships exist and which do not.</p>
+    <p class="body-text">Frasca defines simulation as:</p>
+    <blockquote>
+      <p>“To simulate is to model a (source) system through a different system which maintains [...] some of the behaviors of the original system.”</p>
+      <p><strong>Gonzalo Frasca, “Simulation versus Narrative: Introduction to Ludology,” in <em>The Video Game Theory Reader</em> (2003)</strong></p>
+    </blockquote>
+    <p class="body-text">This means every simulation is <strong>selective</strong>.</p>
+    <p class="body-text guide-example">A farming game might simulate crop growth but not soil depletion.</p>
+    <p class="body-text guide-example">A city simulation might model taxes and employment but not race.</p>
+    <p class="body-text guide-example">A war game might model ammunition and territory but not civilian trauma.</p>
+    <p class="body-text guide-example">Those choices shape what kind of world the simulation produces.</p>
+    <blockquote>
+      <p>“The key trait of simulational media is that it relies on rules: rules that can be manipulated, accepted, rejected, and even contested.”</p>
+      <p><strong>Gonzalo Frasca, “Simulation versus Narrative: Introduction to Ludology,” in <em>The Video Game Theory Reader</em> (2003)</strong></p>
+    </blockquote>
+    <p class="body-text"><strong>Question:</strong> What does the simulation model, and what does it leave out?</p>
+  </section>
+
+  <section class="section" id="meaning-politics-detail">
+    <h2>Meaning + Politics</h2>
+    <h3>Representation</h3>
+    <p class="section-intro"><strong>Representation:</strong> How does the game depict or present something?</p>
+    <p class="body-text">Representation can happen through:</p>
+    <p class="body-text"><strong>images</strong><br><strong>characters</strong><br><strong>environments</strong><br><strong>language</strong><br><strong>sound</strong><br><strong>narrative</strong><br><strong>symbols and categories</strong></p>
+    <p class="body-text guide-example">A city might be represented as:</p>
+    <p class="body-text guide-example"><code class="inline">dangerous</code><br><code class="inline">wealthy</code><br><code class="inline">abandoned</code><br><code class="inline">crowded</code><br><code class="inline">utopian</code></p>
+    <p class="body-text">Representation therefore asks us to examine <strong>how people, places, objects, identities, events, and ideas are portrayed</strong>.</p>
+    <p class="body-text">But in games, representation can interact with simulation.</p>
+    <p class="body-text guide-example">A neighborhood might <strong>look dangerous</strong>, while the game's systems also define:</p>
+    <p class="body-text guide-example"><code class="inline">crime rate = high</code><br><code class="inline">police presence = high</code><br><code class="inline">property value = low</code><br><code class="inline">NPC hostility = high</code></p>
+    <p class="body-text guide-example">Now the idea isn't only communicated through images or narrative. It is also built into <strong>how the world behaves</strong>.</p>
+    <h3>Representation vs. Simulation</h3>
+    <div class="guide-example">
+      <h3>Representation</h3>
+      <p class="body-text"><strong>What does the game show or describe?</strong></p>
+      <p class="body-text">A game depicts a polluted river:</p>
+      <p class="body-text"><code class="inline">dirty water</code><br><code class="inline">dead fish</code><br><code class="inline">industrial buildings</code><br><code class="inline">dark colors</code></p>
+      <h3>Simulation</h3>
+      <p class="body-text"><strong>How does the system behave?</strong></p>
+      <p class="body-text"><code class="inline">factory production ↑</code><br>↓<br><code class="inline">pollution ↑</code><br>↓<br><code class="inline">water quality ↓</code><br>↓<br><code class="inline">fish population ↓</code><br>↓<br><code class="inline">player closes factory</code><br>↓<br><code class="inline">pollution ↓</code></p>
+      <p class="body-text">A game can therefore communicate through both <strong>what it depicts</strong> and <strong>how its systems behave</strong>.</p>
+    </div>
+  </section>
+
+  <section class="section" id="concepts-connect">
+    <h2>How the Concepts Connect</h2>
+    <h3>Connecting the concepts through the example of the door</h3>
+    <p class="section-intro">Take one <strong>locked door</strong>:</p>
+    <div class="ref-groups guide-example">
+      <div class="ref-group">
+        <dl>
+          <div class="ref-row"><dt>AFFORDANCE</dt><dd><strong>What seems possible?</strong><br>The door looks locked. Maybe I need a key, another entrance, or a way to break it.</dd></div>
+          <div class="ref-row"><dt>AGENCY</dt><dd><strong>What am I capable of doing?</strong><br>Can I unlock it, break it, pick the lock, convince someone to open it, or walk away?</dd></div>
+          <div class="ref-row"><dt>STATE</dt><dd><strong>What is currently true?</strong><br><code class="inline">doorLocked = true</code><br><code class="inline">hasKey = false</code><br><code class="inline">guardTrust = 20</code><br>Those conditions determine what can happen.</dd></div>
+          <div class="ref-row"><dt>PROCEDURALITY</dt><dd><strong>What rules determine how the door works?</strong><br>Maybe: <code class="inline">hasKey = true → unlock</code> or <code class="inline">strength &gt; 8 → break</code></dd></div>
+          <div class="ref-row"><dt>EMERGENCE</dt><dd><strong>Can interacting systems create another possibility?</strong><br>Maybe fire spreads from another room and destroys the door without the designer explicitly scripting that solution.</dd></div>
+          <div class="ref-row"><dt>SIMULATION</dt><dd><strong>What properties of a door does the game model?</strong><br>Can doors lock? Burn? Break? Make noise? Be repaired? Who is allowed to open them?</dd></div>
+          <div class="ref-row"><dt>REPRESENTATION</dt><dd><strong>How is the door presented?</strong><br>Does it look secure, fragile, forbidden, institutional, domestic, inviting, threatening?</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="critical-play-detail">
+    <h2>Critical Play</h2>
+    <h3>Understanding critical play</h3>
+    <blockquote>
+      <p>“Critical play means to create or occupy play environments and activities that represent one or more questions about aspects of human life.”</p>
+      <p><strong>Mary Flanagan, <em>Critical Play: Radical Game Design</em> (2009), p. 6</strong></p>
+    </blockquote>
+    <p class="body-text">Critical play treats games as spaces where <strong>rules, conventions, values, and assumptions can be questioned</strong>.</p>
+    <p class="body-text">Because games are systems, critique can happen not only through a game's story or imagery, but through <strong>playing with, against, or changing its rules</strong>.</p>
+    <blockquote>
+      <p>“Because they primarily exist as rule systems, games are particularly ripe for subversive practices.”</p>
+      <p><strong>Mary Flanagan, <em>Critical Play: Radical Game Design</em> (2009), p. 11</strong></p>
+    </blockquote>
+    <p class="body-text"><strong>Critical question:</strong> What happens when we challenge what the game expects us to do?</p>
+    <p class="section-intro">Now we can look at the entire system critically:</p>
+    <p class="body-text"><strong>Why can I break the door but not knock?</strong></p>
+    <p class="body-text"><strong>Why can I fight the guard but not negotiate with them?</strong></p>
+    <p class="body-text"><strong>Why does the game reward entering this space?</strong></p>
+    <p class="body-text"><strong>Who decided what counts as success?</strong></p>
+    <p class="body-text"><strong>Which actions are impossible?</strong></p>
+    <p class="body-text"><strong>Which behaviors are rewarded or punished?</strong></p>
+    <p class="body-text"><strong>What does the simulation model and what does it ignore?</strong></p>
+    <p class="body-text"><strong>What assumptions about the world are encoded in these rules?</strong></p>
+    <p class="body-text">And finally:</p>
+    <p class="body-text"><strong>What happens if we resist, misuse, subvert, or redesign them?</strong></p>
+  </section>
+
+  <section class="section" id="events">
+    <h2>Events</h2>
+    <p class="section-intro"><strong>An event tells Unity that something happened.</strong></p>
+    <p class="body-text">Events usually start a piece of game logic:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>On Start → Show Instructions
+
+On Trigger Enter → Start Dialogue
+
+On Collision Enter → Play Sound</code></pre></div></div></div>
+
+    <h3>Common Events</h3>
+    <div class="ref-groups">
+      <div class="ref-group">
+        <dl>
+          <div class="ref-row"><dt>Start</dt><dd>Runs once when the GameObject starts.</dd></div>
+          <div class="ref-row"><dt>Update</dt><dd>Runs every frame. Use it for something that needs to be checked continuously.</dd></div>
+          <div class="ref-row"><dt>Input Event</dt><dd>Runs when the player performs an input, such as pressing <strong>Interact</strong> or <strong>Jump</strong>.</dd></div>
+          <div class="ref-row"><dt>On Trigger Enter / Stay / Exit</dt><dd>Runs when something enters, stays inside, or leaves a trigger area.</dd></div>
+          <div class="ref-row"><dt>On Collision Enter / Stay / Exit</dt><dd>Runs when physical objects make, maintain, or end contact.</dd></div>
+        </dl>
+      </div>
+    </div>
+    <p class="body-text">An event answers:</p>
+    <p class="body-text"><strong>When should this logic run?</strong></p>
+  </section>
+
+  <section class="section" id="detection">
+    <h2>Detection</h2>
+    <p class="section-intro">An event can tell us something happened, but we often need to know <strong>what caused it</strong>.</p>
+    <p class="body-text">For example, <code class="inline">On Trigger Enter</code> means:</p>
+    <p class="body-text guide-example"><strong>Something entered this trigger.</strong></p>
+    <p class="body-text">It does not automatically mean:</p>
+    <p class="body-text guide-example"><strong>The player entered this trigger.</strong></p>
+    <p class="body-text"><code class="inline">On Trigger Enter</code> provides <strong>Other</strong>, a reference to the Collider that entered.</p>
+    <div class="snippet guide-example"><div class="code-card"><div class="code-scroll"><pre><code>On Trigger Enter
+↓
+Other
+↓
+Check Tag: Player</code></pre></div></div></div>
+    <p class="body-text">Now the game can respond only when the Player enters.</p>
+
+    <h3>Trigger or Collision?</h3>
+    <p class="body-text">Both use <strong>Colliders</strong>, but they detect different things.</p>
+    <div class="ref-groups">
+      <div class="ref-group">
+        <dl>
+          <div class="ref-row"><dt>Trigger</dt><dd>Use a <strong>Trigger</strong> when you want a Collider to act as a <strong>sensor or area</strong> without physically blocking objects.<br>Enable: <strong>Collider → Is Trigger ✓</strong><br><br>Good for:<br><code class="inline">entering a room</code><br><code class="inline">approaching an NPC</code><br><code class="inline">reaching a checkpoint</code><br><code class="inline">entering water</code></dd></div>
+          <div class="ref-row"><dt>Collision</dt><dd>Use a <strong>Collision</strong> when the physical contact itself matters.<br><br>Good for:<br><code class="inline">ball hits wall</code><br><code class="inline">player lands</code><br><code class="inline">car hits obstacle</code><br><code class="inline">projectile hits enemy</code></dd></div>
+        </dl>
+      </div>
+    </div>
+    <div class="snippet guide-example"><div class="code-card"><div class="code-scroll"><pre><code>Player enters Trigger
+↓
+On Trigger Enter
+↓
+Show Message
+
+Ball hits Wall
+↓
+On Collision Enter
+↓
+Play Impact Sound</code></pre></div></div></div>
+    <p class="body-text"><strong>Trigger = detect an area</strong></p>
+    <p class="body-text"><strong>Collision = detect physical contact</strong></p>
+    <p class="body-text guide-example">A door could use both: a <strong>Collider</strong> physically blocks the player, while a larger <strong>Trigger</strong> detects when the player is close enough to interact.</p>
+
+    <h3>Other Types of Detection</h3>
+    <div class="ref-groups">
+      <div class="ref-group">
+        <dl>
+          <div class="ref-row"><dt>Input</dt><dd>Detect something the <strong>player does</strong>:<br><code class="inline">Interact</code><br><code class="inline">Jump</code><br><code class="inline">Move</code><br><code class="inline">Click</code></dd></div>
+          <div class="ref-row"><dt>Raycast</dt><dd>A <strong>Raycast</strong> sends an invisible line through the game world and reports what it hits.<br><br>Use it to ask:<br><code class="inline">What am I looking at?</code><br><code class="inline">What did the gun hit?</code><br><code class="inline">Is there ground below me?</code></dd></div>
+          <div class="ref-row"><dt>Distance</dt><dd>Compare how far apart two objects are:<br><code class="inline">Distance(Player, Enemy) &lt; 5</code><br><br>Use this when proximity matters but you don't need a specific trigger area.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="conditions">
+    <h2>Conditions</h2>
+    <p class="section-intro">Sometimes detecting something isn't enough. The game needs to check whether something is <strong>true</strong> before deciding what to do.</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>On Trigger Enter
+↓
+Is this the Player?
+↓
+Branch
+ ↙    ↘
+TRUE  FALSE</code></pre></div></div></div>
+    <p class="body-text">A <strong>condition</strong> produces a Boolean value:</p>
+    <div class="snippet guide-example"><div class="code-card"><div class="code-scroll"><pre><code>true
+false</code></pre></div></div></div>
+    <p class="body-text">A <strong>Branch</strong> uses that value to choose which flow to follow. It is the Visual Scripting equivalent of an <code class="inline">if</code> statement.</p>
+  </section>
+
+  <section class="section" id="state-variables">
+    <h2>State and Variables</h2>
+    <p class="section-intro">Now imagine a locked door.</p>
+    <p class="body-text">Knowing that the player interacted with the door isn't enough. The game also needs to remember:</p>
+    <p class="body-text guide-example"><strong>Does the player have the key?</strong></p>
+    <p class="body-text">This information is part of the game's <strong>state</strong>.</p>
+    <p class="body-text">State is stored in <strong>variables</strong>:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>bool hasKey = false;
+int health = 100;
+float speed = 4.5f;
+string playerName = "Alex";</code></pre></div></div></div>
+
+    <div class="ref-groups">
+      <div class="ref-group">
+        <dl>
+          <div class="ref-row"><dt>Boolean</dt><dd><code class="inline">bool</code> stores either <code class="inline">true</code> or <code class="inline">false</code>.<br>Useful for two-state information:<br><code class="inline">bool hasKey = true;</code><br><code class="inline">bool doorOpen = false;</code><br><code class="inline">bool enemyAlive = true;</code></dd></div>
+          <div class="ref-row"><dt>Integer</dt><dd><code class="inline">int</code> stores whole numbers:<br><code class="inline">int health = 100;</code><br><code class="inline">int score = 250;</code></dd></div>
+          <div class="ref-row"><dt>Float</dt><dd><code class="inline">float</code> stores numbers with decimals:<br><code class="inline">float speed = 4.5f;</code><br><code class="inline">float distance = 3.25f;</code><br>In C#, a float literal needs <code class="inline">f</code>.</dd></div>
+          <div class="ref-row"><dt>String</dt><dd><code class="inline">string</code> stores text:<br><code class="inline">string playerName = "Alex";</code><br><code class="inline">string message = "The door is locked.";</code></dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <h3>State Can Change</h3>
+    <p class="body-text">Variables let the game remember what has happened.</p>
+    <p class="body-text guide-example">Before picking up a key:</p>
+    <div class="snippet guide-example"><div class="code-card"><div class="code-scroll"><pre><code>bool hasKey = false;</code></pre></div></div></div>
+    <p class="body-text guide-example">After picking it up:</p>
+    <div class="snippet guide-example"><div class="code-card"><div class="code-scroll"><pre><code>bool hasKey = true;</code></pre></div></div></div>
+    <p class="body-text">Later, the game can check:</p>
+    <div class="snippet guide-example"><div class="code-card"><div class="code-scroll"><pre><code>hasKey == true
+↓
+Branch
+ ↙    ↘
+TRUE  FALSE
+ ↓      ↓
+Open   Locked
+Door   Message</code></pre></div></div></div>
+    <p class="body-text"><code class="inline">==</code> means <strong>compare two values</strong>.</p>
+    <p class="body-text"><code class="inline">=</code> means <strong>set a value</strong>.</p>
+    <p class="body-text">This distinction becomes especially important when we move into C#.</p>
+  </section>
+
+  <section class="section" id="building-interaction">
+    <h2>Building an Interaction</h2>
+    <p class="section-intro">A complete interaction combines these pieces.</p>
+    <h3>Locked Door</h3>
+    <div class="snippet guide-example"><div class="code-card"><div class="code-scroll"><pre><code>EVENT
+Player presses Interact
+↓
+DETECTION
+Raycast: What is the player looking at?
+↓
+CONDITION
+Is it a Door?
+↓
+STATE
+Get Variable: hasKey
+↓
+BRANCH
+Is hasKey true?
+ ↙          ↘
+TRUE        FALSE
+ ↓            ↓
+Open Door    Show "Locked"
+↓
+STATE CHANGE
+doorOpen = true</code></pre></div></div></div>
+    <p class="body-text">This gives us a basic structure that can be reused for many game systems:</p>
+    <p class="body-text"><strong>EVENT → DETECTION → CONDITION → ACTION → STATE CHANGE</strong></p>
+    <p class="body-text">Not every interaction needs every step. A simple trigger might only be:</p>
+    <div class="snippet guide-example"><div class="code-card"><div class="code-scroll"><pre><code>On Trigger Enter → Play Sound</code></pre></div></div></div>
+    <p class="body-text">A more complex interaction adds detection, conditions, and stored state <strong>only when they are needed</strong>.</p>
+  </section>
 
 </div>
 
-<script src="../navigation.js?v=16"></script>
-<script src="../last-updated.js?v=8"></script>
+<script src="../navigation.js?v=19"></script>
+<script src="../last-updated.js?v=9"></script>
 <script src="../cursor-sparkle.js?v=8"></script>
 
 </body>

@@ -130,6 +130,15 @@
     margin: 10px 0 0;
   }
 
+  .section p.no-top-margin {
+    margin-top: 0;
+  }
+
+  .section p.prompt-example {
+    color: var(--text-muted);
+    font-size: 12.5px;
+  }
+
   code.inline {
     font-size: 0.95em;
     color: rgba(255, 255, 255, 0.85);
@@ -347,6 +356,40 @@
     padding: 10px 14px;
   }
 
+  .guide-interactivity-and-agency blockquote {
+    margin: 18px 0;
+    padding: 10px 14px;
+    background: var(--fade-box-background);
+  }
+
+  .guide-interactivity-and-agency blockquote p {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
+
+  .guide-interactivity-and-agency blockquote p + p {
+    margin-top: 8px;
+    color: var(--text-muted);
+  }
+
+  .guide-interactivity-and-agency .guide-example {
+    margin-left: 28px !important;
+  }
+
+  .guide-interactivity-and-agency .section > h3 {
+    margin: 46px 0 18px;
+    color: #fff;
+    font-size: 17px;
+    font-weight: normal;
+    line-height: 1.4;
+  }
+
+  .guide-interactivity-and-agency .section > h2 + h3 {
+    margin-top: 20px;
+  }
+
   /* Numbered sections across the guide system. */
   .guide-page .page {
     counter-reset: guide-section;
@@ -363,7 +406,7 @@
   }
 
   .guide-page .section::before {
-    content: "0" counter(guide-section);
+    content: counter(guide-section, decimal-leading-zero);
     position: absolute;
     left: 0;
     top: 0;
