@@ -165,7 +165,10 @@
     element.style.cssText =
       "--x:" + resource.x + "px;--y:" + resource.y + "px;" +
       "--w:" + resource.width + "px;--h:" + resource.height + "px";
-    if (resource.type === "text" && Number.isFinite(Number(resource.fontSize))) {
+    if (
+      ["text", "list"].includes(resource.type) &&
+      Number.isFinite(Number(resource.fontSize))
+    ) {
       element.style.setProperty(
         "--text-font-size",
         Number(resource.fontSize) + "px"
@@ -1591,11 +1594,11 @@
 
   function resizeSelectedText(direction) {
     const sizes = [9, 11, 13, 15, 18, 22, 28, 36];
-    const resources = selectedResources().filter(
-      resource => resource.type === "text"
+    const resources = selectedResources().filter(resource =>
+      ["text", "list"].includes(resource.type)
     );
     if (!resources.length) {
-      alert("Select a plain text object first.");
+      alert("Select a text or list object first.");
       return;
     }
     resources.forEach(resource => {
@@ -1952,7 +1955,9 @@
       );
       if (cachedResourceRevision < baseResourceRevision) {
         json.resources
-          .filter(resource => /^week04-media-/.test(resource.id))
+          .filter(resource =>
+            /^(?:week04-media-|week05-(?:note|media)-)/.test(resource.id)
+          )
           .forEach(resource => {
             if (data.resources.some(item => item.id === resource.id)) return;
             data.resources.push(JSON.parse(JSON.stringify(resource)));

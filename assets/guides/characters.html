@@ -23,12 +23,215 @@
 
   <header class="masthead">
     <div class="section-heading"><pre class="section-ornament guide-title-ornament" aria-hidden="true"></pre><h1>Characters</h1></div>
+    <p>Turn a 2D character image into a rigged, animated, playable character in Unity</p>
   </header>
+
+  <nav class="page-toc">
+    <a href="#workflow">Workflow</a>
+    <a href="#prepare-image">Prepare the image</a>
+    <a href="#generate-model">Generate the model</a>
+    <a href="#prepare-for-mixamo">Prepare for Mixamo</a>
+    <a href="#rig-and-animate">Rig and animate</a>
+    <a href="#import-unity">Import into Unity</a>
+    <a href="#replace-character">Replace the character</a>
+    <a href="#test-and-fix">Test and fix</a>
+  </nav>
+
+  <!-- ================= WORKFLOW ================= -->
+
+  <section class="section" id="workflow">
+    <h2>Workflow</h2>
+    <p class="section-intro">This workflow uses a single image to generate a 3D model, rigs that model for animation, and places it inside an existing Unity third-person controller.</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>Photoshop image &rarr; Meshy &rarr; MeshLab if needed &rarr; Mixamo &rarr; Unity</code></pre></div></div></div>
+    <p class="body-text">Each tool has a separate job: Photoshop prepares the source image, Meshy estimates a 3D form, MeshLab converts or simplifies the mesh when necessary, Mixamo adds a skeleton and animations, and Unity connects the finished character to the game.</p>
+  </section>
+
+  <!-- ================= PREPARE THE IMAGE ================= -->
+
+  <section class="section" id="prepare-image">
+    <h2>Prepare the image</h2>
+    <p class="section-intro">Begin with one clean, front-facing, full-body image. The generator has to infer everything it cannot see, so a clear silhouette produces a more usable model.</p>
+
+    <h3 class="sub">Create a clear source image</h3>
+    <ol class="steps">
+      <li>Open the image in Photoshop and remove the background.</li>
+      <li>Use an A-pose or T-pose, with the arms held away from the torso and the legs separated.</li>
+      <li>Make sure the hands and feet are visible and that no part of the character is cropped.</li>
+      <li>Export the result as a PNG with a transparent or plain background.</li>
+    </ol>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>Character_Front.png</code></pre></div></div></div>
+  </section>
+
+  <!-- ================= GENERATE MODEL ================= -->
+
+  <section class="section" id="generate-model">
+    <h2>Generate the model</h2>
+    <p class="section-intro"><a href="https://www.meshy.ai/" target="_blank" rel="noopener">Meshy</a> can estimate a 3D character from the prepared image. Because it only receives a front view, the sides and back are interpretations rather than exact reconstructions.</p>
+
+    <h3 class="sub">Image to 3D</h3>
+    <ol class="steps">
+      <li>Open Meshy and choose <strong>Image to 3D</strong>.</li>
+      <li>Upload <code class="inline">Character_Front.png</code>.</li>
+      <li>Enable background removal or image enhancement if the source still needs cleanup.</li>
+      <li>Select an A-pose or T-pose if pose controls are available, then generate the model.</li>
+      <li>Rotate the result and inspect the arms, legs, hands, feet, sides, and back. Generate another version if important body parts are fused, missing, or badly distorted.</li>
+    </ol>
+    <p class="body-text">See the <a href="https://docs.meshy.ai/en/webapp/image-to-3d" target="_blank" rel="noopener">Meshy Image-to-3D guide</a> for the current controls.</p>
+
+    <div class="ref-groups">
+      <div class="ref-group">
+        <h3>Before downloading</h3>
+        <dl>
+          <div class="ref-row"><dt>Plan limits</dt><dd>Credit, model, and download limits can change. Check the <a href="https://help.meshy.ai/en/articles/15696428-what-is-included-on-the-free-plan" target="_blank" rel="noopener">current free-plan documentation</a> before choosing a model version.</dd></div>
+          <div class="ref-row"><dt>License</dt><dd>Check whether the generated model requires attribution and record the license information with your project files.</dd></div>
+          <div class="ref-row"><dt>Geometry</dt><dd>Choose the simplest model that preserves the character. An unnecessarily dense mesh will be slower to edit, animate, and render.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PREPARE FOR MIXAMO ================= -->
+
+  <section class="section" id="prepare-for-mixamo">
+    <h2>Prepare for Mixamo</h2>
+    <p class="section-intro">Mixamo accepts FBX, OBJ, and ZIP files, but not GLB. Download an FBX when Meshy provides one; otherwise convert the model before uploading it.</p>
+
+    <h3 class="sub">Convert a GLB with MeshLab</h3>
+    <ol class="steps">
+      <li>Open the GLB in <a href="https://www.meshlab.net/" target="_blank" rel="noopener">MeshLab</a>.</li>
+      <li>Choose <strong>File &rarr; Export Mesh As</strong>.</li>
+      <li>Export the model as <code class="inline">Character_For_Mixamo.obj</code>.</li>
+      <li>Place the OBJ, its MTL file, and its textures together inside a ZIP archive.</li>
+    </ol>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>Character_For_Mixamo.zip
+├── Character_For_Mixamo.obj
+├── Character_For_Mixamo.mtl
+└── Textures/</code></pre></div></div></div>
+    <p class="body-text">If textures disappear during conversion, you can still rig the untextured geometry and reconnect the original Meshy textures later in Unity. MeshLab can also simplify an overly dense mesh before it is rigged.</p>
+    <p class="body-text">See Adobe's <a href="https://helpx.adobe.com/creative-cloud/help/mixamo-rigging-animation.html" target="_blank" rel="noopener">Mixamo rigging and animation guide</a> for supported upload formats and current requirements.</p>
+  </section>
+
+  <!-- ================= RIG AND ANIMATE ================= -->
+
+  <section class="section" id="rig-and-animate">
+    <h2>Rig and animate</h2>
+    <p class="section-intro">Rigging adds a skeleton to the mesh. Mixamo uses that skeleton to bend the character and apply reusable humanoid animations.</p>
+
+    <h3 class="sub">Create the skeleton in Mixamo</h3>
+    <ol class="steps">
+      <li>Open <a href="https://www.mixamo.com/" target="_blank" rel="noopener">Mixamo</a> and click <strong>Upload Character</strong>.</li>
+      <li>Upload the Meshy FBX or the ZIP created with MeshLab.</li>
+      <li>Place the markers on the chin, wrists, elbows, knees, and groin.</li>
+      <li>Let Mixamo create the skeleton, then test the result with a walking animation.</li>
+      <li>If the knees or elbows bend incorrectly, upload the character again and reposition the markers.</li>
+    </ol>
+
+    <div class="ref-groups">
+      <div class="ref-group">
+        <h3>Download settings</h3>
+        <dl>
+          <div class="ref-row"><dt>Base character</dt><dd><strong>Format:</strong> FBX for Unity<br><strong>Skin:</strong> With Skin<br><strong>Frames Per Second:</strong> 30</dd></div>
+          <div class="ref-row"><dt>Additional animations</dt><dd>Download separate animation files <strong>Without Skin</strong>. Enable <strong>In Place</strong> for walking and running when Unity's controller will move the character through the scene.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= IMPORT INTO UNITY ================= -->
+
+  <section class="section" id="import-unity">
+    <h2>Import into Unity</h2>
+    <p class="section-intro">Keep the character model, materials, textures, and animations together in a clearly named project folder.</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>Assets/Characters/MyCharacter/</code></pre></div></div></div>
+
+    <h3 class="sub">Configure the Humanoid Avatar</h3>
+    <ol class="steps">
+      <li>Drag the FBX and its texture files into the character folder in Unity's Project window.</li>
+      <li>Select the FBX and open the <strong>Rig</strong> tab in the Inspector.</li>
+      <li>Set <strong>Animation Type</strong> to <strong>Humanoid</strong>.</li>
+      <li>Set <strong>Avatar Definition</strong> to <strong>Create From This Model</strong>.</li>
+      <li>Click <strong>Apply</strong>, then <strong>Configure</strong>.</li>
+      <li>Confirm that Unity recognizes the main body bones. Use <strong>Enforce T-Pose</strong> if necessary, then save the Avatar configuration.</li>
+    </ol>
+    <p class="body-text">The Humanoid Avatar lets Unity retarget compatible animations to this character. See the <a href="https://docs.unity3d.com/Manual/ConfiguringtheAvatar.html" target="_blank" rel="noopener">Unity Humanoid Avatar documentation</a> for details.</p>
+  </section>
+
+  <!-- ================= REPLACE CHARACTER ================= -->
+
+  <section class="section" id="replace-character">
+    <h2>Replace the third-person character</h2>
+    <p class="section-intro">Keep the working player root. It already contains the movement, input, collider, camera target, and other gameplay components. Replace only the visible character model beneath it.</p>
+
+    <h3 class="sub">Preserve the working controller</h3>
+    <ol class="steps">
+      <li>Duplicate the working player before making changes.</li>
+      <li>Drag the newly rigged character beneath the duplicated player root.</li>
+      <li>Disable the old visible character instead of deleting the player root.</li>
+    </ol>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>Player_CustomCharacter
+├── CameraTarget
+├── GroundCheck
+├── OldCharacter
+└── Character_Rigged</code></pre></div></div></div>
+
+    <h3 class="sub">Align the model</h3>
+    <ol class="steps">
+      <li>Set the new character's local Position and Rotation to <code class="inline">0, 0, 0</code>, and its local Scale to <code class="inline">1, 1, 1</code>.</li>
+      <li>If the character faces backward, rotate only the visible character model <code class="inline">180</code> degrees on Y.</li>
+      <li>Adjust the model's vertical position until its feet meet the ground.</li>
+      <li>Resize and reposition the Character Controller capsule so it fits the new body.</li>
+    </ol>
+
+    <h3 class="sub">Configure the Animator</h3>
+    <div class="ref-groups">
+      <div class="ref-group">
+        <dl>
+          <div class="ref-row"><dt>Controller</dt><dd>Use the existing Third Person Animator Controller.</dd></div>
+          <div class="ref-row"><dt>Avatar</dt><dd>Assign the Avatar generated from <code class="inline">Character_Rigged</code>.</dd></div>
+          <div class="ref-row"><dt>Apply Root Motion</dt><dd>Leave this off when the player movement script controls the character's position.</dd></div>
+          <div class="ref-row"><dt>Animator reference</dt><dd>If the movement script exposes an Animator field, assign the new character's Animator component to it.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TEST AND FIX ================= -->
+
+  <section class="section" id="test-and-fix">
+    <h2>Test and fix</h2>
+
+    <h3 class="sub">Missing textures</h3>
+    <ol class="steps">
+      <li>If the character appears gray, create a new Unity material.</li>
+      <li>Choose the shader used by the project: Standard for the Built-In Render Pipeline, URP Lit for URP, or HDRP Lit for HDRP.</li>
+      <li>Assign the original Meshy texture images to the material.</li>
+      <li>Apply the material to the character mesh.</li>
+    </ol>
+
+    <h3 class="sub">Play Mode test</h3>
+    <p class="body-text">Enter Play Mode and test idle, walking, running, turning, jumping, landing, camera movement, and collisions. Watch the feet, knees, elbows, and ground contact closely.</p>
+
+    <div class="ref-groups">
+      <div class="ref-group">
+        <h3>Quick checklist</h3>
+        <dl>
+          <div class="ref-row"><dt>1</dt><dd>Export one clean, front-facing PNG.</dd></div>
+          <div class="ref-row"><dt>2</dt><dd>Generate the character in Meshy.</dd></div>
+          <div class="ref-row"><dt>3</dt><dd>Download FBX, or convert GLB to OBJ with MeshLab.</dd></div>
+          <div class="ref-row"><dt>4</dt><dd>Upload the model to Mixamo, rig it, and download FBX for Unity.</dd></div>
+          <div class="ref-row"><dt>5</dt><dd>Import it into Unity and configure it as Humanoid.</dd></div>
+          <div class="ref-row"><dt>6</dt><dd>Keep the existing player controller and replace only the visible model.</dd></div>
+          <div class="ref-row"><dt>7</dt><dd>Assign the Animator Controller and Avatar.</dd></div>
+          <div class="ref-row"><dt>8</dt><dd>Align the model, adjust the collider, and test every movement.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
 
 </div>
 
-<script src="../navigation.js?v=19"></script>
-<script src="../last-updated.js?v=9"></script>
+<script src="../navigation.js?v=20"></script>
+<script src="../last-updated.js?v=10"></script>
 <script src="../cursor-sparkle.js?v=8"></script>
 
 </body>

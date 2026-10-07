@@ -593,12 +593,16 @@
 .canvas-page .week-object .week-heading { width: 100%; margin: 0; }
 .canvas-page .week-object .week-title { min-width: 0; }
 .canvas-page .canvas-object.list-object { padding: 54px 60px; }
-.canvas-page .list-object p { margin: 0 0 32px; font-size: 15px; line-height: 1.7; }
+.canvas-page .list-object p {
+  margin: 0 0 32px;
+  font-size: var(--text-font-size, 15px);
+  line-height: 1.7;
+}
 .canvas-page .list-object ul { margin: 0; padding: 0; list-style: none; }
 .canvas-page .list-object li {
   position: relative;
   padding-left: 44px;
-  font-size: 15px;
+  font-size: var(--text-font-size, 15px);
   line-height: 1.7;
 }
 .canvas-page .list-object li::before {

@@ -37,11 +37,19 @@
       const head = parts.find(resource => resource.type === "week");
       if (!head) return;
 
-      const paragraphs = parts
+      // The scrolling view is the formal syllabus. Freeform text and list
+      // cards added around a week belong to the spatial canvas unless they
+      // are explicitly opted into this view.
+      const listViewParts = parts.filter(resource =>
+        resource.listView === true ||
+        resource.id === `week${String(weekNumber).padStart(2, "0")}-content`
+      );
+
+      const paragraphs = listViewParts
         .filter(resource => resource.type === "text" && resource.text)
         .map(resource => `<div class="syllabus-copy">${resource.text}</div>`);
 
-      const lists = parts.filter(resource => resource.type === "list");
+      const lists = listViewParts.filter(resource => resource.type === "list");
       lists.forEach(resource => {
         if (resource.description) {
           paragraphs.push(
