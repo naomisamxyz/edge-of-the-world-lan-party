@@ -1,5 +1,5 @@
 window.CANVAS_DATA = {
-  "version": 43,
+  "version": 44,
   "lastUpdated": {
     "datetime": "2026-10-14",
     "label": "October 14, 2026",
@@ -368,7 +368,6 @@ window.CANVAS_DATA = {
       "height": 501,
       "description": "",
       "items": [
-        "Play Game(s)",
         "“Password Protected with American Artist on their Dash Cam Video Art” — Pioneer Works (2020)<br>American Artist, “Black Gooey Universe” (2021)",
         "The Interface<br>“Easy to Use and Incredibly Difficult: On the Mythical Border between Interface and Gameplay” — Jesper Juul and Marleigh Norton (2009)<br>“The Interface Theory of Perception” — Donald D. Hoffman, Manish Singh, and Chetan Prakash (2015)<br>“Laws of Media: The New Science” — Marshall McLuhan and Eric McLuhan (1988)",
         "<a href=\"assets/guides/interface.html\">✢ Interface ✢</a><br>UI, Fonts, Sprites"
