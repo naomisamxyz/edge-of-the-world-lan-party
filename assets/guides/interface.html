@@ -23,12 +23,208 @@
 
   <header class="masthead">
     <div class="section-heading"><pre class="section-ornament guide-title-ornament" aria-hidden="true"></pre><h1>Interface</h1></div>
+    <p>Import standalone sprites, place them in a Canvas, and control how UI elements layer on screen</p>
   </header>
+
+  <nav class="page-toc">
+    <a href="#ui-foundations">UI foundations</a>
+    <a href="#responsive-layout">Screen size and anchors</a>
+    <a href="#textmesh-pro">TextMesh Pro fonts</a>
+    <a href="#import-sprites">Import sprites</a>
+    <a href="#display-ui">Display on the UI</a>
+    <a href="#image-types">Image types</a>
+    <a href="#draw-order">Draw order</a>
+    <a href="#change-order-code">Change order with code</a>
+  </nav>
+
+  <!-- ================= UI FOUNDATIONS ================= -->
+
+  <section class="section" id="ui-foundations">
+    <h2>UI foundations</h2>
+    <p class="section-intro">A user interface places information and controls on top of the game world: titles, instructions, buttons, health bars, inventories, dialogue, and menus. Unity UI elements live inside a <strong>Canvas</strong> and use a <strong>Rect Transform</strong> instead of a regular Transform.</p>
+
+    <h3 class="sub">Create a Canvas</h3>
+    <ol class="steps">
+      <li>In the Hierarchy, right-click and choose a component from the <strong>UI</strong> menu, such as <strong>UI &rarr; Image</strong> or <strong>UI &rarr; Button - TextMeshPro</strong>.</li>
+      <li>If the scene does not contain a Canvas, Unity creates one and places the new UI object inside it.</li>
+      <li>Unity also creates an <strong>EventSystem</strong> when needed. It receives mouse, keyboard, touch, and controller events for interactive UI components.</li>
+      <li>Switch the Scene view to <strong>2D</strong> and keep the Game view visible while arranging the interface.</li>
+    </ol>
+
+    <div class="ref-groups">
+      <div class="ref-group">
+        <h3>Common UI components</h3>
+        <dl>
+          <div class="ref-row"><dt>Canvas</dt><dd>The container that defines where and how the interface is rendered.</dd></div>
+          <div class="ref-row"><dt>Rect Transform</dt><dd>Controls a UI element's position, size, anchors, pivot, scale, and rotation relative to its parent.</dd></div>
+          <div class="ref-row"><dt>Image</dt><dd>Displays a sprite. Use it for backgrounds, icons, frames, progress fills, and other graphic elements.</dd></div>
+          <div class="ref-row"><dt>TextMeshPro</dt><dd>Displays sharp, controllable text using a TextMesh Pro font asset.</dd></div>
+          <div class="ref-row"><dt>Button</dt><dd>Responds to a click or submit action and can call one or more functions through its <strong>On Click</strong> event.</dd></div>
+          <div class="ref-row"><dt>Slider</dt><dd>Lets the player choose a value within a range and is also useful as the structure for volume or progress controls.</dd></div>
+          <div class="ref-row"><dt>Scroll View</dt><dd>Places larger content inside a movable viewport for inventories, credits, menus, or long text.</dd></div>
+          <div class="ref-row"><dt>Mask</dt><dd>Hides parts of child elements that extend beyond a defined visible area.</dd></div>
+        </dl>
+      </div>
+    </div>
+    <p class="body-text">See Unity Learn's <a href="https://learn.unity.com/course/user-interface-ui/tutorial/ui-components" target="_blank" rel="noopener">UI Components</a> tutorial for more examples.</p>
+  </section>
+
+  <!-- ================= RESPONSIVE LAYOUT ================= -->
+
+  <section class="section" id="responsive-layout">
+    <h2>Screen size and anchors</h2>
+    <p class="section-intro">A UI that looks correct at one resolution can drift, stretch, or leave the screen at another. Test the layout at multiple aspect ratios and use anchors to describe which part of the parent each element should stay attached to.</p>
+
+    <h3 class="sub">Set up the Canvas Scaler</h3>
+    <ol class="steps">
+      <li>Select the Canvas and find its <strong>Canvas Scaler</strong> component.</li>
+      <li>Set <strong>UI Scale Mode</strong> to <strong>Scale With Screen Size</strong>.</li>
+      <li>Set <strong>Reference Resolution</strong> to the resolution used to design the interface. For class projects, begin with <code class="inline">1920 × 1080</code>.</li>
+      <li>Use <strong>Screen Match Mode: Match Width Or Height</strong>. Start with Match near the middle, then adjust it according to whether preserving the horizontal or vertical layout matters more.</li>
+      <li>Use the Game view resolution menu to test 16:9 and several narrower and wider window shapes.</li>
+    </ol>
+
+    <div class="ref-groups">
+      <div class="ref-group">
+        <h3>Anchors and pivots</h3>
+        <dl>
+          <div class="ref-row"><dt>Anchor</dt><dd>The point or area on the parent that the UI element follows when the parent changes size. A settings button in the top-right corner should be anchored to the top-right, not the center.</dd></div>
+          <div class="ref-row"><dt>Stretch anchors</dt><dd>Attach opposite edges of an element to opposite edges of its parent. Use them when a panel or background should grow and shrink with the available space.</dd></div>
+          <div class="ref-row"><dt>Pivot</dt><dd>The point inside the element used for positioning, scaling, and rotation. A confusing rotation or resize often means the pivot is in the wrong place.</dd></div>
+          <div class="ref-row"><dt>Anchor Presets</dt><dd>Open the square preset control in the Rect Transform. Choose a corner, edge, center, or stretch preset instead of positioning every anchor manually.</dd></div>
+        </dl>
+      </div>
+    </div>
+    <p class="body-text">After setting an anchor, resize the Game view and confirm that the element stays attached to the intended corner, edge, or region. Follow Unity Learn's <a href="https://learn.unity.com/tutorial/manage-screen-size-and-anchors" target="_blank" rel="noopener">Manage screen size and anchors</a> tutorial for a guided exercise.</p>
+  </section>
+
+  <!-- ================= TEXTMESH PRO ================= -->
+
+  <section class="section" id="textmesh-pro">
+    <h2>TextMesh Pro font assets</h2>
+    <p class="section-intro">TextMesh Pro does not use a font file directly. It uses a <strong>Font Asset</strong>, which stores character data and a texture atlas containing the glyphs that Unity renders.</p>
+
+    <h3 class="sub">Create a font asset</h3>
+    <ol class="steps">
+      <li>Create a folder such as <code class="inline">Assets/Fonts/</code> and place the licensed <code class="inline">.ttf</code> or <code class="inline">.otf</code> font file inside it.</li>
+      <li>Open <strong>Window &rarr; TextMeshPro &rarr; Font Asset Creator</strong>.</li>
+      <li>Assign the imported file as the <strong>Source Font File</strong>.</li>
+      <li>Choose the characters the project needs. ASCII is enough for basic English text; include punctuation, accented characters, symbols, or other languages when the project uses them.</li>
+      <li>Use an SDF render mode so the text remains sharp across different sizes.</li>
+      <li>Click <strong>Generate Font Atlas</strong>, inspect the result for missing characters, then click <strong>Save</strong>.</li>
+      <li>Select a TextMeshPro UI object and assign the new asset in its <strong>Font Asset</strong> field.</li>
+    </ol>
+
+    <div class="ref-groups">
+      <div class="ref-group">
+        <h3>Choose an atlas type</h3>
+        <dl>
+          <div class="ref-row"><dt>Static</dt><dd>Best when the set of characters is known, such as menu labels, instructions, subtitles, or fixed dialogue. Only the characters included during generation are available.</dd></div>
+          <div class="ref-row"><dt>Dynamic</dt><dd>Adds missing characters to the atlas at runtime and keeps a reference to the source font. Use it when players can enter text or when the required characters are not known in advance.</dd></div>
+          <div class="ref-row"><dt>Fallback font</dt><dd>A second Font Asset that TextMesh Pro checks when the primary font does not contain a character. Use fallbacks for additional languages or symbols.</dd></div>
+        </dl>
+      </div>
+    </div>
+    <p class="body-text">Check the font's license before including it in a project. Unity Learn's <a href="https://learn.unity.com/tutorial/textmesh-pro-font-asset-creation-1" target="_blank" rel="noopener">TextMesh Pro: Font Asset Creation</a> tutorial explains atlas generation, static and dynamic assets, and fallbacks in more detail.</p>
+  </section>
+
+  <!-- ================= IMPORT SPRITES ================= -->
+
+  <section class="section" id="import-sprites">
+    <h2>Import standalone sprites</h2>
+    <p class="section-intro">A standalone sprite is one complete image used as a single UI element, rather than a sprite sheet or an image divided into reusable slices.</p>
+
+    <h3 class="sub">Core import setup</h3>
+    <ol class="steps">
+      <li>Select the image in the <strong>Project</strong> window.</li>
+      <li>In the Inspector, set <strong>Texture Type</strong> to <strong>Sprite (2D and UI)</strong>.</li>
+      <li>Leave <strong>Sprite Mode</strong> set to <strong>Single</strong>.</li>
+      <li>Click <strong>Apply</strong>.</li>
+    </ol>
+  </section>
+
+  <!-- ================= DISPLAY ON UI ================= -->
+
+  <section class="section" id="display-ui">
+    <h2>Display a sprite on the UI</h2>
+    <p class="section-intro">Sprites that belong to an interface should be displayed with an Image component inside a Canvas.</p>
+    <ol class="steps">
+      <li>In the Hierarchy, right-click and choose <strong>UI &rarr; Image</strong>. Unity creates a Canvas automatically if the scene does not already contain one.</li>
+      <li>Select the new Image object.</li>
+      <li>Drag the imported sprite into the Image component's <strong>Source Image</strong> field.</li>
+      <li>Use the Rect Transform to position and resize the image within the Canvas.</li>
+    </ol>
+    <p class="body-text">Use a UI <strong>Image</strong> for interface elements. A <strong>Sprite Renderer</strong> belongs in the game world and follows a different rendering and sorting system.</p>
+  </section>
+
+  <!-- ================= IMAGE TYPES ================= -->
+
+  <section class="section" id="image-types">
+    <h2>Image types</h2>
+    <p class="section-intro">The Image component's <strong>Image Type</strong> controls how the source sprite fills its Rect Transform.</p>
+
+    <div class="ref-groups">
+      <div class="ref-group">
+        <dl>
+          <div class="ref-row"><dt>Simple</dt><dd>Fits the complete sprite inside the Image object's rectangle. Enable <strong>Preserve Aspect</strong> to prevent stretching, or click <strong>Set Native Size</strong> to match the sprite's original pixel dimensions.</dd></div>
+          <div class="ref-row"><dt>Filled</dt><dd>Reveals only part of the sprite. Use <strong>Fill Method</strong> to choose the direction and <strong>Fill Amount</strong>, from <code class="inline">0</code> to <code class="inline">1</code>, to control how much is visible. This is useful for health, progress, and loading indicators.</dd></div>
+          <div class="ref-row"><dt>Tiled</dt><dd>Repeats a small sprite across the Image object's rectangle. Use it for repeating patterns and interface backgrounds.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DRAW ORDER ================= -->
+
+  <section class="section" id="draw-order">
+    <h2>Draw order</h2>
+    <p class="section-intro">Within the same Canvas, Unity draws UI sibling objects in their Hierarchy order. Objects nearer the bottom are drawn later and therefore appear in front of objects above them.</p>
+
+    <div class="ref-groups">
+      <div class="ref-group">
+        <dl>
+          <div class="ref-row"><dt>Higher in the Hierarchy</dt><dd>Drawn first, so it appears farther back.</dd></div>
+          <div class="ref-row"><dt>Lower in the Hierarchy</dt><dd>Drawn later, so it appears in the foreground or on top.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <h3 class="sub">Arrange the siblings</h3>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>WRONG: icon is hidden        CORRECT: icon is on top
+
+Canvas                       Canvas
+├── Icon                     ├── Background
+└── Background               └── Icon</code></pre></div></div></div>
+    <p class="body-text">Drag objects up or down in the Hierarchy to change their sibling order. For a typical interface panel, place the background first, then place icons, labels, and buttons beneath it.</p>
+
+    <h3 class="sub">Parenting</h3>
+    <p class="body-text">If an Icon is a child of a Background object, the child is drawn after its parent's Image and appears on top of it. Parenting also makes the Icon move with the Background. The same sibling-order rule still applies between multiple children.</p>
+  </section>
+
+  <!-- ================= CHANGE ORDER WITH CODE ================= -->
+
+  <section class="section" id="change-order-code">
+    <h2>Change order with code</h2>
+    <p class="section-intro">A script can change a UI object's sibling position at runtime. This is useful for draggable windows, cards, inventory items, or any object that should move to the front when selected.</p>
+
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>transform.SetAsLastSibling();   // Move to the front
+transform.SetAsFirstSibling();  // Move to the back</code></pre></div></div></div>
+
+    <div class="ref-groups">
+      <div class="ref-group">
+        <dl>
+          <div class="ref-row"><dt>SetAsLastSibling</dt><dd>Moves the GameObject to the bottom of its parent's child list, so it is drawn last and appears in front of its siblings.</dd></div>
+          <div class="ref-row"><dt>SetAsFirstSibling</dt><dd>Moves the GameObject to the top of its parent's child list, so it is drawn first and appears behind its siblings.</dd></div>
+        </dl>
+      </div>
+    </div>
+    <p class="body-text">These methods only reorder objects that share the same parent. Separate Canvases can use their own sorting settings, so Canvas order takes priority when UI elements live on different Canvases.</p>
+  </section>
 
 </div>
 
-<script src="../navigation.js?v=20"></script>
-<script src="../last-updated.js?v=10"></script>
+<script src="../navigation.js?v=21"></script>
+<script src="../last-updated.js?v=11"></script>
 <script src="../cursor-sparkle.js?v=8"></script>
 
 </body>

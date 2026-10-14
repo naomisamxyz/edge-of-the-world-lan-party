@@ -48,6 +48,10 @@
   left: 0;
   top: 0;
   transform-origin: 0 0;
+}
+
+.canvas-viewport.is-camera-moving .canvas-world,
+.canvas-viewport.is-camera-moving .connections {
   will-change: transform;
 }
 

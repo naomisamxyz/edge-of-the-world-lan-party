@@ -21,12 +21,26 @@
   let connectionEditMode = false;
   let zoomMomentumTimer = null;
   let zoomMomentumFrame = null;
+  let cameraSettleTimer = null;
   let zoomVelocity = 0;
   let zoomFocus = { x: innerWidth / 2, y: innerHeight / 2 };
   let saveWarningShown = false;
   const minimumZoom = 0.18;
-  const maximumZoom = 1.6;
+  const maximumZoom = 2.31;
+  const maximumDisplayedZoom = 150;
   const connectionGap = 10;
+
+  function beginCameraMotion() {
+    clearTimeout(cameraSettleTimer);
+    viewport.classList.add("is-camera-moving");
+  }
+
+  function settleCameraMotion(delay = 0) {
+    clearTimeout(cameraSettleTimer);
+    cameraSettleTimer = setTimeout(() => {
+      viewport.classList.remove("is-camera-moving");
+    }, delay);
+  }
 
   function beginThumbnailLoad(image) {
     const source = image.dataset.src;
@@ -359,9 +373,10 @@
     world.style.transformOrigin = "0 0";
     lines.style.transformOrigin = "0 0";
     const displayedZoom = clamp(
-      ((zoom - minimumZoom) / (maximumZoom - minimumZoom)) * 100,
+      ((zoom - minimumZoom) / (maximumZoom - minimumZoom)) *
+        maximumDisplayedZoom,
       0,
-      100
+      maximumDisplayedZoom
     );
     readout.textContent = Math.round(displayedZoom) + "%";
     drawConnections();
@@ -1055,6 +1070,7 @@
     const object = event.target.closest(".canvas-object");
     if ((edit && object) || event.target.closest("a, button")) return;
     event.preventDefault();
+    beginCameraMotion();
 
     if (event.pointerType === "touch") {
       touchPoints.set(event.pointerId, { x: event.clientX, y: event.clientY });
@@ -1157,6 +1173,7 @@
     gesture = null;
     pinch = null;
     viewport.classList.remove("is-panning");
+    settleCameraMotion();
     saveLocal();
   });
 
@@ -1166,6 +1183,7 @@
     if (touchPoints.size === 0) {
       gesture = null;
       viewport.classList.remove("is-panning");
+      settleCameraMotion();
     }
   });
 
@@ -1192,7 +1210,10 @@
     zoomMomentumTimer = null;
     zoomMomentumFrame = null;
     zoomVelocity = 0;
-    if (settle) applyCamera();
+    if (settle) {
+      applyCamera();
+      settleCameraMotion();
+    }
   }
 
   function startZoomMomentum() {
@@ -1216,11 +1237,13 @@
     "wheel",
     event => {
       event.preventDefault();
+      beginCameraMotion();
       if (!event.ctrlKey) {
         stopZoomMomentum(false);
         camera.x -= event.deltaX;
         camera.y -= event.deltaY;
         applyCamera();
+        settleCameraMotion(120);
         return;
       }
       clearTimeout(zoomMomentumTimer);

@@ -26,7 +26,6 @@
   ];
 
   var disabledGuides = new Set([
-    "interface.html",
     "scenes-menus.html",
     "dont-destroy-on-load.html",
     "video.html",
