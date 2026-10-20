@@ -4,24 +4,113 @@
 <meta charset="UTF-8">
 <title>Don’t Destroy on Load</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="guide.css?v=50">
-<link rel="stylesheet" href="../site-shell.css?v=10">
-<link rel="stylesheet" href="../navigation.css?v=6">
+<link rel="stylesheet" href="guide.css?v=50" />
+<link rel="stylesheet" href="../site-shell.css?v=10" />
+<link rel="stylesheet" href="../navigation.css?v=6" />
 </head>
-<body class="guide-page">
+<body class="guide-page guide-dont-destroy-on-load">
+
 <header class="site-header" data-site-header></header>
-<main class="page">
+
+<div class="page">
+
   <span class="stamp" data-last-updated></span>
+
   <nav class="guide-nav" data-site-navigation></nav>
   <br>
     <br>
 
   <header class="masthead">
     <div class="section-heading"><pre class="section-ornament guide-title-ornament" aria-hidden="true"></pre><h1>Don’t Destroy on Load</h1></div>
+    <p>Three standard ways to keep data alive across a scene change in Unity</p>
   </header>
-</main>
+
+  <nav class="page-toc">
+    <a href="#scriptable-objects">ScriptableObjects</a>
+    <a href="#dont-destroy-on-load">Don’t Destroy on Load</a>
+    <a href="#player-prefs">PlayerPrefs</a>
+    <a href="#comparison">Comparison</a>
+  </nav>
+
+  <!-- ================= SCRIPTABLE OBJECTS ================= -->
+
+  <section class="section" id="scriptable-objects">
+    <h2>ScriptableObjects</h2>
+    <p class="section-intro">To track the state of objects or values like health across scenes in Unity, you must prevent the data from being destroyed when a new scene loads. Here are three standard ways to handle persistent state tracking, starting with the recommended one for shared data.</p>
+    <p class="body-text">ScriptableObjects exist independently of any specific scene. You can save your health or inventory data inside a ScriptableObject asset, and any script in any scene can read or write to it.</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>using UnityEngine;
+
+[CreateAssetMenu(fileName = "PlayerStats", menuName = "Stats/PlayerStats")]
+public class PlayerStats : ScriptableObject
+{
+    public int health;
+    public int maxHealth;
+}</code></pre></div></div></div>
+    <p class="body-text">How to use: create the asset in your project files (<code class="inline">Assets &rarr; Create &rarr; Stats &rarr; PlayerStats</code>), then drag it into a slot on your scene scripts &mdash; a UI manager or player controller &mdash; to read and modify the shared data.</p>
+  </section>
+
+  <!-- ================= DONT DESTROY ON LOAD ================= -->
+
+  <section class="section" id="dont-destroy-on-load">
+    <h2>Don’t Destroy on Load</h2>
+    <p class="section-intro">If you need an entire GameObject &mdash; a GameManager or AudioManager &mdash; to survive scene transitions, call <code class="inline">Object.DontDestroyOnLoad</code>.</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>using UnityEngine;
+
+public class GameManager : MonoBehaviour
+{
+    public static GameManager Instance { get; private set; }
+    public int playerHealth = 100;
+
+    private void Awake()
+    {
+        // Enforce a Singleton pattern so duplicates aren't created when reloading scenes
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+}</code></pre></div></div></div>
+    <p class="body-text">How to use: access the health from any scene with <code class="inline">GameManager.Instance.playerHealth</code>.</p>
+  </section>
+
+  <!-- ================= PLAYER PREFS ================= -->
+
+  <section class="section" id="player-prefs">
+    <h2>PlayerPrefs</h2>
+    <p class="section-intro">If you want the health value to persist not just across scenes, but also when the player closes and restarts the game, use <code class="inline">PlayerPrefs</code>.</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>// Saving the health value
+PlayerPrefs.SetInt("PlayerHealth", 80);
+PlayerPrefs.Save();
+
+// Loading the health value (defaults to 100 if the key doesn't exist yet)
+int currentHealth = PlayerPrefs.GetInt("PlayerHealth", 100);</code></pre></div></div></div>
+  </section>
+
+  <!-- ================= COMPARISON ================= -->
+
+  <section class="section" id="comparison">
+    <h2>Comparison</h2>
+    <div class="ref-groups">
+      <div class="ref-group">
+        <h3>Direct comparison</h3>
+        <dl>
+          <div class="ref-row"><dt>ScriptableObjects</dt><dd>best for shared gameplay data, stats, and configurations. Does not persist after the game closes &mdash; resets on restart. Low setup complexity.</dd></div>
+          <div class="ref-row"><dt>Don’t Destroy on Load</dt><dd>best for managers, audio players, and network controllers. Does not persist after the game closes &mdash; resets on restart. Medium setup complexity &mdash; requires singleton logic.</dd></div>
+          <div class="ref-row"><dt>PlayerPrefs</dt><dd>best for high scores, settings, and basic save states. Persists after the game closes. Low setup complexity.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+</div>
+
 <script src="../navigation.js?v=21"></script>
-<script src="../last-updated.js?v=11"></script>
+<script src="../last-updated.js?v=12"></script>
 <script src="../cursor-sparkle.js?v=8"></script>
+
 </body>
 </html>
