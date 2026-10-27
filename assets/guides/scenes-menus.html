@@ -4,24 +4,526 @@
 <meta charset="UTF-8">
 <title>Scenes, Menus</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="guide.css?v=50">
-<link rel="stylesheet" href="../site-shell.css?v=10">
-<link rel="stylesheet" href="../navigation.css?v=6">
+<link rel="stylesheet" href="guide.css?v=50" />
+<link rel="stylesheet" href="../site-shell.css?v=10" />
+<link rel="stylesheet" href="../navigation.css?v=6" />
 </head>
-<body class="guide-page">
+<body class="guide-page guide-scenes-menus">
+
 <header class="site-header" data-site-header></header>
-<main class="page">
+
+<div class="page">
+
   <span class="stamp" data-last-updated></span>
+
   <nav class="guide-nav" data-site-navigation></nav>
   <br>
     <br>
 
   <header class="masthead">
     <div class="section-heading"><pre class="section-ornament guide-title-ornament" aria-hidden="true"></pre><h1>Scenes, Menus</h1></div>
+    <p>Scenes and Menus in Unity 2022</p>
   </header>
-</main>
-<script src="../navigation.js?v=21"></script>
-<script src="../last-updated.js?v=12"></script>
+
+  <nav class="page-toc">
+    <a href="#what-is-a-scene">What is a scene?</a>
+    <a href="#what-is-a-menu">What is a menu?</a>
+    <a href="#together">Scenes and menus together</a>
+    <a href="#input-setup">Input System setup</a>
+    <a href="#tutorial">Tutorial</a>
+    <a href="#pause-menu">Pause menu</a>
+    <a href="#scenes-can-do">What scenes can do</a>
+    <a href="#menus-can-do">What menus can do</a>
+    <a href="#common-problems">Common problems</a>
+    <a href="#best-practices">Best practices</a>
+  </nav>
+
+  <section class="section" id="what-is-a-scene">
+    <h2>What is a scene?</h2>
+    <p class="section-intro">A Scene is a container for one part of a Unity project. It holds the GameObjects, cameras, lights, interfaces and other content needed for that part of the game.</p>
+    <p class="body-text">Different scenes might contain:</p>
+    <ul class="steps">
+      <li>A main menu</li>
+      <li>A game level</li>
+      <li>A building interior</li>
+      <li>A character-selection screen</li>
+      <li>A game-over screen</li>
+      <li>A credits screen</li>
+    </ul>
+    <p class="body-text">Loading a scene normally closes the current scene and opens another one.</p>
+    <p class="body-text">Scenes help keep a project organized. Instead of placing the entire game inside one large scene, different locations and activities can exist in separate files.</p>
+  </section>
+
+  <section class="section" id="what-is-a-menu">
+    <h2>What is a menu?</h2>
+    <p class="section-intro">A menu is an interface that allows the player to make choices.</p>
+    <p class="body-text">A menu can include:</p>
+    <ul class="steps">
+      <li>Start Game</li>
+      <li>Continue</li>
+      <li>Restart</li>
+      <li>Level selection</li>
+      <li>Inventory</li>
+      <li>Settings</li>
+      <li>Accessibility options</li>
+      <li>Pause and resume</li>
+      <li>Return to the main menu</li>
+      <li>Quit the game</li>
+    </ul>
+    <p class="body-text">Menus are usually created with a Canvas, Buttons and TextMeshPro text.</p>
+    <p class="body-text">A main menu is often placed in its own scene. A pause menu, inventory or settings menu can be a Canvas panel inside the gameplay scene.</p>
+  </section>
+
+  <section class="section" id="together">
+    <h2>How scenes and menus work together</h2>
+    <p class="section-intro">A scene holds the content. A menu gives the player a way to navigate or interact with that content.</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>MainMenu Scene
+      │
+      │ Start Game Button
+      ▼
+Game Scene
+      │
+      │ Return to Menu Button
+      ▼
+MainMenu Scene</code></pre></div></div></div>
+  </section>
+
+  <section class="section" id="input-setup">
+    <h2>Input System setup</h2>
+    <p class="section-intro">This project uses Unity’s new Input System, not the old Input Manager.</p>
+
+    <h3 class="sub">Install the Input System</h3>
+    <ol class="steps">
+      <li>Open <code class="inline">Window → Package Manager</code>.</li>
+      <li>Select Unity Registry.</li>
+      <li>Find Input System.</li>
+      <li>Select Install.</li>
+    </ol>
+
+    <h3 class="sub">Enable the Input System</h3>
+    <ol class="steps">
+      <li>Open <code class="inline">Edit → Project Settings</code>.</li>
+      <li>Select Player.</li>
+      <li>Find Active Input Handling.</li>
+      <li>Select <code class="inline">Input System Package (New)</code>.</li>
+    </ol>
+    <p class="body-text">Unity may ask to restart the Editor.</p>
+
+    <h3 class="sub">Configure UI input</h3>
+    <p class="body-text">Buttons require an EventSystem.</p>
+    <p class="body-text">When Unity creates a Canvas and Button, it normally creates an EventSystem automatically.</p>
+    <ol class="steps">
+      <li>Select <code class="inline">EventSystem</code> in the Hierarchy.</li>
+      <li>Find the old Standalone Input Module.</li>
+      <li>Select Replace with InputSystemUIInputModule.</li>
+    </ol>
+    <p class="body-text">If that option does not appear:</p>
+    <ol class="steps">
+      <li>Remove the Standalone Input Module.</li>
+      <li>Select Add Component.</li>
+      <li>Add Input System UI Input Module.</li>
+    </ol>
+    <p class="body-text">The scene should contain:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>EventSystem
+└── Input System UI Input Module</code></pre></div></div></div>
+    <p class="body-text">Do not use the old Standalone Input Module.</p>
+  </section>
+
+  <section class="section" id="tutorial">
+    <h2>Tutorial: move between a menu and a game</h2>
+    <p class="section-intro">This tutorial creates:</p>
+    <ul class="steps">
+      <li>A <code class="inline">MainMenu</code> scene</li>
+      <li>A <code class="inline">Game</code> scene</li>
+      <li>A button that starts the game</li>
+      <li>A button that returns to the menu</li>
+    </ul>
+    <p class="body-text">Choose either C# or Visual Scripting. Do not use both on the same button.</p>
+
+    <h3 class="sub">Create the main menu scene</h3>
+    <ol class="steps">
+      <li>Select <code class="inline">File → New Scene</code>.</li>
+      <li>Choose a basic scene.</li>
+      <li>Save it as <code class="inline">MainMenu</code>.</li>
+      <li>Select <code class="inline">GameObject → UI → Canvas</code>.</li>
+      <li>Add Text - TextMeshPro.</li>
+      <li>Change the text to the name of the game.</li>
+      <li>Add Button - TextMeshPro.</li>
+      <li>Change its text to <code class="inline">Start Game</code>.</li>
+    </ol>
+    <p class="body-text">If Unity asks, select <code class="inline">Import TMP Essentials</code>.</p>
+    <p class="body-text">Check that the scene’s EventSystem uses Input System UI Input Module.</p>
+
+    <h3 class="sub">Create the game scene</h3>
+    <ol class="steps">
+      <li>Select <code class="inline">File → New Scene</code>.</li>
+      <li>Save it as <code class="inline">Game</code>.</li>
+      <li>Add a simple object, environment or player.</li>
+      <li>Add a Canvas.</li>
+      <li>Add a TextMeshPro Button.</li>
+      <li>Change its text to <code class="inline">Return to Menu</code>.</li>
+      <li>Check that the EventSystem uses Input System UI Input Module.</li>
+    </ol>
+
+    <h3 class="sub">Add the scenes to Build Settings</h3>
+    <p class="body-text">Unity 2022 uses Build Settings.</p>
+    <ol class="steps">
+      <li>Open <code class="inline">MainMenu</code>.</li>
+      <li>Select <code class="inline">File → Build Settings</code>.</li>
+      <li>Select Add Open Scenes.</li>
+      <li>Open <code class="inline">Game</code>.</li>
+      <li>Return to <code class="inline">File → Build Settings</code>.</li>
+      <li>Select Add Open Scenes again.</li>
+    </ol>
+    <p class="body-text">The Scenes In Build list should contain:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>0  MainMenu
+1  Game</code></pre></div></div></div>
+    <p class="body-text">Make sure both scenes have checkmarks.</p>
+    <p class="body-text">Scene <code class="inline">0</code> is normally the first scene Unity opens in a finished build.</p>
+
+    <h3 class="sub">Option A: C#</h3>
+    <p class="body-text"><strong>Create the navigation script</strong></p>
+    <p class="body-text">Create a C# script named <code class="inline">MenuNavigation</code>:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class MenuNavigation : MonoBehaviour
+{
+    public void StartGame()
+    {
+        // Restore normal game time in case the game was previously paused.
+        Time.timeScale = 1f;
+
+        // Close the current scene and load the Game scene.
+        SceneManager.LoadScene("Game");
+    }
+
+    public void ReturnToMenu()
+    {
+        // Restore normal time before changing scenes.
+        Time.timeScale = 1f;
+
+        // Close the current scene and load the MainMenu scene.
+        SceneManager.LoadScene("MainMenu");
+    }
+}</code></pre></div></div></div>
+    <p class="body-text">The names inside quotation marks must match the scene filenames.</p>
+    <p class="body-text"><strong>Connect the Start button</strong></p>
+    <p class="body-text">Open <code class="inline">MainMenu</code>:</p>
+    <ol class="steps">
+      <li>Create an empty GameObject.</li>
+      <li>Name it <code class="inline">MenuNavigation</code>.</li>
+      <li>Add the <code class="inline">MenuNavigation</code> script.</li>
+      <li>Select the <code class="inline">Start Game</code> button.</li>
+      <li>Find On Click ().</li>
+      <li>Press <code class="inline">+</code>.</li>
+      <li>Drag the <code class="inline">MenuNavigation</code> GameObject into the field.</li>
+      <li>Select <code class="inline">MenuNavigation → StartGame()</code>.</li>
+    </ol>
+    <p class="body-text"><strong>Connect the Return button</strong></p>
+    <p class="body-text">Open <code class="inline">Game</code>:</p>
+    <ol class="steps">
+      <li>Create an empty GameObject.</li>
+      <li>Name it <code class="inline">MenuNavigation</code>.</li>
+      <li>Add the same script.</li>
+      <li>Select the <code class="inline">Return to Menu</code> button.</li>
+      <li>Press <code class="inline">+</code> under On Click ().</li>
+      <li>Drag <code class="inline">MenuNavigation</code> into the field.</li>
+      <li>Select <code class="inline">MenuNavigation → ReturnToMenu()</code>.</li>
+    </ol>
+    <p class="body-text">Enter Play Mode from <code class="inline">MainMenu</code> and test both buttons.</p>
+
+    <h3 class="sub">Option B: Visual Scripting</h3>
+    <p class="body-text">If Visual Scripting is unavailable:</p>
+    <ol class="steps">
+      <li>Open <code class="inline">Window → Package Manager</code>.</li>
+      <li>Select Unity Registry.</li>
+      <li>Find Visual Scripting.</li>
+      <li>Install or enable it.</li>
+    </ol>
+    <p class="body-text"><strong>Start Game button</strong></p>
+    <p class="body-text">Open <code class="inline">MainMenu</code>:</p>
+    <ol class="steps">
+      <li>Select the <code class="inline">Start Game</code> button.</li>
+      <li>Add a Script Machine.</li>
+      <li>Create a graph named <code class="inline">StartGameGraph</code>.</li>
+      <li>Add these nodes:
+        <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>On Button Click
+      │
+      ▼
+Set Time Scale: 1
+      │
+      ▼
+Load Scene
+Scene Name: Game
+Mode: Single</code></pre></div></div></div>
+      </li>
+    </ol>
+    <p class="body-text">If <code class="inline">On Button Click</code> requires a target, connect <code class="inline">Self</code>.</p>
+    <p class="body-text"><strong>Return to Menu button</strong></p>
+    <p class="body-text">Open <code class="inline">Game</code>:</p>
+    <ol class="steps">
+      <li>Select the <code class="inline">Return to Menu</code> button.</li>
+      <li>Add a Script Machine.</li>
+      <li>Create a graph named <code class="inline">ReturnToMenuGraph</code>.</li>
+      <li>Add these nodes:
+        <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>On Button Click
+      │
+      ▼
+Set Time Scale: 1
+      │
+      ▼
+Load Scene
+Scene Name: MainMenu
+Mode: Single</code></pre></div></div></div>
+      </li>
+    </ol>
+    <p class="body-text">Depending on the Visual Scripting version, the loading node may appear as <code class="inline">Load Scene</code> or <code class="inline">Scene Manager: Load Scene</code>.</p>
+    <p class="body-text">Use either the C# version or the Visual Scripting version—not both.</p>
+  </section>
+
+  <section class="section" id="pause-menu">
+    <h2>Pause menu</h2>
+    <p class="section-intro">The pause menu should use an Input Action rather than the old <code class="inline">Input.GetKeyDown</code> system.</p>
+
+    <h3 class="sub">Create the Input Actions asset</h3>
+    <ol class="steps">
+      <li>In the Project window, right-click.</li>
+      <li>Select <code class="inline">Create → Input Actions</code>.</li>
+      <li>Name the asset <code class="inline">MenuControls</code>.</li>
+      <li>Double-click it to open the Input Actions editor.</li>
+      <li>Create an Action Map named <code class="inline">UI</code>.</li>
+      <li>Create an Action named <code class="inline">Pause</code>.</li>
+      <li>Set its Action Type to <code class="inline">Button</code>.</li>
+      <li>Add a binding.</li>
+      <li>Set the binding path to <code class="inline">Keyboard → Escape</code>.</li>
+      <li>Optional: add another binding for a controller, <code class="inline">Gamepad → Start</code>.</li>
+      <li>Select Save Asset.</li>
+    </ol>
+    <p class="body-text">The same <code class="inline">Pause</code> action can now respond to either Escape or a controller’s Start button.</p>
+
+    <h3 class="sub">Create the pause panel</h3>
+    <p class="body-text">A pause menu normally remains inside the <code class="inline">Game</code> scene.</p>
+    <ol class="steps">
+      <li>Add a Panel to the gameplay Canvas.</li>
+      <li>Name it <code class="inline">PauseMenu</code>.</li>
+      <li>Add a title and a <code class="inline">Resume</code> button.</li>
+      <li>Disable <code class="inline">PauseMenu</code> in the Inspector.</li>
+    </ol>
+    <p class="body-text">The panel begins hidden.</p>
+
+    <h3 class="sub">Option A: C#</h3>
+    <p class="body-text">Create a script named <code class="inline">PauseMenuController</code>:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class PauseMenuController : MonoBehaviour
+{
+    // Drag the Pause action from MenuControls into this field.
+    public InputActionReference pauseAction;
+
+    // Drag the PauseMenu panel into this field.
+    public GameObject pauseMenuPanel;
+
+    void OnEnable()
+    {
+        // Begin listening for the Pause action.
+        pauseAction.action.Enable();
+    }
+
+    void OnDisable()
+    {
+        // Stop listening when this component is disabled.
+        pauseAction.action.Disable();
+    }
+
+    void Update()
+    {
+        // Check whether the Pause action was pressed this frame.
+        if (pauseAction.action.WasPressedThisFrame())
+        {
+            TogglePause();
+        }
+    }
+
+    public void TogglePause()
+    {
+        // Reverse the panel's current visibility.
+        bool isPaused = !pauseMenuPanel.activeSelf;
+
+        // Show or hide the pause menu.
+        pauseMenuPanel.SetActive(isPaused);
+
+        // Stop time when paused and restore it when resumed.
+        Time.timeScale = isPaused ? 0f : 1f;
+    }
+
+    public void ResumeGame()
+    {
+        // Hide the pause menu.
+        pauseMenuPanel.SetActive(false);
+
+        // Resume normal game time.
+        Time.timeScale = 1f;
+    }
+}</code></pre></div></div></div>
+    <p class="body-text"><strong>Connect the script</strong></p>
+    <ol class="steps">
+      <li>Create an empty GameObject.</li>
+      <li>Name it <code class="inline">PauseController</code>.</li>
+      <li>Add the <code class="inline">PauseMenuController</code> script.</li>
+      <li>Drag the <code class="inline">PauseMenu</code> panel into <code class="inline">Pause Menu Panel</code>.</li>
+      <li>Drag the <code class="inline">Pause</code> action from <code class="inline">MenuControls</code> into <code class="inline">Pause Action</code>.</li>
+      <li>Connect the Resume button to <code class="inline">PauseMenuController → ResumeGame()</code>.</li>
+    </ol>
+
+    <h3 class="sub">Option B: Visual Scripting</h3>
+    <p class="body-text"><strong>Prepare Visual Scripting for the Input System</strong></p>
+    <p class="body-text">After installing the Input System:</p>
+    <ol class="steps">
+      <li>Open <code class="inline">Edit → Project Settings</code>.</li>
+      <li>Select Visual Scripting.</li>
+      <li>Select Regenerate Nodes.</li>
+    </ol>
+    <p class="body-text">This makes Input System nodes available in Visual Scripting.</p>
+    <p class="body-text">Also check that the project has an Input System settings asset: in <code class="inline">Edit → Project Settings → Input System Package</code>, select Create Settings Asset if the project does not have one yet.</p>
+    <p class="body-text"><strong>Create the pause graph</strong></p>
+    <p class="body-text">Visual Scripting reads input actions from a Player Input component. Add the Player Input component before you create the graph.</p>
+    <ol class="steps">
+      <li>Create an empty GameObject named <code class="inline">PauseController</code>.</li>
+      <li>Add a Player Input component.</li>
+      <li>Drag <code class="inline">MenuControls</code> into its Actions field and set Default Map to <code class="inline">UI</code>.</li>
+      <li>Add a Script Machine.</li>
+      <li>Create a new graph.</li>
+      <li>Add an On Input System Event Button node.</li>
+      <li>Select the <code class="inline">Pause</code> action in its Input Action list.</li>
+      <li>Set its Input Action Change Type to On Pressed.</li>
+      <li>Connect it to the pause logic:
+        <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>On Input System Event Button: Pause
+      │
+      ▼
+Get Active: PauseMenu
+      │
+      ▼
+Not
+      │
+      ▼
+Set Active: PauseMenu</code></pre></div></div></div>
+      </li>
+    </ol>
+    <p class="body-text">Also use the result of <code class="inline">Not</code> to choose the time scale:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>PauseMenu Active = True  ───▶ Set Time Scale: 0
+PauseMenu Active = False ───▶ Set Time Scale: 1</code></pre></div></div></div>
+    <p class="body-text">The Resume button can use:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>On Button Click
+      │
+      ├──▶ Set Active: PauseMenu = False
+      │
+      └──▶ Set Time Scale = 1</code></pre></div></div></div>
+    <p class="body-text">Use either the C# pause system or the Visual Scripting pause system—not both.</p>
+  </section>
+
+  <section class="section" id="scenes-can-do">
+    <h2>What scenes can do</h2>
+    <ul class="steps">
+      <li>Separate levels and locations</li>
+      <li>Organize menus and gameplay</li>
+      <li>Load new parts of the game</li>
+      <li>Restart a level</li>
+      <li>Separate lighting and environments</li>
+      <li>Create title, game-over and credits screens</li>
+      <li>Load additional content alongside the current scene</li>
+    </ul>
+    <p class="body-text"><strong>Single loading</strong></p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>LoadSceneMode.Single</code></pre></div></div></div>
+    <p class="body-text">Closes the current scene and loads the new one.</p>
+    <p class="body-text"><strong>Additive loading</strong></p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>LoadSceneMode.Additive</code></pre></div></div></div>
+    <p class="body-text">Loads another scene without closing the current scene.</p>
+    <p class="body-text">Use <code class="inline">Single</code> for the beginner menu tutorial.</p>
+  </section>
+
+  <section class="section" id="menus-can-do">
+    <h2>What menus can do</h2>
+    <ul class="steps">
+      <li>Move between scenes</li>
+      <li>Pause and resume gameplay</li>
+      <li>Display inventory or state</li>
+      <li>Change audio and graphics settings</li>
+      <li>Select levels or characters</li>
+      <li>Restart the game</li>
+      <li>Communicate instructions</li>
+      <li>Confirm important choices</li>
+      <li>Provide accessibility controls</li>
+    </ul>
+  </section>
+
+  <section class="section" id="common-problems">
+    <h2>Common problems</h2>
+
+    <h3 class="sub">The button does nothing</h3>
+    <p class="body-text">Check that:</p>
+    <ul class="steps">
+      <li>An EventSystem exists.</li>
+      <li>The EventSystem uses Input System UI Input Module.</li>
+      <li>The old Standalone Input Module was removed.</li>
+      <li>The Button is inside a Canvas.</li>
+      <li>The Button’s Interactable option is enabled.</li>
+      <li>The Button’s On Click () event is connected.</li>
+      <li>The Script Machine contains the correct graph.</li>
+    </ul>
+
+    <h3 class="sub">Unity cannot load the scene</h3>
+    <p class="body-text">Check that:</p>
+    <ul class="steps">
+      <li>The scene was added to <code class="inline">File → Build Settings</code>.</li>
+      <li>The scene has a checkmark in Scenes In Build.</li>
+      <li>The scene name matches the script or graph.</li>
+      <li>The name does not include <code class="inline">.unity</code>.</li>
+    </ul>
+    <p class="body-text">Correct:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>SceneManager.LoadScene("Game");</code></pre></div></div></div>
+    <p class="body-text">Incorrect:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>SceneManager.LoadScene("Game.unity");</code></pre></div></div></div>
+
+    <h3 class="sub">Input System nodes are missing</h3>
+    <ol class="steps">
+      <li>Confirm that the Input System package is installed.</li>
+      <li>Set Active Input Handling to Input System Package (New).</li>
+      <li>Open <code class="inline">Project Settings → Visual Scripting</code>.</li>
+      <li>Select Regenerate Nodes.</li>
+    </ol>
+    <p class="body-text">If the <code class="inline">Pause</code> action does not appear in the node’s Input Action list, check that the same GameObject has a Player Input component with <code class="inline">MenuControls</code> assigned.</p>
+
+    <h3 class="sub">The game remains paused</h3>
+    <p class="body-text">Before loading or restarting gameplay, restore:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>// Restore normal time.
+Time.timeScale = 1f;</code></pre></div></div></div>
+  </section>
+
+  <section class="section" id="best-practices">
+    <h2>Best practices</h2>
+    <ul class="steps">
+      <li>Give scenes short, clear names.</li>
+      <li>Add every loadable scene to Build Settings.</li>
+      <li>Keep <code class="inline">MainMenu</code> first in the Scenes In Build list.</li>
+      <li>Use Input System UI Input Module on every EventSystem.</li>
+      <li>Use Input Actions instead of hard-coding keyboard checks.</li>
+      <li>Add keyboard and controller bindings to the same action.</li>
+      <li>Use a separate scene for the main menu.</li>
+      <li>Use Canvas panels for pause, settings and inventory menus.</li>
+      <li>Test every button in Play Mode.</li>
+      <li>Use either C# or Visual Scripting for an action—not both.</li>
+      <li>Remember that <code class="inline">Single</code> scene loading destroys the previous scene’s GameObjects.</li>
+      <li>Use state tracking, <code class="inline">DontDestroyOnLoad</code> or a save system when information must continue between scenes.</li>
+    </ul>
+  </section>
+
+</div>
+
+<script src="../navigation.js?v=23"></script>
+<script src="../last-updated.js?v=13"></script>
 <script src="../cursor-sparkle.js?v=8"></script>
+
 </body>
 </html>

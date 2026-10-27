@@ -1,8 +1,8 @@
 window.CANVAS_DATA = {
-  "version": 48,
+  "version": 57,
   "lastUpdated": {
-    "datetime": "2026-10-20",
-    "label": "October 20, 2026",
+    "datetime": "2026-10-27",
+    "label": "October 27, 2026",
     "by": "Naomi Sam"
   },
   "home": {
@@ -133,7 +133,7 @@ window.CANVAS_DATA = {
       "url": "https://queerecology.org/H-O-R-I-Z-O-N",
       "meta": "Institute of Queer Ecology (2021)",
       "alt": "H.O.R.I.Z.O.N.",
-      "image": "https://iad.microlink.io/hLiCQ9KDozt8ngqW41PQClnT-O2QQqF6MakQlzkTsrQYQTK06X4Zg5cXI9_rClFBabuO5cpN77CreRzb4WzA0w.png",
+      "image": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22420%22%20height%3D%22310%22%20viewBox%3D%220%200%20420%20310%22%3E%3Crect%20width%3D%22420%22%20height%3D%22310%22%20fill%3D%22%23080808%22%2F%3E%3Ctext%20x%3D%2222%22%20y%3D%22148%22%20fill%3D%22%23f2f2f2%22%20font-family%3D%22monospace%22%20font-size%3D%2224%22%3Equeerecology.org%3C%2Ftext%3E%3Ctext%20x%3D%2222%22%20y%3D%22181%22%20fill%3D%22%23777%22%20font-family%3D%22monospace%22%20font-size%3D%2215%22%3Elink%20preview%3C%2Ftext%3E%3C%2Fsvg%3E",
       "previewHeight": 112,
       "heightMode": "manual"
     },
@@ -150,7 +150,7 @@ window.CANVAS_DATA = {
       "url": "https://learn.unity.com/tutorial/3d-game-kit-walkthrough",
       "meta": "Unity Learn",
       "alt": "3D Game Kit Walkthrough",
-      "image": "https://iad.microlink.io/gw9TxuFz-Vm0gHfOykegVjwDfFJXKwwY9vwl3pdzieiE-lbRADXE-MtzuHL0_SxvBYP1RQOSWud0Fw60ZGttNg.png",
+      "image": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22420%22%20height%3D%22310%22%20viewBox%3D%220%200%20420%20310%22%3E%3Crect%20width%3D%22420%22%20height%3D%22310%22%20fill%3D%22%23080808%22%2F%3E%3Ctext%20x%3D%2222%22%20y%3D%22148%22%20fill%3D%22%23f2f2f2%22%20font-family%3D%22monospace%22%20font-size%3D%2224%22%3Elearn.unity.com%3C%2Ftext%3E%3Ctext%20x%3D%2222%22%20y%3D%22181%22%20fill%3D%22%23777%22%20font-family%3D%22monospace%22%20font-size%3D%2215%22%3Elink%20preview%3C%2Ftext%3E%3C%2Fsvg%3E",
       "previewHeight": 112,
       "heightMode": "manual"
     },
@@ -203,7 +203,7 @@ window.CANVAS_DATA = {
       "url": "https://www.saraludy.com/swimmers-canyon-2022",
       "meta": "Sara Ludy (2022)",
       "alt": "Swimmer’s Canyon",
-      "image": "https://iad.microlink.io/9piNotLeo2oWtnXU4umZjYwe0r14ECQR5DZMDLty5QGtoRDEH4x1xgxFh7LPg_smNwjqjA3a62YMlf0U-HfjVg.png",
+      "image": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22420%22%20height%3D%22310%22%20viewBox%3D%220%200%20420%20310%22%3E%3Crect%20width%3D%22420%22%20height%3D%22310%22%20fill%3D%22%23080808%22%2F%3E%3Ctext%20x%3D%2222%22%20y%3D%22148%22%20fill%3D%22%23f2f2f2%22%20font-family%3D%22monospace%22%20font-size%3D%2224%22%3Esaraludy.com%3C%2Ftext%3E%3Ctext%20x%3D%2222%22%20y%3D%22181%22%20fill%3D%22%23777%22%20font-family%3D%22monospace%22%20font-size%3D%2215%22%3Elink%20preview%3C%2Ftext%3E%3C%2Fsvg%3E",
       "previewHeight": 112,
       "heightMode": "manual"
     },
@@ -286,7 +286,7 @@ window.CANVAS_DATA = {
       "url": "https://learn.unity.com/project/introduction-to-visual-scripting",
       "meta": "Unity Learn",
       "alt": "Introduction to Visual Scripting",
-      "image": "https://iad.microlink.io/o5pG84PHJL2kTp2Q_emyw8FNNHk9bxjiUX6CoRHPqit-xfBJc8sdspkKGF5AVZ2Y6HorIY6kpUc-y0cWkyhOuQ.png",
+      "image": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22420%22%20height%3D%22310%22%20viewBox%3D%220%200%20420%20310%22%3E%3Crect%20width%3D%22420%22%20height%3D%22310%22%20fill%3D%22%23080808%22%2F%3E%3Ctext%20x%3D%2222%22%20y%3D%22148%22%20fill%3D%22%23f2f2f2%22%20font-family%3D%22monospace%22%20font-size%3D%2224%22%3Elearn.unity.com%3C%2Ftext%3E%3Ctext%20x%3D%2222%22%20y%3D%22181%22%20fill%3D%22%23777%22%20font-family%3D%22monospace%22%20font-size%3D%2215%22%3Elink%20preview%3C%2Ftext%3E%3C%2Fsvg%3E",
       "previewHeight": 112,
       "heightMode": "manual"
     },
@@ -596,13 +596,70 @@ window.CANVAS_DATA = {
       "height": 411,
       "description": "",
       "items": [
-        "Play Game(s)",
-        "Persistence, Memory & Consequence: Scenes, Menus, State Tracking, Inventory<br>“Game Analysis: Developing a Methodological Toolkit for the Qualitative Study of Games” — Mia Consalvo and Nathan Dutton (2006)",
+        "Persistence, Memory &amp; Consequence: Scenes, Menus, State Tracking, Inventory",
+        "“Game Analysis: Developing a Methodological Toolkit for the Qualitative Study of Games” — Mia Consalvo and Nathan Dutton (2006)",
         "<a href=\"assets/guides/scenes-menus.html\">♦︎ Scenes, Menus ♦︎</a>",
-        "<a href=\"assets/guides/dont-destroy-on-load.html\">⌗ Don’t Destroy on Load ⌗</a><br>State Tracking, Inventory Systems, Mini map",
+        "<a href=\"assets/guides/dont-destroy-on-load.html\">⌗ Don’t Destroy on Load ⌗</a><br>State Tracking, Inventory Systems, Scriptable Objects, Object Pooling, Mini map",
         "Open Lab"
       ],
       "groupId": "group-1792530962033"
+    },
+    {
+      "id": "week08-media-menu-tutorial-csharp",
+      "type": "media",
+      "week": 8,
+      "x": 1724.7191193355675,
+      "y": 1208.6810964337726,
+      "width": 100,
+      "height": 116.40212554291026,
+      "mediaKind": "youtube",
+      "title": "Menu Tutorial C#",
+      "url": "https://www.youtube.com/watch?v=A8B_easomtg",
+      "alt": "Menu Tutorial C#",
+      "image": "https://i.ytimg.com/vi/A8B_easomtg/hqdefault.jpg",
+      "previewHeight": 112,
+      "heightMode": "manual"
+    },
+    {
+      "id": "week08-media-dont-destroy-on-load-csharp",
+      "type": "media",
+      "week": 8,
+      "x": 1577.5606055908713,
+      "y": 1188.1309740888169,
+      "width": 100,
+      "height": 109.32427674006911,
+      "mediaKind": "link",
+      "title": "Don’t Destroy on Load C#",
+      "url": "https://learn.unity.com/tutorial/implement-data-persistence-between-scenes-1",
+      "meta": "Unity Learn",
+      "alt": "Don’t Destroy on Load C#",
+      "image": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22420%22%20height%3D%22310%22%20viewBox%3D%220%200%20420%20310%22%3E%3Crect%20width%3D%22420%22%20height%3D%22310%22%20fill%3D%22%23080808%22%2F%3E%3Ctext%20x%3D%2222%22%20y%3D%22148%22%20fill%3D%22%23f2f2f2%22%20font-family%3D%22monospace%22%20font-size%3D%2224%22%3Elearn.unity.com%3C%2Ftext%3E%3Ctext%20x%3D%2222%22%20y%3D%22181%22%20fill%3D%22%23777%22%20font-family%3D%22monospace%22%20font-size%3D%2215%22%3Elink%20preview%3C%2Ftext%3E%3C%2Fsvg%3E",
+      "previewHeight": 112,
+      "heightMode": "manual"
+    },
+    {
+      "id": "week08-note-societal-question",
+      "type": "text",
+      "week": 8,
+      "x": 1471.518855046588,
+      "y": 914.4893975242429,
+      "width": 470,
+      "height": 245,
+      "text": "Societal question: What happens when maintenance, dependency, repair, and mutual aid replace conquest and accumulation?<br><br>• What does a game remember?<br>• What changes persist between scenes or play sessions?<br>• How can inventories, resources, and tracked states express relationships, responsibility, or care?",
+      "heightMode": "manual",
+      "fontSize": 11
+    },
+    {
+      "id": "week08-note-game-analysis-toolkit",
+      "type": "text",
+      "week": 8,
+      "x": 808.1320372796544,
+      "y": 1335.107334977077,
+      "width": 625.9328037147437,
+      "height": 1300.8259533684152,
+      "text": "<strong>Game analysis toolkit</strong> (Consalvo and Dutton, 2006)<br><br>Consalvo and Dutton propose a practical method for conducting a qualitative analysis of a game—not merely reviewing whether it is enjoyable. They argue that playing is necessary, but researchers should also systematically document how the game’s components produce meaning. Their toolkit has four parts:<br><br><strong>1. Object Inventory</strong><br>Catalog the objects that can be found, purchased, created, collected or used. Record things such as:<br>• What is the object?<br>• How is it acquired?<br>• Is it single-use or reusable?<br>• What actions does it permit?<br>• Is it common, scarce or expensive?<br>• Does its use change over time?<br>• What does the game encourage the player to collect?<br>This can reveal the game’s economic and ideological values. For example: does the game value accumulation, consumption, care, repair or exchange?<br><br><strong>2. Interface Study</strong><br>Examine the information and choices presented through menus, health bars, inventory screens, maps and mini-maps, scores, mission objectives, character statistics, and settings and upgrade screens.<br>The important question is not only whether the interface is easy to use. It is also: what information does the game make visible, and what does it conceal?<br>A permanently visible score suggests that accumulation matters. A visible relationship meter turns intimacy into something measurable. A mini-map determines which parts of the world are considered important.<br><br><strong>3. Interaction Map</strong><br>Document the interactions available between the player and NPCs, different characters, players in multiplayer games, and characters and social systems. Questions include:<br>• Who can the player speak to?<br>• What kinds of responses are possible?<br>• Can relationships change?<br>• Who can be helped, harmed, ignored or exchanged?<br>• Are interactions reciprocal?<br>• What actions are unavailable?<br>The resulting “map” does not have to record every possible interaction. It can identify recurring patterns and limits.<br><br><strong>4. Gameplay Log</strong><br>Keep a record of what happens while playing:<br>• Important events<br>• Unexpected or emergent behavior<br>• Decisions and consequences<br>• Save and checkpoint systems<br>• Changes to the avatar<br>• Changes to the game world<br>• Moments when the rules appear to break<br>• References to other games or media<br>The gameplay log reconnects the separate observations into an account of the overall experience.<br><br><br>",
+      "heightMode": "manual",
+      "fontSize": 11
     },
     {
       "id": "week09",
@@ -2087,6 +2144,17 @@ window.CANVAS_DATA = {
       "meta": "Image",
       "alt": "Screenshot 2026-09-06 at 3.36.38 PM",
       "image": "assets/thumbnails/item1791358197961.png"
+    },
+    {
+      "id": "item1793129970395",
+      "type": "text",
+      "x": 1433.292778130601,
+      "y": 1399.8865607912155,
+      "width": 718.8248414847914,
+      "height": 336.33461408765584,
+      "text": "Exercise<br>Quickly conceptualize a hypothetical game in 15min and follow steps 1.- 4.<br>1. Record five significant objects that can be found, purchased, created, collected or used.<br>2. Sketch its interface and mini-map.<br>3. Map one character interaction.<br>4. Write a chronological gameplay log.<br>5. Identify one value that the game rewards or privileges.",
+      "fontSize": 15,
+      "heightMode": "manual"
     }
   ],
   "connections": [

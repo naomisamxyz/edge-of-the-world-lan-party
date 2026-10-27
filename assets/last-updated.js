@@ -30,8 +30,8 @@
   }
 
   const updated = {
-    datetime: "2026-10-20",
-    label: "October 20, 2026",
+    datetime: "2026-10-27",
+    label: "October 27, 2026",
     by: "Naomi Sam"
   };
 

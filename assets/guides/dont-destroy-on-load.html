@@ -22,94 +22,926 @@
 
   <header class="masthead">
     <div class="section-heading"><pre class="section-ornament guide-title-ornament" aria-hidden="true"></pre><h1>Don’t Destroy on Load</h1></div>
-    <p>Three standard ways to keep data alive across a scene change in Unity</p>
+    <p>State Tracking, Inventory Systems, Scriptable Objects, Object Pooling, Mini map</p>
   </header>
 
   <nav class="page-toc">
-    <a href="#scriptable-objects">ScriptableObjects</a>
+    <a href="#overview">Overview</a>
     <a href="#dont-destroy-on-load">Don’t Destroy on Load</a>
-    <a href="#player-prefs">PlayerPrefs</a>
-    <a href="#comparison">Comparison</a>
+    <a href="#state-tracking">State tracking</a>
+    <a href="#inventory">Inventory systems</a>
+    <a href="#scriptable-objects">Scriptable Objects</a>
+    <a href="#object-pooling">Object pooling</a>
+    <a href="#mini-map">Mini-maps</a>
+    <a href="#saving">Saving after quitting</a>
+    <a href="#best-practices">Best practices</a>
   </nav>
 
-  <!-- ================= SCRIPTABLE OBJECTS ================= -->
+  <section class="section" id="overview">
+    <h2>Overview</h2>
+    <p class="section-intro">These lessons move from the easiest concept to the most advanced. Work through them in order:</p>
+    <ol class="steps">
+      <li>Don’t Destroy on Load: keep one object alive between scenes.</li>
+      <li>State tracking: remember a changing value.</li>
+      <li>Inventory systems: record what the player owns.</li>
+      <li>Scriptable Objects: define reusable items.</li>
+      <li>Object pooling: reuse objects instead of destroying them.</li>
+      <li>Mini-maps: show the world from above.</li>
+      <li>Saving after quitting: keep progress after the game closes.</li>
+    </ol>
 
-  <section class="section" id="scriptable-objects">
-    <h2>ScriptableObjects</h2>
-    <p class="section-intro">To track the state of objects or values like health across scenes in Unity, you must prevent the data from being destroyed when a new scene loads. Here are three standard ways to handle persistent state tracking, starting with the recommended one for shared data.</p>
-    <p class="body-text">ScriptableObjects exist independently of any specific scene. You can save your health or inventory data inside a ScriptableObject asset, and any script in any scene can read or write to it.</p>
-    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>using UnityEngine;
+    <h3 class="sub">How the systems differ</h3>
+    <p class="body-text">These systems serve different purposes:</p>
+    <ul class="steps">
+      <li><code class="inline">DontDestroyOnLoad</code> carries selected objects between scenes.</li>
+      <li>State tracking remembers what has happened.</li>
+      <li>An inventory records what the player owns.</li>
+      <li>Scriptable Objects define reusable information.</li>
+      <li>Object pooling efficiently reuses scene objects.</li>
+      <li>A save system preserves information after the game closes.</li>
+    </ul>
 
-[CreateAssetMenu(fileName = "PlayerStats", menuName = "Stats/PlayerStats")]
-public class PlayerStats : ScriptableObject
-{
-    public int health;
-    public int maxHealth;
-}</code></pre></div></div></div>
-    <p class="body-text">How to use: create the asset in your project files (<code class="inline">Assets &rarr; Create &rarr; Stats &rarr; PlayerStats</code>), then drag it into a slot on your scene scripts &mdash; a UI manager or player controller &mdash; to read and modify the shared data.</p>
+    <h3 class="sub">Choose one method</h3>
+    <p class="body-text">The tutorials show two ways to perform the same tasks:</p>
+    <ul class="steps">
+      <li>C# scripts</li>
+      <li>Visual Scripting graphs</li>
+    </ul>
+    <p class="body-text">Choose one method for each example. Do not attach both versions to the same object, or Unity may perform the action twice.</p>
+    <p class="body-text">For example, use either the <code class="inline">KeepAlive</code> C# script or the <code class="inline">Don’t Destroy on Load</code> graph—not both.</p>
+
   </section>
-
-  <!-- ================= DONT DESTROY ON LOAD ================= -->
 
   <section class="section" id="dont-destroy-on-load">
     <h2>Don’t Destroy on Load</h2>
-    <p class="section-intro">If you need an entire GameObject &mdash; a GameManager or AudioManager &mdash; to survive scene transitions, call <code class="inline">Object.DontDestroyOnLoad</code>.</p>
+    <p class="section-intro">Normally, Unity destroys the objects in the current scene when another scene loads. <code class="inline">DontDestroyOnLoad</code> allows one object to survive.</p>
+    <p class="body-text">Create the object in the first scene—or as early as possible—and keep it at the top level of the Hierarchy.</p>
+
+    <h3 class="sub">Option A: Visual Scripting</h3>
+    <p class="body-text">Add a Script Machine component to the object and create a Script Graph:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>On Start ───▶ Don’t Destroy on Load
+                    ▲
+                   Self</code></pre></div></div></div>
+    <p class="body-text">Connect <code class="inline">Self</code> to the target input.</p>
+
+    <h3 class="sub">Option B: C#</h3>
+    <p class="body-text">Add this script to the object:</p>
     <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class KeepAlive : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
-    public int playerHealth = 100;
-
-    private void Awake()
+    void Awake()
     {
-        // Enforce a Singleton pattern so duplicates aren't created when reloading scenes
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
+        // Keep this GameObject alive when Unity loads another scene.
         DontDestroyOnLoad(gameObject);
     }
 }</code></pre></div></div></div>
-    <p class="body-text">How to use: access the health from any scene with <code class="inline">GameManager.Instance.playerHealth</code>.</p>
+    <p class="body-text">Load another scene. The object should remain in the Hierarchy.</p>
+
+    <h3 class="sub">What is this useful for?</h3>
+    <ul class="steps">
+      <li>Player characters</li>
+      <li>Background music</li>
+      <li>Health and lives</li>
+      <li>Inventory</li>
+      <li>Scores and resources</li>
+      <li>Quest progress</li>
+      <li>Player choices and consequences</li>
+      <li>Character relationships</li>
+      <li>World-state changes</li>
+      <li>Difficulty and accessibility settings</li>
+      <li>Information shared between menus and gameplay scenes</li>
+    </ul>
   </section>
 
-  <!-- ================= PLAYER PREFS ================= -->
+  <section class="section" id="state-tracking">
+    <h2>State tracking</h2>
+    <p class="section-intro">A state is a piece of information that describes the game at a particular moment.</p>
+    <p class="body-text">Different variable types can track different kinds of state:</p>
+    <ul class="steps">
+      <li>An <code class="inline">int</code> can track health, currency or collected objects.</li>
+      <li>A <code class="inline">float</code> can track time, distance or energy.</li>
+      <li>A <code class="inline">bool</code> can record whether something has happened.</li>
+      <li>A <code class="inline">string</code> can store a name, message or location.</li>
+      <li>A list can hold items, objectives or discovered places.</li>
+    </ul>
+    <p class="body-text">State tracking allows an action in one scene to have consequences in another.</p>
 
-  <section class="section" id="player-prefs">
-    <h2>PlayerPrefs</h2>
-    <p class="section-intro">If you want the health value to persist not just across scenes, but also when the player closes and restarts the game, use <code class="inline">PlayerPrefs</code>.</p>
-    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>// Saving the health value
-PlayerPrefs.SetInt("PlayerHealth", 80);
-PlayerPrefs.Save();
+    <h3 class="sub">Prepare the scene for clicking</h3>
+    <p class="body-text">The collectibles in this lesson are clicked with the mouse. With the new Input System, clicks on objects in the scene are delivered through the EventSystem.</p>
+    <ol class="steps">
+      <li>Select the Main Camera and add a Physics Raycaster component.</li>
+      <li>Make sure the scene has an EventSystem that uses Input System UI Input Module. Creating a Canvas adds an EventSystem automatically.</li>
+      <li>Give every clickable object a Collider.</li>
+    </ol>
+    <p class="body-text">To switch an EventSystem to the Input System UI Input Module, follow <a href="scenes-menus.html#input-setup">Input System setup</a> in the Scenes, Menus guide.</p>
 
-// Loading the health value (defaults to 100 if the key doesn't exist yet)
-int currentHealth = PlayerPrefs.GetInt("PlayerHealth", 100);</code></pre></div></div></div>
+    <h3 class="sub">Option A: Visual Scripting</h3>
+    <p class="body-text"><strong>What is an Application Variable?</strong></p>
+    <p class="body-text">An Application Variable is a value stored globally by Unity Visual Scripting.</p>
+    <p class="body-text">Application Variables:</p>
+    <ul class="steps">
+      <li>Can be accessed by different Script Graphs.</li>
+      <li>Remain available when the scene changes.</li>
+      <li>Last for the current play session.</li>
+      <li>Reset when the game closes or Play Mode stops.</li>
+    </ul>
+    <p class="body-text">They provide Visual Scripting with a simple place to store health, scores, inventory and other shared information.</p>
+    <p class="body-text">Create them through the Application section of the Visual Scripting Variables window or Blackboard.</p>
+    <p class="body-text">A Saved Variable is different: it can preserve simple values after the game closes.</p>
+    <p class="body-text"><strong>Create the variable</strong></p>
+    <p class="body-text">Create an Application Variable:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>Name: CollectedObjects
+Type: Integer
+Starting value: 0</code></pre></div></div></div>
+    <p class="body-text"><strong>Create the collectible graph</strong></p>
+    <p class="body-text">Add a Script Machine to a collectible object:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>On Pointer Click
+      │
+      ▼
+Get Application Variable: CollectedObjects
+      │
+      ▼
+Add: 1
+      │
+      ▼
+Set Application Variable: CollectedObjects
+      │
+      ▼
+Debug Log
+      │
+      ▼
+Destroy: Self</code></pre></div></div></div>
+    <p class="body-text">Connect the result of <code class="inline">Add</code> to both:</p>
+    <ul class="steps">
+      <li><code class="inline">Set Application Variable</code></li>
+      <li><code class="inline">Debug Log</code></li>
+    </ul>
+    <p class="body-text">The Console will display the new number whenever an object is collected.</p>
+    <p class="body-text">Make sure the collectible has a Collider so it can receive <code class="inline">On Pointer Click</code>. The scene preparation above applies to this graph too.</p>
+    <p class="body-text"><strong>Display the number on a Canvas</strong></p>
+    <ol class="steps">
+      <li>Create a Canvas.</li>
+      <li>Add a TextMeshPro Text object.</li>
+      <li>Name it <code class="inline">StateText</code>.</li>
+      <li>Add a Script Machine to <code class="inline">StateText</code>.</li>
+      <li>Create this display graph:
+        <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>On Update
+      │
+      ▼
+Get Application Variable: CollectedObjects
+      │
+      ▼
+To String
+      │
+      ▼
+Set Text on StateText</code></pre></div></div></div>
+      </li>
+    </ol>
+    <p class="body-text">Depending on the Unity version, the final node may appear as <code class="inline">Set Text</code> or <code class="inline">Set Member: text</code>.</p>
+    <p class="body-text">The target is the TextMeshPro component on <code class="inline">StateText</code>.</p>
+    <p class="body-text">This graph reads the shared value every frame and displays it on the Canvas.</p>
+
+    <h3 class="sub">Option B: C#</h3>
+    <p class="body-text"><strong>Create the GameState</strong></p>
+    <p class="body-text">Create an empty GameObject named <code class="inline">GameState</code> in the first scene and add this script:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>using TMPro;
+using UnityEngine;
+
+public class GameState : MonoBehaviour
+{
+    // The number of objects the player has collected.
+    public int collectedObjects = 0;
+
+    // Optional TextMeshPro display.
+    public TMP_Text stateText;
+
+    void Awake()
+    {
+        // Keep GameState and its children between scenes.
+        DontDestroyOnLoad(gameObject);
+    }
+
+    void Start()
+    {
+        // Display the starting value.
+        UpdateDisplay();
+    }
+
+    public void CollectObject()
+    {
+        // Increase the counter by one.
+        collectedObjects++;
+
+        // Display the new value in the Unity Console.
+        Debug.Log("Collected objects: " + collectedObjects);
+
+        // Update the Canvas.
+        UpdateDisplay();
+    }
+
+    void UpdateDisplay()
+    {
+        // Only update the Canvas if a Text object was assigned.
+        if (stateText != null)
+        {
+            stateText.text = "Collected: " + collectedObjects;
+        }
+    }
+}</code></pre></div></div></div>
+    <p class="body-text"><strong>Create a Canvas display</strong></p>
+    <ol class="steps">
+      <li>Create a Canvas as a child of <code class="inline">GameState</code>.</li>
+      <li>Add a TextMeshPro Text object.</li>
+      <li>Drag the Text object into the <code class="inline">State Text</code> field on <code class="inline">GameState</code>.</li>
+    </ol>
+    <p class="body-text">Because the Canvas is a child of <code class="inline">GameState</code>, it also survives scene changes.</p>
+    <p class="body-text"><strong>Why does the C# version use two scripts?</strong></p>
+    <p class="body-text">The C# examples separate two responsibilities:</p>
+    <ul class="steps">
+      <li><code class="inline">GameState</code> stores the information.</li>
+      <li><code class="inline">Collectible</code> or <code class="inline">InventoryItem</code> reports that something was collected.</li>
+    </ul>
+    <p class="body-text">The Visual Scripting examples use Application Variables for storage, so the collectible graph can change the shared value directly.</p>
+    <p class="body-text">A single collectible graph can be reused on many collectible objects. It does not require a different graph for every item.</p>
+    <p class="body-text"><strong>Create the collectible</strong></p>
+    <p class="body-text">Add this script to a collectible:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>using UnityEngine;
+using UnityEngine.EventSystems;
+
+public class Collectible : MonoBehaviour, IPointerClickHandler
+{
+    // Unity calls this method when the player clicks the object.
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        // Find the persistent GameState object.
+        GameState state = FindFirstObjectByType&lt;GameState&gt;();
+
+        // Tell GameState that an object was collected.
+        state.CollectObject();
+
+        // Remove this collectible from the scene.
+        Destroy(gameObject);
+    }
+}</code></pre></div></div></div>
+    <p class="body-text">Add a Collider to the collectible. Enter Play Mode and click it.</p>
+    <p class="body-text">The value will appear:</p>
+    <ul class="steps">
+      <li>In the Unity Console.</li>
+      <li>On the Canvas.</li>
+      <li>In the <code class="inline">GameState</code> Inspector.</li>
+    </ul>
   </section>
 
-  <!-- ================= COMPARISON ================= -->
+  <section class="section" id="inventory">
+    <h2>Inventory systems</h2>
+    <p class="section-intro">An inventory is a collection of state. It records which objects the player currently owns.</p>
+    <p class="body-text">A complete inventory might track:</p>
+    <ul class="steps">
+      <li>Item names</li>
+      <li>Quantities</li>
+      <li>Images or icons</li>
+      <li>Descriptions</li>
+      <li>Categories</li>
+      <li>Item effects</li>
+      <li>Whether an item has been used</li>
+    </ul>
+    <p class="body-text">The simplest inventory can be a list of item names.</p>
 
-  <section class="section" id="comparison">
-    <h2>Comparison</h2>
-    <div class="ref-groups">
-      <div class="ref-group">
-        <h3>Direct comparison</h3>
-        <dl>
-          <div class="ref-row"><dt>ScriptableObjects</dt><dd>best for shared gameplay data, stats, and configurations. Does not persist after the game closes &mdash; resets on restart. Low setup complexity.</dd></div>
-          <div class="ref-row"><dt>Don’t Destroy on Load</dt><dd>best for managers, audio players, and network controllers. Does not persist after the game closes &mdash; resets on restart. Medium setup complexity &mdash; requires singleton logic.</dd></div>
-          <div class="ref-row"><dt>PlayerPrefs</dt><dd>best for high scores, settings, and basic save states. Persists after the game closes. Low setup complexity.</dd></div>
-        </dl>
-      </div>
-    </div>
+    <h3 class="sub">Option A: Visual Scripting</h3>
+    <p class="body-text"><strong>Create the inventory variables</strong></p>
+    <p class="body-text">Create two Application Variables:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>Name: Inventory
+Type: List of Strings
+Starting value: Empty List</code></pre></div></div></div>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>Name: InventoryDisplay
+Type: String
+Starting value: ""</code></pre></div></div></div>
+    <p class="body-text"><code class="inline">Inventory</code> stores the actual list.</p>
+    <p class="body-text"><code class="inline">InventoryDisplay</code> stores a readable version that can be shown on the Canvas.</p>
+    <p class="body-text"><strong>Create the inventory-item graph</strong></p>
+    <p class="body-text">Add a Script Machine to an inventory item:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>On Pointer Click
+      │
+      ├──▶ Get Application Variable: Inventory
+      │          │
+      │          ▼
+      │     Add List Item: "Key"
+      │
+      ├──▶ Get Application Variable: InventoryDisplay
+      │          │
+      │          ▼
+      │     Add Text: "Key" + New Line
+      │          │
+      │          ▼
+      │     Set Application Variable: InventoryDisplay
+      │
+      ├──▶ Debug Log: InventoryDisplay
+      │
+      ▼
+Destroy: Self</code></pre></div></div></div>
+    <p class="body-text">The text operation may appear as <code class="inline">Add</code>, <code class="inline">Concatenate</code> or <code class="inline">String Concat</code>, depending on the Unity version.</p>
+    <p class="body-text">Duplicate the object and change <code class="inline">"Key"</code> to other item names:</p>
+    <ul class="steps">
+      <li>Letter</li>
+      <li>Medicine</li>
+      <li>Photograph</li>
+      <li>Tool</li>
+    </ul>
+    <p class="body-text">The same graph can be reused. Expose the item name as an Object Variable if each object should have a different name.</p>
+    <p class="body-text"><strong>Display the complete inventory</strong></p>
+    <ol class="steps">
+      <li>Add another TextMeshPro Text object to the Canvas.</li>
+      <li>Name it <code class="inline">InventoryText</code>.</li>
+      <li>Add a Script Machine.</li>
+      <li>Create this display graph:
+        <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>On Update
+      │
+      ▼
+Get Application Variable: InventoryDisplay
+      │
+      ▼
+Set Text on InventoryText</code></pre></div></div></div>
+      </li>
+    </ol>
+    <p class="body-text">The Canvas will display every collected item on a separate line:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>Key
+Letter
+Medicine
+Photograph</code></pre></div></div></div>
+    <p class="body-text">This display string is a simple teaching method. The <code class="inline">Inventory</code> list remains the actual inventory data.</p>
+
+    <h3 class="sub">Option B: C#</h3>
+    <p class="body-text">Expand <code class="inline">GameState</code> so it can hold an inventory:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+
+public class GameState : MonoBehaviour
+{
+    // Countable game state.
+    public int collectedObjects = 0;
+
+    // A simple inventory containing item names.
+    public List&lt;string&gt; inventory = new List&lt;string&gt;();
+
+    // Optional TextMeshPro display.
+    public TMP_Text stateText;
+
+    void Awake()
+    {
+        // Keep GameState and its children between scenes.
+        DontDestroyOnLoad(gameObject);
+    }
+
+    void Start()
+    {
+        // Display the starting state.
+        UpdateDisplay();
+    }
+
+    public void CollectObject()
+    {
+        // Increase the collection counter.
+        collectedObjects++;
+
+        // Report the change in the Console.
+        Debug.Log("Collected objects: " + collectedObjects);
+
+        // Refresh the Canvas text.
+        UpdateDisplay();
+    }
+
+    public void AddItem(string itemName)
+    {
+        // Add the item's name to the inventory list.
+        inventory.Add(itemName);
+
+        // Report the newly collected item.
+        Debug.Log("Added to inventory: " + itemName);
+
+        // Show the complete inventory in the Console.
+        Debug.Log("Inventory: " + string.Join(", ", inventory));
+
+        // Refresh the Canvas text.
+        UpdateDisplay();
+    }
+
+    void UpdateDisplay()
+    {
+        // Stop if no Text object was assigned.
+        if (stateText == null)
+        {
+            return;
+        }
+
+        // Put every inventory item on a separate line.
+        string inventoryList = string.Join("\n", inventory);
+
+        // Display the counter and complete inventory.
+        stateText.text =
+            "Collected: " + collectedObjects +
+            "\n\nInventory:\n" + inventoryList;
+    }
+}</code></pre></div></div></div>
+    <p class="body-text">Add this script to an inventory item:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>using UnityEngine;
+using UnityEngine.EventSystems;
+
+public class InventoryItem : MonoBehaviour, IPointerClickHandler
+{
+    // Change this name for each inventory object.
+    public string itemName = "Key";
+
+    // Unity calls this method when the player clicks the object.
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        // Find the persistent GameState.
+        GameState state = FindFirstObjectByType&lt;GameState&gt;();
+
+        // Add this item's name to the inventory.
+        state.AddItem(itemName);
+
+        // Remove the physical object from the scene.
+        Destroy(gameObject);
+    }
+}</code></pre></div></div></div>
+    <p class="body-text">Add a Collider to the item. Change <code class="inline">Item Name</code> in the Inspector for each object.</p>
+    <p class="body-text">When the player clicks an item:</p>
+    <ol class="steps">
+      <li>Its name is added to the inventory.</li>
+      <li>The Console reports what was collected.</li>
+      <li>The Canvas displays the complete inventory.</li>
+      <li>The physical item disappears.</li>
+      <li>The inventory remains when another scene loads.</li>
+    </ol>
+
+  </section>
+
+  <section class="section" id="scriptable-objects">
+    <h2>Scriptable Objects</h2>
+    <p class="section-intro">Strings are suitable for a first experiment, but larger inventories need more information. A Scriptable Object is an asset that stores information outside of any scene.</p>
+    <p class="body-text">A Scriptable Object can define:</p>
+    <ul class="steps">
+      <li>Item name</li>
+      <li>Icon</li>
+      <li>Description</li>
+      <li>Value</li>
+      <li>Category</li>
+      <li>Possible actions</li>
+      <li>Sound and visual effects</li>
+    </ul>
+    <p class="body-text">Several objects can reference the same Scriptable Object instead of duplicating the information in every scene.</p>
+    <p class="body-text">Scriptable Objects define what an item is. <code class="inline">GameState</code> or an Application Variable records whether the player owns it.</p>
+
+    <h3 class="sub">Create an item asset</h3>
+    <p class="body-text">Scriptable Objects are defined with a short C# script. Visual Scripting graphs can read their values, but the asset type itself is written in C#.</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>using UnityEngine;
+
+// Creates an "Item" entry in the Create menu.
+[CreateAssetMenu(fileName = "NewItem", menuName = "Inventory/Item")]
+public class ItemData : ScriptableObject
+{
+    public string itemName;
+    public Sprite icon;
+
+    [TextArea]
+    public string description;
+}</code></pre></div></div></div>
+    <ol class="steps">
+      <li>Save the script as <code class="inline">ItemData</code>.</li>
+      <li>In the Project window, choose <code class="inline">Create → Inventory → Item</code>.</li>
+      <li>Name the asset <code class="inline">Key</code>. In the Inspector, fill in its name, icon and description.</li>
+      <li>Duplicate the asset for each other item: Letter, Medicine, Photograph and Tool.</li>
+    </ol>
+
+    <h3 class="sub">Use the asset in the inventory</h3>
+    <p class="body-text">Change <code class="inline">InventoryItem</code> so it holds an Item asset instead of a typed name:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>using UnityEngine;
+using UnityEngine.EventSystems;
+
+public class InventoryItem : MonoBehaviour, IPointerClickHandler
+{
+    // Drag an Item asset here instead of typing a name.
+    public ItemData item;
+
+    // Unity calls this method when the player clicks the object.
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        // Find the persistent GameState.
+        GameState state = FindFirstObjectByType&lt;GameState&gt;();
+
+        // Add the asset's name to the inventory.
+        state.AddItem(item.itemName);
+
+        // Remove the physical object from the scene.
+        Destroy(gameObject);
+    }
+}</code></pre></div></div></div>
+    <p class="body-text">Drag the matching Item asset into the <code class="inline">Item</code> field on each collectible object. Several objects can use the same asset.</p>
+    <p class="body-text">The inventory still records only the item’s name. The asset supplies everything else, so an icon or description can be shown whenever it is needed.</p>
+    <p class="body-text">Scriptable Objects do not automatically save the player’s progress after the game closes.</p>
+  </section>
+
+  <section class="section" id="object-pooling">
+    <h2>Object pooling</h2>
+    <p class="section-intro">Object pooling is useful when objects are created and destroyed repeatedly:</p>
+    <ul class="steps">
+      <li>Projectiles</li>
+      <li>Enemies</li>
+      <li>Particle effects</li>
+      <li>Collectible visuals</li>
+      <li>Repeating environmental objects</li>
+    </ul>
+    <p class="body-text">Creating and destroying objects again and again is slow. A pool creates a set of objects once, keeps the unused ones hidden, and reuses them.</p>
+
+    <h3 class="sub">Option A: Visual Scripting</h3>
+    <p class="body-text">The basic habit is to hide an object instead of destroying it:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>Set Active
+Value: False
+Target: Self</code></pre></div></div></div>
+    <p class="body-text">Use <code class="inline">Set Active</code> with Value <code class="inline">True</code> to bring it back later. A complete pool in a graph needs a List variable and a loop, which is much easier in C#.</p>
+
+    <h3 class="sub">Option B: C#</h3>
+    <p class="body-text">Hide the object instead of destroying it:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>// Hide the object so it can be reused later.
+gameObject.SetActive(false);</code></pre></div></div></div>
+    <p class="body-text">A simple pool creates the copies once and reuses them:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>using System.Collections.Generic;
+using UnityEngine;
+
+public class SimplePool : MonoBehaviour
+{
+    // The object to reuse, for example a small sphere prefab.
+    public GameObject prefab;
+
+    // How many copies to create at the start.
+    public int poolSize = 10;
+
+    List&lt;GameObject&gt; pool = new List&lt;GameObject&gt;();
+
+    void Start()
+    {
+        // Create every copy once and hide it.
+        for (int i = 0; i &lt; poolSize; i++)
+        {
+            GameObject copy = Instantiate(prefab, transform);
+            copy.SetActive(false);
+            pool.Add(copy);
+        }
+    }
+
+    public GameObject Get(Vector3 position)
+    {
+        // Reuse the first copy that is currently hidden.
+        foreach (GameObject copy in pool)
+        {
+            if (!copy.activeSelf)
+            {
+                copy.transform.position = position;
+                copy.SetActive(true);
+                return copy;
+            }
+        }
+
+        // Every copy is in use.
+        return null;
+    }
+}</code></pre></div></div></div>
+    <p class="body-text">Add this script to the prefab so each copy hides itself after two seconds:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>using UnityEngine;
+
+public class PooledObject : MonoBehaviour
+{
+    void OnEnable()
+    {
+        // Give the object back to the pool after two seconds.
+        Invoke(nameof(ReturnToPool), 2f);
+    }
+
+    void ReturnToPool()
+    {
+        // Hide the object instead of destroying it.
+        gameObject.SetActive(false);
+    }
+}</code></pre></div></div></div>
+    <p class="body-text">Add this script to an empty GameObject to test the pool:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>using UnityEngine;
+
+public class Spawner : MonoBehaviour
+{
+    // Drag the object with the SimplePool script here.
+    public SimplePool pool;
+
+    void Start()
+    {
+        // Ask the pool for an object once per second.
+        InvokeRepeating(nameof(Spawn), 1f, 1f);
+    }
+
+    void Spawn()
+    {
+        // Place it at a random position near this object.
+        pool.Get(transform.position + Random.insideUnitSphere * 3f);
+    }
+}</code></pre></div></div></div>
+    <ol class="steps">
+      <li>Create a prefab, such as a small sphere, and add <code class="inline">PooledObject</code> to it.</li>
+      <li>Create an empty GameObject named <code class="inline">Pool</code>, add <code class="inline">SimplePool</code> and drag the prefab into its <code class="inline">Prefab</code> field.</li>
+      <li>Create another empty GameObject, add <code class="inline">Spawner</code> and drag <code class="inline">Pool</code> into its <code class="inline">Pool</code> field.</li>
+      <li>Enter Play Mode. Objects appear and disappear, but <code class="inline">Pool</code> always contains the same ten objects.</li>
+    </ol>
+    <p class="body-text">Object pooling is mainly a performance technique. It does not replace state tracking or an inventory.</p>
+  </section>
+
+  <section class="section" id="mini-map">
+    <h2>Mini-maps</h2>
+    <p class="section-intro">A mini-map is a second representation of the game world. It shows selected information rather than everything visible to the player.</p>
+    <p class="body-text">A mini-map can communicate:</p>
+    <ul class="steps">
+      <li>The player’s position</li>
+      <li>Paths and boundaries</li>
+      <li>Important locations</li>
+      <li>Resources</li>
+      <li>Characters or threats</li>
+      <li>Collected and uncollected objects</li>
+      <li>Discovered areas</li>
+      <li>Relationships between spaces</li>
+    </ul>
+    <p class="body-text">What the mini-map includes—or excludes—is a design decision.</p>
+
+    <h3 class="sub">Simplest mini-map tutorial</h3>
+    <p class="body-text">This version does not require C# or Visual Scripting.</p>
+    <ol class="steps">
+      <li>Create a second Camera.</li>
+      <li>Name it <code class="inline">MiniMapCamera</code>.</li>
+      <li>Position it above the player.</li>
+      <li>Rotate it downward:
+        <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>Rotation X: 90
+Rotation Y: 0
+Rotation Z: 0</code></pre></div></div></div>
+      </li>
+      <li>Change its Projection to <code class="inline">Orthographic</code>.</li>
+      <li>Make <code class="inline">MiniMapCamera</code> a child of the player.</li>
+      <li>Create a Render Texture in the Project window.</li>
+      <li>Assign it to the camera’s Target Texture.</li>
+      <li>Add a Canvas to the scene.</li>
+      <li>Add a Raw Image to the Canvas.</li>
+      <li>Place the Raw Image in a corner of the screen.</li>
+      <li>Assign the Render Texture to the Raw Image’s Texture field.</li>
+    </ol>
+    <p class="body-text">Enter Play Mode. The Raw Image should display a top-down view that follows the player.</p>
+
+    <h3 class="sub">Control what the mini-map shows</h3>
+    <p class="body-text">For a clearer map:</p>
+    <ol class="steps">
+      <li>Create a layer named <code class="inline">MiniMap</code>.</li>
+      <li>Place map icons on this layer.</li>
+      <li>Select <code class="inline">MiniMapCamera</code>.</li>
+      <li>Adjust its Culling Mask.</li>
+    </ol>
+    <p class="body-text">The mini-map camera can display information that the main camera does not display.</p>
+
+    <h3 class="sub">Optional toggle: create the input action</h3>
+    <p class="body-text">To let the player show or hide the map with the M key, add an Input Action. This reuses the <code class="inline">MenuControls</code> asset from the <a href="scenes-menus.html#pause-menu">Scenes, Menus guide</a>. If you have not created it yet, follow that guide first.</p>
+    <ol class="steps">
+      <li>Double-click the <code class="inline">MenuControls</code> asset to open the Input Actions editor.</li>
+      <li>In the <code class="inline">UI</code> action map, create an Action named <code class="inline">ToggleMap</code>.</li>
+      <li>Set its Action Type to <code class="inline">Button</code>.</li>
+      <li>Add a binding and set its path to <code class="inline">Keyboard → M</code>.</li>
+      <li>Select Save Asset.</li>
+    </ol>
+
+    <h3 class="sub">Optional Visual Scripting toggle</h3>
+    <p class="body-text">Add the Player Input component before you create the graph. This also needs the Visual Scripting setup from the Scenes, Menus guide, including Regenerate Nodes.</p>
+    <ol class="steps">
+      <li>Select the Canvas.</li>
+      <li>Add a Player Input component.</li>
+      <li>Drag <code class="inline">MenuControls</code> into its Actions field and set Default Map to <code class="inline">UI</code>.</li>
+      <li>Add a Script Machine.</li>
+      <li>Add an On Input System Event Button node, select the <code class="inline">ToggleMap</code> action and set Input Action Change Type to On Pressed.</li>
+      <li>Create this graph:
+        <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>On Input System Event Button: ToggleMap
+      │
+      ▼
+Get Active: Mini-Map Display
+      │
+      ▼
+Not
+      │
+      ▼
+Set Active: Mini-Map Display</code></pre></div></div></div>
+      </li>
+    </ol>
+
+    <h3 class="sub">Optional C# toggle</h3>
+    <p class="body-text">Add this script to the Canvas:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class MiniMapToggle : MonoBehaviour
+{
+    // Drag the ToggleMap action from MenuControls into this field.
+    public InputActionReference toggleMapAction;
+
+    // Drag the mini-map Raw Image or its parent panel here.
+    public GameObject miniMapDisplay;
+
+    void OnEnable()
+    {
+        // Begin listening for the ToggleMap action.
+        toggleMapAction.action.Enable();
+    }
+
+    void OnDisable()
+    {
+        // Stop listening when this component is disabled.
+        toggleMapAction.action.Disable();
+    }
+
+    void Update()
+    {
+        // Check whether the ToggleMap action was pressed this frame.
+        if (toggleMapAction.action.WasPressedThisFrame())
+        {
+            // Reverse the mini-map's current visibility.
+            bool shouldBeVisible = !miniMapDisplay.activeSelf;
+
+            // Show or hide the mini-map.
+            miniMapDisplay.SetActive(shouldBeVisible);
+        }
+    }
+}</code></pre></div></div></div>
+    <ol class="steps">
+      <li>Drag the <code class="inline">ToggleMap</code> action from <code class="inline">MenuControls</code> into <code class="inline">Toggle Map Action</code>.</li>
+      <li>Drag the mini-map Raw Image or its parent panel into <code class="inline">Mini Map Display</code>.</li>
+    </ol>
+    <p class="body-text">Use either the Visual Scripting toggle or the C# toggle—not both.</p>
+  </section>
+
+  <section class="section" id="saving">
+    <h2>Saving after quitting</h2>
+    <p class="section-intro">Keep progress after the game closes, from a single saved number to a complete save file.</p>
+    <p class="body-text">Application Variables and <code class="inline">DontDestroyOnLoad</code> reset when the game closes. To keep progress between play sessions, the information has to be saved.</p>
+
+    <h3 class="sub">Option A: Visual Scripting</h3>
+    <p class="body-text">Use a Saved Variable. It works like an Application Variable, but its value is kept after the game closes.</p>
+    <ol class="steps">
+      <li>Open the Variables window or Blackboard and select the Saved tab.</li>
+      <li>Create <code class="inline">CollectedObjects</code> there (Integer, starting value 0) instead of in the Application tab.</li>
+      <li>In the collectible and display graphs, set the scope of the Get and Set Variable nodes to Saved.</li>
+      <li>Collect some objects, stop Play Mode and press Play again. The number is still there.</li>
+    </ol>
+    <p class="body-text">Unity stores Saved Variables in PlayerPrefs. They hold simple values such as numbers, text and lists of these, and they can’t refer to Unity objects like GameObjects or components.</p>
+    <p class="body-text">To start fresh while testing, choose <code class="inline">Edit → Clear All PlayerPrefs</code>.</p>
+
+    <h3 class="sub">Option B: C#</h3>
+    <p class="body-text">Use <code class="inline">PlayerPrefs</code>. It saves simple values on the player’s computer under a name you choose. Add saving and loading to <code class="inline">GameState</code>:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>// Replace Start and CollectObject in GameState, and add Save and Load.
+
+void Start()
+{
+    // Load saved progress first, then display it.
+    Load();
+    UpdateDisplay();
+}
+
+public void CollectObject()
+{
+    collectedObjects++;
+
+    // Save every time the value changes.
+    Save();
+
+    UpdateDisplay();
+}
+
+void Save()
+{
+    PlayerPrefs.SetInt("CollectedObjects", collectedObjects);
+    PlayerPrefs.Save();
+}
+
+void Load()
+{
+    // The second value is used if nothing has been saved yet.
+    collectedObjects = PlayerPrefs.GetInt("CollectedObjects", 0);
+}</code></pre></div></div></div>
+    <p class="body-text"><code class="inline">PlayerPrefs</code> can only store an <code class="inline">int</code>, a <code class="inline">float</code> or a <code class="inline">string</code>. A list has to be turned into one string first:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>// Save: turn the list into one string.
+PlayerPrefs.SetString("Inventory", string.Join(",", inventory));
+
+// Load: split the string back into a list.
+string saved = PlayerPrefs.GetString("Inventory", "");
+inventory = saved == "" ? new List&lt;string&gt;() : new List&lt;string&gt;(saved.Split(','));</code></pre></div></div></div>
+    <p class="body-text">To start fresh while testing, call <code class="inline">PlayerPrefs.DeleteKey("CollectedObjects")</code>, or <code class="inline">PlayerPrefs.DeleteAll()</code> to remove everything.</p>
+
+    <h3 class="sub">Where these methods stop</h3>
+    <p class="body-text">Saved Variables and <code class="inline">PlayerPrefs</code> suit a few simple values: a score, a setting, a counter. Joining a list into a string already feels awkward. A larger game needs a different approach.</p>
+
+    <h3 class="sub">Outlook: storing a more complex game progress</h3>
+    <p class="body-text">Real progress can include many items, quest stages, the current scene, the player’s position and the state of the world. The usual solution is a save file.</p>
+    <p class="body-text">Separate what the game contains from what has changed. Prefabs, Scriptable Objects and scenes are part of the game and are not saved. Only the changes are saved: what the player owns, what has happened and where they are.</p>
+    <ol class="steps">
+      <li>Collect all progress in one plain data class marked <code class="inline">[System.Serializable]</code>.</li>
+      <li>Convert it to JSON text with <code class="inline">JsonUtility.ToJson</code>.</li>
+      <li>Write the text to a file in <code class="inline">Application.persistentDataPath</code>.</li>
+      <li>When the game starts, read the file, rebuild the data with <code class="inline">JsonUtility.FromJson</code> and apply the values back to the game.</li>
+    </ol>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
+
+// Plain data only: numbers, text, true/false values and lists.
+// No GameObjects or components.
+[System.Serializable]
+public class SaveData
+{
+    public int version = 1;
+    public string sceneName;
+    public Vector3 playerPosition;
+    public int collectedObjects;
+    public List&lt;string&gt; inventory = new List&lt;string&gt;();
+    public List&lt;string&gt; completedQuests = new List&lt;string&gt;();
+}
+
+public static class SaveSystem
+{
+    // A folder Unity provides for each player and platform.
+    static string FilePath =&gt;
+        Path.Combine(Application.persistentDataPath, "save.json");
+
+    public static void Save(SaveData data)
+    {
+        // Convert the data to readable JSON text and write it to a file.
+        string json = JsonUtility.ToJson(data, true);
+        File.WriteAllText(FilePath, json);
+    }
+
+    public static SaveData Load()
+    {
+        // Start fresh if there is no save file yet.
+        if (!File.Exists(FilePath))
+        {
+            return new SaveData();
+        }
+
+        // Read the file and rebuild the data from the JSON text.
+        string json = File.ReadAllText(FilePath);
+        return JsonUtility.FromJson&lt;SaveData&gt;(json);
+    }
+}</code></pre></div></div></div>
+    <p class="body-text">Then connect it to the state you already track:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>// Inside GameState: copy the current state into SaveData and save it.
+SaveData data = new SaveData();
+data.collectedObjects = collectedObjects;
+data.inventory = new List&lt;string&gt;(inventory);
+data.sceneName = SceneManager.GetActiveScene().name;
+SaveSystem.Save(data);
+
+// Later, load it and copy the values back into the game.
+SaveData loaded = SaveSystem.Load();
+collectedObjects = loaded.collectedObjects;
+inventory = loaded.inventory;</code></pre></div></div></div>
+    <p class="body-text">Visual Scripting has no built-in file saving beyond Saved Variables. A common approach is a hybrid: keep <code class="inline">SaveSystem</code> in C# and call its <code class="inline">Save</code> and <code class="inline">Load</code> methods from a graph. After adding a new script you may need to select Regenerate Nodes in Project Settings → Visual Scripting so its methods appear.</p>
+    <p class="body-text">Things to plan for a larger save system:</p>
+    <ul class="steps">
+      <li>Save what changed, not whole scene objects. Give items, locations and events unique IDs so the save file can refer to them.</li>
+      <li>Store only an item’s ID or name in the save file. The Scriptable Object defines the rest.</li>
+      <li>Add a <code class="inline">version</code> number so older save files can be upgraded after you change the format.</li>
+      <li>Save at clear moments: checkpoints, scene changes and when the player quits.</li>
+      <li>Use one file per save slot, for example <code class="inline">save1.json</code> and <code class="inline">save2.json</code>.</li>
+      <li>Test loading with a missing file and with an old file.</li>
+      <li>JSON files are easy to read and edit. If cheating matters, encrypt the file or store progress on a server.</li>
+      <li>Bigger projects may use binary formats, a database, cloud saves or a ready-made save asset.</li>
+    </ul>
+  </section>
+
+  <section class="section" id="best-practices">
+    <h2>Best practices</h2>
+    <ul class="steps">
+      <li>Establish persistent objects in the first scene or as early as possible.</li>
+      <li>Keep persistent objects at the top level of the Hierarchy.</li>
+      <li>Make sure only one copy of each persistent manager exists.</li>
+      <li>Keep shared information in a clearly named object such as <code class="inline">GameState</code>.</li>
+      <li>Give important items, locations and events unique IDs.</li>
+      <li>Track information about an event instead of keeping every scene object alive.</li>
+      <li>Avoid persistent references to objects that disappear when a scene closes.</li>
+      <li>Use the Console while developing so you can see when values change.</li>
+      <li>Add a Canvas display when players also need to see the information.</li>
+      <li>Use Scriptable Objects to define reusable items and content.</li>
+      <li>Use object pooling for frequently reused objects.</li>
+      <li>Do not use object pooling as a replacement for state tracking.</li>
+      <li>Use <code class="inline">DontDestroyOnLoad</code> only for objects that genuinely need to survive.</li>
+      <li>Remember that Application Variables and <code class="inline">DontDestroyOnLoad</code> last only while the game is running.</li>
+      <li>Use Saved Variables or a separate save system if information must remain after the player quits.</li>
+    </ul>
   </section>
 
 </div>
 
-<script src="../navigation.js?v=21"></script>
-<script src="../last-updated.js?v=12"></script>
+<script src="../navigation.js?v=23"></script>
+<script src="../last-updated.js?v=13"></script>
 <script src="../cursor-sparkle.js?v=8"></script>
 
 </body>
