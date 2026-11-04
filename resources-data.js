@@ -17,7 +17,7 @@ window.CANVAS_DATA = {
       "x": 3375.7000115585142,
       "y": 1909.5082286260022,
       "width": 540,
-      "height": 94,
+      "height": 90,
       "title": "Syllabus",
       "groupId": "group-1787883267744"
     },
@@ -27,7 +27,7 @@ window.CANVAS_DATA = {
       "x": 3440.2068877907273,
       "y": 1941.9402991348848,
       "width": 900,
-      "height": 312,
+      "height": 414,
       "text": "<strong>IIMC-457/IIMC-657: Edge of the World LAN Party</strong> is a studio course that reclaims the cultural phenomenon of the LAN party as a collective game making lab. The course engages critically with video games in contemporary culture and explores their potential as an artistic medium for a speculative practice. Moving beyond the understanding of video games as finite, conquest driven systems, this course examines the inversion of traditional game mechanics and narratives, as well as environmental storytelling, and experimental forms of interactivity. Students will learn the basics of game development in Unity, while developing projects that use games to reflect on social, political, ecological, and philosophical questions. Regular play sessions and group critiques will allow students to test and discuss projects collectively. Readings and discussions will focus on contemporary discourse around video games in art, posthuman feminism, post patriarchal narratives, and critical design practices.",
       "groupId": "group-1787883267744"
     },
@@ -38,7 +38,7 @@ window.CANVAS_DATA = {
       "x": 1945.706698762086,
       "y": 2365.5317312276243,
       "width": 650,
-      "height": 145,
+      "height": 160,
       "title": "Week 01 ✧ No-clipping, glitch hunting and world-exiting in open-world games",
       "date": "Wednesday, September 9"
     },
@@ -49,7 +49,7 @@ window.CANVAS_DATA = {
       "x": 2037.9704374823498,
       "y": 2464.117075952279,
       "width": 650,
-      "height": 678,
+      "height": 806,
       "description": "",
       "items": [
         "“Hivemind” — Trust, Calum Bowden, Will Freudenheim and Joanna Pope (2021)<br>“Third World: The Bottom Dimension” — Gabriel Massan with Castiel Vitorino Brasileiro, Novíssimo Edgar and LYZZA (2023)<br>“Line of Sight” — Taylor McArthur (2021)",
@@ -67,7 +67,7 @@ window.CANVAS_DATA = {
       "x": 2640.3546035583645,
       "y": 3780.825081365331,
       "width": 650,
-      "height": 145,
+      "height": 138,
       "title": "Week 02 ✧ Countergaming, Modding and the Realtime Manifesto",
       "date": "Wednesday, September 16",
       "groupId": "group-1787888674196"
@@ -79,7 +79,7 @@ window.CANVAS_DATA = {
       "x": 2746.1403062841,
       "y": 3850.224110905377,
       "width": 650,
-      "height": 627,
+      "height": 678,
       "description": "",
       "items": [
         "“DOOM: The Gallery Experience” — Filippo Meozzi and Liam Stone, SCUM DOG (2024)",
@@ -98,7 +98,7 @@ window.CANVAS_DATA = {
       "x": 4472.448463220693,
       "y": 4084.6453726649743,
       "width": 650,
-      "height": 120,
+      "height": 138,
       "title": "Week 03 ✧ Environment, Worlding, Narrative",
       "date": "Wednesday, September 23"
     },
@@ -109,7 +109,7 @@ window.CANVAS_DATA = {
       "x": 4553.20941898551,
       "y": 4163.918512750007,
       "width": 650,
-      "height": 576,
+      "height": 602,
       "description": "",
       "items": [
         "“H.O.R.I.Z.O.N. (Habitat One: Regenerative Interactive Zone of Nurture)” — Institute of Queer Ecology (2021)",
@@ -297,7 +297,7 @@ window.CANVAS_DATA = {
       "x": 5641.062290057864,
       "y": 2462.358963963372,
       "width": 650,
-      "height": 145,
+      "height": 138,
       "title": "Week 04 ✧ Critical Play, Concepts in video game art",
       "date": "Wednesday, September 30",
       "groupId": "group-1793765794807"
@@ -309,7 +309,7 @@ window.CANVAS_DATA = {
       "x": 5714.939407419784,
       "y": 2577.241998817355,
       "width": 650,
-      "height": 794,
+      "height": 870,
       "description": "",
       "items": [
         "“Waluigi’s Purgatory” — dmstfctn with Evita Manji (2024)",
@@ -327,7 +327,7 @@ window.CANVAS_DATA = {
       "x": 5216.47704080104,
       "y": 1278.776738779703,
       "width": 650,
-      "height": 120,
+      "height": 138,
       "title": "Week 05 ✧ Player Character and Animations",
       "date": "Wednesday, October 7",
       "groupId": "group-1793765829624"
@@ -339,7 +339,7 @@ window.CANVAS_DATA = {
       "x": 5267.551393412296,
       "y": 1362.9845466247912,
       "width": 650,
-      "height": 374,
+      "height": 450,
       "description": "",
       "items": [
         "“Becoming Chimeric, Chimeric Becoming: Glitching Toward Radical Hybrid Identities and Unruly Kinship” — Martina Menegon (2024–ongoing)<br>“The Alluvials” — Alice Bucknell (2023–2024)<br>“Time to Party” — Derek Holguin (2023)",
@@ -356,7 +356,7 @@ window.CANVAS_DATA = {
       "x": 3386.0239774509364,
       "y": 274.5984540303157,
       "width": 650,
-      "height": 120,
+      "height": 117,
       "title": "Week 06 ✧ The Interface",
       "date": "Wednesday, October 14",
       "groupId": "group-1793765856197"
@@ -368,7 +368,7 @@ window.CANVAS_DATA = {
       "x": 3463.6131541636423,
       "y": 343.6063808018563,
       "width": 650,
-      "height": 438,
+      "height": 464,
       "description": "",
       "items": [
         "“Password Protected with American Artist on their Dash Cam Video Art” — Pioneer Works (2020)<br>American Artist, “Black Gooey Universe” (2021)",
@@ -560,7 +560,7 @@ window.CANVAS_DATA = {
       "y": 783.4688830597048,
       "width": 530.1786503382733,
       "height": 660.244762598467,
-      "text": "Interfaces are tools or prostheses for communicating with coded structures and accessing information and resources that lie beyond our perceptual, physiological, and socioeconomic limitations. They create bridges between physical and digital realms, connecting us with and within the world around us (Hookway 2014, 4–5).<br><br>The inter-face is a significant surface: a “permeable plane that lies between two entities” [source needed], “with meaning embedded in it or delivered through it” (Galloway 2012, 30; see also Flusser 2000, 6). It speaks in a language of thresholds and transitions. It is “a gateway that opens up and allows passage to some place beyond” (Galloway 2012, 30), providing access to virtual grounds. Interfaces are “autonomous zones of activity” with their own capacity to generate results, consequences, and narratives (Galloway 2012, vii). They are processes that produce results and “bring about transformations in material states” (Galloway 2012, vii). Interfaces are therefore never neutral: they emerge in response to particular social and historical conditions. They can be interpreted as sites through which we “read the present as material history” (Galloway 2012, ix).<br><br>Contemporary media contain other forms of media within them. As McLuhan argues, “the ‘content’ of any medium is always another medium” (McLuhan 1964, 8). Building upon this layered conception of media, Galloway writes that “the interface becomes the point of transition between different mediatic layers within any nested system” (Galloway 2012, 31). In certain cases, it becomes an intraface: “an interface internal to the interface” (Galloway 2012, 40), operating between such elements as non-diegetic and diegetic space.<br><br>In “The Interface Theory of Perception,” Donald D. Hoffman uses the interface as a model for perception—not as a transparent window onto reality, but as a species-specific desktop shaped by natural selection. It presents the world in a form that allows organisms to act, survive, and reproduce rather than showing objective reality as it truly is (Hoffman 2009, 148–165; Hoffman 2016, 157–161). For human beings, spacetime functions as the desktop of this perceptual interface, while physical objects function as icons (Hoffman 2016, 159). Perception does not simply reconstruct an independently given visual reality; it constructs and translates the properties and categories of an organism’s perceptual world, much as a computer desktop turns underlying code into representational symbols and possible actions (Davies and Hoffman 2002, 72–87).",
+      "text": "Interfaces are tools or prostheses for communicating with coded structures and accessing information and resources that lie beyond our perceptual, physiological, and socioeconomic limitations. They create bridges between physical and digital realms, connecting us with and within the world around us (Hookway 2014, 4–5).<br><br>The inter-face is a significant surface: a “permeable plane that lies between two entities”, “with meaning embedded in it or delivered through it” (Galloway 2012, 30; see also Flusser 2000, 6). It speaks in a language of thresholds and transitions. It is “a gateway that opens up and allows passage to some place beyond” (Galloway 2012, 30), providing access to virtual grounds. Interfaces are “autonomous zones of activity” with their own capacity to generate results, consequences, and narratives (Galloway 2012, vii). They are processes that produce results and “bring about transformations in material states” (Galloway 2012, vii). Interfaces are therefore never neutral: they emerge in response to particular social and historical conditions. They can be interpreted as sites through which we “read the present as material history” (Galloway 2012, ix).<br><br>Contemporary media contain other forms of media within them. As McLuhan argues, “the ‘content’ of any medium is always another medium” (McLuhan 1964, 8). Building upon this layered conception of media, Galloway writes that “the interface becomes the point of transition between different mediatic layers within any nested system” (Galloway 2012, 31). In certain cases, it becomes an intraface: “an interface internal to the interface” (Galloway 2012, 40), operating between such elements as non-diegetic and diegetic space.<br><br>In “The Interface Theory of Perception,” Donald D. Hoffman uses the interface as a model for perception—not as a transparent window onto reality, but as a species-specific desktop shaped by natural selection. It presents the world in a form that allows organisms to act, survive, and reproduce rather than showing objective reality as it truly is (Hoffman 2009, 148–165; Hoffman 2016, 157–161). For human beings, spacetime functions as the desktop of this perceptual interface, while physical objects function as icons (Hoffman 2016, 159). Perception does not simply reconstruct an independently given visual reality; it constructs and translates the properties and categories of an organism’s perceptual world, much as a computer desktop turns underlying code into representational symbols and possible actions (Davies and Hoffman 2002, 72–87).",
       "heightMode": "manual",
       "fontSize": 9,
       "groupId": "group-1793765856197"
@@ -572,7 +572,7 @@ window.CANVAS_DATA = {
       "x": 2080.543465615542,
       "y": 860.8218746762734,
       "width": 650,
-      "height": 120,
+      "height": 117,
       "title": "Week 07 ✧ Recap",
       "date": "Wednesday, October 21",
       "groupId": "group-1793765606330"
@@ -599,7 +599,7 @@ window.CANVAS_DATA = {
       "x": 334.4135389088942,
       "y": 1325.151925852103,
       "width": 650,
-      "height": 120,
+      "height": 117,
       "title": "Week 08 ✧ Don’t Destroy On Load",
       "date": "Wednesday, October 28",
       "groupId": "group-1793765599156"
@@ -611,7 +611,7 @@ window.CANVAS_DATA = {
       "x": 414.4383901563157,
       "y": 1384.7637079343376,
       "width": 650,
-      "height": 360,
+      "height": 411,
       "description": "",
       "items": [
         "Persistence, Memory &amp; Consequence: Scenes, Menus, State Tracking, Inventory",
@@ -690,7 +690,7 @@ window.CANVAS_DATA = {
       "x": -74.4095091159185,
       "y": 3607.33972697507,
       "width": 650,
-      "height": 120,
+      "height": 138,
       "title": "Week 09 ✧ Don’t Destroy On Load (continued)",
       "date": "Wednesday, November 4",
       "groupId": "group-1793765910730"
@@ -717,7 +717,7 @@ window.CANVAS_DATA = {
       "x": 1011.0146377493176,
       "y": 4623.746340654676,
       "width": 780,
-      "height": 120,
+      "height": 117,
       "title": "Week 10 ✧ Cut Scenes and Machinima",
       "groupId": "group-1792530953617",
       "date": "Wednesday, November 18"
