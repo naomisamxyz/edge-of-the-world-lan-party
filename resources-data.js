@@ -1,8 +1,8 @@
 window.CANVAS_DATA = {
-  "version": 57,
+  "version": 61,
   "lastUpdated": {
-    "datetime": "2026-10-27",
-    "label": "October 27, 2026",
+    "datetime": "2026-11-03",
+    "label": "November 3, 2026",
     "by": "Naomi Sam"
   },
   "home": {
@@ -14,20 +14,20 @@ window.CANVAS_DATA = {
     {
       "id": "syllabus",
       "type": "section",
-      "x": 3341.9760532251807,
-      "y": 1920.87975640378,
+      "x": 3375.7000115585142,
+      "y": 1909.5082286260022,
       "width": 540,
-      "height": 90,
+      "height": 94,
       "title": "Syllabus",
       "groupId": "group-1787883267744"
     },
     {
       "id": "syllabus-body",
       "type": "text",
-      "x": 3406.4829294573938,
-      "y": 1953.3118269126626,
+      "x": 3440.2068877907273,
+      "y": 1941.9402991348848,
       "width": 900,
-      "height": 414,
+      "height": 312,
       "text": "<strong>IIMC-457/IIMC-657: Edge of the World LAN Party</strong> is a studio course that reclaims the cultural phenomenon of the LAN party as a collective game making lab. The course engages critically with video games in contemporary culture and explores their potential as an artistic medium for a speculative practice. Moving beyond the understanding of video games as finite, conquest driven systems, this course examines the inversion of traditional game mechanics and narratives, as well as environmental storytelling, and experimental forms of interactivity. Students will learn the basics of game development in Unity, while developing projects that use games to reflect on social, political, ecological, and philosophical questions. Regular play sessions and group critiques will allow students to test and discuss projects collectively. Readings and discussions will focus on contemporary discourse around video games in art, posthuman feminism, post patriarchal narratives, and critical design practices.",
       "groupId": "group-1787883267744"
     },
@@ -38,7 +38,7 @@ window.CANVAS_DATA = {
       "x": 1945.706698762086,
       "y": 2365.5317312276243,
       "width": 650,
-      "height": 160,
+      "height": 145,
       "title": "Week 01 ✧ No-clipping, glitch hunting and world-exiting in open-world games",
       "date": "Wednesday, September 9"
     },
@@ -49,7 +49,7 @@ window.CANVAS_DATA = {
       "x": 2037.9704374823498,
       "y": 2464.117075952279,
       "width": 650,
-      "height": 806,
+      "height": 678,
       "description": "",
       "items": [
         "“Hivemind” — Trust, Calum Bowden, Will Freudenheim and Joanna Pope (2021)<br>“Third World: The Bottom Dimension” — Gabriel Massan with Castiel Vitorino Brasileiro, Novíssimo Edgar and LYZZA (2023)<br>“Line of Sight” — Taylor McArthur (2021)",
@@ -67,7 +67,7 @@ window.CANVAS_DATA = {
       "x": 2640.3546035583645,
       "y": 3780.825081365331,
       "width": 650,
-      "height": 138,
+      "height": 145,
       "title": "Week 02 ✧ Countergaming, Modding and the Realtime Manifesto",
       "date": "Wednesday, September 16",
       "groupId": "group-1787888674196"
@@ -79,7 +79,7 @@ window.CANVAS_DATA = {
       "x": 2746.1403062841,
       "y": 3850.224110905377,
       "width": 650,
-      "height": 678,
+      "height": 627,
       "description": "",
       "items": [
         "“DOOM: The Gallery Experience” — Filippo Meozzi and Liam Stone, SCUM DOG (2024)",
@@ -98,7 +98,7 @@ window.CANVAS_DATA = {
       "x": 4472.448463220693,
       "y": 4084.6453726649743,
       "width": 650,
-      "height": 138,
+      "height": 120,
       "title": "Week 03 ✧ Environment, Worlding, Narrative",
       "date": "Wednesday, September 23"
     },
@@ -109,7 +109,7 @@ window.CANVAS_DATA = {
       "x": 4553.20941898551,
       "y": 4163.918512750007,
       "width": 650,
-      "height": 602,
+      "height": 576,
       "description": "",
       "items": [
         "“H.O.R.I.Z.O.N. (Habitat One: Regenerative Interactive Zone of Nurture)” — Institute of Queer Ecology (2021)",
@@ -133,7 +133,7 @@ window.CANVAS_DATA = {
       "url": "https://queerecology.org/H-O-R-I-Z-O-N",
       "meta": "Institute of Queer Ecology (2021)",
       "alt": "H.O.R.I.Z.O.N.",
-      "image": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22420%22%20height%3D%22310%22%20viewBox%3D%220%200%20420%20310%22%3E%3Crect%20width%3D%22420%22%20height%3D%22310%22%20fill%3D%22%23080808%22%2F%3E%3Ctext%20x%3D%2222%22%20y%3D%22148%22%20fill%3D%22%23f2f2f2%22%20font-family%3D%22monospace%22%20font-size%3D%2224%22%3Equeerecology.org%3C%2Ftext%3E%3Ctext%20x%3D%2222%22%20y%3D%22181%22%20fill%3D%22%23777%22%20font-family%3D%22monospace%22%20font-size%3D%2215%22%3Elink%20preview%3C%2Ftext%3E%3C%2Fsvg%3E",
+      "image": "https://iad.microlink.io/3twFbUmDxeqnWKCSZffz0Sqk0kc4BhJf2ik1QXV6tW_eniFT1uimhfZjH58sAo34rDCObLtl5OLCPGO7utt6jQ.png",
       "previewHeight": 112,
       "heightMode": "manual"
     },
@@ -203,7 +203,7 @@ window.CANVAS_DATA = {
       "url": "https://www.saraludy.com/swimmers-canyon-2022",
       "meta": "Sara Ludy (2022)",
       "alt": "Swimmer’s Canyon",
-      "image": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22420%22%20height%3D%22310%22%20viewBox%3D%220%200%20420%20310%22%3E%3Crect%20width%3D%22420%22%20height%3D%22310%22%20fill%3D%22%23080808%22%2F%3E%3Ctext%20x%3D%2222%22%20y%3D%22148%22%20fill%3D%22%23f2f2f2%22%20font-family%3D%22monospace%22%20font-size%3D%2224%22%3Esaraludy.com%3C%2Ftext%3E%3Ctext%20x%3D%2222%22%20y%3D%22181%22%20fill%3D%22%23777%22%20font-family%3D%22monospace%22%20font-size%3D%2215%22%3Elink%20preview%3C%2Ftext%3E%3C%2Fsvg%3E",
+      "image": "https://iad.microlink.io/DBjwqpi1zoqfUH22j4bUPIk8-ODuQEoCGKqQcP9xPnlv2DRwekc874MWQv3vdG8ggefgWVNa-SSYWOBZgDXFsQ.png",
       "previewHeight": 112,
       "heightMode": "manual"
     },
@@ -286,7 +286,7 @@ window.CANVAS_DATA = {
       "url": "https://learn.unity.com/project/introduction-to-visual-scripting",
       "meta": "Unity Learn",
       "alt": "Introduction to Visual Scripting",
-      "image": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22420%22%20height%3D%22310%22%20viewBox%3D%220%200%20420%20310%22%3E%3Crect%20width%3D%22420%22%20height%3D%22310%22%20fill%3D%22%23080808%22%2F%3E%3Ctext%20x%3D%2222%22%20y%3D%22148%22%20fill%3D%22%23f2f2f2%22%20font-family%3D%22monospace%22%20font-size%3D%2224%22%3Elearn.unity.com%3C%2Ftext%3E%3Ctext%20x%3D%2222%22%20y%3D%22181%22%20fill%3D%22%23777%22%20font-family%3D%22monospace%22%20font-size%3D%2215%22%3Elink%20preview%3C%2Ftext%3E%3C%2Fsvg%3E",
+      "image": "https://iad.microlink.io/0-ndNomhY9Ne3ogHhpeuJbqmBo2xiFlc0s9-g01OjsGoR7t5YSRNO1FPqEEvLhDg6lfAvq6YKCmSb7gnzQVIfQ.png",
       "previewHeight": 112,
       "heightMode": "manual"
     },
@@ -294,22 +294,22 @@ window.CANVAS_DATA = {
       "id": "week04",
       "type": "week",
       "week": 4,
-      "x": 5563.656067136752,
-      "y": 2260.221610529284,
+      "x": 5641.062290057864,
+      "y": 2462.358963963372,
       "width": 650,
-      "height": 138,
+      "height": 145,
       "title": "Week 04 ✧ Critical Play, Concepts in video game art",
       "date": "Wednesday, September 30",
-      "groupId": "group-1790734145529"
+      "groupId": "group-1793765794807"
     },
     {
       "id": "week04-content",
       "type": "list",
       "week": 4,
-      "x": 5637.533184498673,
-      "y": 2375.1046453832673,
+      "x": 5714.939407419784,
+      "y": 2577.241998817355,
       "width": 650,
-      "height": 870,
+      "height": 794,
       "description": "",
       "items": [
         "“Waluigi’s Purgatory” — dmstfctn with Evita Manji (2024)",
@@ -318,67 +318,71 @@ window.CANVAS_DATA = {
         "<a href=\"assets/guides/ai-tools.html\">❖ AI Tools: ChatBots, Coding Agents, Generating Assets ❖</a>",
         "Open Lab"
       ],
-      "groupId": "group-1790734145529"
+      "groupId": "group-1793765794807"
     },
     {
       "id": "week05",
       "type": "week",
       "week": 5,
-      "x": 4957.210547745484,
-      "y": 1362.496831962442,
+      "x": 5216.47704080104,
+      "y": 1278.776738779703,
       "width": 650,
-      "height": 138,
+      "height": 120,
       "title": "Week 05 ✧ Player Character and Animations",
-      "date": "Wednesday, October 7"
+      "date": "Wednesday, October 7",
+      "groupId": "group-1793765829624"
     },
     {
       "id": "week05-content",
       "type": "list",
       "week": 5,
-      "x": 5008.284900356741,
-      "y": 1446.7046398075302,
+      "x": 5267.551393412296,
+      "y": 1362.9845466247912,
       "width": 650,
-      "height": 450,
+      "height": 374,
       "description": "",
       "items": [
         "“Becoming Chimeric, Chimeric Becoming: Glitching Toward Radical Hybrid Identities and Unruly Kinship” — Martina Menegon (2024–ongoing)<br>“The Alluvials” — Alice Bucknell (2023–2024)<br>“Time to Party” — Derek Holguin (2023)",
         "“What Can Play: The Potential of Non-Human Players” — Kara Stone (2018)",
         "<a href=\"assets/guides/characters.html\">❥ Characters <span class=\"mirror-symbol\">❥</span></a><br>Third Person Controller, 3D AI generation (Meshy), Character animation (Mixamo), Motion Capture (Deep Motion)",
         "Open Lab"
-      ]
+      ],
+      "groupId": "group-1793765829624"
     },
     {
       "id": "week06",
       "type": "week",
       "week": 6,
-      "x": 3674.7725817629635,
-      "y": 235.49255125253796,
+      "x": 3386.0239774509364,
+      "y": 274.5984540303157,
       "width": 650,
-      "height": 117,
+      "height": 120,
       "title": "Week 06 ✧ The Interface",
-      "date": "Wednesday, October 14"
+      "date": "Wednesday, October 14",
+      "groupId": "group-1793765856197"
     },
     {
       "id": "week06-content",
       "type": "list",
       "week": 6,
-      "x": 3752.3617584756694,
-      "y": 304.5004780240786,
+      "x": 3463.6131541636423,
+      "y": 343.6063808018563,
       "width": 650,
-      "height": 464,
+      "height": 438,
       "description": "",
       "items": [
         "“Password Protected with American Artist on their Dash Cam Video Art” — Pioneer Works (2020)<br>American Artist, “Black Gooey Universe” (2021)",
         "The Interface<br>“Easy to Use and Incredibly Difficult: On the Mythical Border between Interface and Gameplay” — Jesper Juul and Marleigh Norton (2009)<br>“The Interface Theory of Perception” — Donald D. Hoffman, Manish Singh, and Chetan Prakash (2015)<br>“Laws of Media: The New Science” — Marshall McLuhan and Eric McLuhan (1988)",
         "<a href=\"assets/guides/interface.html\">✢ Interface ✢</a><br>UI, Fonts, Sprites"
-      ]
+      ],
+      "groupId": "group-1793765856197"
     },
     {
       "id": "week06-media-juul-norton",
       "type": "media",
       "week": 6,
-      "x": 3459.7989534057633,
-      "y": 254.13448864164553,
+      "x": 3171.409196461319,
+      "y": 293.2403914194233,
       "width": 100,
       "height": 112,
       "mediaKind": "link",
@@ -388,14 +392,15 @@ window.CANVAS_DATA = {
       "alt": "Easy to Use and Incredibly Difficult",
       "image": "https://iad.microlink.io/DYqJNPR5-DzgqNtKrGQhM3pZ1Xcn68VdccFvOF369RaCv2UIKOuKLgidsEM570GoXIdbRpiZoUW7JliTbtfGRw.png",
       "previewHeight": 112,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765856197"
     },
     {
       "id": "week06-media-interface-theory",
       "type": "media",
       "week": 6,
-      "x": 3325.247126787518,
-      "y": 208.99468144159914,
+      "x": 3036.8573698430737,
+      "y": 248.10058421937688,
       "width": 100,
       "height": 112,
       "mediaKind": "link",
@@ -405,14 +410,15 @@ window.CANVAS_DATA = {
       "alt": "The Interface Theory of Perception",
       "image": "https://iad.microlink.io/0gu8dD-8zEjNukKZaVq_4i-YN394HBVrS1vsol7YzFWgN99TjQcLez2Awup8sOvM-XBNn-LHAf85yvueUC5tnQ.png",
       "previewHeight": 112,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765856197"
     },
     {
       "id": "week06-media-screen-anchors",
       "type": "media",
       "week": 6,
-      "x": 4470,
-      "y": 720,
+      "x": 4181.251395687973,
+      "y": 759.1059027777777,
       "width": 100,
       "height": 112,
       "mediaKind": "link",
@@ -422,14 +428,15 @@ window.CANVAS_DATA = {
       "alt": "Manage screen size and anchors",
       "image": "https://iad.microlink.io/1sAYYknA4KPXBL0-dd7xtxymAtWqQpt3mFUDGk68stQmjJ5hKR6gwTrCcHpYvejrfKYSAquRT6cXNV_wD5zsjw.png",
       "previewHeight": 112,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765856197"
     },
     {
       "id": "week06-media-ui-components",
       "type": "media",
       "week": 6,
-      "x": 4734.935283107508,
-      "y": 808.8250562188215,
+      "x": 4446.186678795481,
+      "y": 848.2782306426469,
       "width": 100,
       "height": 112,
       "mediaKind": "link",
@@ -439,14 +446,15 @@ window.CANVAS_DATA = {
       "alt": "UI Components",
       "image": "https://iad.microlink.io/2B2JOR_cheJPWgtzxi3eTcYOBnHiYRIEeK8z9w5bTxGwZtNtl72ySp3hSRFBVO6Iv9VfbCnrX8bODUqv8_MbvQ.png",
       "previewHeight": 112,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765856197"
     },
     {
       "id": "week06-media-tmp-font-creation",
       "type": "media",
       "week": 6,
-      "x": 4598.674350626269,
-      "y": 770.0125771073053,
+      "x": 4309.925746314242,
+      "y": 809.118479885083,
       "width": 100,
       "height": 112,
       "mediaKind": "link",
@@ -456,26 +464,28 @@ window.CANVAS_DATA = {
       "alt": "TextMesh Pro: Font Asset Creation",
       "image": "https://iad.microlink.io/oJDxNbAFo7zIYgtaDMi4snQWVRCXVpP6SZ_TNz97Xqi8Lk4htFwM8omOqMQYQKLvbbiCP9Bp5W5BynVrWgydkw.png",
       "previewHeight": 112,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765856197"
     },
     {
       "id": "week06-note-questions",
       "type": "text",
       "week": 6,
-      "x": 4367.946995336822,
-      "y": 540.3087859447464,
+      "x": 4079.198391024795,
+      "y": 579.7619603685717,
       "width": 535.8817017575532,
       "height": 185.81330036315921,
       "text": "Central question: How does an interface tell the player which actions are possible? And shape his actions!<br>Societal question: How are people quantified and governed by computational systems?",
       "heightMode": "manual",
-      "fontSize": 11
+      "fontSize": 11,
+      "groupId": "group-1793765856197"
     },
     {
       "id": "week06-media-password-protected",
       "type": "media",
       "week": 6,
-      "x": 4408.898166685309,
-      "y": 238.4719590159637,
+      "x": 4120.508409740864,
+      "y": 277.5778617937415,
       "width": 180,
       "height": 112,
       "mediaKind": "youtube",
@@ -485,14 +495,15 @@ window.CANVAS_DATA = {
       "alt": "Password Protected with American Artist on their Dash Cam Video Art",
       "image": "https://i.ytimg.com/vi/t9AGx0tO7yg/hqdefault.jpg",
       "previewHeight": 112,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765856197"
     },
     {
       "id": "week06-media-black-gooey-universe",
       "type": "media",
       "week": 6,
-      "x": 4606.425067792186,
-      "y": 358.4054759124326,
+      "x": 4317.676463480159,
+      "y": 397.51137869021034,
       "width": 100,
       "height": 112,
       "mediaKind": "link",
@@ -502,14 +513,15 @@ window.CANVAS_DATA = {
       "alt": "Black Gooey Universe",
       "image": "https://iad.microlink.io/q0Ys-W9jivXHjnxLc58f_ea0lBuM0G1h13BeK_uZi1FExtU7p3pGX_ZoqNxiRISgJOrSEM4QAIYahY-t_YHeug.png",
       "previewHeight": 112,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765856197"
     },
     {
       "id": "week06-media-input-icons",
       "type": "media",
       "week": 6,
-      "x": 4492.23418322451,
-      "y": 1026.626754495168,
+      "x": 4203.485578912483,
+      "y": 1065.7326572729457,
       "width": 100,
       "height": 112,
       "mediaKind": "link",
@@ -519,14 +531,15 @@ window.CANVAS_DATA = {
       "alt": "Game Input Controller Icons Free",
       "image": "https://iad.microlink.io/peWPs9EOdoZbVe5IegW2vcpXHyS_Ric022np_OKmoFCXl4QebY26JfPP-ZRmuA46XguTsCEuyFLRVdyzk8CoOQ.png",
       "previewHeight": 112,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765856197"
     },
     {
       "id": "week06-media-laws-of-media",
       "type": "media",
       "week": 6,
-      "x": 3592.9971497629435,
-      "y": 379.0317170088256,
+      "x": 3304.607392818499,
+      "y": 418.1376197866033,
       "width": 100,
       "height": 112,
       "mediaKind": "link",
@@ -536,64 +549,69 @@ window.CANVAS_DATA = {
       "alt": "Laws of Media: The New Science",
       "image": "https://iad.microlink.io/0Y8YHPpzM3jlywPMJa82_Ec_TkysoEgd7T05wOqGei2rqeMKZ7pgf_CGMYmbiU4zSTEoO_X0XcbRmjJqTjF2_g.png",
       "previewHeight": 112,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765856197"
     },
     {
       "id": "week06-note-interface-essay",
       "type": "text",
       "week": 6,
-      "x": 3865.9142917658105,
-      "y": 744.3629802819271,
+      "x": 3577.1656874537834,
+      "y": 783.4688830597048,
       "width": 530.1786503382733,
       "height": 660.244762598467,
       "text": "Interfaces are tools or prostheses for communicating with coded structures and accessing information and resources that lie beyond our perceptual, physiological, and socioeconomic limitations. They create bridges between physical and digital realms, connecting us with and within the world around us (Hookway 2014, 4–5).<br><br>The inter-face is a significant surface: a “permeable plane that lies between two entities” [source needed], “with meaning embedded in it or delivered through it” (Galloway 2012, 30; see also Flusser 2000, 6). It speaks in a language of thresholds and transitions. It is “a gateway that opens up and allows passage to some place beyond” (Galloway 2012, 30), providing access to virtual grounds. Interfaces are “autonomous zones of activity” with their own capacity to generate results, consequences, and narratives (Galloway 2012, vii). They are processes that produce results and “bring about transformations in material states” (Galloway 2012, vii). Interfaces are therefore never neutral: they emerge in response to particular social and historical conditions. They can be interpreted as sites through which we “read the present as material history” (Galloway 2012, ix).<br><br>Contemporary media contain other forms of media within them. As McLuhan argues, “the ‘content’ of any medium is always another medium” (McLuhan 1964, 8). Building upon this layered conception of media, Galloway writes that “the interface becomes the point of transition between different mediatic layers within any nested system” (Galloway 2012, 31). In certain cases, it becomes an intraface: “an interface internal to the interface” (Galloway 2012, 40), operating between such elements as non-diegetic and diegetic space.<br><br>In “The Interface Theory of Perception,” Donald D. Hoffman uses the interface as a model for perception—not as a transparent window onto reality, but as a species-specific desktop shaped by natural selection. It presents the world in a form that allows organisms to act, survive, and reproduce rather than showing objective reality as it truly is (Hoffman 2009, 148–165; Hoffman 2016, 157–161). For human beings, spacetime functions as the desktop of this perceptual interface, while physical objects function as icons (Hoffman 2016, 159). Perception does not simply reconstruct an independently given visual reality; it constructs and translates the properties and categories of an organism’s perceptual world, much as a computer desktop turns underlying code into representational symbols and possible actions (Davies and Hoffman 2002, 72–87).",
       "heightMode": "manual",
-      "fontSize": 9
+      "fontSize": 9,
+      "groupId": "group-1793765856197"
     },
     {
       "id": "week07",
       "type": "week",
       "week": 7,
-      "x": 2013.7644099151498,
-      "y": 102.05782675643859,
+      "x": 2080.543465615542,
+      "y": 860.8218746762734,
       "width": 650,
-      "height": 117,
+      "height": 120,
       "title": "Week 07 ✧ Recap",
-      "date": "Wednesday, October 21"
+      "date": "Wednesday, October 21",
+      "groupId": "group-1793765606330"
     },
     {
       "id": "week07-content",
       "type": "list",
       "week": 7,
-      "x": 2130.956285055263,
-      "y": 190.88847821854336,
+      "x": 2217.223187977878,
+      "y": 972.0629846968839,
       "width": 647.0434356748193,
       "height": 329.0217422958171,
       "description": "",
       "items": [
         "Exercise: Create a scene that brings together everything from the past sessions<br>Sculpt a terrain and populate it with imported assets. Add a third person controller with a custom character. Create custom materials and shaders, and use visual scripting for interactions. Build an interface with interactive buttons.<br>AI chat tools are allowed."
       ],
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765606330"
     },
     {
       "id": "week08",
       "type": "week",
       "week": 8,
-      "x": 790.6734315902254,
-      "y": 908.948675717166,
+      "x": 334.4135389088942,
+      "y": 1325.151925852103,
       "width": 650,
-      "height": 117,
+      "height": 120,
       "title": "Week 08 ✧ Don’t Destroy On Load",
-      "groupId": "group-1792530962033"
+      "date": "Wednesday, October 28",
+      "groupId": "group-1793765599156"
     },
     {
       "id": "week08-content",
       "type": "list",
       "week": 8,
-      "x": 870.6982828376467,
-      "y": 968.5604577994006,
+      "x": 414.4383901563157,
+      "y": 1384.7637079343376,
       "width": 650,
-      "height": 411,
+      "height": 360,
       "description": "",
       "items": [
         "Persistence, Memory &amp; Consequence: Scenes, Menus, State Tracking, Inventory",
@@ -602,84 +620,116 @@ window.CANVAS_DATA = {
         "<a href=\"assets/guides/dont-destroy-on-load.html\">⌗ Don’t Destroy on Load ⌗</a><br>State Tracking, Inventory Systems, Scriptable Objects, Object Pooling, Mini map",
         "Open Lab"
       ],
-      "groupId": "group-1792530962033"
+      "groupId": "group-1793765599156"
     },
     {
       "id": "week08-media-menu-tutorial-csharp",
       "type": "media",
       "week": 8,
-      "x": 1724.7191193355675,
-      "y": 1208.6810964337726,
+      "x": 1268.4592266542359,
+      "y": 1624.8843465687096,
       "width": 100,
-      "height": 116.40212554291026,
+      "height": 112,
       "mediaKind": "youtube",
       "title": "Menu Tutorial C#",
       "url": "https://www.youtube.com/watch?v=A8B_easomtg",
       "alt": "Menu Tutorial C#",
       "image": "https://i.ytimg.com/vi/A8B_easomtg/hqdefault.jpg",
       "previewHeight": 112,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765599156"
     },
     {
       "id": "week08-media-dont-destroy-on-load-csharp",
       "type": "media",
       "week": 8,
-      "x": 1577.5606055908713,
-      "y": 1188.1309740888169,
+      "x": 1121.30071290954,
+      "y": 1604.3342242237536,
       "width": 100,
-      "height": 109.32427674006911,
+      "height": 112,
       "mediaKind": "link",
       "title": "Don’t Destroy on Load C#",
       "url": "https://learn.unity.com/tutorial/implement-data-persistence-between-scenes-1",
       "meta": "Unity Learn",
       "alt": "Don’t Destroy on Load C#",
-      "image": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22420%22%20height%3D%22310%22%20viewBox%3D%220%200%20420%20310%22%3E%3Crect%20width%3D%22420%22%20height%3D%22310%22%20fill%3D%22%23080808%22%2F%3E%3Ctext%20x%3D%2222%22%20y%3D%22148%22%20fill%3D%22%23f2f2f2%22%20font-family%3D%22monospace%22%20font-size%3D%2224%22%3Elearn.unity.com%3C%2Ftext%3E%3Ctext%20x%3D%2222%22%20y%3D%22181%22%20fill%3D%22%23777%22%20font-family%3D%22monospace%22%20font-size%3D%2215%22%3Elink%20preview%3C%2Ftext%3E%3C%2Fsvg%3E",
+      "image": "https://iad.microlink.io/8BWgyQf9_9zLJf4_78aVDcUhnHRrwRVw408q21KgLXvAWf4UVu7MDy9R_2fNBF7hJY9IEyQWYFPpQGTWTJGHPQ.png",
       "previewHeight": 112,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765599156"
     },
     {
       "id": "week08-note-societal-question",
       "type": "text",
       "week": 8,
-      "x": 1471.518855046588,
-      "y": 914.4893975242429,
+      "x": 1015.2589623652567,
+      "y": 1330.6926476591798,
       "width": 470,
       "height": 245,
       "text": "Societal question: What happens when maintenance, dependency, repair, and mutual aid replace conquest and accumulation?<br><br>• What does a game remember?<br>• What changes persist between scenes or play sessions?<br>• How can inventories, resources, and tracked states express relationships, responsibility, or care?",
       "heightMode": "manual",
-      "fontSize": 11
+      "fontSize": 11,
+      "groupId": "group-1793765599156"
     },
     {
       "id": "week08-note-game-analysis-toolkit",
       "type": "text",
       "week": 8,
-      "x": 808.1320372796544,
-      "y": 1335.107334977077,
-      "width": 625.9328037147437,
-      "height": 1300.8259533684152,
+      "x": 351.8721445983233,
+      "y": 1751.310585112014,
+      "width": 640.8859441723258,
+      "height": 1102.1568677889281,
       "text": "<strong>Game analysis toolkit</strong> (Consalvo and Dutton, 2006)<br><br>Consalvo and Dutton propose a practical method for conducting a qualitative analysis of a game—not merely reviewing whether it is enjoyable. They argue that playing is necessary, but researchers should also systematically document how the game’s components produce meaning. Their toolkit has four parts:<br><br><strong>1. Object Inventory</strong><br>Catalog the objects that can be found, purchased, created, collected or used. Record things such as:<br>• What is the object?<br>• How is it acquired?<br>• Is it single-use or reusable?<br>• What actions does it permit?<br>• Is it common, scarce or expensive?<br>• Does its use change over time?<br>• What does the game encourage the player to collect?<br>This can reveal the game’s economic and ideological values. For example: does the game value accumulation, consumption, care, repair or exchange?<br><br><strong>2. Interface Study</strong><br>Examine the information and choices presented through menus, health bars, inventory screens, maps and mini-maps, scores, mission objectives, character statistics, and settings and upgrade screens.<br>The important question is not only whether the interface is easy to use. It is also: what information does the game make visible, and what does it conceal?<br>A permanently visible score suggests that accumulation matters. A visible relationship meter turns intimacy into something measurable. A mini-map determines which parts of the world are considered important.<br><br><strong>3. Interaction Map</strong><br>Document the interactions available between the player and NPCs, different characters, players in multiplayer games, and characters and social systems. Questions include:<br>• Who can the player speak to?<br>• What kinds of responses are possible?<br>• Can relationships change?<br>• Who can be helped, harmed, ignored or exchanged?<br>• Are interactions reciprocal?<br>• What actions are unavailable?<br>The resulting “map” does not have to record every possible interaction. It can identify recurring patterns and limits.<br><br><strong>4. Gameplay Log</strong><br>Keep a record of what happens while playing:<br>• Important events<br>• Unexpected or emergent behavior<br>• Decisions and consequences<br>• Save and checkpoint systems<br>• Changes to the avatar<br>• Changes to the game world<br>• Moments when the rules appear to break<br>• References to other games or media<br>The gameplay log reconnects the separate observations into an account of the overall experience.<br><br><br>",
       "heightMode": "manual",
-      "fontSize": 11
+      "fontSize": 11,
+      "groupId": "group-1793765599156"
     },
     {
       "id": "week09",
       "type": "week",
       "week": 9,
-      "x": -474.8061774197845,
-      "y": 2150.9301354589884,
-      "width": 780,
-      "height": 117,
-      "title": "Week 09 ✧ Cut Scenes and Machinima",
-      "groupId": "group-1792530953617"
+      "x": -74.4095091159185,
+      "y": 3607.33972697507,
+      "width": 650,
+      "height": 120,
+      "title": "Week 09 ✧ Don’t Destroy On Load (continued)",
+      "date": "Wednesday, November 4",
+      "groupId": "group-1793765910730"
     },
     {
       "id": "week09-content",
       "type": "list",
       "week": 9,
-      "x": -297.0771856613049,
-      "y": 2256.4975779257716,
+      "x": 94.80198413536635,
+      "y": 3708.549545333126,
       "width": 650,
-      "height": 488,
+      "height": 222,
+      "description": "",
+      "items": [
+        "<a href=\"assets/guides/scenes-menus.html\">♦︎ Scenes, Menus ♦︎</a>",
+        "<a href=\"assets/guides/dont-destroy-on-load.html\">⌗ Don’t Destroy on Load ⌗</a><br>State Tracking, Inventory Systems, Scriptable Objects, Object Pooling, Mini map"
+      ],
+      "groupId": "group-1793765910730"
+    },
+    {
+      "id": "week10",
+      "type": "week",
+      "week": 10,
+      "x": 1011.0146377493176,
+      "y": 4623.746340654676,
+      "width": 780,
+      "height": 120,
+      "title": "Week 10 ✧ Cut Scenes and Machinima",
+      "groupId": "group-1792530953617",
+      "date": "Wednesday, November 18"
+    },
+    {
+      "id": "week10-content",
+      "type": "list",
+      "week": 10,
+      "x": 1188.7436295077976,
+      "y": 4729.313783121459,
+      "width": 650,
+      "height": 473.5978326723026,
       "description": "",
       "items": [
         "“The Night Journey” — Bill Viola and USC Game Innovation Lab (2007–2018)<br>KEIKEN — <a href=\"https://www.wisdomsfor.love/\">wisdomsfor.love</a>",
@@ -688,25 +738,27 @@ window.CANVAS_DATA = {
         "<a href=\"assets/guides/video.html\">⠿ Video ⠿</a><br>Timeline, Recorder",
         "<a href=\"assets/guides/export-and-distribution.html\">☁︎ Export and Distribution ☁︎</a><br>Optimizing Performance, Build for PC/Mac, WebGL"
       ],
-      "groupId": "group-1792530953617"
+      "groupId": "group-1792530953617",
+      "heightMode": "manual"
     },
     {
-      "id": "week10",
+      "id": "week11",
       "type": "week",
-      "week": 10,
-      "x": -602.5990056272101,
-      "y": 3895.747489617912,
+      "week": 11,
+      "x": 772.7511364773428,
+      "y": 6079.467455453933,
       "width": 650,
       "height": 138,
-      "title": "Week 10 ✧ Alternative controllers, sensors and interactivity",
-      "groupId": "group-1792530935866"
+      "title": "Week X ✧ Alternative controllers, sensors and interactivity",
+      "groupId": "group-1792530935866",
+      "date": ""
     },
     {
-      "id": "week10-content",
+      "id": "week11-content",
       "type": "list",
-      "week": 10,
-      "x": -432.84269520040345,
-      "y": 3984.0306911857806,
+      "week": 11,
+      "x": 942.5074469041496,
+      "y": 6167.750657021802,
       "width": 650,
       "height": 374,
       "description": "",
@@ -719,142 +771,92 @@ window.CANVAS_DATA = {
       "groupId": "group-1792530935866"
     },
     {
-      "id": "week11",
+      "id": "week12",
       "type": "week",
-      "week": 11,
-      "x": 1472.5844223636552,
-      "y": 5241.772880347792,
+      "week": 12,
+      "x": 2399.2141988039193,
+      "y": 5741.433888813278,
       "width": 650,
       "height": 117,
       "title": "Week 11 ✧ Networked Play",
-      "groupId": "group-1792531074131"
+      "groupId": "group-1792531074131",
+      "date": "Wednesday, November 25"
     },
     {
-      "id": "week11-content",
+      "id": "week12-content",
       "type": "list",
-      "week": 11,
-      "x": 1581.268314176061,
-      "y": 5324.7508184705675,
+      "week": 12,
+      "x": 2507.898090616325,
+      "y": 5824.411826936053,
       "width": 645.97813918697,
       "height": 346.0912605059224,
       "description": "",
       "items": [
         "Multiplayer games<br>“The Endless Forest” — Auriea Harvey and Michaël Samyn / Tale of Tales (2005–ongoing)<br>“KronoDonum” — Jenna Caravello (2025)<br>“Feral Metaverse” — Theo Triantafyllidis (2024)<br>“Nightcrawlers” — Alice Bucknell with Mati Bratkowski (2025)",
-        "<a href=\"assets/guides/multiplayer-game.html\">⟷ Multiplayer Game ⟷</a>",
+        "Final project concept presentations",
         "Open Lab"
       ],
       "heightMode": "manual",
       "groupId": "group-1792531074131"
     },
     {
-      "id": "week12",
+      "id": "week13",
       "type": "week",
-      "week": 12,
-      "x": 4093.637631037889,
-      "y": 5968.063458782071,
+      "week": 13,
+      "x": 4154.923773982994,
+      "y": 5858.891275056261,
       "width": 650,
       "height": 138,
       "title": "Week 12 ✧ Ecological games, Procedural environments, Simulations",
-      "groupId": "group-1792530925851"
+      "groupId": "group-1792530925851",
+      "date": "Wednesday, December 2"
     },
     {
-      "id": "week12-content",
+      "id": "week13-content",
       "type": "list",
-      "week": 12,
-      "x": 4225.380545910566,
-      "y": 6046.021344626056,
-      "width": 650,
-      "height": 845,
+      "week": 13,
+      "x": 4286.666688855671,
+      "y": 5936.849160900246,
+      "width": 650.2520949670068,
+      "height": 834.3980182560964,
       "description": "",
       "items": [
         "“The Inner Carbon Classic” — Wendi Yan with Yi Xie (2024)<br>“The Alluvials” — Alice Bucknell (2023–2024)<br>“Earth Engine” — Alice Bucknell (2025–2026)",
         "Ecological Games<br>“Playing Nature: Ecology in Video Games” — Alenda Y. Chang (2019)<br>“Rambunctious Games: A Manifesto for Environmental Game Design” — Alenda Y. Chang (2020)<br>“Ecological World-Building: From Science Fiction to Virtual Reality” — Alice Bucknell (2021)<br>“Playing Nature: Alenda Y. Chang on Gaming’s Role in the Climate Crisis” — Alenda Y. Chang and Kay Watson (2021)<br>“Ecogames: Playful Perspectives on the Climate Crisis” — Laura op de Beke, Joost Raessens, Stefan Werning, and Gerald Farca, editors (2024)",
         "Simulation<br>“BOB (Bag of Beliefs)” — Ian Cheng (2018–2019)<br>“Drift Lattice” — Theo Triantafyllidis (2025)<br>“The Sentinel Self” — Sissel Marie Tonn (2022–ongoing)<br>“Ork Haus” — Theo Triantafyllidis (2022)<br>“Radicalization Pipeline” — Theo Triantafyllidis (2021)",
         "<a href=\"assets/guides/environment-ii.html\">◇ Environment II ◇</a><br>Procedural Environment, APIs and Database integration",
-        "Open Lab"
+        "Playtesting and Debugging"
       ],
-      "groupId": "group-1792530925851"
-    },
-    {
-      "id": "week13",
-      "type": "week",
-      "week": 13,
-      "x": 6549.906432238155,
-      "y": 5317.2649177759085,
-      "width": 650,
-      "height": 117,
-      "title": "Week 13 ✧ NPCs",
-      "groupId": "group-1792531047256"
-    },
-    {
-      "id": "week13-content",
-      "type": "list",
-      "week": 13,
-      "x": 6628.1398574819,
-      "y": 5396.290888534495,
-      "width": 650,
-      "height": 399,
-      "description": "",
-      "items": [
-        "“Non-Playable Characters” — LAN Party, edited by Vienna Kim and Benoît Palop (2025)<br>“The NPC-ification of Society and Culture” — Javier Sosa (2026)<br>“Non-player Characters and the Nonhuman: Insights and Scoping Review Toward Critical Posthumanist Human-Machine Communication” — Do Own Kim (2025)",
-        "<a href=\"assets/guides/ai-integration.html\">✣ AI Integration ✣</a>",
-        "Final project concept presentations",
-        "Work on final project games"
-      ],
-      "groupId": "group-1792531047256"
+      "groupId": "group-1792530925851",
+      "heightMode": "manual"
     },
     {
       "id": "week14",
       "type": "week",
       "week": 14,
-      "x": 7728.063427836245,
-      "y": 3355.1489148224414,
+      "x": 6094.602443925221,
+      "y": 5460.153838704249,
       "width": 650,
       "height": 117,
-      "title": "Week 14 ✧ Playtest",
-      "groupId": "group-1787895932750"
+      "title": "Week 13 ✧ NPCs and LAN Party",
+      "groupId": "group-1792531047256",
+      "date": "Wednesday, December 9"
     },
     {
       "id": "week14-content",
       "type": "list",
       "week": 14,
-      "x": 7838.063427836245,
-      "y": 3555.7999564891084,
+      "x": 6172.835869168967,
+      "y": 5539.179809462836,
       "width": 650,
-      "height": 171,
+      "height": 362,
       "description": "",
       "items": [
-        "Playtest",
-        "Debugging/Work on final project games"
-      ],
-      "groupId": "group-1787895932750"
-    },
-    {
-      "id": "week15",
-      "type": "week",
-      "week": 15,
-      "x": 7186.13634450291,
-      "y": 1774.940581489108,
-      "width": 650,
-      "height": 117,
-      "title": "Week 15 ✧ LAN Party",
-      "groupId": "group-1787895937567"
-    },
-    {
-      "id": "week15-content",
-      "type": "list",
-      "week": 15,
-      "x": 7296.809087558466,
-      "y": 1974.940581489108,
-      "width": 650,
-      "height": 209,
-      "description": "",
-      "items": [
-        "Set up for Presentation",
+        "“Non-Playable Characters” — LAN Party, edited by Vienna Kim and Benoît Palop (2025)<br>“The NPC-ification of Society and Culture” — Javier Sosa (2026)<br>“Non-player Characters and the Nonhuman: Insights and Scoping Review Toward Critical Posthumanist Human-Machine Communication” — Do Own Kim (2025)",
         "Presentation and collective gaming",
         "Setup for IM class show"
       ],
-      "groupId": "group-1787895937567"
+      "groupId": "group-1792531047256"
     },
     {
       "id": "item1788837607403",
@@ -1591,8 +1593,8 @@ window.CANVAS_DATA = {
     {
       "id": "item1790725675601",
       "type": "media",
-      "x": 5373.375513690556,
-      "y": 2437.885636540336,
+      "x": 5450.781736611667,
+      "y": 2640.0229899744236,
       "width": 240,
       "height": 135,
       "mediaKind": "youtube",
@@ -1602,13 +1604,13 @@ window.CANVAS_DATA = {
       "alt": "Waluigi's Purgatory - dmstfctn & Evita Manji",
       "image": "https://i.ytimg.com/vi/da79UnNPflo/hqdefault.jpg",
       "previewHeight": 135,
-      "groupId": "group-1790734145529"
+      "groupId": "group-1793765794807"
     },
     {
       "id": "item1790725728441",
       "type": "media",
-      "x": 5448.993303710198,
-      "y": 2662.0420180964197,
+      "x": 5526.3995266313095,
+      "y": 2864.1793715305075,
       "width": 210,
       "height": 155,
       "mediaKind": "link",
@@ -1618,13 +1620,13 @@ window.CANVAS_DATA = {
       "alt": "Godmode Epochs",
       "image": "assets/thumbnails/week04-godmode-epochs.png?v=1",
       "previewHeight": 155,
-      "groupId": "group-1790734145529"
+      "groupId": "group-1793765794807"
     },
     {
       "id": "item1790725792328",
       "type": "media",
-      "x": 5207.455975373851,
-      "y": 2720.4308181072925,
+      "x": 5284.862198294963,
+      "y": 2922.5681715413803,
       "width": 210,
       "height": 155,
       "mediaKind": "link",
@@ -1634,13 +1636,13 @@ window.CANVAS_DATA = {
       "alt": "Vinny Roca",
       "image": "assets/thumbnails/week04-slot-waste.jpg?v=1",
       "previewHeight": 155,
-      "groupId": "group-1790734145529"
+      "groupId": "group-1793765794807"
     },
     {
       "id": "item1790725852756",
       "type": "media",
-      "x": 5398.176877990346,
-      "y": 2907.984034426996,
+      "x": 5475.583100911457,
+      "y": 3110.121387861084,
       "width": 210,
       "height": 155,
       "mediaKind": "link",
@@ -1650,14 +1652,14 @@ window.CANVAS_DATA = {
       "alt": "Unprotected",
       "image": "assets/thumbnails/week04-epoch-gallery.jpg?v=1",
       "previewHeight": 155,
-      "groupId": "group-1790734145529"
+      "groupId": "group-1793765794807"
     },
     {
       "id": "week04-media-playable-games",
       "type": "media",
       "week": 4,
-      "x": 5302.339714866421,
-      "y": 3199.0686549654292,
+      "x": 5379.745937787532,
+      "y": 3401.206008399517,
       "width": 100,
       "height": 155,
       "mediaKind": "link",
@@ -1668,14 +1670,14 @@ window.CANVAS_DATA = {
       "image": "assets/thumbnails/week04-playable-games.jpg?v=1",
       "previewHeight": 155,
       "heightMode": "manual",
-      "groupId": "group-1790734416897"
+      "groupId": "group-1793765794807"
     },
     {
       "id": "week04-media-black-trans-archive",
       "type": "media",
       "week": 4,
-      "x": 5543.4996400865075,
-      "y": 3427.289696161325,
+      "x": 5620.905863007619,
+      "y": 3629.427049595413,
       "width": 210,
       "height": 155,
       "mediaKind": "link",
@@ -1685,14 +1687,14 @@ window.CANVAS_DATA = {
       "alt": "Black Trans Archive",
       "image": "assets/thumbnails/week04-black-trans-archive.jpg?v=1",
       "previewHeight": 155,
-      "groupId": "group-1790734416897"
+      "groupId": "group-1793765794807"
     },
     {
       "id": "week04-media-danielle-video",
       "type": "media",
       "week": 4,
-      "x": 5304.608613260756,
-      "y": 3441.808738384606,
+      "x": 5382.014836181867,
+      "y": 3643.9460918186937,
       "width": 100,
       "height": 155,
       "mediaKind": "link",
@@ -1703,14 +1705,14 @@ window.CANVAS_DATA = {
       "image": "assets/thumbnails/week04-playable-games.jpg?v=1",
       "previewHeight": 155,
       "heightMode": "manual",
-      "groupId": "group-1790734416897"
+      "groupId": "group-1793765794807"
     },
     {
       "id": "week04-media-the-delusion",
       "type": "media",
       "week": 4,
-      "x": 5422.639647567685,
-      "y": 3201.7077179784656,
+      "x": 5500.045870488796,
+      "y": 3403.8450714125534,
       "width": 210,
       "height": 155,
       "mediaKind": "link",
@@ -1720,14 +1722,14 @@ window.CANVAS_DATA = {
       "alt": "THE DELUSION",
       "image": "assets/thumbnails/week04-the-delusion.png?v=1",
       "previewHeight": 155,
-      "groupId": "group-1790734416897"
+      "groupId": "group-1793765794807"
     },
     {
       "id": "week04-media-danielle-twitch",
       "type": "media",
       "week": 4,
-      "x": 5421.846695995408,
-      "y": 3429.1165541847977,
+      "x": 5499.252918916519,
+      "y": 3631.2539076188855,
       "width": 100,
       "height": 155,
       "mediaKind": "link",
@@ -1738,14 +1740,14 @@ window.CANVAS_DATA = {
       "image": "assets/thumbnails/week04-danielle-twitch.jpg?v=1",
       "previewHeight": 155,
       "heightMode": "manual",
-      "groupId": "group-1790734416897"
+      "groupId": "group-1793765794807"
     },
     {
       "id": "week04-media-jenn-frank",
       "type": "media",
       "week": 4,
-      "x": 6422.811479152787,
-      "y": 3247.241775545356,
+      "x": 6500.461582977028,
+      "y": 3449.379128979444,
       "width": 100,
       "height": 155,
       "mediaKind": "link",
@@ -1755,14 +1757,15 @@ window.CANVAS_DATA = {
       "alt": "Games Are a Faith-Based Pursuit: A Conversation with Jenn Frank",
       "image": "assets/thumbnails/week04-jenn-frank.jpg?v=1",
       "previewHeight": 155,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765794807"
     },
     {
       "id": "week04-media-critical-play",
       "type": "media",
       "week": 4,
-      "x": 6266.531408770261,
-      "y": 2414.530419649667,
+      "x": 6344.425393497632,
+      "y": 2616.431759306532,
       "width": 100,
       "height": 155,
       "mediaKind": "link",
@@ -1772,14 +1775,15 @@ window.CANVAS_DATA = {
       "alt": "Critical Play by Mary Flanagan",
       "image": "assets/thumbnails/week04-critical-play.jpg?v=1",
       "previewHeight": 155,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765794807"
     },
     {
       "id": "week04-media-world-exploration",
       "type": "media",
       "week": 4,
-      "x": 6303.541099182833,
-      "y": 3177.887344676504,
+      "x": 6380.947322103944,
+      "y": 3380.024698110592,
       "width": 100,
       "height": 155,
       "mediaKind": "link",
@@ -1789,14 +1793,15 @@ window.CANVAS_DATA = {
       "alt": "The Experience and Exploration of Worlds in Single-Player Video Games",
       "image": "assets/thumbnails/week04-world-exploration.jpg?v=1",
       "previewHeight": 155,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765794807"
     },
     {
       "id": "week04-media-persuasive-games",
       "type": "media",
       "week": 4,
-      "x": 6293.818685835056,
-      "y": 2948.5817434387245,
+      "x": 6371.468789659298,
+      "y": 3150.7190968728123,
       "width": 100,
       "height": 155,
       "mediaKind": "link",
@@ -1806,14 +1811,15 @@ window.CANVAS_DATA = {
       "alt": "Persuasive Games: The Expressive Power of Videogames",
       "image": "assets/thumbnails/week04-persuasive-games.jpg?v=1",
       "previewHeight": 155,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765794807"
     },
     {
       "id": "week04-media-games-agency",
       "type": "media",
       "week": 4,
-      "x": 6399.91174089034,
-      "y": 2463.8038333255495,
+      "x": 6477.561844714582,
+      "y": 2665.7051729824148,
       "width": 100,
       "height": 155,
       "mediaKind": "link",
@@ -1823,14 +1829,15 @@ window.CANVAS_DATA = {
       "alt": "Games: Agency as Art by C. Thi Nguyen",
       "image": "assets/thumbnails/week04-games-agency.jpg?v=1",
       "previewHeight": 155,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765794807"
     },
     {
       "id": "week04-media-unity-quick-start",
       "type": "media",
       "week": 4,
-      "x": 6116.981748286133,
-      "y": 3343.290340577144,
+      "x": 6194.387971207244,
+      "y": 3545.427694011232,
       "width": 113.26271295768129,
       "height": 155,
       "mediaKind": "link",
@@ -1840,14 +1847,15 @@ window.CANVAS_DATA = {
       "alt": "Unity Learn Quick Start",
       "image": "assets/thumbnails/week04-unity-quick-start.jpg?v=1",
       "previewHeight": 155,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765794807"
     },
     {
       "id": "week04-media-serious-games",
       "type": "media",
       "week": 4,
-      "x": 5881.553596823325,
-      "y": 3258.500912312775,
+      "x": 5958.959819744437,
+      "y": 3460.638265746863,
       "width": 210,
       "height": 155,
       "mediaKind": "link",
@@ -1856,14 +1864,15 @@ window.CANVAS_DATA = {
       "meta": "Harun Farocki · Vimeo",
       "alt": "Harun Farocki — Serious Games",
       "image": "assets/thumbnails/week04-serious-games.webp?v=1",
-      "previewHeight": 155
+      "previewHeight": 155,
+      "groupId": "group-1793765794807"
     },
     {
       "id": "week04-media-hamlet-holodeck",
       "type": "media",
       "week": 4,
-      "x": 6288.037377100541,
-      "y": 2628.108445259479,
+      "x": 6365.687480924782,
+      "y": 2830.0097849163444,
       "width": 100,
       "height": 155,
       "mediaKind": "link",
@@ -1873,14 +1882,15 @@ window.CANVAS_DATA = {
       "alt": "Hamlet on the Holodeck: The Future of Narrative in Cyberspace",
       "image": "assets/thumbnails/week04-hamlet-holodeck.jpg?v=1",
       "previewHeight": 155,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765794807"
     },
     {
       "id": "week04-media-simulation-narrative",
       "type": "media",
       "week": 4,
-      "x": 6417.177406777418,
-      "y": 2701.7918564745114,
+      "x": 6494.827510601659,
+      "y": 2903.6931961313767,
       "width": 100,
       "height": 155,
       "mediaKind": "link",
@@ -1890,14 +1900,15 @@ window.CANVAS_DATA = {
       "alt": "Simulation versus Narrative: Introduction to Ludology",
       "image": "assets/thumbnails/week04-simulation-narrative.jpg?v=1",
       "previewHeight": 155,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765794807"
     },
     {
       "id": "week04-media-rules-of-play",
       "type": "media",
       "week": 4,
-      "x": 6545.308913736699,
-      "y": 2762.342439259101,
+      "x": 6622.95901756094,
+      "y": 2964.2437789159662,
       "width": 100,
       "height": 155,
       "mediaKind": "link",
@@ -1907,14 +1918,15 @@ window.CANVAS_DATA = {
       "alt": "Rules of Play: Game Design Fundamentals",
       "image": "assets/thumbnails/week04-rules-of-play.jpg?v=1",
       "previewHeight": 155,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765794807"
     },
     {
       "id": "week04-media-emergent-strategy",
       "type": "media",
       "week": 4,
-      "x": 6415.033954809137,
-      "y": 3011.410977925023,
+      "x": 6492.684058633378,
+      "y": 3213.5483313591108,
       "width": 100,
       "height": 155,
       "mediaKind": "link",
@@ -1924,14 +1936,15 @@ window.CANVAS_DATA = {
       "alt": "Emergent Strategy by adrienne maree brown",
       "image": "assets/thumbnails/week04-emergent-strategy.jpg?v=1",
       "previewHeight": 155,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765794807"
     },
     {
       "id": "week04-media-everything-to-play-for",
       "type": "media",
       "week": 4,
-      "x": 6548.700110546436,
-      "y": 3301.427155624396,
+      "x": 6626.350214370677,
+      "y": 3503.564509058484,
       "width": 100,
       "height": 155,
       "mediaKind": "link",
@@ -1941,14 +1954,15 @@ window.CANVAS_DATA = {
       "alt": "Everything to Play For: How Videogames Are Changing Our World",
       "image": "assets/thumbnails/week04-everything-to-play-for.jpg?v=1",
       "previewHeight": 155,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765794807"
     },
     {
       "id": "week05-note-post-humanist-framework",
       "type": "list",
       "week": 5,
-      "x": 5825.332537818166,
-      "y": 1232.3004814612784,
+      "x": 6084.599030873722,
+      "y": 1148.5803882785394,
       "width": 491.30720632517017,
       "height": 753.9357866635387,
       "description": "<strong>Post-Humanist Framework:</strong> The paper applies theories from feminist post-humanism, new materialism, and game studies (drawing on scholars like Donna Haraway and T.L. Taylor) to question traditional boundaries between humans, non-human animals, and non-living matter in gaming.",
@@ -1959,14 +1973,15 @@ window.CANVAS_DATA = {
         "<strong>4. Environmental &amp; Relational Impact:</strong> By considering how non-human players participate, the paper highlights how gaming platforms impact broader ecosystems and shape our relationships with non-human “Others.”"
       ],
       "fontSize": 13,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765829624"
     },
     {
       "id": "week05-media-what-can-play",
       "type": "media",
       "week": 5,
-      "x": 5616.705907426653,
-      "y": 1226.518640228395,
+      "x": 5875.972400482208,
+      "y": 1142.798547045656,
       "width": 210,
       "height": 155,
       "mediaKind": "link",
@@ -1976,14 +1991,15 @@ window.CANVAS_DATA = {
       "alt": "What Can Play: The Potential of Non-Human Players by Kara Stone",
       "image": "assets/thumbnails/week05-what-can-play.jpg?v=1",
       "previewHeight": 155,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765829624"
     },
     {
       "id": "week05-media-common-garden",
       "type": "media",
       "week": 5,
-      "x": 4442.097227375178,
-      "y": 1747.232238071842,
+      "x": 4701.363720430733,
+      "y": 1663.512144889103,
       "width": 210,
       "height": 155,
       "mediaKind": "link",
@@ -1993,14 +2009,15 @@ window.CANVAS_DATA = {
       "alt": "Common Garden",
       "image": "assets/thumbnails/week05-common-garden.png?v=1",
       "previewHeight": 155,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765829624"
     },
     {
       "id": "week05-media-becoming-chimeric",
       "type": "media",
       "week": 5,
-      "x": 4454.255250869034,
-      "y": 1523.5505239321062,
+      "x": 4713.52174392459,
+      "y": 1440.217190598773,
       "width": 210,
       "height": 155,
       "mediaKind": "link",
@@ -2010,14 +2027,15 @@ window.CANVAS_DATA = {
       "alt": "Becoming Chimeric by Martina Menegon",
       "image": "assets/thumbnails/week05-becoming-chimeric.png?v=1",
       "previewHeight": 155,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765829624"
     },
     {
       "id": "week05-media-multiple-lives-permadeath",
       "type": "media",
       "week": 5,
-      "x": 5652.660340878133,
-      "y": 1497.5409440826809,
+      "x": 5911.926833933689,
+      "y": 1413.820850899942,
       "width": 210,
       "height": 155,
       "mediaKind": "link",
@@ -2027,14 +2045,15 @@ window.CANVAS_DATA = {
       "alt": "The Multiple Lives of Permadeath",
       "image": "assets/thumbnails/week05-multiple-lives-permadeath.jpg?v=1",
       "previewHeight": 155,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765829624"
     },
     {
       "id": "week05-media-deepmotion",
       "type": "media",
       "week": 5,
-      "x": 5300.675376610307,
-      "y": 1968.520322108581,
+      "x": 5559.941869665862,
+      "y": 1884.800228925842,
       "width": 100,
       "height": 155,
       "mediaKind": "link",
@@ -2044,14 +2063,15 @@ window.CANVAS_DATA = {
       "alt": "DeepMotion Animate 3D",
       "image": "assets/thumbnails/week05-deepmotion.png?v=1",
       "previewHeight": 155,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765829624"
     },
     {
       "id": "week05-media-unity-keyframed-animation",
       "type": "media",
       "week": 5,
-      "x": 132.91739678896883,
-      "y": 2838.845593129361,
+      "x": 1837.6115820022815,
+      "y": 4927.897463930114,
       "width": 100,
       "height": 155,
       "mediaKind": "link",
@@ -2067,8 +2087,8 @@ window.CANVAS_DATA = {
       "id": "week05-media-time-to-party",
       "type": "media",
       "week": 5,
-      "x": 4995.065528157496,
-      "y": 2151.2986512483135,
+      "x": 5254.332021213052,
+      "y": 2067.5785580655743,
       "width": 210,
       "height": 155,
       "mediaKind": "link",
@@ -2078,14 +2098,15 @@ window.CANVAS_DATA = {
       "alt": "Time to Party by Derek Holguin",
       "image": "assets/thumbnails/week05-time-to-party.webp?v=1",
       "previewHeight": 155,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765829624"
     },
     {
       "id": "week05-media-the-alluvials",
       "type": "media",
       "week": 5,
-      "x": 4791.200681746458,
-      "y": 1717.6166396812416,
+      "x": 5050.467174802014,
+      "y": 1633.8965464985026,
       "width": 210,
       "height": 155,
       "mediaKind": "link",
@@ -2095,14 +2116,15 @@ window.CANVAS_DATA = {
       "alt": "The Alluvials by Alice Bucknell",
       "image": "assets/thumbnails/week05-the-alluvials.png?v=1",
       "previewHeight": 155,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765829624"
     },
     {
       "id": "week05-media-nightcrawlers",
       "type": "media",
       "week": 5,
-      "x": 4925.809071585495,
-      "y": 1885.204243090921,
+      "x": 5185.075564641051,
+      "y": 1801.484149908182,
       "width": 210,
       "height": 155,
       "mediaKind": "link",
@@ -2112,14 +2134,15 @@ window.CANVAS_DATA = {
       "alt": "Nightcrawlers by Alice Bucknell",
       "image": "assets/thumbnails/week05-nightcrawlers.png?v=1",
       "previewHeight": 155,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765829624"
     },
     {
       "id": "week05-media-earth-engine",
       "type": "media",
       "week": 5,
-      "x": 4697.30655661468,
-      "y": 1950.4878536314163,
+      "x": 4956.573049670235,
+      "y": 1866.7677604486773,
       "width": 210,
       "height": 155,
       "mediaKind": "link",
@@ -2129,13 +2152,14 @@ window.CANVAS_DATA = {
       "alt": "Earth Engine by Alice Bucknell",
       "image": "assets/thumbnails/week05-earth-engine.png?v=1",
       "previewHeight": 155,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765829624"
     },
     {
       "id": "item1791358197961",
       "type": "media",
-      "x": 4703.5165089547445,
-      "y": 1240.307046517488,
+      "x": 4962.7830020103,
+      "y": 1156.9737131841548,
       "width": 240,
       "height": 408.6075949367089,
       "mediaKind": "image",
@@ -2143,18 +2167,20 @@ window.CANVAS_DATA = {
       "url": "",
       "meta": "Image",
       "alt": "Screenshot 2026-09-06 at 3.36.38 PM",
-      "image": "assets/thumbnails/item1791358197961.png"
+      "image": "assets/thumbnails/item1791358197961.png",
+      "groupId": "group-1793765829624"
     },
     {
       "id": "item1793129970395",
       "type": "text",
-      "x": 1433.292778130601,
-      "y": 1399.8865607912155,
+      "x": 977.0328854492697,
+      "y": 1816.3638964421261,
       "width": 718.8248414847914,
       "height": 336.33461408765584,
       "text": "Exercise<br>Quickly conceptualize a hypothetical game in 15min and follow steps 1.- 4.<br>1. Record five significant objects that can be found, purchased, created, collected or used.<br>2. Sketch its interface and mini-map.<br>3. Map one character interaction.<br>4. Write a chronological gameplay log.<br>5. Identify one value that the game rewards or privileges.",
       "fontSize": 15,
-      "heightMode": "manual"
+      "heightMode": "manual",
+      "groupId": "group-1793765599156"
     }
   ],
   "connections": [
@@ -2175,32 +2201,12 @@ window.CANVAS_DATA = {
       "to": "week08"
     },
     {
-      "from": "week08",
-      "to": "week09"
-    },
-    {
-      "from": "week10-content",
-      "to": "week11"
-    },
-    {
-      "from": "week11-content",
-      "to": "week12"
-    },
-    {
       "from": "week12-content",
       "to": "week13"
     },
     {
-      "from": "week13",
-      "to": "week14-content"
-    },
-    {
-      "from": "week14",
-      "to": "week15-content"
-    },
-    {
-      "from": "week09-content",
-      "to": "week10"
+      "from": "week13-content",
+      "to": "week14"
     },
     {
       "from": "week01-content",
@@ -2247,6 +2253,18 @@ window.CANVAS_DATA = {
     {
       "from": "week04",
       "to": "week05-content"
+    },
+    {
+      "from": "week09-content",
+      "to": "week10"
+    },
+    {
+      "from": "week08-note-game-analysis-toolkit",
+      "to": "week09"
+    },
+    {
+      "from": "week10-content",
+      "to": "week12"
     }
   ],
   "baseResourceRevision": 4
