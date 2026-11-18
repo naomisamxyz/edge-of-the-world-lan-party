@@ -8,20 +8,98 @@
 <link rel="stylesheet" href="../site-shell.css?v=10">
 <link rel="stylesheet" href="../navigation.css?v=6">
 </head>
-<body class="guide-page">
+<body class="guide-page guide-video">
+
 <header class="site-header" data-site-header></header>
-<main class="page">
+
+<div class="page">
+
   <span class="stamp" data-last-updated></span>
+
   <nav class="guide-nav" data-site-navigation></nav>
   <br>
     <br>
 
   <header class="masthead">
     <div class="section-heading"><pre class="section-ornament guide-title-ornament" aria-hidden="true"></pre><h1>Video</h1></div>
+    <p>Timeline, Recorder</p>
   </header>
-</main>
-<script src="../navigation.js?v=23"></script>
-<script src="../last-updated.js?v=14"></script>
+
+  <nav class="page-toc">
+    <a href="#cinemachine">Cinemachine</a>
+    <a href="#timeline">Timeline</a>
+    <a href="#recorder">Recorder</a>
+  </nav>
+
+  <!-- ================= CINEMACHINE ================= -->
+
+  <section class="section" id="cinemachine">
+    <h2>Cinemachine</h2>
+    <p class="section-intro">Cinemachine controls Unity&rsquo;s Main Camera through lightweight Virtual Cameras. It can follow a player, frame a character, blend between viewpoints and create cinematic shots without manually animating the Main Camera.</p>
+
+    <h3 class="sub">Setup</h3>
+    <p class="body-text">Install these packages through <strong>Window &rarr; Package Manager</strong>:</p>
+    <ul class="steps">
+      <li>Cinemachine</li>
+      <li>Timeline</li>
+      <li>Recorder</li>
+    </ul>
+    <p class="body-text">Create a Virtual Camera:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>GameObject &rarr; Cinemachine &rarr; Virtual Camera</code></pre></div></div></div>
+    <p class="body-text">Cinemachine automatically adds a Cinemachine Brain to the Main Camera.</p>
+
+    <h3 class="sub">First- or Third-Person Controller</h3>
+    <p class="body-text">Select the Virtual Camera and assign the controller&rsquo;s camera target &mdash; often named <code class="inline">CinemachineCameraTarget</code> or <code class="inline">PlayerCameraRoot</code> &mdash; to:</p>
+    <div class="ref-groups">
+      <div class="ref-group">
+        <dl>
+          <div class="ref-row"><dt>Follow</dt><dd>the object the camera moves with.</dd></div>
+          <div class="ref-row"><dt>Look At</dt><dd>the object the camera points toward.</dd></div>
+        </dl>
+      </div>
+    </div>
+    <p class="body-text">For a third-person controller, use Third Person Follow or a FreeLook Camera. For first-person, position the camera target near the character&rsquo;s head and use minimal damping.</p>
+    <p class="body-text">Do not delete the controller&rsquo;s camera target: Cinemachine follows it while the controller handles player input.</p>
+  </section>
+
+  <!-- ================= TIMELINE ================= -->
+
+  <section class="section" id="timeline">
+    <h2>Timeline</h2>
+    <p class="section-intro">Timeline can switch and blend between several Virtual Cameras.</p>
+    <ol class="steps">
+      <li>Create an empty GameObject named <code class="inline">Cutscene</code>.</li>
+      <li>Open <strong>Window &rarr; Sequencing &rarr; Timeline</strong>.</li>
+      <li>Create a Timeline asset.</li>
+      <li>Add a Cinemachine Track.</li>
+      <li>Bind it to the Main Camera&rsquo;s Cinemachine Brain.</li>
+      <li>Add Virtual Cameras as Cinemachine Shot clips.</li>
+      <li>Arrange and overlap the clips to create cuts and blends.</li>
+    </ol>
+    <p class="body-text">Timeline controls which Virtual Camera is active; Cinemachine controls how each shot moves and frames its subject.</p>
+  </section>
+
+  <!-- ================= RECORDER ================= -->
+
+  <section class="section" id="recorder">
+    <h2>Recorder</h2>
+    <p class="section-intro">Recorder exports the finished sequence as a video.</p>
+    <ol class="steps">
+      <li>Open <strong>Window &rarr; General &rarr; Recorder &rarr; Recorder Window</strong>.</li>
+      <li>Add a Movie Clip recorder.</li>
+      <li>Set the source to Game View.</li>
+      <li>Choose the resolution, frame rate and output location.</li>
+      <li>Select Start Recording.</li>
+      <li>Play the Timeline.</li>
+    </ol>
+    <p class="body-text">Use the player camera for gameplay, Cinemachine cameras for composition, Timeline for editing shots, and Recorder for exporting the result.</p>
+  </section>
+
+</div>
+
+<script src="../navigation.js?v=25"></script>
+<script src="../last-updated.js?v=15"></script>
 <script src="../cursor-sparkle.js?v=8"></script>
+
 </body>
 </html>

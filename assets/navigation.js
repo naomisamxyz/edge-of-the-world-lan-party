@@ -26,8 +26,6 @@
   ];
 
   var disabledGuides = new Set([
-    "video.html",
-    "export-and-distribution.html",
     "alternative-controls-and-sensors.html",
     "audioreactivity.html",
     "multiplayer-game.html",

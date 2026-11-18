@@ -8,20 +8,260 @@
 <link rel="stylesheet" href="../site-shell.css?v=10">
 <link rel="stylesheet" href="../navigation.css?v=6">
 </head>
-<body class="guide-page">
+<body class="guide-page guide-export-and-distribution">
+
 <header class="site-header" data-site-header></header>
-<main class="page">
+
+<div class="page">
+
   <span class="stamp" data-last-updated></span>
+
   <nav class="guide-nav" data-site-navigation></nav>
   <br>
     <br>
 
   <header class="masthead">
     <div class="section-heading"><pre class="section-ornament guide-title-ornament" aria-hidden="true"></pre><h1>Export and Distribution</h1></div>
+    <p>Optimizing Performance, Build for PC/Mac, WebGL</p>
   </header>
-</main>
-<script src="../navigation.js?v=23"></script>
-<script src="../last-updated.js?v=14"></script>
+
+  <nav class="page-toc">
+    <a href="#before-building">Before building</a>
+    <a href="#windows-build">Windows</a>
+    <a href="#macos-build">macOS</a>
+    <a href="#webgl-build">WebGL</a>
+    <a href="#optimization">Optimization</a>
+    <a href="#distribution">Distribution</a>
+    <a href="#final-checklist">Final checklist</a>
+  </nav>
+
+  <section class="section" id="before-building">
+    <h2>Before building</h2>
+    <p class="section-intro">A build turns the Unity project into something other people can run without opening the Unity Editor. Unity can build the same project for different platforms, but each platform creates a different set of files.</p>
+    <h3 class="sub">Install the platform modules</h3>
+    <p class="body-text">Install the required platform modules through Unity Hub:</p>
+    <ol class="steps">
+      <li>Open Installs.</li>
+      <li>Find the installed Unity 2022 version.</li>
+      <li>Select the gear icon.</li>
+      <li>Select Add modules.</li>
+      <li>Install the required support:
+        <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>Windows Build Support
+Mac Build Support
+WebGL Build Support</code></pre></div></div></div></li>
+    </ol>
+    <h3 class="sub">Set up Build Settings</h3>
+    <p class="body-text">In Unity, open:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>File → Build Settings</code></pre></div></div></div>
+    <p class="body-text">Add every required scene with Add Open Scenes. Place the first scene&mdash;usually <code class="inline">MainMenu</code>&mdash;at the top:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>0  MainMenu
+1  Game</code></pre></div></div></div>
+  </section>
+
+  <section class="section" id="windows-build">
+    <h2>Windows build</h2>
+    <ol class="steps">
+      <li>Open <strong>File &rarr; Build Settings</strong>.</li>
+      <li>Select PC, Mac &amp; Linux Standalone.</li>
+      <li>Set Target Platform to <code class="inline">Windows</code>.</li>
+      <li>Select Switch Platform.</li>
+      <li>Select Build.</li>
+      <li>Create a new folder for the build.</li>
+    </ol>
+    <p class="body-text">Unity creates an <code class="inline">.exe</code> file and supporting folders. Distribute the entire folder&mdash;not only the <code class="inline">.exe</code>.</p>
+    <p class="body-text">A Windows build might contain:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>MyGame.exe
+MyGame_Data
+UnityPlayer.dll
+MonoBleedingEdge</code></pre></div></div></div>
+    <p class="body-text">Compress the complete folder as a <code class="inline">.zip</code> before uploading it.</p>
+  </section>
+
+  <section class="section" id="macos-build">
+    <h2>macOS build</h2>
+    <ol class="steps">
+      <li>Open <strong>File &rarr; Build Settings</strong>.</li>
+      <li>Select PC, Mac &amp; Linux Standalone.</li>
+      <li>Set Target Platform to <code class="inline">macOS</code>.</li>
+      <li>Select Switch Platform.</li>
+      <li>Choose an architecture:
+        <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>Intel 64-bit
+Apple Silicon
+Intel 64-bit + Apple Silicon</code></pre></div></div></div>
+        <p class="body-text">Use <code class="inline">Intel 64-bit + Apple Silicon</code> for the broadest compatibility.</p></li>
+      <li>Select Build.</li>
+    </ol>
+    <p class="body-text">Unity creates a <code class="inline">.app</code> application. Compress the <code class="inline">.app</code> as a <code class="inline">.zip</code> before uploading it. Zipping helps preserve the application&rsquo;s internal folder structure and permissions.</p>
+    <p class="body-text">For public distribution outside stores, macOS applications may need to be code-signed and notarized by Apple. Test the final build on a Mac.</p>
+  </section>
+
+  <section class="section" id="webgl-build">
+    <h2>WebGL build</h2>
+    <p class="section-intro">WebGL creates a version that runs inside a web browser.</p>
+    <ol class="steps">
+      <li>Open <strong>File &rarr; Build Settings</strong>.</li>
+      <li>Select WebGL.</li>
+      <li>Select Switch Platform.</li>
+      <li>Select Build And Run for a local test.</li>
+      <li>Select Build when ready to publish.</li>
+    </ol>
+    <p class="body-text">Unity creates a folder containing files such as:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>index.html
+Build
+TemplateData</code></pre></div></div></div>
+    <p class="body-text">Upload the complete folder to a web server or platform such as itch.io.</p>
+    <p class="body-text">Do not test a WebGL build by double-clicking <code class="inline">index.html</code>. Browsers restrict locally opened game files. Use Build And Run or a local web server.</p>
+    <h3 class="sub">WebGL publishing settings</h3>
+    <p class="body-text">Open:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>Edit → Project Settings → Player → WebGL</code></pre></div></div></div>
+    <p class="body-text">Under Publishing Settings, choose a compression format:</p>
+    <div class="ref-groups"><div class="ref-group"><dl><div class="ref-row"><dt>Gzip</dt><dd>broadly supported and quicker to build.</dd></div><div class="ref-row"><dt>Brotli</dt><dd>smaller downloads but requires correct HTTPS server configuration.</dd></div><div class="ref-row"><dt>Disabled</dt><dd>larger files but easier for basic hosting.</dd></div></dl></div></div>
+    <p class="body-text">For a first itch.io upload, Gzip with Decompression Fallback enabled is often the simplest option.</p>
+    <p class="body-text">Do not enable Development Build for the public version. Development builds are larger and slower.</p>
+  </section>
+
+  <section class="section" id="optimization">
+    <h2>Basic build optimization</h2>
+    <p class="section-intro">Optimization should reduce loading time, download size and runtime cost without noticeably damaging the experience.</p>
+    <p class="body-text">Always test performance in a build. The Unity Editor is not an accurate measurement of the final application.</p>
+    <h3 class="sub">Bake static lighting</h3>
+    <p class="body-text">Realtime lights and shadows can be expensive. Baking calculates lighting before the game runs and stores the result in lightmaps. Use baked lighting for objects and lights that do not move.</p>
+    <p class="body-text"><strong>Simple lighting bake</strong></p>
+    <ol class="steps">
+      <li>Select static environment objects.</li>
+      <li>Enable Static or Contribute Global Illumination.</li>
+      <li>Select stationary lights.</li>
+      <li>Set their Mode to <code class="inline">Baked</code> or <code class="inline">Mixed</code>.</li>
+      <li>Open:
+        <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>Window → Rendering → Lighting</code></pre></div></div></div></li>
+      <li>Disable Auto Generate.</li>
+      <li>Select Generate Lighting.</li>
+      <li>Save the scene.</li>
+    </ol>
+    <p class="body-text">Unity creates lighting data and lightmaps.</p>
+    <p class="body-text">Do not bake moving players, enemies or other dynamic objects into the lightmap. Use Light Probes to light moving objects and Reflection Probes for reflective materials.</p>
+    <h3 class="sub">Reduce realtime lights</h3>
+    <ul class="steps">
+      <li>Limit the number of realtime lights.</li>
+      <li>Avoid several shadow-casting lights affecting the same object.</li>
+      <li>Disable shadows on lights that do not need them.</li>
+      <li>Reduce shadow distance and resolution when possible.</li>
+      <li>Prefer baked lighting for static environments.</li>
+    </ul>
+    <h3 class="sub">Optimize textures</h3>
+    <p class="body-text">Textures are often the largest part of a build.</p>
+    <ul class="steps">
+      <li>Use appropriate maximum texture sizes.</li>
+      <li>Avoid 4K textures when 1K is sufficient.</li>
+      <li>Enable texture compression.</li>
+      <li>Disable Read/Write unless a script needs it.</li>
+      <li>Use smaller textures for distant or minor objects.</li>
+      <li>Use platform-specific compression settings when necessary.</li>
+    </ul>
+    <p class="body-text">WebGL builds especially benefit from smaller textures.</p>
+    <h3 class="sub">Optimize models</h3>
+    <ul class="steps">
+      <li>Remove hidden geometry.</li>
+      <li>Reduce unnecessary polygons.</li>
+      <li>Use simpler collision meshes.</li>
+      <li>Enable mesh compression when appropriate.</li>
+      <li>Use LOD Groups for objects viewed at different distances.</li>
+      <li>Combine small static environment meshes when practical.</li>
+    </ul>
+    <p class="body-text">An LOD Group displays a detailed model nearby and simpler models at greater distances.</p>
+    <h3 class="sub">Bake occlusion culling</h3>
+    <p class="body-text">Occlusion culling prevents Unity from rendering objects hidden behind walls or other geometry.</p>
+    <ol class="steps">
+      <li>Mark appropriate environment objects as Occluder Static or Occludee Static.</li>
+      <li>Open:
+        <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>Window → Rendering → Occlusion Culling</code></pre></div></div></div></li>
+      <li>Select Bake.</li>
+      <li>Test the result with the Visualization tab.</li>
+    </ol>
+    <p class="body-text">Occlusion culling is most effective in interiors, cities and environments with many blocked sightlines.</p>
+    <h3 class="sub">Optimize audio</h3>
+    <ul class="steps">
+      <li>Compress music and long sound effects.</li>
+      <li>Use mono audio for sounds that do not require stereo.</li>
+      <li>Use lower sample rates when the difference is not noticeable.</li>
+      <li>Stream long music tracks instead of loading everything into memory.</li>
+      <li>Remove unused audio files.</li>
+    </ul>
+    <h3 class="sub">Remove unused content</h3>
+    <ul class="steps">
+      <li>Remove unused scenes from Build Settings.</li>
+      <li>Remove unused assets from <code class="inline">Resources</code> folders.</li>
+      <li>Avoid including unnecessary high-resolution source files.</li>
+      <li>Disable packages and plugins the project does not use.</li>
+      <li>Check the Editor log after building to see which assets use the most space.</li>
+    </ul>
+    <h3 class="sub">Use object pooling</h3>
+    <p class="body-text">Frequently creating and destroying objects can cause performance problems. Object pooling is helpful for:</p>
+    <ul class="steps">
+      <li>Projectiles</li>
+      <li>Enemies</li>
+      <li>Particles</li>
+      <li>Collectibles</li>
+      <li>Repeated visual effects</li>
+    </ul>
+    <p class="body-text">Instead of destroying an object, deactivate and reuse it:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>// Hide the object so it can be reused later.
+gameObject.SetActive(false);</code></pre></div></div></div>
+    <h3 class="sub">Profile the build</h3>
+    <p class="body-text">Use:</p>
+    <div class="snippet"><div class="code-card"><div class="code-scroll"><pre><code>Window → Analysis → Profiler</code></pre></div></div></div>
+    <p class="body-text">Create a temporary Development Build and enable Autoconnect Profiler. Check:</p>
+    <ul class="steps">
+      <li>CPU usage</li>
+      <li>GPU usage</li>
+      <li>Memory</li>
+      <li>Rendering</li>
+      <li>Physics</li>
+      <li>Audio</li>
+    </ul>
+    <p class="body-text">Turn Development Build off before creating the public release.</p>
+  </section>
+
+  <section class="section" id="distribution">
+    <h2>Distribution</h2>
+    <div class="ref-groups"><div class="ref-group"><dl><div class="ref-row"><dt>Windows</dt><dd>Upload a <code class="inline">.zip</code> containing the complete Windows build folder.</dd></div><div class="ref-row"><dt>macOS</dt><dd>Upload a <code class="inline">.zip</code> containing the <code class="inline">.app</code>. Code-sign and notarize it when distributing publicly outside a controlled classroom environment.</dd></div><div class="ref-row"><dt>WebGL</dt><dd>Upload the complete WebGL build folder. For itch.io, upload a <code class="inline">.zip</code> with <code class="inline">index.html</code> at its root and mark the project as playable in the browser.</dd></div></dl></div></div>
+    <p class="body-text">Possible distribution platforms include:</p>
+    <ul class="steps">
+      <li>itch.io</li>
+      <li>A personal website</li>
+      <li>A school server</li>
+      <li>Steam</li>
+      <li>Microsoft Store</li>
+      <li>Mac App Store</li>
+    </ul>
+    <p class="body-text">Desktop builds are downloaded and run locally. WebGL builds are downloaded by the browser and should therefore remain as small as possible.</p>
+  </section>
+
+  <section class="section" id="final-checklist">
+    <h2>Final checklist</h2>
+    <p class="section-intro">Before distribution:</p>
+    <ul class="steps">
+      <li>Add every required scene to Build Settings.</li>
+      <li>Put the correct starting scene first.</li>
+      <li>Set the game name, icon and version in Player Settings.</li>
+      <li>Remove testing objects and debug messages.</li>
+      <li>Bake static lighting.</li>
+      <li>Bake occlusion culling when useful.</li>
+      <li>Compress large textures and audio.</li>
+      <li>Test every menu and scene transition.</li>
+      <li>Test the new Input System controls.</li>
+      <li>Create a non-development release build.</li>
+      <li>Test the final build outside the Unity Editor.</li>
+      <li>Test on the actual target platform.</li>
+      <li>Include the entire build&mdash;not only the executable.</li>
+    </ul>
+  </section>
+
+</div>
+
+<script src="../navigation.js?v=25"></script>
+<script src="../last-updated.js?v=15"></script>
 <script src="../cursor-sparkle.js?v=8"></script>
+
 </body>
 </html>
